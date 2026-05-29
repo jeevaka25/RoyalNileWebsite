@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Nile Villas — Luxury Holiday Stays in Luxor, Egypt</title>
+<meta name="description" content="Discover our collection of luxury Nile-view villas and penthouses in Luxor. Private pools, panoramic sunsets, and bespoke ancient Egypt tours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
+<style>
+:root {
+  --bg: #fcfbf7;
+  --bg-warm: #f4f0e7;
+  --card: #ffffff;
+  --primary: #147481;
+  --primary-light: #2d9aa7;
+  --primary-dark: #0d5862;
+  --primary-glow: rgba(20,116,129,0.14);
+  --teal: #147481;
+  --teal-light: #2d9aa7;
+  --gold: #c8a45d;
+  --text: #1f2a2c;
+  --text-secondary: #5d6969;
+  --text-muted: #8d9895;
+  --border: #e7e0d1;
+  --border-light: #f0eadf;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family:var(--font-body); background:var(--bg); color:var(--text);
+  line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body.modal-open { overflow:hidden; }
+
+/* NAV */
+.nav { position:fixed; top:0; left:0; right:0; z-index:1000; padding:1rem 2rem; transition:var(--transition); }
+.nav.scrolled { background:rgba(254,253,251,0.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:0.7rem 2rem; box-shadow:var(--shadow-sm); }
+.nav-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--text); text-decoration:none; letter-spacing:0.5px; }
+.nav-logo span { color:var(--primary); }
+.nav-links { display:flex; gap:2.2rem; align-items:center; list-style:none; }
+.nav-links a { color:var(--text-secondary); text-decoration:none; font-size:0.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; transition:var(--transition); position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--primary); transition:var(--transition); }
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { width:100%; }
+.nav-cta { background:var(--primary); color:#fff!important; padding:0.55rem 1.5rem!important; border-radius:50px; font-weight:600!important; letter-spacing:0.5px!important; }
+.nav-cta:hover { background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 6px 20px var(--primary-glow); }
+.nav-cta::after { display:none!important; }
+.nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:5px; }
+.nav-toggle span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:var(--transition); }
+
+/* HERO */
+.hero { position:relative; min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; overflow:hidden; }
+.hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(170deg, rgba(250,247,242,0.6) 0%, rgba(254,253,251,0.7) 40%, rgba(245,237,224,0.8) 100%); z-index:1; }
+.hero-content { position:relative; z-index:2; max-width:800px; }
+.hero-eyebrow { font-size:0.75rem; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--primary); margin-bottom:1.2rem; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.6rem, 7vw, 5rem); font-weight:700; line-height:1.12; color:var(--text); margin-bottom:0.3rem; }
+.hero h1 em { font-style:italic; color:var(--primary); }
+.hero-subtitle { font-size:clamp(0.95rem, 1.8vw, 1.15rem); color:var(--text-secondary); max-width:560px; margin:1.2rem auto 2.2rem; line-height:1.7; }
+.btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; border-radius:50px; font-family:var(--font-body); font-size:0.82rem; font-weight:600; letter-spacing:0.5px; text-decoration:none; transition:var(--transition); cursor:pointer; border:none; }
+.btn-primary { background:var(--primary); color:#fff; box-shadow:0 4px 16px var(--primary-glow); }
+.btn-primary:hover { background:var(--primary-dark); transform:translateY(-2px); box-shadow:0 8px 28px rgba(193,122,62,0.25); }
+.btn-outline { background:transparent; color:var(--primary); border:1.5px solid var(--primary); }
+.btn-outline:hover { background:var(--primary); color:#fff; }
+.btn-sm { padding:0.5rem 1.2rem; font-size:0.75rem; }
+.btn-teal { background:var(--teal); color:#fff; }
+.btn-teal:hover { background:var(--teal-light); }
+.scroll-indicator { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:0.5rem; animation:float 2s ease-in-out infinite; }
+.scroll-indicator span { font-size:0.65rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted); }
+.scroll-indicator .line { width:1px; height:36px; background:linear-gradient(to bottom, var(--primary), transparent); }
+@keyframes float { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(8px); } }
+
+/* SEARCH */
+.search-wrapper { position:sticky; top:72px; z-index:100; max-width:880px; margin:-3rem auto 3rem; padding:0 1rem; }
+.search-bar { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-xl); padding:1.1rem 1.5rem; display:flex; gap:1rem; align-items:flex-end; flex-wrap:wrap; box-shadow:var(--shadow); }
+.search-field { flex:1; min-width:150px; }
+.search-field label { display:block; font-size:0.65rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--primary); margin-bottom:0.3rem; }
+.search-field input, .search-field select { width:100%; padding:0.65rem 0.9rem; background:var(--bg-warm); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-family:var(--font-body); font-size:0.88rem; transition:var(--transition); }
+.search-field input:focus, .search-field select:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-glow); background:var(--card); }
+.search-field input::placeholder { color:var(--text-muted); }
+.search-field select { cursor:pointer; }
+.search-submit { padding:0.65rem 2rem; background:var(--primary); color:#fff; border:none; border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.82rem; font-weight:700; letter-spacing:0.5px; cursor:pointer; transition:var(--transition); white-space:nowrap; }
+.search-submit:hover { background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 6px 20px var(--primary-glow); }
+.search-submit:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+/* Flatpickr overrides */
+.flatpickr-calendar { border:1px solid var(--border)!important; border-radius:var(--radius)!important; box-shadow:var(--shadow-lg)!important; }
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { background:var(--primary)!important; border-color:var(--primary)!important; }
+.flatpickr-day.inRange { background:var(--primary-glow)!important; box-shadow:none!important; }
+.flatpickr-day:hover { background:rgba(193,122,62,0.1)!important; }
+.flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { fill:var(--primary)!important; }
+
+/* SECTIONS */
+.section { position:relative; z-index:1; max-width:1300px; margin:0 auto; padding:5rem 2rem; }
+.section-header { text-align:center; margin-bottom:3.5rem; }
+.section-eyebrow { font-size:0.7rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--primary); margin-bottom:0.7rem; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem, 4vw, 2.8rem); font-weight:700; color:var(--text); line-height:1.2; margin-bottom:0.8rem; }
+.section-subtitle { color:var(--text-secondary); font-size:1rem; max-width:580px; margin:0 auto; line-height:1.7; }
+
+/* AMENITIES */
+.amenities-section { max-width:1300px; margin:0 auto; padding:3rem 2rem 1rem; position:relative; z-index:2; }
+.amenities-shell { display:grid; grid-template-columns:minmax(220px, 0.72fr) 1.5fr; gap:2.5rem; align-items:start; padding:2.3rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.amenities-kicker { font-size:0.7rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--primary); margin-bottom:0.55rem; }
+.amenities-title { font-family:var(--font-display); font-size:clamp(1.55rem, 3vw, 2.2rem); line-height:1.18; color:var(--text); margin-bottom:0.7rem; }
+.amenities-copy { color:var(--text-secondary); font-size:0.94rem; line-height:1.7; max-width:360px; }
+.amenities-grid { list-style:none; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:0.85rem 1.25rem; }
+.amenities-grid li { display:flex; align-items:flex-start; gap:0.55rem; color:var(--text-secondary); font-size:0.88rem; line-height:1.45; }
+.amenities-grid .emoji, .location-highlights .emoji { flex:0 0 auto; line-height:1.35; }
+
+/* VILLA CARDS */
+.villa-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(330px, 1fr)); gap:1.8rem; }
+.villa-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition); cursor:pointer; box-shadow:var(--shadow-sm); }
+.villa-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); border-color:var(--primary-light); }
+.villa-card.unavailable { opacity:0.5; pointer-events:none; }
+.villa-image { position:relative; height:240px; overflow:hidden; background:var(--bg-warm); }
+.villa-image img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
+.villa-card:hover .villa-image img { transform:scale(1.05); }
+.villa-badge { position:absolute; top:0.8rem; right:0.8rem; background:rgba(255,255,255,0.9); backdrop-filter:blur(8px); color:var(--primary); font-size:0.65rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:0.3rem 0.7rem; border-radius:50px; border:1px solid var(--border); }
+.villa-rating { position:absolute; bottom:0.8rem; left:0.8rem; background:rgba(255,255,255,0.9); backdrop-filter:blur(8px); padding:0.25rem 0.6rem; border-radius:50px; font-size:0.75rem; font-weight:600; color:var(--text); display:flex; align-items:center; gap:0.25rem; }
+.villa-rating .star { color:#e8a838; }
+.villa-body { padding:1.3rem; }
+.villa-name { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--text); margin-bottom:0.25rem; line-height:1.3; }
+.villa-location { font-size:0.78rem; color:var(--text-muted); display:flex; align-items:center; gap:0.3rem; margin-bottom:0.7rem; }
+.villa-features { display:flex; gap:0.9rem; flex-wrap:wrap; margin-bottom:0.7rem; padding-bottom:0.7rem; border-bottom:1px solid var(--border-light); }
+.villa-feature { font-size:0.75rem; color:var(--text-secondary); display:flex; align-items:center; gap:0.25rem; }
+.villa-status { display:flex; align-items:center; gap:0.35rem; font-size:0.72rem; font-weight:600; margin-bottom:0.5rem; }
+.villa-status.available { color:#2d8a56; }
+.villa-status.unavailable-text { color:#c44; }
+.villa-status .dot { width:6px; height:6px; border-radius:50%; }
+.villa-status.available .dot { background:#2d8a56; }
+.villa-status.unavailable-text .dot { background:#c44; }
+.villa-footer { display:flex; gap:0.5rem; }
+.villa-footer .btn { flex:1; text-align:center; justify-content:center; font-size:0.72rem; }
+
+.results-header { display:none; justify-content:space-between; align-items:center; margin-bottom:1.8rem; flex-wrap:wrap; gap:1rem; }
+.results-header.visible { display:flex; }
+.results-count { font-size:0.88rem; color:var(--text-secondary); }
+.results-count strong { color:var(--text); }
+.results-reset { background:none; border:1px solid var(--border); color:var(--text-secondary); padding:0.4rem 1rem; border-radius:50px; font-size:0.75rem; cursor:pointer; transition:var(--transition); }
+.results-reset:hover { border-color:var(--primary); color:var(--primary); }
+
+/* LOADING */
+.loading-overlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(254,253,251,0.8); backdrop-filter:blur(6px); align-items:center; justify-content:center; flex-direction:column; gap:1rem; }
+.loading-overlay.active { display:flex; }
+.loading-spinner { width:36px; height:36px; border:2px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.loading-text { color:var(--text-secondary); font-size:0.85rem; }
+
+/* ============================================
+   MODAL
+   ============================================ */
+.modal-overlay { display:none; position:fixed; inset:0; z-index:9998; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:1.5rem; }
+.modal-overlay.active { display:flex; }
+.modal { background:var(--card); border-radius:var(--radius-lg); max-width:840px; width:100%; max-height:90vh; overflow-y:auto; position:relative; box-shadow:var(--shadow-lg); animation:modalIn 0.35s ease; }
+@keyframes modalIn { from { opacity:0; transform:translateY(20px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+.modal-close { position:sticky; top:1rem; float:right; z-index:10; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.9); border:1px solid var(--border); font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; margin-right:1rem; transition:var(--transition); color:var(--text); }
+.modal-close:hover { background:var(--bg-warm); }
+.modal-gallery { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:200px 200px; grid-auto-rows:160px; gap:4px; overflow:hidden; }
+.modal-gallery img { width:100%; height:100%; object-fit:cover; cursor:zoom-in; transition:opacity 0.2s ease, transform 0.2s ease; }
+.modal-gallery img:hover { opacity:0.9; transform:scale(1.01); }
+.modal-gallery img:first-child { grid-row:1/3; }
+.modal-body .modal-gallery { margin-top:1.6rem; border-radius:var(--radius); }
+.image-viewer { display:none; position:fixed; inset:0; z-index:10000; background:rgba(10,13,13,0.92); backdrop-filter:blur(5px); align-items:center; justify-content:center; padding:2rem; }
+.image-viewer.active { display:flex; }
+.image-viewer img { max-width:min(94vw, 1400px); max-height:88vh; object-fit:contain; border-radius:var(--radius); box-shadow:var(--shadow-lg); }
+.image-viewer-close { position:absolute; top:1.2rem; right:1.2rem; width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.32); background:rgba(255,255,255,0.14); color:white; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.image-viewer-caption { position:absolute; left:2rem; right:2rem; bottom:1rem; color:rgba(255,255,255,0.82); text-align:center; font-size:0.85rem; }
+.modal-body { padding:2rem; }
+.modal-body h2 { font-family:var(--font-display); font-size:1.8rem; color:var(--text); margin-bottom:0.3rem; }
+.tour-modal-hero { position:relative; min-height:360px; border-radius:var(--radius); overflow:hidden; margin:-0.4rem -0.4rem 1.6rem; background:var(--text); display:flex; align-items:center; justify-content:center; }
+.tour-modal-hero video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.tour-modal-hero-nile-boat-cruise video { transform:scale(1.45); object-position:center 32%; }
+.tour-modal-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.48)); }
+.tour-modal-hero h2 { position:relative; z-index:1; color:#fff; font-size:clamp(2.3rem, 5vw, 4.8rem); line-height:0.95; text-align:center; padding:1.5rem; text-shadow:0 3px 18px rgba(0,0,0,0.65); max-width:760px; }
+.modal-location { color:var(--text-muted); font-size:0.85rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.4rem; }
+.modal-meta { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border-light); }
+.modal-meta-item { text-align:center; }
+.modal-meta-item .val { font-size:1.4rem; font-weight:700; color:var(--primary); font-family:var(--font-display); }
+.modal-meta-item .lbl { font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; }
+.modal-desc { color:var(--text-secondary); font-size:0.92rem; line-height:1.7; margin-bottom:1.5rem; }
+.modal-amenities { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-bottom:1.5rem; }
+.modal-amenity { font-size:0.82rem; color:var(--text-secondary); display:flex; align-items:center; gap:0.5rem; }
+.modal-amenity::before { content:'•'; color:var(--primary); font-weight:bold; }
+.modal-actions { display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:1.5rem; }
+.modal-search-inline { background:var(--bg-warm); border-radius:var(--radius); padding:1.2rem; margin-top:1.5rem; display:flex; gap:0.8rem; align-items:flex-end; flex-wrap:wrap; border:1px solid var(--border-light); }
+.modal-search-inline .search-field { min-width:120px; }
+.modal-search-inline .search-field input { background:var(--card); }
+.modal-search-inline label { font-size:0.6rem; }
+
+/* TOURS */
+.tours-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(330px, 1fr)); gap:1.8rem; }
+.tour-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition); cursor:pointer; box-shadow:var(--shadow-sm); position:relative; }
+.tour-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); border-color:var(--teal); }
+.tour-image { position:relative; height:220px; overflow:hidden; background:var(--bg-warm); }
+.tour-image img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
+.tour-card:hover .tour-image img { transform:scale(1.05); }
+.tour-body { padding:1.3rem; }
+.tour-name { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--text); margin-bottom:0.3rem; line-height:1.3; }
+.tour-desc { font-size:0.82rem; color:var(--text-secondary); line-height:1.5; }
+
+/* CTA */
+.cta-banner { background:linear-gradient(135deg, rgba(193,122,62,0.06), rgba(42,127,138,0.04)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center; }
+.cta-banner h3 { font-family:var(--font-display); font-size:1.8rem; color:var(--text); margin-bottom:0.6rem; }
+.cta-banner p { color:var(--text-secondary); margin-bottom:1.5rem; max-width:480px; margin-left:auto; margin-right:auto; }
+.credentials-image { display:block; width:min(100%, 520px); margin:1rem auto 1.5rem; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); }
+
+/* LOCATION */
+.location-wrapper { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
+.location-info { padding:2.5rem; display:flex; flex-direction:column; justify-content:center; }
+.location-info h3 { font-family:var(--font-display); font-size:1.6rem; color:var(--text); margin-bottom:0.8rem; }
+.location-info p { color:var(--text-secondary); font-size:0.9rem; line-height:1.7; margin-bottom:1.2rem; }
+.location-highlights { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; list-style:none; margin-bottom:1.5rem; }
+.location-highlights li { font-size:0.82rem; color:var(--text-secondary); display:flex; align-items:center; gap:0.4rem; }
+.location-map { min-height:380px; }
+.location-map iframe { width:100%; height:100%; border:none; }
+
+/* FOOTER */
+.footer { border-top:1px solid var(--border); padding:4rem 2rem 2rem; background:var(--bg-warm); }
+.footer-inner { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem; }
+.footer-brand h4 { font-family:var(--font-display); font-size:1.3rem; color:var(--text); margin-bottom:0.6rem; }
+.footer-brand h4 span { color:var(--primary); }
+.footer-brand p { font-size:0.82rem; color:var(--text-muted); line-height:1.7; max-width:300px; }
+.footer-col h5 { font-size:0.7rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:1rem; }
+.footer-col ul { list-style:none; }
+.footer-col li { margin-bottom:0.5rem; }
+.footer-col a { color:var(--text-secondary); text-decoration:none; font-size:0.82rem; transition:var(--transition); }
+.footer-col a:hover { color:var(--text); }
+.footer-bottom { max-width:1300px; margin:2.5rem auto 0; padding-top:1.5rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); }
+.footer-legal { max-width:1300px; margin:1rem auto 0; font-size:0.7rem; color:var(--text-muted); line-height:1.6; }
+
+/* ANIMATIONS */
+.fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  .location-wrapper { grid-template-columns:1fr; }
+  .location-map { min-height:280px; }
+  .footer-inner { grid-template-columns:1fr; gap:2rem; }
+  .amenities-shell { grid-template-columns:1fr; gap:1.7rem; }
+  .amenities-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .modal-gallery { grid-template-columns:1fr 1fr; grid-template-rows:180px 180px; grid-auto-rows:180px; }
+  .modal-gallery img:first-child { grid-row:auto; grid-column:1/3; }
+  .modal-amenities { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(254,253,251,0.98); backdrop-filter:blur(20px); padding:2rem; gap:1.5rem; border-bottom:1px solid var(--border); }
+  .nav-toggle { display:flex; }
+  .hero { min-height:80vh; padding:5rem 1.2rem 3rem; }
+  .search-wrapper { position:relative; top:auto; z-index:5; max-width:none; margin:-1.4rem 1rem 2rem; padding:0; }
+  .search-bar { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; padding:0.75rem; border-radius:var(--radius); align-items:end; }
+  .search-field { min-width:0; flex:auto; }
+  .search-field label { font-size:0.55rem; letter-spacing:1px; margin-bottom:0.18rem; }
+  .search-field input, .search-field select { padding:0.5rem 0.6rem; font-size:0.78rem; }
+  .search-submit { width:100%; grid-column:1/3; padding:0.55rem 0.75rem; font-size:0.74rem; }
+  .villa-grid { grid-template-columns:1fr; }
+  .tours-grid { grid-template-columns:1fr; }
+  .section { padding:3.5rem 1.2rem; }
+  .modal-gallery { grid-template-columns:1fr; grid-template-rows:200px 150px 150px; grid-auto-rows:150px; }
+  .modal-gallery img:first-child { grid-column:auto; }
+  .modal-overlay { padding:0.6rem; align-items:flex-start; }
+  .modal { max-height:calc(100vh - 1.2rem); border-radius:var(--radius-lg); }
+  .modal-body { padding:1rem; }
+  .tour-modal-hero { min-height:300px; margin:-0.55rem -0.55rem 1.3rem; border-radius:var(--radius) var(--radius) var(--radius) var(--radius); }
+  .tour-modal-hero h2 { font-size:2.45rem; }
+}
+@media (max-width:480px) {
+  .hero h1 { font-size:2rem; }
+  .search-wrapper { margin:-1rem 0.8rem 1.7rem; }
+  .search-bar { padding:0.65rem; gap:0.45rem; }
+  .location-info { padding:1.8rem 1.2rem; }
+  .amenities-section { padding:2.4rem 1.2rem 0.6rem; }
+  .amenities-shell { padding:1.7rem 0; }
+  .amenities-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0.65rem 0.85rem; }
+  .amenities-grid li { font-size:0.78rem; line-height:1.35; gap:0.45rem; }
+}
+
+/* VILLA CARD HOVER INDICATOR */
+.villa-card { position:relative; }
+.villa-card::after { content:'Click for details →'; position:absolute; bottom:1rem; right:1.3rem; font-size:0.68rem; color:var(--text-muted); opacity:0; transition:var(--transition); }
+.villa-card:hover::after { opacity:1; }
+.tour-card::after { content:'Click for details →'; position:absolute; bottom:1rem; right:1.3rem; font-size:0.68rem; color:var(--text-muted); opacity:0; transition:var(--transition); }
+.tour-card:hover::after { opacity:1; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Royal Nile <span>Villas</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#villas">Villas</a></li>
+      <li><a href="#tours">Tours</a></li>
+      <li><a href="restaurant.html">Restaurant</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://wa.me/201000000000?text=Hi!%20I'm%20interested%20in%20booking%20a%20villa." class="nav-cta" target="_blank">Book Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content fade-up visible">
+    <p class="hero-eyebrow">Luxor, Egypt</p>
+    <h1>Your Nile <em>Paradise</em> Awaits</h1>
+    <p class="hero-subtitle">Handpicked luxury villas on the tranquil West Bank. Private pools, panoramic sunsets, and bespoke ancient Egyptian adventures.</p>
+  </div>
+  <div class="scroll-indicator"><span>Discover</span><div class="line"></div></div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-wrapper" id="search">
+  <div class="search-bar">
+    <div class="search-field"><label>Check In</label><input type="text" id="checkin" placeholder="Select date" readonly></div>
+    <div class="search-field"><label>Check Out</label><input type="text" id="checkout" placeholder="Select date" readonly></div>
+    <button class="search-submit" id="searchBtn" onclick="checkAvailability()">Search Availability</button>
+  </div>
+</div>
+
+<!-- AMENITIES -->
+<section class="amenities-section fade-up" aria-label="Villa amenities and services">
+  <div class="amenities-shell">
+    <div>
+      <p class="amenities-kicker">Included Comforts</p>
+      <h2 class="amenities-title">Everything you need for an easy Luxor stay</h2>
+      <p class="amenities-copy">Relaxed resort-style comforts, practical guest services, and thoughtful details across our Royal Nile Villas apartments.</p>
+    </div>
+    <ul class="amenities-grid">
+      <li><span class="emoji">📶</span> Free WiFi</li>
+      <li><span class="emoji">🏊</span> 14 meter lap pool</li>
+      <li><span class="emoji">🌿</span> 30 meter green garden</li>
+      <li><span class="emoji">❄️</span> Air conditioning throughout</li>
+      <li><span class="emoji">📺</span> Smart TV / Netflix</li>
+      <li><span class="emoji">🧹</span> Free daily room service</li>
+      <li><span class="emoji">🚐</span> Airport pick-up & drop-off (charges apply)</li>
+      <li><span class="emoji">🛕</span> Private tours & local experiences</li>
+      <li><span class="emoji">🍽️</span> Nile view restaurant</li>
+      <li><span class="emoji">⛴️</span> Free shuttle to West Bank Ferry</li>
+    </ul>
+  </div>
+</section>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div><p class="loading-text">Checking availability...</p></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalContent"></div></div>
+<div class="image-viewer" id="imageViewer" aria-hidden="true">
+  <button class="image-viewer-close" onclick="closeImageViewer()" aria-label="Close image">✕</button>
+  <img id="imageViewerImg" src="" alt="">
+  <p class="image-viewer-caption" id="imageViewerCaption"></p>
+</div>
+
+<!-- VILLAS -->
+<section class="section" id="villas">
+  <div class="section-header fade-up"><p class="section-eyebrow">Our Collection</p><h2 class="section-title">Luxury Nile Villas</h2><p class="section-subtitle">Eight exceptional properties on Luxor's peaceful West Bank. From poolside ground-floor apartments to panoramic sky penthouses.</p></div>
+  <div class="results-header" id="resultsHeader"><p class="results-count" id="resultsCount"></p><button class="results-reset" onclick="resetSearch()">Show All Villas</button></div>
+  <div class="villa-grid" id="villaGrid"></div>
+</section>
+
+<!-- TOURS -->
+<section class="section" id="tours" style="padding-top:2rem;">
+  <div class="section-header fade-up"><p class="section-eyebrow">Curated Experiences</p><h2 class="section-title">Tours & Adventures</h2><p class="section-subtitle">Unlock ancient Egypt with our handcrafted tours. Sunrise balloons, temple explorations, desert safaris, and sunset feluccas.</p></div>
+  <div class="tours-grid" id="toursGrid"></div>
+  <div class="cta-banner fade-up" style="margin-top:3rem;"><h3>The Complete Luxor Experience</h3><p>Balloon + West Bank + East Bank + Sunset Cruise — Save $$$ with our custom tour packages. Complimentary airport transfer with 3+ tours booked.</p><a href="https://wa.me/201000000000?text=Hi!%20I'm%20interested%20in%20the%20Complete%20Luxor%20Experience%20package." class="btn btn-teal" target="_blank">Inquire on WhatsApp</a></div>
+</section>
+
+<!-- RESTAURANT -->
+<section class="section" id="restaurant" style="padding-top:2rem;padding-bottom:2rem;">
+  <div class="section-header fade-up"><p class="section-eyebrow">Dine With Us</p><h2 class="section-title">Royal Nile View Restaurant</h2><p class="section-subtitle">The best Nile panorama in Luxor — authentic Egyptian cuisine, fresh juices, and unforgettable sunsets from our panoramic rooftop.</p></div>
+  <div class="location-wrapper fade-up" style="border-color:var(--teal);">
+    <div class="location-info">
+      <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--text);margin-bottom:0.8rem;">Rooftop Dining <span style="color:var(--teal);">Above the Nile</span></h3>
+      <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:1.2rem;">From slow-cooked clay-pot tagens to charcoal-grilled kofta and wood-fired pizza — every dish is prepared fresh to order using local ingredients. Open to guests and visitors alike.</p>
+      <ul class="location-highlights">
+        <li><span class="emoji">🕖</span> Open daily 7 AM – late</li>
+        <li><span class="emoji">🍳</span> All-day breakfast</li>
+        <li><span class="emoji">🥘</span> Egyptian classics & tagens</li>
+        <li><span class="emoji">🔥</span> Charcoal grill & wood-fired pizza</li>
+        <li><span class="emoji">🍹</span> Fresh seasonal juices</li>
+        <li><span class="emoji">🌬️</span> Traditional shisha</li>
+        <li><span class="emoji">🌅</span> Panoramic Nile sunset views</li>
+        <li><span class="emoji">🥗</span> Vegetarian & vegan friendly</li>
+      </ul>
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
+        <a href="restaurant.html" class="btn btn-teal">Explore Restaurant</a>
+        <a href="restaurant.html#menu" class="btn btn-outline" style="border-color:var(--teal);color:var(--teal);">View Full Menu</a>
+      </div>
+    </div>
+    <div class="location-map" style="min-height:380px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;background:var(--border);">
+      <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_elegan_5dd2dd67-9a2b-4ff8-b16b-d4995aeb5431.png" alt="Egyptian dinner spread" style="width:100%;height:100%;object-fit:cover;grid-row:1/3;" loading="lazy">
+      <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_8406ef7f-87ae-453b-be57-3e6cc0f5e6a6_3.png" alt="Mixed grill platter" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_d268e45c-a9bc-46e1-8c82-2bef68a21e30_0.png" alt="Fresh Egyptian cuisine" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="section" id="location">
+  <div class="section-header fade-up"><p class="section-eyebrow">Where to Find Us</p><h2 class="section-title">West Bank, Luxor</h2><p class="section-subtitle">Perfectly positioned on Luxor's tranquil West Bank — minutes from the Valley of the Kings and a short ferry ride to the city.</p></div>
+  <div class="location-wrapper fade-up">
+    <div class="location-info">
+      <h3>The Heart of Ancient Thebes</h3>
+      <p>All our properties are located in Al Aqaletah, surrounded by sugar cane fields with stunning Nile and mountain views. Free shuttle service to the West Bank ferry station. Don't miss our <a href="restaurant.html" style="color:var(--primary);font-weight:600;">rooftop restaurant</a> — the best Nile view in Luxor.</p>
+      <ul class="location-highlights"><li><span class="emoji">🏜️</span> 15 min to Valley of the Kings</li><li><span class="emoji">🎈</span> 10 min to balloon launch</li><li><span class="emoji">⛴️</span> 5 min to West Bank ferry</li><li><span class="emoji">🛕</span> 15 min to Luxor Temple</li><li><span class="emoji">🏛️</span> 20 min to Karnak Temple</li><li><span class="emoji">✈️</span> 25 min to Luxor Airport</li><li><span class="emoji">🍽️</span> Nile view restaurant</li><li><span class="emoji">🅿️</span> Free parking</li></ul>
+      <a href="https://wa.me/201000000000?text=Hi!%20I'd%20like%20to%20know%20more%20about%20Royal%20Nile%20Villas." class="btn btn-outline" target="_blank">Contact on WhatsApp</a>
+    </div>
+    <div class="location-map"><iframe src="https://www.google.com/maps?q=25.691162,32.623042&z=17&output=embed" allowfullscreen loading="lazy" title="Royal Nile Villas Location"></iframe></div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="section" id="contact" style="padding-top:2rem;">
+  <div class="cta-banner fade-up"><h3>Ready to Experience the Nile?</h3><img class="credentials-image" src="villa-assets/abdol-airbnb-credentials.jpeg" alt="Abdol Airbnb credentials showing guest rating, reviews, years hosting, and licensed tour guide profile" loading="lazy"><p>Message us directly for availability, rates, and personalised stay or tour support.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;"><a href="https://wa.me/201000000000?text=Hi!%20I'm%20interested%20in%20booking%20a%20villa." class="btn btn-primary" target="_blank">WhatsApp Us</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments and penthouses on Luxor's West Bank. Hosted by Abdol — Superhost with 7+ years and 1,800+ glowing reviews.</p></div>
+    <div class="footer-col"><h5>Villas</h5><ul><li><a href="#" onclick="openVillaModal('sky-penthouse-1')">Sky Penthouse 1</a></li><li><a href="#" onclick="openVillaModal('sky-penthouse-2')">Sky Penthouse 2</a></li><li><a href="#" onclick="openVillaModal('nile-view-luxury-1')">Luxury Nile View 1</a></li><li><a href="#" onclick="openVillaModal('nile-view-luxury-2')">Luxury Nile View 2</a></li><li><a href="#" onclick="openVillaModal('royal-home-pool-view')">Pool View Apartment</a></li><li><a href="restaurant.html">Rooftop Restaurant</a></li></ul></div>
+    <div class="footer-col"><h5>Connect</h5><ul><li><a href="https://wa.me/201000000000" target="_blank">WhatsApp</a></li><li><a href="mailto:royalhomeluxor@gmail.com">Email Us</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Royal Nile Villas. All rights reserved.</span><span>Luxor, Egypt — West Bank</span></div>
+  <p class="footer-legal">All website content, branding, text, photography, and design are the property of Royal Nile Villas unless otherwise credited. Unauthorized reproduction, copying, or commercial use is prohibited.</p>
+</footer>
+
+<script>
+// ============================================
+// VILLA DATA
+// ============================================
+const VILLAS = [
+  { id:'royal-home-nile-view', roomId:'33825380', name:'Royal Home Luxor — Nile View', shortName:'Nile View Apartment', location:'West Bank, Luxor', guests:4, bedrooms:2, beds:2, bathrooms:1, rating:4.91, reviews:404, floor:'Top Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
+    features:['Private Balcony','Shared Pool','Rose Garden','Rooftop Restaurant','15min Walk to Ferry','Self Check-in','Extra Spacious'],
+    description:'Top-floor apartment with a private entrance and balcony overlooking the pool, green countryside, and the River Nile. Part of the enchanting Royal Home Villa — just 15 minutes\' walk from the West Bank ferry and waterfront restaurants.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/33825380',
+    bookingUrl:'https://www.booking.com/Pulse-CZL3W5',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/33825380.ics?t=db0bb0f1a2094605a74753169c7fa8f2',
+    propertyGroup:'Royal Home Luxor',
+    photos:['0f9027b3-d864-4162-bb6f-f91b7eb4d1c0.jpg','ff9890f6-2cdd-4e6c-87ff-65744e1c4013.jpg','ba12b524-21f2-4141-8d52-59d1af265544.jpg','cb69e200-f98f-4bbc-84dd-ec6bae1cabea.jpg','84789dfc-80bd-4cb8-bdff-e5b1ce72e905.jpg','4e8e41ed-363c-4adb-a962-a160829fef32.jpg','515f7b54-25d7-4cb2-9d4d-1b375994f538.jpg'],
+  },
+  { id:'royal-home-pool-view', roomId:'33760041', name:'Royal Home Luxor — Pool View', shortName:'Pool View Apartment', location:'West Bank, Luxor', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.94, reviews:464, floor:'Ground Floor', viewType:'Pool, Valley & Garden', bedsConfig:'1 Queen + 2 Singles',
+    features:['Direct Pool Access','Private Entrance','Rose Garden & Hammock','Rooftop Nile Sunsets','Daily Housekeeping','Self Check-in'],
+    description:'Ground-floor apartment with private entrance and direct pool access. Lounge in the rose garden hammock after a day exploring ancient temples. Rooftop terrace for unforgettable Nile sunsets.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/33760041',
+    bookingUrl:'https://www.booking.com/Pulse-DGM5QI',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/33760041.ics?t=a316c37daf0e4aa8a042707ea26b00e3',
+    propertyGroup:'Royal Home Luxor',
+    photos:['c5034f08-97d7-42c5-a094-0532921122f7.jpg','5997fc1e-9626-4490-981f-79febbeda217.jpg','68d3db49-c20a-4615-9b29-0670831cf291.jpg','42e61710-4b43-4992-9dee-c37258deb8fd.jpg','5ad8f753-2746-4dce-bfdc-2677f9b6abed.jpg','d3470d76-85f4-4ec0-a176-a437bcd3c649.jpg','30afc5b2-704e-416c-bd4c-9d50a6082eff.jpg'],
+  },
+  { id:'sky-penthouse-1', roomId:'1505758884972582166', name:'Royal Nile Villa — Sky Penthouse 1', shortName:'Sky Penthouse 1', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.92, reviews:36, floor:'Top Floor Penthouse', viewType:'Panoramic Nile, Desert', bedsConfig:'1 Queen + 2 Singles',
+    features:['Panoramic 360° Views','Private Terrace','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle','TV & Workspace'],
+    description:'Top-floor penthouse with breathtaking panoramic views of the Nile, desert mountains, pool, and lush gardens. The ultimate Luxor vantage point — watch the sunrise paint the river gold from your private terrace.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/1505758884972582166',
+    bookingUrl:'https://www.booking.com/Pulse-a5GOdn',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/1505758884972582166.ics?t=ac9593ce802647a6b9b8b5cd3e0ca623',
+    propertyGroup:'Royal Nile Villa',
+    photos:['hosting/Hosting-1505758884972582166/original/095deb02-b573-486e-beb8-26caf938e11d.jpeg','hosting/Hosting-1505758884972582166/original/d29d1f46-3c76-44f0-ac38-3e978b316b9e.jpeg','hosting/Hosting-1505758884972582166/original/18e00ed1-db90-4789-9bb7-14d1c0075afe.jpeg','hosting/Hosting-1505758884972582166/original/d43daf90-8086-4446-ad1d-b0ccfa920961.jpeg','hosting/Hosting-1505758884972582166/original/8e34daa2-9050-4522-875a-57f31e38d8b0.jpeg','hosting/Hosting-1505758884972582166/original/3d52a54d-b40b-4dc1-87bd-10bb234d4de8.jpeg'],
+  },
+  { id:'sky-penthouse-2', roomId:'1505764523387331978', name:'Royal Nile Villa — Sky Penthouse 2', shortName:'Sky Penthouse 2', location:'Luxor, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.92, reviews:48, floor:'Top Floor Penthouse', viewType:'Panoramic Nile, Desert & Mountains', bedsConfig:'1 Queen + 2 Singles',
+    features:['Guest Favourite','Panoramic 360° Views','Private Terrace','14m Swimming Pool','On-site Restaurant','TV & Workspace'],
+    description:'Guest-favourite penthouse with the same stunning panoramic views. Dedicated workspace makes it ideal for digital nomads seeking inspiration from the timeless Nile landscape.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/1505764523387331978',
+    bookingUrl:'https://www.booking.com/Pulse-XuOc35',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/1505764523387331978.ics?t=258f71adbd25442f89dfd2db702d355e',
+    propertyGroup:'Royal Nile Villa',
+    photos:['hosting/Hosting-1505764523387331978/original/9bee0310-0105-47fd-9944-bcf41f34f121.jpeg','hosting/Hosting-1505758884972582166/original/095deb02-b573-486e-beb8-26caf938e11d.jpeg','hosting/Hosting-1505758884972582166/original/18e00ed1-db90-4789-9bb7-14d1c0075afe.jpeg','hosting/Hosting-1505758884972582166/original/e5af2d6c-305a-496c-91e2-471d5ca8707d.jpeg','hosting/Hosting-1505758884972582166/original/8e34daa2-9050-4522-875a-57f31e38d8b0.jpeg','hosting/Hosting-1505758884972582166/original/d43daf90-8086-4446-ad1d-b0ccfa920961.jpeg'],
+  },
+  { id:'nile-view-luxury-1', roomId:'959398645193866526', name:'Royal Nile Villa — Luxury Nile View 1', shortName:'Luxury Nile View 1', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:2, rating:4.97, reviews:153, floor:'2nd Floor', viewType:'Nile, Garden & Mountain', bedsConfig:'2 Queen Beds',
+    features:['Highest Rated ★ 4.97','2 Bathrooms','2 Queen Beds','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
+    description:'Our highest-rated property. Two queen bedrooms with two bathrooms — perfect for couples traveling together, or families wanting extra space and privacy. Stunning Nile, garden, and mountain views from the 2nd floor.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/959398645193866526',
+    bookingUrl:'https://www.booking.com/Pulse-Cq1VIp',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/959398645193866526.ics?t=88e80f2db092405ebaf3ef172b771d0f',
+    propertyGroup:'Royal Nile Villa',
+    photos:['hosting/Hosting-959398645193866526/original/f62cc0ab-cc13-4ca7-8ceb-eca9f272e412.jpeg','hosting/Hosting-959398645193866526/original/539d62ac-4ab6-4b71-8bc5-74ca198d8740.jpeg','hosting/Hosting-959398645193866526/original/8b0ae1c4-18a2-40cf-aed3-0e7aab16368e.jpeg','miso/Hosting-959398645193866526/original/49544fa0-6a75-4c1b-9e98-c5158e81fa8f.jpeg','miso/Hosting-959398645193866526/original/0a9fb635-f402-4e04-9efc-86a463f83582.jpeg','miso/Hosting-959398645193866526/original/bdd4482d-9bb5-4d41-baae-5c2691a5b5ae.jpeg'],
+  },
+  { id:'nile-view-1', roomId:'950750256318960064', name:'Royal Nile Villa — Nile View Apartment 1', shortName:'Nile View 1', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.90, reviews:58, floor:'Ground Floor', viewType:'Nile, Garden & Mountain', bedsConfig:'1 Queen + 2 Singles',
+    features:['Direct Pool Access','Ground Floor','Garden & Mountain Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
+    description:'Ground-floor apartment with direct pool access and beautiful garden and mountain views. Ideal for families wanting easy outdoor access — step right from your door to the 14-meter pool.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/950750256318960064',
+    bookingUrl:'https://www.booking.com/Pulse-eWXYX5',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/950750256318960064.ics?t=29cb67176e6e44738bc2d997d9878ef0',
+    propertyGroup:'Royal Nile Villa',
+    photos:['hosting/Hosting-950750256318960064/original/fe75eeaf-6e1b-429c-9de7-23e454495951.jpeg','hosting/Hosting-950750256318960064/original/94b97dbf-9999-470c-bac9-1eaa624c31a9.jpeg','miso/Hosting-950750256318960064/original/dc7b07ce-e5da-42e9-92a0-f3074c60f6f2.jpeg','miso/Hosting-950750256318960064/original/76a27f45-d604-40ac-917e-e2f4d447ebfc.jpeg','miso/Hosting-950750256318960064/original/640d02bc-1e0a-4fbf-b7e6-0225b84cfd88.jpeg','miso/Hosting-950750256318960064/original/8086ee0b-d445-4294-86a1-7ce53ed8cfd0.jpeg'],
+  },
+  { id:'nile-view-luxury-2', roomId:'959415706303071560', name:'Royal Nile Villas — Luxury Nile View 2', shortName:'Luxury Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:1, rating:4.94, reviews:124, floor:'2nd Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
+    features:['Guest Favourite','Private Terrace','Incredible Nile Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
+    description:'Second-floor apartment with a private terrace and incredible Nile River, pool, and garden views. A guest favourite with 124 reviews — known for spectacular sunset views from the terrace.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/959415706303071560',
+    bookingUrl:'https://www.booking.com/Pulse-ILh8Q3',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/959415706303071560.ics?t=67b6e918b5b34b68b33dae58b13b27cd',
+    propertyGroup:'Royal Nile Villa',
+    photos:['hosting/Hosting-959415706303071560/original/f0b244de-b444-4bc9-9cf7-afad74eb4793.jpeg','hosting/Hosting-959415706303071560/original/177f5134-8f3c-4f08-a0f1-a58c748e71ba.jpeg','miso/Hosting-959415706303071560/original/2a759cb1-e923-406b-8aa6-97abe1551267.jpeg'],
+  },
+  { id:'nile-view-2', roomId:'952260705771172731', name:'Royal Nile Villas — Nile View Apartment 2', shortName:'Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.91, reviews:58, floor:'Ground Floor', viewType:'Nile & Desert View', bedsConfig:'1 Queen + 2 Singles',
+    features:['Direct Pool Access','Ground Floor','Desert & Nile Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
+    description:'Ground-floor apartment with direct pool access and sweeping desert and Nile views. Same great layout as Nile View 1, with a different, dramatic desert vista from your windows.',
+    airbnbUrl:'https://www.airbnb.co.uk/rooms/952260705771172731',
+    bookingUrl:'https://www.booking.com/Pulse-vTu0Xy',
+    icalUrl:'https://www.airbnb.co.uk/calendar/ical/952260705771172731.ics?t=674a6b647e5a4a2288cd2b25225ea3ed',
+    propertyGroup:'Royal Nile Villa',
+    photos:['hosting/Hosting-952260705771172731/original/4a7fc130-6e87-4f39-aaf5-300afb527106.jpeg','hosting/Hosting-952260705771172731/original/9d752eda-265e-4419-9be8-3bdb66d7d426.jpeg','miso/Hosting-952260705771172731/original/7c36b2a2-3ab3-407d-9714-2883f58998bc.jpeg','miso/Hosting-952260705771172731/original/9b0f63f0-2ac6-414e-a007-2685d923d358.jpeg','miso/Hosting-952260705771172731/original/ae6d8147-4b4f-4aa3-942a-e8aebdaf6001.jpeg','miso/Hosting-952260705771172731/original/edecbe4e-df9e-4803-a92e-a8e0abebd5a6.jpeg','miso/Hosting-952260705771172731/original/da9e5d9b-2fc1-4967-9c94-e9bc8490d7fb.jpeg'],
+  },
+];
+
+const SITE_VILLA_PHOTOS = {
+  'royal-home-nile-view': [
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.14-2-scaled-e1686320627582.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.06-7-1-scaled-e1686320754594.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.14-1-3-scaled-e1686320564726.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.13-1-1-scaled-e1686397013985.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.07-1-scaled-e1686397036525.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.06-5-scaled-e1686397073986.jpeg'
+  ],
+  'royal-home-pool-view': [
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.14-1-3-scaled-e1686320564726.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.14-2-scaled-e1686320627582.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.14-4-scaled-e1686320653991.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.06-10-1-scaled-e1686320710754.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.06-9-1-scaled-e1686320736408.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.06-1-1-scaled-e1686320833422.jpeg'
+  ],
+  'nile-view-luxury-1': [
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.32-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-16-at-16.23.46.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-16-at-16.23.44-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-18-at-17.25.18.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.28-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-16-at-16.23.44-1.jpeg',
+    'villa-assets/rnv-lux-grey-hallway.jpeg',
+    'villa-assets/rnv-lux-botanical-wall-art.jpeg',
+    'villa-assets/rnv-entrance-walkway.jpeg',
+    'villa-assets/rnv-grass-view.jpeg',
+    'villa-assets/rnv-pool-night-green.jpeg',
+    'villa-assets/rnv-pool-night-blue.jpeg'
+  ],
+  'nile-view-luxury-2': [
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.32-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-16-at-16.23.46.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-16-at-16.23.44-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-18-at-17.25.18.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.28-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-16-at-16.23.44-1.jpeg',
+    'villa-assets/rnv-lux-grey-hallway.jpeg',
+    'villa-assets/rnv-lux-botanical-wall-art.jpeg',
+    'villa-assets/rnv-entrance-walkway.jpeg',
+    'villa-assets/rnv-grass-view.jpeg',
+    'villa-assets/rnv-pool-night-green.jpeg',
+    'villa-assets/rnv-pool-night-blue.jpeg'
+  ],
+  'nile-view-1': [
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.32-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.28-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.39-1.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.24-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.11-1.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.21-5.jpeg'
+  ],
+  'nile-view-2': [
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.32-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.34.28-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.39-1.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.24-2.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.11-1.jpeg',
+    'https://egyptvillastours.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-13-at-10.37.21-5.jpeg'
+  ]
+};
+
+VILLAS.forEach(villa => {
+  if (SITE_VILLA_PHOTOS[villa.id]) villa.photos = SITE_VILLA_PHOTOS[villa.id];
+});
+
+const VILLA_COVER_PHOTOS = {
+  'royal-home-nile-view': 'https://egyptvillastours.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-01-04-at-20.09.14-1-4-scaled-e1686487768699.jpeg',
+  'nile-view-luxury-1': 'https://a0.muscache.com/im/pictures/hosting/Hosting-959398645193866526/original/f62cc0ab-cc13-4ca7-8ceb-eca9f272e412.jpeg?im_w=720',
+  'nile-view-1': 'https://a0.muscache.com/im/pictures/hosting/Hosting-950750256318960064/original/fe75eeaf-6e1b-429c-9de7-23e454495951.jpeg?im_w=720',
+  'nile-view-luxury-2': 'https://a0.muscache.com/im/pictures/hosting/Hosting-959415706303071560/original/f0b244de-b444-4bc9-9cf7-afad74eb4793.jpeg?im_w=720',
+  'nile-view-2': 'https://a0.muscache.com/im/pictures/hosting/Hosting-952260705771172731/original/4a7fc130-6e87-4f39-aaf5-300afb527106.jpeg?im_w=720'
+};
+
+function vPhoto(villa, idx) {
+  if (idx === undefined && VILLA_COVER_PHOTOS[villa.id]) return VILLA_COVER_PHOTOS[villa.id];
+  const photo = villa.photos[idx || 0];
+  if (/^https?:\/\//.test(photo)) return photo;
+  if (photo.startsWith('villa-assets/')) return photo;
+  return 'https://a0.muscache.com/im/pictures/' + photo + '?im_w=720';
+}
+
+// ============================================
+// TOUR DATA
+// ============================================
+const TOURS = [
+  { id:'balloon', name:'Hot Air Balloon Sunrise', icon:'🎈', desc:'Float above the Valley of the Kings at dawn. Watch the sun paint ancient temples gold from 2,000 feet — an unforgettable once-in-a-lifetime experience.',
+    details:'Depart before sunrise from the West Bank launch site. Your expert pilot guides you over the Valley of the Kings, Queen Hatshepsut Temple, and the Nile River. Flight duration: 45-60 minutes. Includes hotel pickup, light breakfast, and flight certificate. Photography opportunities are unmatched.',
+    coverImage:'tour-assets/balloon-cover-no-caption.png',
+    heroVideo:'tour-assets/balloon/hero-loop.mp4',
+    photos:[
+      'tour-assets/balloon-01-begin-before-sunrise.png',
+      'tour-assets/balloon-02-lift-into-golden-sky.png',
+      'tour-assets/balloon-03-ancient-luxor-from-above.png',
+      'tour-assets/balloon-04-moments-you-never-forget.png',
+      'tour-assets/balloon-05-float-over-living-history.png',
+      'tour-assets/balloon-06-reserve-your-sunrise-ride.png',
+    ]},
+  { id:'west-bank', name:'West Bank Wonders', icon:'🏛️', desc:'Valley of the Kings, Queen Hatshepsut Temple, Colossi of Memnon — a full day walking among pharaohs in the world\'s greatest necropolis.',
+    details:'Full-day guided tour covering the Valley of the Kings (3 tombs including Tutankhamun option), the magnificent Temple of Hatshepsut, the Colossi of Memnon, and a visit to an alabaster workshop. Includes private Egyptologist guide, air-conditioned transport, and lunch.',
+    heroVideo:'tour-assets/west-bank/hero-loop.mp4',
+    photos:[
+      'tour-assets/west-bank/01-begin-at-the-colossi.png',
+      'tour-assets/west-bank/02-enter-the-valley-of-kings.png',
+      'tour-assets/west-bank/03-tombs-alive-with-colour.png',
+      'tour-assets/west-bank/04-temple-of-a-queen.png',
+      'tour-assets/west-bank/05-crafted-by-hand.png',
+      'tour-assets/west-bank/06-a-day-among-pharaohs.png',
+    ]},
+  { id:'east-bank', name:'East Bank Magical Temple Tour', icon:'🏺', desc:'Explore Karnak Temple and Luxor Temple with a private guide and private air-conditioned van transfers throughout.',
+    details:'Private half-day tour in Luxor exploring the magnificent temples of the East Bank. Visit Karnak Temple and Luxor Temple with an Egyptologist guide, private luxury air-conditioned van transfers, bottled water, and flexible pacing.',
+    included:['Private Egyptologist guide','Private luxury AC van transfers','Hotel pickup & drop-off','Karnak Temple visit','Luxor Temple visit','Bottled water provided'],
+    heroVideo:'tour-assets/east-bank/hero-loop.mp4',
+    photos:[
+      'tour-assets/east-bank/01-arrive-at-karnak.png',
+      'tour-assets/east-bank/02-forest-of-134-columns.png',
+      'tour-assets/east-bank/03-obelisks-of-karnak.png',
+      'tour-assets/east-bank/04-walk-the-sphinx-avenue.png',
+      'tour-assets/east-bank/05-luxor-temple-at-gold-hour.png',
+      'tour-assets/east-bank/06-private-comfort-throughout.png',
+    ]},
+  { id:'desert', name:'Desert Quad Safari', icon:'🏜️', desc:'Race across golden dunes on a quad bike, explore ancient desert trails, then share tea with a Bedouin family under a canopy of stars.',
+    details:'Afternoon departure to the desert. After a safety briefing, ride quad bikes through the stunning Western Desert landscapes. Visit a Bedouin village for traditional tea and bread. Watch the sunset over the dunes before returning. Includes quad bike, helmet, guide, and Bedouin tea.',
+    coverImage:'tour-assets/desert/03-ride-the-golden-trails.png',
+    heroVideo:'tour-assets/desert/hero-loop.mp4',
+    photos:[
+      'tour-assets/desert/01-arrive-in-the-desert.png',
+      'tour-assets/desert/02-safety-briefing.png',
+      'tour-assets/desert/03-ride-the-golden-trails.png',
+      'tour-assets/desert/04-desert-viewpoint.png',
+      'tour-assets/desert/05-bedouin-tea-stop.png',
+      'tour-assets/desert/06-sunset-ride-home.png',
+    ]},
+  { id:'abu-simbel', name:'Abu Simbel Expedition', icon:'🛕', desc:'Journey south to Ramesses II\'s masterpiece — Egypt\'s most breathtaking UNESCO temples, carved from a mountainside 3,000 years ago.',
+    details:'Early morning departure (approx. 4 AM) for the 3-hour drive south to Abu Simbel. Explore the Great Temple of Ramesses II and the Temple of Nefertari — both relocated in a massive UNESCO operation. Return to Luxor by afternoon. Includes private transport and guide. Entry tickets are extra.',
+    coverImage:'tour-assets/abu-simbel/03-temple-of-ramesses-ii.png',
+    heroVideo:'tour-assets/abu-simbel/hero-loop.mp4',
+    photos:[
+      'tour-assets/abu-simbel/01-early-morning-departure.png',
+      'tour-assets/abu-simbel/02-arrive-at-abu-simbel.png',
+      'tour-assets/abu-simbel/03-temple-of-ramesses-ii.png',
+      'tour-assets/abu-simbel/04-inside-the-sanctuary.png',
+      'tour-assets/abu-simbel/05-temple-of-nefertari.png',
+      'tour-assets/abu-simbel/06-lake-nasser-views.png',
+    ]},
+  { id:'aswan', name:'Aswan & Philae Temple', icon:'🏝️', desc:'A full day exploring Aswan\'s Nubian charm — the High Dam, Philae Temple on its island sanctuary, and a traditional Nubian lunch.',
+    details:'Drive south to Aswan (approx. 3 hours). Visit the Aswan High Dam, take a motorboat to the beautiful island Temple of Philae dedicated to Isis, enjoy a traditional Nubian lunch, and return to Luxor in the evening. Includes transport, guide, boat, and lunch. Entry tickets are extra.',
+    coverImage:'tour-assets/aswan/03-temple-of-isis.png',
+    heroVideo:'tour-assets/aswan/hero-loop.mp4',
+    photos:[
+      'tour-assets/aswan/01-private-drive-to-aswan.png',
+      'tour-assets/aswan/02-boat-to-philae.png',
+      'tour-assets/aswan/03-temple-of-isis.png',
+      'tour-assets/aswan/04-aswan-high-dam.png',
+      'tour-assets/aswan/05-nubian-lunch.png',
+      'tour-assets/aswan/06-return-to-luxor.png',
+    ]},
+];
+
+const TOUR_TICKET_NOTE = 'Entrance tickets are extra and must be purchased by tourist credit card at the temple/site ticket office, as required by local law.';
+const TICKET_EXTRA_TOUR_IDS = new Set(['east-bank','west-bank','aswan','abu-simbel','abydos-dendera']);
+
+const TOUR_PHOTOS = {
+  'balloon': [
+    'tour-assets/balloon-01-begin-before-sunrise.png',
+    'tour-assets/balloon-02-lift-into-golden-sky.png',
+    'tour-assets/balloon-03-ancient-luxor-from-above.png',
+    'tour-assets/balloon-04-moments-you-never-forget.png',
+    'tour-assets/balloon-05-float-over-living-history.png',
+    'tour-assets/balloon-06-reserve-your-sunrise-ride.png'
+  ],
+  'west-bank': [
+    'tour-assets/west-bank/01-begin-at-the-colossi.png',
+    'tour-assets/west-bank/02-enter-the-valley-of-kings.png',
+    'tour-assets/west-bank/03-tombs-alive-with-colour.png',
+    'tour-assets/west-bank/04-temple-of-a-queen.png',
+    'tour-assets/west-bank/05-crafted-by-hand.png',
+    'tour-assets/west-bank/06-a-day-among-pharaohs.png'
+  ],
+  'east-bank': [
+    'tour-assets/east-bank/01-arrive-at-karnak.png',
+    'tour-assets/east-bank/02-forest-of-134-columns.png',
+    'tour-assets/east-bank/03-obelisks-of-karnak.png',
+    'tour-assets/east-bank/04-walk-the-sphinx-avenue.png',
+    'tour-assets/east-bank/05-luxor-temple-at-gold-hour.png',
+    'tour-assets/east-bank/06-private-comfort-throughout.png'
+  ],
+  'desert': [
+    'tour-assets/desert/01-arrive-in-the-desert.png',
+    'tour-assets/desert/02-safety-briefing.png',
+    'tour-assets/desert/03-ride-the-golden-trails.png',
+    'tour-assets/desert/04-desert-viewpoint.png',
+    'tour-assets/desert/05-bedouin-tea-stop.png',
+    'tour-assets/desert/06-sunset-ride-home.png'
+  ],
+  'abu-simbel': [
+    'tour-assets/abu-simbel/01-early-morning-departure.png',
+    'tour-assets/abu-simbel/02-arrive-at-abu-simbel.png',
+    'tour-assets/abu-simbel/03-temple-of-ramesses-ii.png',
+    'tour-assets/abu-simbel/04-inside-the-sanctuary.png',
+    'tour-assets/abu-simbel/05-temple-of-nefertari.png',
+    'tour-assets/abu-simbel/06-lake-nasser-views.png'
+  ],
+  'aswan': [
+    'tour-assets/aswan/01-private-drive-to-aswan.png',
+    'tour-assets/aswan/02-boat-to-philae.png',
+    'tour-assets/aswan/03-temple-of-isis.png',
+    'tour-assets/aswan/04-aswan-high-dam.png',
+    'tour-assets/aswan/05-nubian-lunch.png',
+    'tour-assets/aswan/06-return-to-luxor.png'
+  ],
+  'nile-boat-cruise': [
+    'tour-assets/nile-boat-cruise/01-private-pickup.png',
+    'tour-assets/nile-boat-cruise/02-board-the-nile-boat.png',
+    'tour-assets/nile-boat-cruise/03-sail-into-sunset.png',
+    'tour-assets/nile-boat-cruise/04-dinner-on-the-nile.png',
+    'tour-assets/nile-boat-cruise/05-tea-and-nile-breeze.png',
+    'tour-assets/nile-boat-cruise/06-golden-hour-return.png'
+  ],
+  'red-sea': [
+    'tour-assets/red-sea/01-private-drive-to-hurghada.png',
+    'tour-assets/red-sea/02-board-the-red-sea-boat.png',
+    'tour-assets/red-sea/03-coral-reef-snorkelling.png',
+    'tour-assets/red-sea/04-tropical-fish-below.png',
+    'tour-assets/red-sea/05-lunch-on-deck.png',
+    'tour-assets/red-sea/06-turquoise-water-finale.png'
+  ],
+  'abydos-dendera': [
+    'tour-assets/abydos-dendera/01-private-drive-north.png',
+    'tour-assets/abydos-dendera/02-abydos-temple-arrival.png',
+    'tour-assets/abydos-dendera/03-temple-of-seti-i.png',
+    'tour-assets/abydos-dendera/04-dendera-temple-of-hathor.png',
+    'tour-assets/abydos-dendera/05-dendera-zodiac-ceiling.png',
+    'tour-assets/abydos-dendera/06-sacred-temple-journey.png'
+  ]
+};
+
+TOURS.push(
+  { id:'nile-boat-cruise', name:'Sunset Nile Boat Cruise', icon:'⛵', desc:'A peaceful two-hour Nile boat ride at sunset with authentic Egyptian dinner, tea, coffee, bottled water, and private transfers.',
+    details:'Glide along the Nile as the sun sets over Luxor. The tour includes a Nile boat ride, authentic Egyptian dinner, tea, coffee, bottled water, taxes, service charges, and air-conditioned round-trip transportation.',
+    coverImage:'tour-assets/nile-boat-cruise/03-sail-into-sunset.png',
+    heroVideo:'tour-assets/nile-boat-cruise/hero-loop.mp4',
+    photos:[
+      'tour-assets/nile-boat-cruise/01-private-pickup.png',
+      'tour-assets/nile-boat-cruise/02-board-the-nile-boat.png',
+      'tour-assets/nile-boat-cruise/03-sail-into-sunset.png',
+      'tour-assets/nile-boat-cruise/04-dinner-on-the-nile.png',
+      'tour-assets/nile-boat-cruise/05-tea-and-nile-breeze.png',
+      'tour-assets/nile-boat-cruise/06-golden-hour-return.png'
+    ]},
+  { id:'red-sea', name:'Hurghada Snorkelling Adventure', icon:'🤿', desc:'A full-day Red Sea escape from Luxor to Hurghada for bright coral, tropical fish, and clear turquoise water.',
+    details:'Travel by private air-conditioned transport from Luxor to Hurghada for a day of Red Sea snorkelling. Includes experienced driver, round-trip transport, taxes, and service charges.',
+    coverImage:'tour-assets/red-sea/04-tropical-fish-below.png',
+    heroVideo:'tour-assets/red-sea/hero-loop.mp4',
+    photos:[
+      'tour-assets/red-sea/01-private-drive-to-hurghada.png',
+      'tour-assets/red-sea/02-board-the-red-sea-boat.png',
+      'tour-assets/red-sea/03-coral-reef-snorkelling.png',
+      'tour-assets/red-sea/04-tropical-fish-below.png',
+      'tour-assets/red-sea/05-lunch-on-deck.png',
+      'tour-assets/red-sea/06-turquoise-water-finale.png'
+    ]},
+  { id:'abydos-dendera', name:'Abydos & Dendera Temples', icon:'🏛️', desc:'A full-day private temple journey to Abydos and Dendera with luxury air-conditioned transfers and your own guide.',
+    details:'Travel north from Luxor for a full-day visit to the Temple of Seti I at Abydos and the beautifully preserved Hathor Temple at Dendera. Includes private luxury air-conditioned transfers and a private tour guide. Temple entry tickets are extra.',
+    included:['Private tour guide','Private luxury AC transfers','Hotel pickup & drop-off','Abydos Temple visit','Dendera Temple visit','Temple entry tickets extra'],
+    coverImage:'tour-assets/abydos-dendera/04-dendera-temple-of-hathor.png',
+    heroVideo:'tour-assets/abydos-dendera/hero-loop.mp4',
+    photos:[
+      'tour-assets/abydos-dendera/01-private-drive-north.png',
+      'tour-assets/abydos-dendera/02-abydos-temple-arrival.png',
+      'tour-assets/abydos-dendera/03-temple-of-seti-i.png',
+      'tour-assets/abydos-dendera/04-dendera-temple-of-hathor.png',
+      'tour-assets/abydos-dendera/05-dendera-zodiac-ceiling.png',
+      'tour-assets/abydos-dendera/06-sacred-temple-journey.png'
+    ]}
+);
+
+TOURS.forEach(tour => {
+  if (TOUR_PHOTOS[tour.id]) tour.photos = TOUR_PHOTOS[tour.id];
+});
+
+// ============================================
+// ICAL CACHE (pre-fetched May 25, 2026)
+// ============================================
+const prefetchedICalData = {"33825380":{"status":"ok","booked":["2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-08","2026-06-09","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":14},"33760041":{"status":"ok","booked":["2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-06","2026-06-07","2026-06-08","2026-06-12","2026-06-13","2026-06-14","2026-06-15","2026-06-17","2026-06-18","2026-06-24","2026-06-25","2026-06-26","2026-07-09","2026-07-10","2026-07-16","2026-07-17","2026-07-18","2026-07-25","2026-07-30","2026-07-31","2026-08-01","2026-08-11","2026-08-12","2026-08-13","2026-09-07","2026-09-08","2026-09-09","2026-09-10","2026-09-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02","2026-10-03","2026-10-04","2026-10-10","2026-10-11","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":53},"1505758884972582166":{"status":"ok","booked":["2026-05-23","2026-05-24","2026-05-25","2026-05-26","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":10},"1505764523387331978":{"status":"ok","booked":["2026-05-26","2026-05-27","2026-05-30","2026-05-31","2026-06-01","2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-23","2026-06-24","2026-07-23","2026-09-08","2026-09-09","2026-10-07","2026-10-08","2026-10-09","2026-10-10","2026-10-11","2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16","2026-10-17","2026-11-07","2026-11-08","2026-11-09","2026-11-10","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":35},"959398645193866526":{"status":"ok","booked":["2026-05-26","2026-05-27","2026-05-28","2026-09-20","2026-09-21","2026-09-22","2026-09-23","2026-09-24","2026-09-25","2026-09-26","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":16},"950750256318960064":{"status":"ok","booked":["2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":6},"959415706303071560":{"status":"ok","booked":["2026-05-31","2026-06-01","2026-10-15","2026-10-16","2026-10-17","2026-10-18","2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-24","2026-10-25","2026-10-26","2026-10-27","2026-10-28","2026-10-29","2026-10-30","2026-10-31","2026-11-01","2026-11-02","2026-11-03","2026-11-04","2026-11-05","2026-11-06","2026-11-07","2026-11-08","2026-11-09","2026-11-10","2026-11-11","2026-11-12","2026-11-13","2026-11-14","2026-11-15","2026-11-16","2026-11-17","2026-11-18","2026-11-19","2026-11-20","2026-11-21","2026-11-22","2026-11-23","2026-11-24","2026-11-25","2026-11-26","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":51},"952260705771172731":{"status":"ok","booked":["2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06","2026-06-07","2026-06-08","2026-06-21","2026-06-22","2027-05-20","2027-05-21","2027-05-22","2027-05-23","2027-05-24","2027-05-25"],"count":25}};
+const fallbackICalCache = {};
+const liveICalCache = {};
+Object.keys(prefetchedICalData).forEach(roomId => {
+  const v = VILLAS.find(v => v.roomId === roomId);
+  if (v) fallbackICalCache[v.icalUrl] = new Set(prefetchedICalData[roomId].booked);
+});
+
+function formatDate(d) { return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function getDateRange(start, end) { const dates=[]; const d=new Date(start); while(d<end) { dates.push(formatDate(new Date(d))); d.setDate(d.getDate()+1); } return dates; }
+function isAvailable(bookedDates, checkin, checkout) { if(!bookedDates) return 'unknown'; const range=getDateRange(checkin,checkout); for(const d of range) { if(bookedDates.has(d)) return false; } return true; }
+
+async function fetchICal(url, options = {}) {
+  const forceLive = options.forceLive === true;
+  if(!forceLive && liveICalCache[url]) return liveICalCache[url];
+  let text;
+  try { const r=await fetch(url); if(r.ok) text=await r.text(); } catch(e){}
+  if(!text) {
+    for(const proxy of ['https://api.allorigins.win/raw?url=','https://corsproxy.io/?']) {
+      try { const r=await fetch(proxy+encodeURIComponent(url)); if(r.ok) { text=await r.text(); break; } } catch(e){}
+    }
+  }
+  if(!text) return fallbackICalCache[url] || null;
+  try {
+    const jcal=ICAL.parse(text); const comp=new ICAL.Component(jcal); const vevents=comp.getAllSubcomponents('vevent');
+    const booked=[];
+    vevents.forEach(vevent=>{
+      const event=new ICAL.Event(vevent);
+      if(event.summary&&(event.summary.includes('Reserved')||event.summary.includes('Not available'))) {
+        const d=new Date(event.startDate.toJSDate()); while(d<event.endDate.toJSDate()) { booked.push(formatDate(new Date(d))); d.setDate(d.getDate()+1); }
+      }
+    });
+    liveICalCache[url]=new Set(booked); return liveICalCache[url];
+  } catch(e) { return fallbackICalCache[url] || null; }
+}
+
+async function checkAvailability() {
+  const ci=document.getElementById('checkin').value, co=document.getElementById('checkout').value;
+  if(!ci||!co) { alert('Please select check-in and check-out dates.'); return; }
+  const checkin=new Date(ci+'T00:00:00'), checkout=new Date(co+'T00:00:00');
+  if(checkout<=checkin) { alert('Check-out must be after check-in.'); return; }
+  document.getElementById('loadingOverlay').classList.add('active');
+  document.getElementById('searchBtn').disabled=true;
+  try {
+    const results=await Promise.allSettled(VILLAS.map(v=>fetchICal(v.icalUrl,{forceLive:true})));
+    const statuses=VILLAS.map((v,i)=>({...v, available:isAvailable(results[i].status==='fulfilled'?results[i].value:null,checkin,checkout)}));
+    const available=statuses.filter(v=>v.available===true);
+    renderVillas(available, ci, co);
+    document.getElementById('resultsHeader').classList.add('visible');
+    document.getElementById('resultsCount').innerHTML=`<strong>${available.length}</strong> of ${VILLAS.length} villas available for your dates`;
+    document.getElementById('villas').scrollIntoView({behavior:'smooth'});
+  } finally {
+    document.getElementById('loadingOverlay').classList.remove('active');
+    document.getElementById('searchBtn').disabled=false;
+  }
+}
+
+function resetSearch() {
+  document.getElementById('resultsHeader').classList.remove('visible');
+  document.getElementById('checkin').value=''; document.getElementById('checkout').value='';
+  renderVillas(VILLAS.map(v=>({...v,available:null})));
+}
+
+// ============================================
+// RENDER
+// ============================================
+function renderVillas(villaStatuses, ci, co) {
+  const grid=document.getElementById('villaGrid');
+  grid.innerHTML=villaStatuses.map(villa=>{
+    const sc=villa.available===true?'available':villa.available===false?'unavailable-text':'';
+    const st=villa.available===true?'Available':villa.available===false?'Booked':'';
+    const isUn=villa.available===false;
+    return `<div class="villa-card fade-up ${isUn?'unavailable':''}" onclick="${isUn?'':'openVillaModal(\''+villa.id+'\')'}" style="cursor:${isUn?'default':'pointer'}">
+      <div class="villa-image"><img src="${vPhoto(villa)}" alt="${villa.name}" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)';this.style.opacity='0.3';"><span class="villa-badge">${villa.floor}</span><span class="villa-rating"><span class="star">★</span> ${villa.rating} · ${villa.reviews}</span></div>
+      <div class="villa-body">${villa.available!==null?`<div class="villa-status ${sc}"><span class="dot"></span> ${st}</div>`:''}
+        <h3 class="villa-name">${villa.name}</h3>
+        <p class="villa-location">📍 ${villa.location} · ${villa.viewType}</p>
+        <div class="villa-features"><span class="villa-feature">🛏 ${villa.bedrooms} BR</span><span class="villa-feature">🛌 ${villa.beds} Beds</span><span class="villa-feature">🚿 ${villa.bathrooms} BA</span><span class="villa-feature">${villa.bedsConfig}</span></div>
+        <div class="villa-footer">
+          <a href="${villa.airbnbUrl}" target="_blank" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">Airbnb</a>
+          <a href="${villa.bookingUrl}" target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Booking.com</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  requestAnimationFrame(()=>{ document.querySelectorAll('.villa-card.fade-up').forEach(el=>el.classList.add('visible')); });
+}
+
+// ============================================
+// VILLA MODAL
+// ============================================
+function openVillaModal(villaId) {
+  const v=VILLAS.find(x=>x.id===villaId); if(!v) return;
+  const modal=document.getElementById('modalContent');
+  const photosHtml=v.photos.map((p,i)=>`<img src="${vPhoto(v,i)}" alt="${v.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
+  modal.innerHTML=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <h2>${v.name}</h2>
+      <p class="modal-location">📍 ${v.location} · ${v.viewType} · ${v.floor}</p>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><div class="val">★ ${v.rating}</div><div class="lbl">Rating (${v.reviews} reviews)</div></div>
+        <div class="modal-meta-item"><div class="val">${v.bedrooms}</div><div class="lbl">Bedrooms</div></div>
+        <div class="modal-meta-item"><div class="val">${v.beds}</div><div class="lbl">Beds (${v.bedsConfig})</div></div>
+        <div class="modal-meta-item"><div class="val">${v.bathrooms}</div><div class="lbl">Bathrooms</div></div>
+        <div class="modal-meta-item"><div class="val">${v.guests}</div><div class="lbl">Max Guests</div></div>
+      </div>
+      <p class="modal-desc">${v.description}</p>
+      <h4 style="font-family:var(--font-display);margin-bottom:0.8rem;color:var(--text);">Amenities & Features</h4>
+      <div class="modal-amenities">${v.features.map(f=>`<div class="modal-amenity">${f}</div>`).join('')}</div>
+      <div class="modal-search-inline">
+        <div class="search-field"><label>Check In</label><input type="text" id="modalCheckin" placeholder="Select date" readonly></div>
+        <div class="search-field"><label>Check Out</label><input type="text" id="modalCheckout" placeholder="Select date" readonly></div>
+        <button class="btn btn-sm btn-primary" onclick="checkModalAvailability('${v.id}')">Check</button>
+      </div>
+      <div id="modalAvailResult" style="margin-top:0.5rem;font-size:0.82rem;"></div>
+      <div class="modal-actions">
+        <a href="${v.airbnbUrl}" target="_blank" class="btn btn-outline">Book on Airbnb</a>
+        <a href="${v.bookingUrl}" target="_blank" class="btn btn-primary">Booking.com</a>
+      </div>
+      <div class="modal-gallery">${photosHtml}</div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.classList.add('modal-open');
+  enableGalleryLightbox(modal);
+  // Init flatpickr in modal
+  const fpCfg={dateFormat:'Y-m-d',minDate:'today',disableMobile:true};
+  const mci=flatpickr('#modalCheckin',{...fpCfg,onChange:function(sd){if(sd.length){mco.set('minDate',sd[0].fp_incr(1));if(mco.selectedDates[0]<=sd[0]) mco.clear();}}});
+  const mco=flatpickr('#modalCheckout',fpCfg);
+  setTimeout(()=>modal.scrollIntoView({behavior:'smooth',block:'center'}),50);
+}
+
+async function checkModalAvailability(villaId) {
+  const ci=document.getElementById('modalCheckin').value, co=document.getElementById('modalCheckout').value;
+  if(!ci||!co) { document.getElementById('modalAvailResult').innerHTML='<span style="color:#c44">Please select both dates.</span>'; return; }
+  const v=VILLAS.find(x=>x.id===villaId);
+  const resultEl=document.getElementById('modalAvailResult');
+  resultEl.innerHTML='<span style="color:var(--text-muted)">Checking live Airbnb calendar...</span>';
+  const booked=await fetchICal(v.icalUrl,{forceLive:true});
+  const checkin=new Date(ci+'T00:00:00'), checkout=new Date(co+'T00:00:00');
+  if(checkout<=checkin) { document.getElementById('modalAvailResult').innerHTML='<span style="color:#c44">Check-out must be after check-in.</span>'; return; }
+  const avail=isAvailable(booked,checkin,checkout);
+  if(avail===true) resultEl.innerHTML='<span style="color:#2d8a56;font-weight:600;">✓ Available for your dates!</span>';
+  else if(avail===false) resultEl.innerHTML='<span style="color:#c44;font-weight:600;">✗ Booked for selected dates. Try different dates.</span>';
+  else resultEl.innerHTML='<span style="color:var(--text-muted)">Could not verify availability. Please check the Airbnb calendar.</span>';
+}
+
+function closeModal() {
+  closeImageViewer();
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+
+function enableGalleryLightbox(scope) {
+  scope.querySelectorAll('.modal-gallery img').forEach(img=>{
+    img.setAttribute('tabindex','0');
+    img.setAttribute('role','button');
+    img.addEventListener('click',e=>{
+      e.stopPropagation();
+      openImageViewer(img.currentSrc||img.src,img.alt);
+    });
+    img.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' ') {
+        e.preventDefault();
+        openImageViewer(img.currentSrc||img.src,img.alt);
+      }
+    });
+  });
+}
+
+function openImageViewer(src, caption) {
+  const viewer=document.getElementById('imageViewer');
+  const img=document.getElementById('imageViewerImg');
+  img.src=src;
+  img.alt=caption||'Full-size gallery photo';
+  document.getElementById('imageViewerCaption').textContent=caption||'';
+  viewer.classList.add('active');
+  viewer.setAttribute('aria-hidden','false');
+}
+
+function closeImageViewer() {
+  const viewer=document.getElementById('imageViewer');
+  if(!viewer) return;
+  viewer.classList.remove('active');
+  viewer.setAttribute('aria-hidden','true');
+  document.getElementById('imageViewerImg').src='';
+}
+
+// ============================================
+// TOUR MODAL
+// ============================================
+function openTourModal(tourId) {
+  const t=TOURS.find(x=>x.id===tourId); if(!t) return;
+  const modal=document.getElementById('modalContent');
+  const waMsg=encodeURIComponent(`Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
+  const photosHtml=t.photos.map((p,i)=>`<img src="${p}" alt="${t.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
+  const included=t.included||['Private Egyptologist guide','Air-conditioned transport','Hotel pickup & drop-off','Bottled water provided','Flexible scheduling'];
+  const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
+  const heroVideo=t.heroVideo?`
+      <div class="tour-modal-hero tour-modal-hero-${t.id}">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="${t.heroVideo}" type="video/mp4">
+        </video>
+        <h2>${t.name}</h2>
+      </div>`:'';
+  modal.innerHTML=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      ${heroVideo || `<div style="font-size:2.5rem;margin-bottom:0.5rem;">${t.icon}</div><h2>${t.name}</h2>`}
+      <p class="modal-desc" style="margin-top:1rem;">${t.details}</p>
+      ${ticketNote}
+      <h4 style="font-family:var(--font-display);margin-bottom:0.5rem;color:var(--text);">What's Included</h4>
+      <div class="modal-amenities">${included.map(item=>`<div class="modal-amenity">${item}</div>`).join('')}</div>
+      <div class="modal-actions">
+        <a href="https://wa.me/201000000000?text=${waMsg}" target="_blank" class="btn btn-primary">Inquire on WhatsApp</a>
+        <button class="btn btn-outline" onclick="closeModal()">Close</button>
+      </div>
+      <div class="modal-gallery">${photosHtml}</div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.classList.add('modal-open');
+  enableGalleryLightbox(modal);
+  setTimeout(()=>modal.scrollIntoView({behavior:'smooth',block:'center'}),50);
+}
+
+// ============================================
+// RENDER TOURS
+// ============================================
+function renderTours() {
+  document.getElementById('toursGrid').innerHTML=TOURS.map(t=>`
+    <div class="tour-card fade-up" onclick="openTourModal('${t.id}')">
+      <div class="tour-image"><img src="${t.coverImage||t.photos[0]}" alt="${t.name}" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)';this.style.opacity='0.3';"></div>
+      <div class="tour-body">
+        <h3 class="tour-name">${t.name}</h3>
+        <p class="tour-desc">${t.desc}</p>
+      </div>
+    </div>
+  `).join('');
+  requestAnimationFrame(()=>{ document.querySelectorAll('.tour-card.fade-up').forEach(el=>el.classList.add('visible')); });
+}
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener('DOMContentLoaded',()=>{
+  renderVillas(VILLAS.map(v=>({...v,available:null})));
+  renderTours();
+
+  const fpCfg={dateFormat:'Y-m-d',minDate:'today',disableMobile:true,static:true};
+  const ciPicker=flatpickr('#checkin',{...fpCfg,onChange:function(sd){if(sd.length){coPicker.set('minDate',sd[0].fp_incr(1));if(coPicker.selectedDates[0]<=sd[0]) coPicker.clear();}}});
+  const coPicker=flatpickr('#checkout',fpCfg);
+
+  window.addEventListener('scroll',()=>{ document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80); });
+  document.getElementById('navToggle').addEventListener('click',()=>{ document.getElementById('navLinks').classList.toggle('open'); });
+  document.querySelectorAll('#navLinks a').forEach(l=>l.addEventListener('click',()=>{ document.getElementById('navLinks').classList.remove('open'); }));
+  document.getElementById('modalOverlay').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+  document.getElementById('imageViewer').addEventListener('click',function(e){ if(e.target===this) closeImageViewer(); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') {
+      if(document.getElementById('imageViewer').classList.contains('active')) closeImageViewer();
+      else closeModal();
+    }
+  });
+
+  const obs=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:0.15});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

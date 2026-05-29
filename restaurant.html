@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Nile View Restaurant — Authentic Egyptian Cuisine, Luxor West Bank</title>
+<meta name="description" content="Dine with the best Nile views in Luxor. Authentic Egyptian classics, grilled meats, fresh pasta, and wood-fired pizza at Royal Nile Villas' rooftop restaurant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fefdfb;
+  --bg-warm: #faf7f2;
+  --card: #ffffff;
+  --primary: #c17a3e;
+  --primary-light: #d4955a;
+  --primary-dark: #a05e2a;
+  --primary-glow: rgba(193,122,62,0.12);
+  --teal: #2a7f8a;
+  --teal-light: #3a9aa6;
+  --gold: #c9a96e;
+  --text: #2d2318;
+  --text-secondary: #6b6258;
+  --text-muted: #9a9288;
+  --border: #ede6db;
+  --border-light: #f0ebe2;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:var(--font-body); background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+/* NAV */
+.nav { position:fixed; top:0; left:0; right:0; z-index:1000; padding:1rem 2rem; transition:var(--transition); }
+.nav.scrolled { background:rgba(254,253,251,0.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:0.7rem 2rem; box-shadow:var(--shadow-sm); }
+.nav-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--text); text-decoration:none; letter-spacing:0.5px; }
+.nav-logo span { color:var(--primary); }
+.nav-links { display:flex; gap:2.2rem; align-items:center; list-style:none; }
+.nav-links a { color:var(--text-secondary); text-decoration:none; font-size:0.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; transition:var(--transition); position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--primary); transition:var(--transition); }
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--primary); }
+.nav-links a.active::after { width:100%; }
+.nav-cta { background:var(--primary); color:#fff!important; padding:0.55rem 1.5rem!important; border-radius:50px; font-weight:600!important; letter-spacing:0.5px!important; }
+.nav-cta:hover { background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 6px 20px var(--primary-glow); }
+.nav-cta::after { display:none!important; }
+.nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:5px; }
+.nav-toggle span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:var(--transition); }
+
+/* HERO */
+.hero { position:relative; min-height:70vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; overflow:hidden; }
+.hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(170deg, rgba(42,127,138,0.55) 0%, rgba(250,247,242,0.65) 50%, rgba(254,253,251,0.8) 100%); z-index:1; }
+.hero-content { position:relative; z-index:2; max-width:750px; }
+.hero-eyebrow { font-size:0.75rem; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--teal-light); margin-bottom:1.2rem; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.2rem, 6vw, 4rem); font-weight:700; line-height:1.12; color:var(--text); margin-bottom:0.5rem; }
+.hero h1 em { font-style:italic; color:var(--primary); }
+.hero-subtitle { font-size:clamp(0.95rem, 1.8vw, 1.15rem); color:var(--text-secondary); max-width:560px; margin:1.2rem auto 2.2rem; line-height:1.7; }
+.hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; border-radius:50px; font-family:var(--font-body); font-size:0.82rem; font-weight:600; letter-spacing:0.5px; text-decoration:none; transition:var(--transition); cursor:pointer; border:none; }
+.btn-primary { background:var(--primary); color:#fff; box-shadow:0 4px 16px var(--primary-glow); }
+.btn-primary:hover { background:var(--primary-dark); transform:translateY(-2px); box-shadow:0 8px 28px rgba(193,122,62,0.25); }
+.btn-outline { background:transparent; color:var(--primary); border:1.5px solid var(--primary); }
+.btn-outline:hover { background:var(--primary); color:#fff; }
+.btn-teal { background:var(--teal); color:#fff; }
+.btn-teal:hover { background:var(--teal-light); }
+
+/* SECTIONS */
+.section { position:relative; z-index:1; max-width:1300px; margin:0 auto; padding:5rem 2rem; }
+.section-header { text-align:center; margin-bottom:3.5rem; }
+.section-eyebrow { font-size:0.7rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--primary); margin-bottom:0.7rem; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem, 4vw, 2.8rem); font-weight:700; color:var(--text); line-height:1.2; margin-bottom:0.8rem; }
+.section-subtitle { color:var(--text-secondary); font-size:1rem; max-width:580px; margin:0 auto; line-height:1.7; }
+
+/* MENU INTRO BANNER */
+.menu-intro { background:linear-gradient(135deg, rgba(42,127,138,0.05), rgba(193,122,62,0.05)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:2.5rem; display:flex; gap:2rem; align-items:center; flex-wrap:wrap; }
+.menu-intro-content { flex:1; min-width:280px; }
+.menu-intro-content h3 { font-family:var(--font-display); font-size:1.5rem; color:var(--text); margin-bottom:0.8rem; }
+.menu-intro-content p { color:var(--text-secondary); font-size:0.9rem; line-height:1.7; margin-bottom:0.6rem; }
+.menu-intro-highlights { display:flex; gap:1.5rem; flex-wrap:wrap; }
+.menu-intro-highlight { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.2rem 1.5rem; text-align:center; flex:1; min-width:140px; }
+.menu-intro-highlight .icon { font-size:2rem; margin-bottom:0.5rem; }
+.menu-intro-highlight .val { font-size:1.4rem; font-weight:700; color:var(--primary); font-family:var(--font-display); }
+.menu-intro-highlight .lbl { font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+
+/* MENU CATEGORIES */
+.menu-category { margin-bottom:3rem; }
+.menu-cat-title { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--text); margin-bottom:0.3rem; padding-bottom:0.6rem; border-bottom:2px solid var(--primary); display:inline-block; }
+.menu-cat-subtitle { color:var(--text-muted); font-size:0.82rem; margin-bottom:1.2rem; }
+.menu-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:1.2rem; }
+.menu-item { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.2rem 1.5rem; display:flex; justify-content:space-between; align-items:center; transition:var(--transition); }
+.menu-item:hover { border-color:var(--primary-light); box-shadow:var(--shadow-sm); transform:translateY(-2px); }
+.menu-item-left { flex:1; }
+.menu-item-name { font-weight:600; color:var(--text); font-size:0.92rem; margin-bottom:0.15rem; }
+.menu-item-desc { font-size:0.76rem; color:var(--text-muted); line-height:1.4; }
+.menu-item-price { font-family:var(--font-display); font-size:1.25rem; font-weight:700; color:var(--primary); margin-left:1rem; white-space:nowrap; }
+.menu-note { font-size:0.78rem; color:var(--teal); font-style:italic; margin-top:0.8rem; padding:0.6rem 1rem; background:rgba(42,127,138,0.06); border-radius:var(--radius-sm); display:inline-block; }
+
+/* IMAGE GALLERY */
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:1rem; }
+.gallery-grid img { width:100%; height:240px; object-fit:cover; border-radius:var(--radius); transition:transform 0.5s ease, box-shadow 0.3s ease; cursor:pointer; border:1px solid var(--border); }
+.gallery-grid img:hover { transform:scale(1.03); box-shadow:var(--shadow); }
+
+/* CTA BANNER */
+.cta-banner { background:linear-gradient(135deg, rgba(193,122,62,0.06), rgba(42,127,138,0.04)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center; }
+.cta-banner h3 { font-family:var(--font-display); font-size:1.8rem; color:var(--text); margin-bottom:0.6rem; }
+.cta-banner p { color:var(--text-secondary); margin-bottom:1.5rem; max-width:480px; margin-left:auto; margin-right:auto; }
+
+/* HOURS */
+.hours-bar { background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1.2rem 2rem; text-align:center; display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; }
+.hours-item { display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; color:var(--text-secondary); }
+.hours-item strong { color:var(--text); }
+.hours-dot { width:8px; height:8px; border-radius:50%; background:#2d8a56; }
+
+/* FOOTER */
+.footer { border-top:1px solid var(--border); padding:4rem 2rem 2rem; background:var(--bg-warm); }
+.footer-inner { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem; }
+.footer-brand h4 { font-family:var(--font-display); font-size:1.3rem; color:var(--text); margin-bottom:0.6rem; }
+.footer-brand h4 span { color:var(--primary); }
+.footer-brand p { font-size:0.82rem; color:var(--text-muted); line-height:1.7; max-width:300px; }
+.footer-col h5 { font-size:0.7rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:1rem; }
+.footer-col ul { list-style:none; }
+.footer-col li { margin-bottom:0.5rem; }
+.footer-col a { color:var(--text-secondary); text-decoration:none; font-size:0.82rem; transition:var(--transition); }
+.footer-col a:hover { color:var(--text); }
+.footer-bottom { max-width:1300px; margin:2.5rem auto 0; padding-top:1.5rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); }
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(254,253,251,0.98); backdrop-filter:blur(20px); padding:2rem; gap:1.5rem; border-bottom:1px solid var(--border); }
+  .nav-toggle { display:flex; }
+  .hero { min-height:55vh; padding:5rem 1.2rem 3rem; }
+  .section { padding:3.5rem 1.2rem; }
+  .menu-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); }
+  .hours-bar { gap:1rem; }
+  .footer-inner { grid-template-columns:1fr; gap:2rem; }
+}
+@media (max-width:480px) {
+  .hero h1 { font-size:1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Royal Nile <span>Villas</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Villas</a></li>
+      <li><a href="index.html#tours">Tours</a></li>
+      <li><a href="restaurant.html" class="active">Restaurant</a></li>
+      <li><a href="index.html#location">Location</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html#search" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="restaurant-assets/restaurant-hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Luxor West Bank — Rooftop Dining</p>
+    <h1>Royal Nile View <em>Restaurant</em></h1>
+    <p class="hero-subtitle">Authentic Egyptian and international cuisine served with the best Nile panorama in Luxor. Open daily from sunrise to late night.</p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn btn-primary">View Our Menu</a>
+      <a href="#gallery" class="btn btn-outline">Food Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS BAR -->
+<div class="hours-bar">
+  <div class="hours-item"><span class="hours-dot"></span> <strong>Open Daily</strong> 7 AM – Late</div>
+  <div class="hours-item">🍳 <strong>Breakfast</strong> All Day</div>
+  <div class="hours-item">🌅 <strong>Best Nile View</strong> in Luxor</div>
+  <div class="hours-item">📍 <strong>Rooftop</strong> at Royal Nile Villas</div>
+</div>
+
+<!-- MENU -->
+<section class="section" id="menu">
+  <div class="section-header">
+    <p class="section-eyebrow">Our Menu</p>
+    <h2 class="section-title">Flavors of the Nile</h2>
+    <p class="section-subtitle">Every dish is prepared fresh to order. Our tagens are slow-cooked in traditional clay pots. All mains come with rice, salad, bread, tahini, drink, and dessert.</p>
+  </div>
+
+  <!-- Egyptian Classics -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Egyptian Classics</h3>
+    <p class="menu-cat-subtitle">The heart of our kitchen — generations-old recipes from up and down the Nile</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-name">Egyptian Koshari</div>
+          <div class="menu-item-desc">Egypt's national dish — layers of rice, macaroni, lentils, chickpeas, crispy onions & spicy tomato sauce</div>
+        </div>
+        <div class="menu-item-price">$5</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-name">Beef Kofta</div>
+          <div class="menu-item-desc">Spiced minced beef skewers, flame-grilled over charcoal</div>
+        </div>
+        <div class="menu-item-price">$12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tagen (Clay Pot Stews) -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Tagen</h3>
+    <p class="menu-cat-subtitle">Slow-cooked in traditional Egyptian clay pots — tender, aromatic, unforgettable</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Chicken Tagen</div><div class="menu-item-desc">Falling-off-the-bone chicken with onions, tomatoes & Egyptian spices</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Fish Tagen</div><div class="menu-item-desc">Fresh local catch baked with herbs, lemon & tahini sauce</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Moussaka Tagen</div><div class="menu-item-desc">Egyptian-style layered eggplant with spiced minced meat</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Vegetable Tagen</div><div class="menu-item-desc">Seasonal vegetables slow-baked with olive oil & cumin</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Shakshoka Tagen</div><div class="menu-item-desc">Baked eggs in spiced tomato & pepper sauce — a breakfast classic</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+    </div>
+    <p class="menu-note">All tagens served with rice, salad, fresh bread, tahini, drink, dessert & water</p>
+  </div>
+
+  <!-- Grill -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">From the Grill</h3>
+    <p class="menu-cat-subtitle">Charcoal-grilled to perfection — the aroma alone is worth the visit</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Grilled Chicken</div><div class="menu-item-desc">Half chicken, marinated in yogurt & Egyptian spices</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Kebab</div><div class="menu-item-desc">Tender cubes of marinated lamb, skewered & char-grilled</div></div>
+        <div class="menu-item-price">$12</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Kofta</div><div class="menu-item-desc">Spiced minced meat skewers, grilled over charcoal</div></div>
+        <div class="menu-item-price">$12</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Mixed Grill</div><div class="menu-item-desc">The ultimate platter — chicken, kebab & kofta together</div></div>
+        <div class="menu-item-price">$15</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Burgers -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Burgers</h3>
+    <p class="menu-cat-subtitle">All served with crispy golden fries</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Lamb Burger</div><div class="menu-item-desc">Juicy seasoned lamb patty with fresh toppings</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Beef Burger</div><div class="menu-item-desc">Classic beef patty, lettuce, tomato & our house sauce</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Chicken Burger</div><div class="menu-item-desc">Crispy breaded chicken fillet with coleslaw</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Veggie Burger</div><div class="menu-item-desc">House-made vegetable & bean patty</div></div>
+        <div class="menu-item-price">$7</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pasta -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Pasta</h3>
+    <p class="menu-cat-subtitle">Italian classics with an Egyptian twist</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Bolognese</div><div class="menu-item-desc">Rich slow-simmered meat sauce over al dente pasta</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Chicken Pasta</div><div class="menu-item-desc">Tender chicken in creamy sauce with penne</div></div>
+        <div class="menu-item-price">$10</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">White / Basil Pasta</div><div class="menu-item-desc">Creamy white sauce with fresh basil</div></div>
+        <div class="menu-item-price">$8</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Tomato Pasta</div><div class="menu-item-desc">Simple, vibrant tomato & garlic sauce</div></div>
+        <div class="menu-item-price">$7</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pizza -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Pizza</h3>
+    <p class="menu-cat-subtitle">Wood-fired with premium toppings</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Chicken Pizza</div></div>
+        <div class="menu-item-price">$7</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Beef Pizza</div></div>
+        <div class="menu-item-price">$7</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Tuna Pizza</div></div>
+        <div class="menu-item-price">$7</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Vegetarian Pizza</div><div class="menu-item-desc">Loaded with seasonal vegetables</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Margherita</div><div class="menu-item-desc">Classic tomato, mozzarella & fresh basil</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Salads, Soup & Sides -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Salads, Soup & Sides</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Tuna Salad</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Chicken Salad</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Greek Salad</div></div>
+        <div class="menu-item-price">$4</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Hummus</div><div class="menu-item-desc">Creamy chickpea dip with olive oil</div></div>
+        <div class="menu-item-price">$4</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Egg Salad</div></div>
+        <div class="menu-item-price">$4</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Baba Ganoush</div><div class="menu-item-desc">Smoky roasted eggplant dip</div></div>
+        <div class="menu-item-price">$2</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Green Salad</div><div class="menu-item-desc">Fresh seasonal greens with lemon dressing</div></div>
+        <div class="menu-item-price">$1</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Lentil Soup</div><div class="menu-item-desc">Hearty Egyptian-style red lentil soup</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Vegetable Soup</div><div class="menu-item-desc">Seasonal vegetables in rich broth</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Fries</div></div>
+        <div class="menu-item-price">$2</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Coleslaw</div></div>
+        <div class="menu-item-price">$2</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Jumbo Shrimps</div><div class="menu-item-desc">Premium plump shrimps — our signature side</div></div>
+        <div class="menu-item-price">$20</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">All-Day Breakfast</div><div class="menu-item-desc">Egyptian breakfast plate — ful medames, eggs, falafel, bread & tahini</div></div>
+        <div class="menu-item-price">$5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drinks -->
+  <div class="menu-category">
+    <h3 class="menu-cat-title">Drinks</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Fresh Seasonal Juice</div><div class="menu-item-desc">Mango, guava, strawberry, sugarcane — depending on the season</div></div>
+        <div class="menu-item-price">$2</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Special Oreo Shake</div><div class="menu-item-desc">Creamy Oreo blended milkshake</div></div>
+        <div class="menu-item-price">$3</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Virgin Mojito</div><div class="menu-item-desc">Fresh mint, lime & soda — perfectly refreshing</div></div>
+        <div class="menu-item-price">$3</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Cold Karkadeh</div><div class="menu-item-desc">Traditional chilled hibiscus tea — Egypt's favorite drink</div></div>
+        <div class="menu-item-price">$1</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Soft Drinks & Water</div></div>
+        <div class="menu-item-price">$0.30 – $1.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Mint Tea</div><div class="menu-item-desc">Fresh mint leaves steeped in hot tea</div></div>
+        <div class="menu-item-price">$0.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Turkish Coffee</div><div class="menu-item-desc">Strong, aromatic, served in a traditional finjan</div></div>
+        <div class="menu-item-price">$1</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Hot Chocolate</div></div>
+        <div class="menu-item-price">$1.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left"><div class="menu-item-name">Shisha</div><div class="menu-item-desc">Traditional water pipe — apple, mint, grape & more</div></div>
+        <div class="menu-item-price">$2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD GALLERY -->
+<section class="section" id="gallery" style="padding-top:1rem;">
+  <div class="section-header">
+    <p class="section-eyebrow">A Taste of What Awaits</p>
+    <h2 class="section-title">Our Kitchen</h2>
+    <p class="section-subtitle">Every dish is crafted with care using the freshest local ingredients. From the charcoal grill to the clay tagen oven — experience the flavors of Egypt.</p>
+  </div>
+  <div class="gallery-grid">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_elegan_5dd2dd67-9a2b-4ff8-b16b-d4995aeb5431.png" alt="Egyptian dinner spread" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_elegan_328a6caf-20f9-4331-acc5-1d5a0029e707.png" alt="Egyptian feast" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_elegan_21fbc0b6-b3a4-49b1-9035-ff697d1e32ad.png" alt="Traditional Egyptian dishes" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_f82c7d0e-ea32-477f-bde7-96466b58fcac_0.png" alt="Grilled specialties" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_f82c7d0e-ea32-477f-bde7-96466b58fcac_3.png" alt="Egyptian mezze spread" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_d268e45c-a9bc-46e1-8c82-2bef68a21e30_0.png" alt="Fresh Egyptian cuisine" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_bfe5c59d-85e1-4f01-8eb2-76bfcc3f66cb_3.png" alt="Dinner by the Nile" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_87610eef-966f-4b42-a0f2-726137de146e_2.png" alt="Egyptian tagen dishes" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_8406ef7f-87ae-453b-be57-3e6cc0f5e6a6_0.png" alt="Fresh salads and dips" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_8406ef7f-87ae-453b-be57-3e6cc0f5e6a6_3.png" alt="Mixed grill platter" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_6930e285-7a7e-4681-82b7-3b807c4902e9_0.png" alt="Traditional Egyptian breakfast" loading="lazy" onclick="this.requestFullscreen()">
+    <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_552ca52b-bd2a-45ca-967d-75ca1fa15e4f_1.png" alt="Egyptian desserts" loading="lazy" onclick="this.requestFullscreen()">
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:2rem;">
+  <div class="cta-banner">
+    <h3>Dine With the Best Nile View</h3>
+    <p>Join us on the rooftop at Royal Nile Villas. Whether it's a leisurely breakfast, lunch between temple visits, or dinner under the stars — we'll make it memorable.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.me/201000000000?text=Hi!%20I'd%20like%20to%20make%20a%20reservation%20at%20the%20Royal%20Nile%20View%20Restaurant." class="btn btn-primary" target="_blank">Reserve on WhatsApp</a>
+      <a href="index.html" class="btn btn-outline">View Our Villas</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h4>Royal Nile <span>Villas</span></h4>
+      <p>Premium Nile-view apartments and penthouses on Luxor's West Bank — plus the best rooftop restaurant with panoramic Nile views.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="index.html">Villas & Penthouses</a></li>
+        <li><a href="index.html#tours">Tours & Adventures</a></li>
+        <li><a href="restaurant.html">Restaurant</a></li>
+        <li><a href="index.html#location">Location</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="https://wa.me/201000000000" target="_blank">WhatsApp</a></li>
+        <li><a href="https://www.airbnb.co.uk/users/show/157757016" target="_blank">Airbnb Profile</a></li>
+        <li><a href="https://egyptvillastours.com" target="_blank">Egypt Villas Tours</a></li>
+        <li><a href="mailto:info@egyptvillastours.com">Email Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Royal Nile Villas. All rights reserved.</span>
+    <span>Luxor, Egypt — West Bank</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', ()=>{
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 80);
+});
+document.getElementById('navToggle').addEventListener('click', ()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(l=>
+  l.addEventListener('click', ()=>{ document.getElementById('navLinks').classList.remove('open'); })
+);
+</script>
+</body>
+</html>
