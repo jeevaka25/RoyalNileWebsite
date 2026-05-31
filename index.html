@@ -930,6 +930,7 @@ Object.keys(prefetchedICalData).forEach(roomId => {
   const v = VILLAS.find(v => v.roomId === roomId);
   if (v) fallbackICalCache[v.icalUrl] = new Set(prefetchedICalData[roomId].booked);
 });
+const AVAILABILITY_API_TIMEOUT_MS = 9000;
 
 function formatDate(d) { return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function getDateRange(start, end) { const dates=[]; const d=new Date(start); while(d<end) { dates.push(formatDate(new Date(d))); d.setDate(d.getDate()+1); } return dates; }
@@ -959,6 +960,34 @@ async function fetchICal(url, options = {}) {
   } catch(e) { return fallbackICalCache[url] || null; }
 }
 
+async function fetchAvailabilityStatuses(checkinValue, checkoutValue, villaIds) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), AVAILABILITY_API_TIMEOUT_MS);
+  const selectedVillas = villaIds ? VILLAS.filter(villa => villaIds.includes(villa.id)) : VILLAS;
+  try {
+    const response = await fetch('/api/availability', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        checkin: checkinValue,
+        checkout: checkoutValue,
+        calendars: selectedVillas.map(villa => ({ id: villa.id, roomId: villa.roomId, icalUrl: villa.icalUrl }))
+      })
+    });
+    if (!response.ok) throw new Error('Availability check failed');
+    const payload = await response.json();
+    const statusById = new Map((payload.results || []).map(result => [result.id, result]));
+    return selectedVillas.map(villa => ({
+      ...villa,
+      available: statusById.has(villa.id) ? statusById.get(villa.id).available : null,
+      availabilitySource: statusById.get(villa.id)?.source || 'unverified'
+    }));
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function checkAvailability() {
   const ci=document.getElementById('checkin').value, co=document.getElementById('checkout').value;
   if(!ci||!co) { alert('Please select check-in and check-out dates.'); return; }
@@ -967,12 +996,17 @@ async function checkAvailability() {
   document.getElementById('loadingOverlay').classList.add('active');
   document.getElementById('searchBtn').disabled=true;
   try {
-    const results=await Promise.allSettled(VILLAS.map(v=>fetchICal(v.icalUrl,{forceLive:true})));
-    const statuses=VILLAS.map((v,i)=>({...v, available:isAvailable(results[i].status==='fulfilled'?results[i].value:null,checkin,checkout)}));
+    const statuses=await fetchAvailabilityStatuses(ci, co);
     const available=statuses.filter(v=>v.available===true);
     renderVillas(available, ci, co);
     document.getElementById('resultsHeader').classList.add('visible');
-    document.getElementById('resultsCount').innerHTML=`<strong>${available.length}</strong> of ${VILLAS.length} villas available for your dates`;
+    const unverifiedCount=statuses.filter(v=>v.available===null).length;
+    document.getElementById('resultsCount').innerHTML=`<strong>${available.length}</strong> of ${VILLAS.length} apartments verified available for your dates${unverifiedCount?` · ${unverifiedCount} could not be verified live`:''}`;
+    document.getElementById('villas').scrollIntoView({behavior:'smooth'});
+  } catch(e) {
+    renderVillas([]);
+    document.getElementById('resultsHeader').classList.add('visible');
+    document.getElementById('resultsCount').innerHTML='Live availability could not be checked. Please try again in a moment or message us directly.';
     document.getElementById('villas').scrollIntoView({behavior:'smooth'});
   } finally {
     document.getElementById('loadingOverlay').classList.remove('active');
@@ -1061,13 +1095,17 @@ async function checkModalAvailability(villaId) {
   const v=VILLAS.find(x=>x.id===villaId);
   const resultEl=document.getElementById('modalAvailResult');
   resultEl.innerHTML='<span style="color:var(--text-muted)">Checking live Airbnb calendar...</span>';
-  const booked=await fetchICal(v.icalUrl,{forceLive:true});
   const checkin=new Date(ci+'T00:00:00'), checkout=new Date(co+'T00:00:00');
   if(checkout<=checkin) { document.getElementById('modalAvailResult').innerHTML='<span style="color:#c44">Check-out must be after check-in.</span>'; return; }
-  const avail=isAvailable(booked,checkin,checkout);
-  if(avail===true) resultEl.innerHTML='<span style="color:#2d8a56;font-weight:600;">✓ Available for your dates!</span>';
-  else if(avail===false) resultEl.innerHTML='<span style="color:#c44;font-weight:600;">✗ Booked for selected dates. Try different dates.</span>';
-  else resultEl.innerHTML='<span style="color:var(--text-muted)">Could not verify availability. Please check the Airbnb calendar.</span>';
+  try {
+    const statuses=await fetchAvailabilityStatuses(ci, co, [villaId]);
+    const avail=statuses[0]?.available;
+    if(avail===true) resultEl.innerHTML='<span style="color:#2d8a56;font-weight:600;">✓ Available for your dates!</span>';
+    else if(avail===false) resultEl.innerHTML='<span style="color:#c44;font-weight:600;">✗ Booked for selected dates. Try different dates.</span>';
+    else resultEl.innerHTML='<span style="color:var(--text-muted)">Could not verify live availability. Please message us to confirm.</span>';
+  } catch(e) {
+    resultEl.innerHTML='<span style="color:var(--text-muted)">Could not verify live availability. Please message us to confirm.</span>';
+  }
 }
 
 function closeModal() {
