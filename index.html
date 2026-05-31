@@ -65,7 +65,7 @@ body.modal-open { overflow:hidden; }
 .nav-toggle span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:var(--transition); }
 
 /* HERO */
-.hero { position:relative; min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; overflow:hidden; }
+.hero { position:relative; min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; overflow:hidden; background:url('villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.png') center/cover no-repeat; }
 .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
 .hero-overlay { position:absolute; inset:0; background:linear-gradient(170deg, rgba(250,247,242,0.6) 0%, rgba(254,253,251,0.7) 40%, rgba(245,237,224,0.8) 100%); z-index:1; }
 .hero-content { position:relative; z-index:2; max-width:800px; }
@@ -183,7 +183,7 @@ body.modal-open { overflow:hidden; }
 .image-viewer-caption { position:absolute; left:2rem; right:2rem; bottom:1rem; color:rgba(255,255,255,0.82); text-align:center; font-size:0.85rem; }
 .modal-body { padding:2rem; }
 .modal-body h2 { font-family:var(--font-display); font-size:1.8rem; color:var(--text); margin-bottom:0.3rem; }
-.tour-modal-hero { position:relative; min-height:360px; border-radius:var(--radius); overflow:hidden; margin:-0.4rem -0.4rem 1.6rem; background:var(--text); display:flex; align-items:center; justify-content:center; }
+.tour-modal-hero { position:relative; min-height:360px; border-radius:var(--radius); overflow:hidden; margin:-0.4rem -0.4rem 1.6rem; background:var(--text) center/cover no-repeat; display:flex; align-items:center; justify-content:center; }
 .tour-modal-hero video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .tour-modal-hero-nile-boat-cruise video { transform:scale(1.45); object-position:center 32%; }
 .tour-modal-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.48)); }
@@ -320,7 +320,7 @@ body.modal-open { overflow:hidden; }
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="">
+  <video class="hero-video" autoplay muted loop playsinline poster="villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.png">
     <source src="hero.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
@@ -894,7 +894,31 @@ TOURS.push(
 
 TOURS.forEach(tour => {
   if (TOUR_PHOTOS[tour.id]) tour.photos = TOUR_PHOTOS[tour.id];
+  tour.heroPoster = tour.heroPoster || tour.coverImage || tour.photos[0];
 });
+
+const TOUR_ROUTE_ALIASES = {
+  'balloon': ['hot-air-balloon-ride', 'hot-air-balloon-luxor', 'hot-air-balloon-tour', 'balloon-tour'],
+  'west-bank': ['west-bank-tour', 'luxor-west-bank-tour', 'valley-of-the-kings-tour'],
+  'east-bank': ['east-bank-tour', 'luxor-east-bank-tour', 'karnak-luxor-temple-tour'],
+  'desert': ['desert-quad-safari', 'quad-bike-safari', 'luxor-desert-safari'],
+  'abu-simbel': ['abu-simbel-tour', 'abu-simbel-expedition'],
+  'aswan': ['aswan-tour', 'aswan-philae-temple', 'aswan-and-philae-temple'],
+  'nile-boat-cruise': ['nile-boat-cruise', 'sunset-nile-boat-cruise', 'nile-sunset-cruise'],
+  'red-sea': ['hurghada-snorkelling-adventure', 'hurghada-snorkeling-adventure', 'red-sea-snorkelling', 'red-sea-snorkeling'],
+  'abydos-dendera': ['abydos-dendera-tour', 'abydos-and-dendera-tour']
+};
+
+function tourIdFromPath(pathname) {
+  const slug = pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+  if (!slug) return null;
+  const directMatch = TOURS.find(tour => tour.id === slug || `${tour.id}-tour` === slug);
+  if (directMatch) return directMatch.id;
+  for (const [tourId, aliases] of Object.entries(TOUR_ROUTE_ALIASES)) {
+    if (aliases.includes(slug)) return tourId;
+  }
+  return null;
+}
 
 // ============================================
 // ICAL CACHE (pre-fetched May 25, 2026)
@@ -1097,9 +1121,10 @@ function openTourModal(tourId) {
   const photosHtml=t.photos.map((p,i)=>`<img src="${p}" alt="${t.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
   const included=t.included||['Private Egyptologist guide','Air-conditioned transport','Hotel pickup & drop-off','Bottled water provided','Flexible scheduling'];
   const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
+  const heroPoster=t.heroPoster||t.coverImage||t.photos[0];
   const heroVideo=t.heroVideo?`
-      <div class="tour-modal-hero tour-modal-hero-${t.id}">
-        <video autoplay muted loop playsinline preload="metadata">
+      <div class="tour-modal-hero tour-modal-hero-${t.id}" style="background-image:url('${heroPoster}')">
+        <video autoplay muted loop playsinline preload="metadata" poster="${heroPoster}">
           <source src="${t.heroVideo}" type="video/mp4">
         </video>
         <h2>${t.name}</h2>
@@ -1156,6 +1181,10 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('#navLinks a').forEach(l=>l.addEventListener('click',()=>{ document.getElementById('navLinks').classList.remove('open'); }));
   document.getElementById('modalOverlay').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
   document.getElementById('imageViewer').addEventListener('click',function(e){ if(e.target===this) closeImageViewer(); });
+  const directTourId = tourIdFromPath(window.location.pathname);
+  if (directTourId) {
+    setTimeout(()=>openTourModal(directTourId), 350);
+  }
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape') {
       if(document.getElementById('imageViewer').classList.contains('active')) closeImageViewer();
