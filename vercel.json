@@ -8,6 +8,8 @@
     { "source": "/hot-air-balloon-tour/", "destination": "/index.html" },
     { "source": "/balloon-tour", "destination": "/index.html" },
     { "source": "/balloon-tour/", "destination": "/index.html" },
+    { "source": "/balloon-ride", "destination": "/index.html" },
+    { "source": "/balloon-ride/", "destination": "/index.html" },
     { "source": "/balloon", "destination": "/index.html" },
     { "source": "/balloon/", "destination": "/index.html" },
 
@@ -42,6 +44,8 @@
     { "source": "/abu-simbel-tour/", "destination": "/index.html" },
     { "source": "/abu-simbel-expedition", "destination": "/index.html" },
     { "source": "/abu-simbel-expedition/", "destination": "/index.html" },
+    { "source": "/aswan-abusimbel-tour", "destination": "/index.html" },
+    { "source": "/aswan-abusimbel-tour/", "destination": "/index.html" },
     { "source": "/abu-simbel", "destination": "/index.html" },
     { "source": "/abu-simbel/", "destination": "/index.html" },
 
@@ -49,6 +53,8 @@
     { "source": "/aswan-tour/", "destination": "/index.html" },
     { "source": "/aswan-philae-temple", "destination": "/index.html" },
     { "source": "/aswan-philae-temple/", "destination": "/index.html" },
+    { "source": "/aswan-philae-temple-tour", "destination": "/index.html" },
+    { "source": "/aswan-philae-temple-tour/", "destination": "/index.html" },
     { "source": "/aswan-and-philae-temple", "destination": "/index.html" },
     { "source": "/aswan-and-philae-temple/", "destination": "/index.html" },
     { "source": "/aswan", "destination": "/index.html" },
@@ -60,6 +66,8 @@
     { "source": "/sunset-nile-boat-cruise/", "destination": "/index.html" },
     { "source": "/nile-sunset-cruise", "destination": "/index.html" },
     { "source": "/nile-sunset-cruise/", "destination": "/index.html" },
+    { "source": "/nile-cruise", "destination": "/index.html" },
+    { "source": "/nile-cruise/", "destination": "/index.html" },
 
     { "source": "/hurghada-snorkelling-adventure", "destination": "/index.html" },
     { "source": "/hurghada-snorkelling-adventure/", "destination": "/index.html" },
@@ -77,6 +85,11 @@
     { "source": "/abydos-and-dendera-tour", "destination": "/index.html" },
     { "source": "/abydos-and-dendera-tour/", "destination": "/index.html" },
     { "source": "/abydos-dendera", "destination": "/index.html" },
-    { "source": "/abydos-dendera/", "destination": "/index.html" }
+    { "source": "/abydos-dendera/", "destination": "/index.html" },
+
+    { "source": "/pyramids-sphinx-tour", "destination": "/index.html" },
+    { "source": "/pyramids-sphinx-tour/", "destination": "/index.html" },
+    { "source": "/wonders-of-cairo-tour", "destination": "/index.html" },
+    { "source": "/wonders-of-cairo-tour/", "destination": "/index.html" }
   ]
 }
