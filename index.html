@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+<link rel="preload" as="image" href="optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp" type="image/webp">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
 <style>
@@ -65,7 +66,7 @@ body.modal-open { overflow:hidden; }
 .nav-toggle span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:var(--transition); }
 
 /* HERO */
-.hero { position:relative; min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; overflow:hidden; background:url('villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.png') center/cover no-repeat; }
+.hero { position:relative; min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; overflow:hidden; background:url('optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp') center/cover no-repeat; }
 .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
 .hero-overlay { position:absolute; inset:0; background:linear-gradient(170deg, rgba(250,247,242,0.6) 0%, rgba(254,253,251,0.7) 40%, rgba(245,237,224,0.8) 100%); z-index:1; }
 .hero-content { position:relative; z-index:2; max-width:800px; }
@@ -320,7 +321,7 @@ body.modal-open { overflow:hidden; }
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.png">
+  <video class="hero-video" autoplay muted loop playsinline poster="optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp">
     <source src="hero.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
@@ -412,9 +413,9 @@ body.modal-open { overflow:hidden; }
       </div>
     </div>
     <div class="location-map" style="min-height:380px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;background:var(--border);">
-      <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_elegan_5dd2dd67-9a2b-4ff8-b16b-d4995aeb5431.png" alt="Egyptian dinner spread" style="width:100%;height:100%;object-fit:cover;grid-row:1/3;" loading="lazy">
-      <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_8406ef7f-87ae-453b-be57-3e6cc0f5e6a6_3.png" alt="Mixed grill platter" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
-      <img src="restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_d268e45c-a9bc-46e1-8c82-2bef68a21e30_0.png" alt="Fresh Egyptian cuisine" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      <img src="optimized-assets/restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_elegan_5dd2dd67-9a2b-4ff8-b16b-d4995aeb5431.webp" alt="Egyptian dinner spread" style="width:100%;height:100%;object-fit:cover;grid-row:1/3;" loading="lazy">
+      <img src="optimized-assets/restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_8406ef7f-87ae-453b-be57-3e6cc0f5e6a6_3.webp" alt="Mixed grill platter" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      <img src="optimized-assets/restaurant-assets/jeevaka_a_delicious_dinner_spread_of_egyptian_food_on_an_eleg_d268e45c-a9bc-46e1-8c82-2bef68a21e30_0.webp" alt="Fresh Egyptian cuisine" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
     </div>
   </div>
 </section>
@@ -435,7 +436,7 @@ body.modal-open { overflow:hidden; }
 
 <!-- CONTACT CTA -->
 <section class="section" id="contact" style="padding-top:2rem;">
-  <div class="cta-banner fade-up"><h3>Ready to Experience the Nile?</h3><img class="credentials-image" src="villa-assets/abdol-airbnb-credentials.jpeg" alt="Abdol Airbnb credentials showing guest rating, reviews, years hosting, and licensed tour guide profile" loading="lazy"><p>Message us directly for availability, rates, and personalised stay or tour support.</p>
+  <div class="cta-banner fade-up"><h3>Ready to Experience the Nile?</h3><img class="credentials-image" src="optimized-assets/villa-assets/abdol-airbnb-credentials.webp" alt="Abdol Airbnb credentials showing guest rating, reviews, years hosting, and licensed tour guide profile" loading="lazy"><p>Message us directly for availability, rates, and personalised stay or tour support.</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;"><a href="https://wa.me/201000000000?text=Hi!%20I'm%20interested%20in%20booking%20a%20villa." class="btn btn-primary" target="_blank">WhatsApp Us</a></div>
   </div>
 </section>
@@ -690,11 +691,19 @@ const VILLA_COVER_PHOTOS = {
 };
 
 function vPhoto(villa, idx) {
-  if (idx === undefined && VILLA_COVER_PHOTOS[villa.id]) return VILLA_COVER_PHOTOS[villa.id];
+  if (idx === undefined && VILLA_COVER_PHOTOS[villa.id]) return optimizedImage(VILLA_COVER_PHOTOS[villa.id]);
   const photo = villa.photos[idx || 0];
   if (/^https?:\/\//.test(photo)) return photo;
-  if (photo.startsWith('villa-assets/')) return photo;
+  if (photo.startsWith('villa-assets/')) return optimizedImage(photo);
   return 'https://a0.muscache.com/im/pictures/' + photo + '?im_w=720';
+}
+
+function optimizedImage(src) {
+  if (!src || /^https?:\/\//.test(src) || src.startsWith('optimized-assets/')) return src;
+  if (/^(villa-assets|tour-assets|restaurant-assets)\//.test(src) && /\.(png|jpe?g)$/i.test(src)) {
+    return 'optimized-assets/' + src.replace(/\.(png|jpe?g)$/i, '.webp');
+  }
+  return src;
 }
 
 // ============================================
@@ -894,7 +903,7 @@ TOURS.push(
 
 TOURS.forEach(tour => {
   if (TOUR_PHOTOS[tour.id]) tour.photos = TOUR_PHOTOS[tour.id];
-  tour.heroPoster = tour.heroPoster || tour.coverImage || tour.photos[0];
+  tour.heroPoster = optimizedImage(tour.heroPoster || tour.coverImage || tour.photos[0]);
 });
 
 const TOUR_ROUTE_ALIASES = {
@@ -1156,10 +1165,10 @@ function openTourModal(tourId) {
   const t=TOURS.find(x=>x.id===tourId); if(!t) return;
   const modal=document.getElementById('modalContent');
   const waMsg=encodeURIComponent(`Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
-  const photosHtml=t.photos.map((p,i)=>`<img src="${p}" alt="${t.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
+  const photosHtml=t.photos.map((p,i)=>`<img src="${optimizedImage(p)}" alt="${t.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
   const included=t.included||['Private Egyptologist guide','Air-conditioned transport','Hotel pickup & drop-off','Bottled water provided','Flexible scheduling'];
   const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
-  const heroPoster=t.heroPoster||t.coverImage||t.photos[0];
+  const heroPoster=optimizedImage(t.heroPoster||t.coverImage||t.photos[0]);
   const heroVideo=t.heroVideo?`
       <div class="tour-modal-hero tour-modal-hero-${t.id}" style="background-image:url('${heroPoster}')">
         <video autoplay muted loop playsinline preload="metadata" poster="${heroPoster}">
@@ -1193,7 +1202,7 @@ function openTourModal(tourId) {
 function renderTours() {
   document.getElementById('toursGrid').innerHTML=TOURS.map(t=>`
     <div class="tour-card fade-up" onclick="openTourModal('${t.id}')">
-      <div class="tour-image"><img src="${t.coverImage||t.photos[0]}" alt="${t.name}" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)';this.style.opacity='0.3';"></div>
+      <div class="tour-image"><img src="${optimizedImage(t.coverImage||t.photos[0])}" alt="${t.name}" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)';this.style.opacity='0.3';"></div>
       <div class="tour-body">
         <h3 class="tour-name">${t.name}</h3>
         <p class="tour-desc">${t.desc}</p>
