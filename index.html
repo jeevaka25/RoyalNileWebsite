@@ -357,7 +357,7 @@ body.modal-open { overflow:hidden; }
       <li><span class="emoji">❄️</span> Air conditioning throughout</li>
       <li><span class="emoji">📺</span> Smart TV / Netflix</li>
       <li><span class="emoji">🧹</span> Free daily room service</li>
-      <li><span class="emoji">🚐</span> Airport pick-up & drop-off (charges apply)</li>
+      <li><span class="emoji">🚐</span> Airport pick-up & drop-off</li>
       <li><span class="emoji">🛕</span> Private tours & local experiences</li>
       <li><span class="emoji">🍽️</span> Nile view restaurant</li>
       <li><span class="emoji">⛴️</span> Free shuttle to West Bank Ferry</li>
@@ -711,7 +711,8 @@ function optimizedImage(src) {
 // ============================================
 const TOURS = [
   { id:'balloon', name:'Hot Air Balloon Sunrise', icon:'🎈', desc:'Float above the Valley of the Kings at dawn. Watch the sun paint ancient temples gold from 2,000 feet — an unforgettable once-in-a-lifetime experience.',
-    details:'Depart before sunrise from the West Bank launch site. Your expert pilot guides you over the Valley of the Kings, Queen Hatshepsut Temple, and the Nile River. Flight duration: 45-60 minutes. Includes hotel pickup, light breakfast, and flight certificate. Photography opportunities are unmatched.',
+    details:'Depart before sunrise from the West Bank launch site. Your expert pilot guides the balloon over the Valley of the Kings, Queen Hatshepsut Temple, and the Nile River. Flight duration is usually 45-60 minutes. Includes hotel pickup and drop-off and a flight certificate. Photography opportunities are unmatched.',
+    included:['Hotel pickup & drop-off','Professional balloon pilot','45-60 minute flight','Flight certificate','Sunrise views over ancient Luxor'],
     coverImage:'tour-assets/balloon-cover-no-caption.png',
     heroVideo:'tour-assets/balloon/hero-loop.mp4',
     photos:[
@@ -722,8 +723,9 @@ const TOURS = [
       'tour-assets/balloon-05-float-over-living-history.png',
       'tour-assets/balloon-06-reserve-your-sunrise-ride.png',
     ]},
-  { id:'west-bank', name:'West Bank Wonders', icon:'🏛️', desc:'Valley of the Kings, Queen Hatshepsut Temple, Colossi of Memnon — a full day walking among pharaohs in the world\'s greatest necropolis.',
-    details:'Full-day guided tour covering the Valley of the Kings (3 tombs including Tutankhamun option), the magnificent Temple of Hatshepsut, the Colossi of Memnon, and a visit to an alabaster workshop. Includes private Egyptologist guide, air-conditioned transport, and lunch.',
+  { id:'west-bank', name:'West Bank Wonders', icon:'🏛️', desc:'Valley of the Kings, Queen Hatshepsut Temple, and the Colossi of Memnon — around 3 hours among the monuments of ancient Thebes.',
+    details:'Around 3 hours exploring Luxor\'s West Bank highlights: the Valley of the Kings, the magnificent Temple of Hatshepsut, and the Colossi of Memnon. Includes a private Egyptologist guide, private transfers, hotel pickup and drop-off, and bottled water.',
+    included:['Private Egyptologist guide','Private transfers','Hotel pickup & drop-off','Valley of the Kings visit','Hatshepsut Temple visit','Colossi of Memnon stop','Bottled water provided'],
     heroVideo:'tour-assets/west-bank/hero-loop.mp4',
     photos:[
       'tour-assets/west-bank/01-begin-at-the-colossi.png',
@@ -733,8 +735,8 @@ const TOURS = [
       'tour-assets/west-bank/05-crafted-by-hand.png',
       'tour-assets/west-bank/06-a-day-among-pharaohs.png',
     ]},
-  { id:'east-bank', name:'East Bank Magical Temple Tour', icon:'🏺', desc:'Explore Karnak Temple and Luxor Temple with a private guide and private air-conditioned van transfers throughout.',
-    details:'Private half-day tour in Luxor exploring the magnificent temples of the East Bank. Visit Karnak Temple and Luxor Temple with an Egyptologist guide, private luxury air-conditioned van transfers, bottled water, and flexible pacing.',
+  { id:'east-bank', name:'East Bank Magical Temple Tour', icon:'🏺', desc:'Explore Karnak Temple and Luxor Temple in around 3 hours with a private guide and private air-conditioned van transfers.',
+    details:'Around 3 hours exploring the magnificent temples of Luxor\'s East Bank. Visit Karnak Temple and Luxor Temple with an Egyptologist guide, private luxury air-conditioned van transfers, hotel pickup and drop-off, and bottled water.',
     included:['Private Egyptologist guide','Private luxury AC van transfers','Hotel pickup & drop-off','Karnak Temple visit','Luxor Temple visit','Bottled water provided'],
     heroVideo:'tour-assets/east-bank/hero-loop.mp4',
     photos:[
@@ -747,6 +749,7 @@ const TOURS = [
     ]},
   { id:'desert', name:'Desert Quad Safari', icon:'🏜️', desc:'Race across golden dunes on a quad bike, explore ancient desert trails, then share tea with a Bedouin family under a canopy of stars.',
     details:'Afternoon departure to the desert. After a safety briefing, ride quad bikes through the stunning Western Desert landscapes. Visit a Bedouin village for traditional tea and bread. Watch the sunset over the dunes before returning. Includes quad bike, helmet, guide, and Bedouin tea.',
+    included:['Hotel pickup & drop-off','Quad bike rental','Helmet','Desert safari guide','Bedouin tea stop','Safety briefing'],
     coverImage:'tour-assets/desert/03-ride-the-golden-trails.png',
     heroVideo:'tour-assets/desert/hero-loop.mp4',
     photos:[
@@ -758,7 +761,8 @@ const TOURS = [
       'tour-assets/desert/06-sunset-ride-home.png',
     ]},
   { id:'abu-simbel', name:'Abu Simbel Expedition', icon:'🛕', desc:'Journey south to Ramesses II\'s masterpiece — Egypt\'s most breathtaking UNESCO temples, carved from a mountainside 3,000 years ago.',
-    details:'Early morning departure (approx. 4 AM) for the 3-hour drive south to Abu Simbel. Explore the Great Temple of Ramesses II and the Temple of Nefertari — both relocated in a massive UNESCO operation. Return to Luxor by afternoon. Includes private transport and guide. Entry tickets are extra.',
+    details:'Early morning departure from Luxor for the long journey south to Abu Simbel. The drive is around 8 hours each way, with return to Luxor the same day in the late evening. The standard tour includes a comfy modern private air-conditioned van and professional driver. A tour guide can be provided at extra cost.',
+    included:['Comfy modern private AC van','Professional driver','Hotel pickup & drop-off','Same-day return to Luxor','Abu Simbel temple visit','Tour guide available at extra cost'],
     coverImage:'tour-assets/abu-simbel/03-temple-of-ramesses-ii.png',
     heroVideo:'tour-assets/abu-simbel/hero-loop.mp4',
     photos:[
@@ -769,8 +773,9 @@ const TOURS = [
       'tour-assets/abu-simbel/05-temple-of-nefertari.png',
       'tour-assets/abu-simbel/06-lake-nasser-views.png',
     ]},
-  { id:'aswan', name:'Aswan & Philae Temple', icon:'🏝️', desc:'A full day exploring Aswan\'s Nubian charm — the High Dam, Philae Temple on its island sanctuary, and a traditional Nubian lunch.',
-    details:'Drive south to Aswan (approx. 3 hours). Visit the Aswan High Dam, take a motorboat to the beautiful island Temple of Philae dedicated to Isis, enjoy a traditional Nubian lunch, and return to Luxor in the evening. Includes transport, guide, boat, and lunch. Entry tickets are extra.',
+  { id:'aswan', name:'Aswan & Philae Temple', icon:'🏝️', desc:'A full-day private journey from Luxor to Aswan, including the High Dam and the beautiful island Temple of Philae.',
+    details:'Drive south from Luxor to Aswan, around 4 hours each way. Visit the Aswan High Dam and take a motorboat to the beautiful island Temple of Philae dedicated to Isis, then return to Luxor in the evening. The standard tour includes a comfy modern private air-conditioned van and professional driver. A tour guide can be provided at extra cost.',
+    included:['Comfy modern private AC van','Professional driver','Hotel pickup & drop-off','Aswan High Dam visit','Motorboat to Philae Temple','Tour guide available at extra cost'],
     coverImage:'tour-assets/aswan/03-temple-of-isis.png',
     heroVideo:'tour-assets/aswan/hero-loop.mp4',
     photos:[
@@ -863,7 +868,8 @@ const TOUR_PHOTOS = {
 
 TOURS.push(
   { id:'nile-boat-cruise', name:'Sunset Nile Boat Cruise', icon:'⛵', desc:'A peaceful two-hour Nile boat ride at sunset with authentic Egyptian dinner, tea, coffee, bottled water, and private transfers.',
-    details:'Glide along the Nile as the sun sets over Luxor. The tour includes a Nile boat ride, authentic Egyptian dinner, tea, coffee, bottled water, taxes, service charges, and air-conditioned round-trip transportation.',
+    details:'Glide along the Nile as the sun sets over Luxor. The tour includes a Nile boat ride, authentic Egyptian dinner, tea, coffee, bottled water, taxes, service charges, and round-trip transfers.',
+    included:['Two-hour Nile boat ride','Authentic Egyptian dinner','Tea, coffee & bottled water','Round-trip transfers','Taxes & service charges'],
     coverImage:'tour-assets/nile-boat-cruise/03-sail-into-sunset.png',
     heroVideo:'tour-assets/nile-boat-cruise/hero-loop.mp4',
     photos:[
@@ -876,6 +882,7 @@ TOURS.push(
     ]},
   { id:'red-sea', name:'Hurghada Snorkelling Adventure', icon:'🤿', desc:'A full-day Red Sea escape from Luxor to Hurghada for bright coral, tropical fish, and clear turquoise water.',
     details:'Travel by private air-conditioned transport from Luxor to Hurghada for a day of Red Sea snorkelling. Includes experienced driver, round-trip transport, taxes, and service charges.',
+    included:['Private round-trip transport','Experienced driver','Red Sea boat trip','Snorkelling experience','Taxes & service charges'],
     coverImage:'tour-assets/red-sea/04-tropical-fish-below.png',
     heroVideo:'tour-assets/red-sea/hero-loop.mp4',
     photos:[
@@ -886,9 +893,9 @@ TOURS.push(
       'tour-assets/red-sea/05-lunch-on-deck.png',
       'tour-assets/red-sea/06-turquoise-water-finale.png'
     ]},
-  { id:'abydos-dendera', name:'Abydos & Dendera Temples', icon:'🏛️', desc:'A full-day private temple journey to Abydos and Dendera with luxury air-conditioned transfers and your own guide.',
-    details:'Travel north from Luxor for a full-day visit to the Temple of Seti I at Abydos and the beautifully preserved Hathor Temple at Dendera. Includes private luxury air-conditioned transfers and a private tour guide. Temple entry tickets are extra.',
-    included:['Private tour guide','Private luxury AC transfers','Hotel pickup & drop-off','Abydos Temple visit','Dendera Temple visit','Temple entry tickets extra'],
+  { id:'abydos-dendera', name:'Abydos & Dendera Temples', icon:'🏛️', desc:'A full-day private temple journey to Abydos and Dendera with a comfy modern private air-conditioned van and professional driver.',
+    details:'Travel north from Luxor for a full-day visit to the Temple of Seti I at Abydos and the beautifully preserved Hathor Temple at Dendera. The standard tour includes a comfy modern private air-conditioned van and professional driver. A tour guide can be provided at extra cost.',
+    included:['Comfy modern private AC van','Professional driver','Hotel pickup & drop-off','Abydos Temple visit','Dendera Temple visit','Tour guide available at extra cost','Temple entry tickets extra'],
     coverImage:'tour-assets/abydos-dendera/04-dendera-temple-of-hathor.png',
     heroVideo:'tour-assets/abydos-dendera/hero-loop.mp4',
     photos:[
@@ -1166,7 +1173,7 @@ function openTourModal(tourId) {
   const modal=document.getElementById('modalContent');
   const waMsg=encodeURIComponent(`Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
   const photosHtml=t.photos.map((p,i)=>`<img src="${optimizedImage(p)}" alt="${t.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
-  const included=t.included||['Private Egyptologist guide','Air-conditioned transport','Hotel pickup & drop-off','Bottled water provided','Flexible scheduling'];
+  const included=t.included||['Hotel pickup & drop-off','Private transfers','Bottled water provided'];
   const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
   const heroPoster=optimizedImage(t.heroPoster||t.coverImage||t.photos[0]);
   const heroVideo=t.heroVideo?`
