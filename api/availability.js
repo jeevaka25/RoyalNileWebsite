@@ -1,5 +1,8 @@
 const FETCH_TIMEOUT_MS = 6000;
 const MAX_CALENDARS = 8;
+const MANUAL_BLOCKED_DATES = {
+  'sky-penthouse-1': ['2026-06-02'],
+};
 
 function parseDateParam(value) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return null;
@@ -42,6 +45,18 @@ function isAvailable(bookedDates, checkin, checkout) {
     if (bookedDates.has(formatDate(date))) return false;
   }
   return true;
+}
+
+function getManualBlockedDates(calendarId) {
+  return new Set(MANUAL_BLOCKED_DATES[calendarId] || []);
+}
+
+function mergeBookedDates(calendarId, bookedDates) {
+  return new Set([...bookedDates, ...getManualBlockedDates(calendarId)]);
+}
+
+function manualBlockOverlaps(calendarId, checkin, checkout) {
+  return !isAvailable(getManualBlockedDates(calendarId), checkin, checkout);
 }
 
 function isAllowedAirbnbCalendarUrl(value) {
@@ -118,15 +133,25 @@ module.exports = async function handler(req, res) {
 
   const results = await Promise.all(sanitizedCalendars.map(async calendar => {
     try {
-      const bookedDates = await fetchCalendar(calendar.icalUrl);
+      const bookedDates = mergeBookedDates(calendar.id, await fetchCalendar(calendar.icalUrl));
+      const hasManualBlocks = getManualBlockedDates(calendar.id).size > 0;
       return {
         id: calendar.id,
         roomId: calendar.roomId,
         available: isAvailable(bookedDates, checkin, checkout),
         bookedDateCount: bookedDates.size,
-        source: 'airbnb-ical',
+        source: hasManualBlocks ? 'airbnb-ical+manual-block' : 'airbnb-ical',
       };
     } catch (error) {
+      if (manualBlockOverlaps(calendar.id, checkin, checkout)) {
+        return {
+          id: calendar.id,
+          roomId: calendar.roomId,
+          available: false,
+          bookedDateCount: getManualBlockedDates(calendar.id).size,
+          source: 'manual-block',
+        };
+      }
       return {
         id: calendar.id,
         roomId: calendar.roomId,
