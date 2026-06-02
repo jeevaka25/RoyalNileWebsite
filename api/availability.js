@@ -1,7 +1,14 @@
-const FETCH_TIMEOUT_MS = 6000;
+const FETCH_TIMEOUT_MS = 5000;
 const MAX_CALENDARS = 8;
-const MANUAL_BLOCKED_DATES = {
-  'sky-penthouse-1': ['2026-06-02'],
+const BOOKING_CALENDAR_ENV_KEYS = {
+  'royal-home-nile-view': 'BOOKING_ICAL_ROYAL_HOME_NILE_VIEW',
+  'royal-home-pool-view': 'BOOKING_ICAL_ROYAL_HOME_POOL_VIEW',
+  'sky-penthouse-1': 'BOOKING_ICAL_SKY_PENTHOUSE_1',
+  'sky-penthouse-2': 'BOOKING_ICAL_SKY_PENTHOUSE_2',
+  'nile-view-luxury-1': 'BOOKING_ICAL_LUXURY_NILE_VIEW_1',
+  'nile-view-1': 'BOOKING_ICAL_NILE_VIEW_1',
+  'nile-view-luxury-2': 'BOOKING_ICAL_LUXURY_NILE_VIEW_2',
+  'nile-view-2': 'BOOKING_ICAL_NILE_VIEW_2',
 };
 
 function parseDateParam(value) {
@@ -47,18 +54,6 @@ function isAvailable(bookedDates, checkin, checkout) {
   return true;
 }
 
-function getManualBlockedDates(calendarId) {
-  return new Set(MANUAL_BLOCKED_DATES[calendarId] || []);
-}
-
-function mergeBookedDates(calendarId, bookedDates) {
-  return new Set([...bookedDates, ...getManualBlockedDates(calendarId)]);
-}
-
-function manualBlockOverlaps(calendarId, checkin, checkout) {
-  return !isAvailable(getManualBlockedDates(calendarId), checkin, checkout);
-}
-
 function isAllowedAirbnbCalendarUrl(value) {
   try {
     const url = new URL(value);
@@ -73,6 +68,43 @@ function isAllowedAirbnbCalendarUrl(value) {
   }
 }
 
+function isAllowedBookingCalendarUrl(value) {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === 'https:' &&
+      (
+        (
+          url.hostname === 'ical.booking.com' &&
+          url.pathname === '/v1/export'
+        ) ||
+        (
+          url.hostname === 'admin.booking.com' &&
+          url.pathname === '/hotel/hoteladmin/ical.html'
+        )
+      ) &&
+      url.searchParams.has('t')
+    );
+  } catch (error) {
+    return false;
+  }
+}
+
+function getBookingCalendarUrl(calendarId) {
+  const envKey = BOOKING_CALENDAR_ENV_KEYS[calendarId];
+  if (!envKey) return null;
+  const url = process.env[envKey];
+  return isAllowedBookingCalendarUrl(url) ? url : null;
+}
+
+function combineBookedDates(dateSets) {
+  const booked = new Set();
+  for (const set of dateSets) {
+    for (const date of set) booked.add(date);
+  }
+  return booked;
+}
+
 async function readJsonBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string') return JSON.parse(req.body || '{}');
@@ -81,7 +113,7 @@ async function readJsonBody(req) {
   return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}');
 }
 
-async function fetchCalendar(icalUrl) {
+async function fetchCalendar(icalUrl, sourceName) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -89,10 +121,23 @@ async function fetchCalendar(icalUrl) {
       signal: controller.signal,
       headers: { 'user-agent': 'RoyalNileWebsite/1.0' },
     });
-    if (!response.ok) throw new Error(`Airbnb calendar returned ${response.status}`);
+    if (!response.ok) throw new Error(`${sourceName} calendar returned ${response.status}`);
     return getBookedDatesFromICal(await response.text());
   } finally {
     clearTimeout(timer);
+  }
+}
+
+async function fetchCalendarSource(source) {
+  try {
+    const bookedDates = await fetchCalendar(source.icalUrl, source.name);
+    return { ...source, ok: true, bookedDates };
+  } catch (error) {
+    return {
+      ...source,
+      ok: false,
+      error: error.name === 'AbortError' ? `${source.name} calendar request timed out.` : `${source.name} calendar could not be checked.`,
+    };
   }
 }
 
@@ -132,34 +177,35 @@ module.exports = async function handler(req, res) {
     .map(calendar => ({ id: calendar.id, roomId: String(calendar.roomId || ''), icalUrl: calendar.icalUrl }));
 
   const results = await Promise.all(sanitizedCalendars.map(async calendar => {
-    try {
-      const bookedDates = mergeBookedDates(calendar.id, await fetchCalendar(calendar.icalUrl));
-      const hasManualBlocks = getManualBlockedDates(calendar.id).size > 0;
+    const sources = [{ name: 'airbnb-ical', icalUrl: calendar.icalUrl }];
+    const bookingCalendarUrl = getBookingCalendarUrl(calendar.id);
+    if (bookingCalendarUrl) sources.push({ name: 'booking-ical', icalUrl: bookingCalendarUrl });
+
+    const sourceResults = await Promise.all(sources.map(fetchCalendarSource));
+    const successfulSources = sourceResults.filter(source => source.ok);
+    const failedSources = sourceResults.filter(source => !source.ok);
+
+    if (successfulSources.length) {
+      const bookedDates = combineBookedDates(successfulSources.map(source => source.bookedDates));
+      const available = isAvailable(bookedDates, checkin, checkout);
       return {
         id: calendar.id,
         roomId: calendar.roomId,
-        available: isAvailable(bookedDates, checkin, checkout),
+        available: available === false ? false : failedSources.length ? null : true,
         bookedDateCount: bookedDates.size,
-        source: hasManualBlocks ? 'airbnb-ical+manual-block' : 'airbnb-ical',
-      };
-    } catch (error) {
-      if (manualBlockOverlaps(calendar.id, checkin, checkout)) {
-        return {
-          id: calendar.id,
-          roomId: calendar.roomId,
-          available: false,
-          bookedDateCount: getManualBlockedDates(calendar.id).size,
-          source: 'manual-block',
-        };
-      }
-      return {
-        id: calendar.id,
-        roomId: calendar.roomId,
-        available: null,
-        source: 'unverified',
-        error: error.name === 'AbortError' ? 'Calendar request timed out.' : 'Calendar could not be checked.',
+        source: successfulSources.map(source => source.name).join('+'),
+        failedSources: failedSources.map(source => source.name),
       };
     }
+
+    return {
+      id: calendar.id,
+      roomId: calendar.roomId,
+      available: null,
+      source: 'unverified',
+      failedSources: failedSources.map(source => source.name),
+      error: 'Calendars could not be checked.',
+    };
   }));
 
   res.statusCode = 200;
