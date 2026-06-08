@@ -1,0 +1,12 @@
+{
+  "name": "Royal Nile Villas — Luxor",
+  "short_name": "Royal Nile Villas",
+  "description": "Luxury Nile-view villas and curated tours on Luxor's West Bank, Egypt.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fcfbf7",
+  "theme_color": "#147481",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

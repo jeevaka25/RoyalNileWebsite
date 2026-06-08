@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Royal Nile Villas — Luxury Holiday Stays in Luxor, Egypt</title>
 <meta name="description" content="Discover our collection of luxury Nile-view villas and penthouses in Luxor. Private pools, panoramic sunsets, and bespoke ancient Egypt tours.">
+<link rel="canonical" href="https://egyptvillastours.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Royal Nile Villas">
+<meta property="og:title" content="Royal Nile Villas — Luxury Nile-View Villas & Tours in Luxor, Egypt">
+<meta property="og:description" content="Luxury Nile-view villas and penthouses with private pools on Luxor's West Bank, plus bespoke ancient Egypt tours. Hosted by a Superhost with 1,800+ reviews.">
+<meta property="og:url" content="https://egyptvillastours.com/">
+<meta property="og:image" content="https://egyptvillastours.com/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Royal Nile Villas — Luxury Villas & Tours in Luxor, Egypt">
+<meta name="twitter:description" content="Nile-view villas with private pools on Luxor's West Bank, plus bespoke ancient Egypt tours.">
+<meta name="twitter:image" content="https://egyptvillastours.com/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#147481">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -128,7 +145,9 @@ body.modal-open { overflow:hidden; }
 .villa-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(330px, 1fr)); gap:1.8rem; }
 .villa-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition); cursor:pointer; box-shadow:var(--shadow-sm); }
 .villa-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); border-color:var(--primary-light); }
-.villa-card.unavailable { opacity:0.5; pointer-events:none; }
+.villa-card.unavailable { opacity:0.6; }
+.villa-card .villa-link:hover { text-decoration:none; }
+.tour-card:hover .tour-name { color:var(--primary); }
 .villa-image { position:relative; height:240px; overflow:hidden; background:var(--bg-warm); }
 .villa-image img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
 .villa-card:hover .villa-image img { transform:scale(1.05); }
@@ -219,7 +238,8 @@ body.modal-open { overflow:hidden; }
 .cta-banner { background:linear-gradient(135deg, rgba(193,122,62,0.06), rgba(42,127,138,0.04)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center; }
 .cta-banner h3 { font-family:var(--font-display); font-size:1.8rem; color:var(--text); margin-bottom:0.6rem; }
 .cta-banner p { color:var(--text-secondary); margin-bottom:1.5rem; max-width:480px; margin-left:auto; margin-right:auto; }
-.credentials-image { display:block; width:min(100%, 520px); margin:1rem auto 1.5rem; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); }
+.credentials-image { display:block; width:min(100%, 520px); margin:1rem auto 1.5rem; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); transition:var(--transition); }
+a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:var(--primary-light); }
 
 /* LOCATION */
 .location-wrapper { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
@@ -233,7 +253,7 @@ body.modal-open { overflow:hidden; }
 
 /* FOOTER */
 .footer { border-top:1px solid var(--border); padding:4rem 2rem 2rem; background:var(--bg-warm); }
-.footer-inner { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem; }
+.footer-inner { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1.8fr 1fr 1fr 0.8fr; gap:2.5rem; }
 .footer-brand h4 { font-family:var(--font-display); font-size:1.3rem; color:var(--text); margin-bottom:0.6rem; }
 .footer-brand h4 span { color:var(--primary); }
 .footer-brand p { font-size:0.82rem; color:var(--text-muted); line-height:1.7; max-width:300px; }
@@ -300,6 +320,15 @@ body.modal-open { overflow:hidden; }
 .tour-card::after { content:'Click for details →'; position:absolute; bottom:1rem; right:1.3rem; font-size:0.68rem; color:var(--text-muted); opacity:0; transition:var(--transition); }
 .tour-card:hover::after { opacity:1; }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Royal Nile Villas","description":"Luxury Nile-view villas and penthouses with private pools on Luxor's West Bank, plus bespoke ancient Egypt tours and a rooftop restaurant.","url":"https://egyptvillastours.com/","image":"https://egyptvillastours.com/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp","telephone":"+201204421652","email":"royalhomeluxor@gmail.com","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"Al Aqaletah, West Bank","addressLocality":"Luxor","addressRegion":"Luxor","addressCountry":"EG"},"geo":{"@type":"GeoCoordinates","latitude":25.691162,"longitude":32.623042},"hasMap":"https://www.google.com/maps?q=25.691162,32.623042","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Free WiFi","value":true},{"@type":"LocationFeatureSpecification","name":"Swimming pool","value":true},{"@type":"LocationFeatureSpecification","name":"Air conditioning","value":true},{"@type":"LocationFeatureSpecification","name":"Airport shuttle","value":true},{"@type":"LocationFeatureSpecification","name":"On-site restaurant","value":true},{"@type":"LocationFeatureSpecification","name":"Free parking","value":true}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.93","reviewCount":1345,"bestRating":"5"},"sameAs":["https://www.airbnb.co.uk/rooms/959398645193866526","https://www.airbnb.co.uk/rooms/33760041"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Royal Nile Villas","url":"https://egyptvillastours.com/"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where are Royal Nile Villas located?","acceptedAnswer":{"@type":"Answer","text":"In Al Aqaletah on Luxor's tranquil West Bank — about 15 minutes from the Valley of the Kings, 10 minutes from the hot air balloon launch site, and 5 minutes from the West Bank ferry, with a free shuttle to the ferry."}},{"@type":"Question","name":"Do the villas have a private pool?","acceptedAnswer":{"@type":"Answer","text":"Yes. Guests enjoy a 14-metre swimming pool set in a 30-metre garden, with several apartments offering direct pool access or panoramic pool and Nile views."}},{"@type":"Question","name":"Do you offer airport pickup and tours?","acceptedAnswer":{"@type":"Answer","text":"Yes. We arrange airport pickup and drop-off, a free shuttle to the West Bank ferry, and a full range of private tours including the Valley of the Kings, hot air balloon rides, Abu Simbel, Aswan and more."}},{"@type":"Question","name":"How do I book a villa?","acceptedAnswer":{"@type":"Answer","text":"Message us directly on WhatsApp for the best direct rates and availability, or book instantly through our Airbnb and Booking.com listings."}}]}
+</script>
 </head>
 <body>
 
@@ -326,9 +355,9 @@ body.modal-open { overflow:hidden; }
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content fade-up visible">
-    <p class="hero-eyebrow">Luxor, Egypt</p>
-    <h1>Your Nile <em>Paradise</em> Awaits</h1>
-    <p class="hero-subtitle">Handpicked luxury villas on the tranquil West Bank. Private pools, panoramic sunsets, and bespoke ancient Egyptian adventures.</p>
+    <p class="hero-eyebrow">Luxor · West Bank, Egypt</p>
+    <h1>Luxury Nile-View Villas in <em>Luxor</em></h1>
+    <p class="hero-subtitle">Handpicked private-pool villas and penthouses on Luxor's tranquil West Bank — plus bespoke Valley of the Kings tours, sunrise hot air balloon rides, and Nile cruises.</p>
   </div>
   <div class="scroll-indicator"><span>Discover</span><div class="line"></div></div>
 </section>
@@ -390,6 +419,14 @@ body.modal-open { overflow:hidden; }
   <div class="cta-banner fade-up" style="margin-top:3rem;"><h3>The Complete Luxor Experience</h3><p>Balloon + West Bank + East Bank + Sunset Cruise — Save $$$ with our custom tour packages. Complimentary airport transfer with 3+ tours booked.</p><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20the%20Complete%20Luxor%20Experience%20package." class="btn btn-teal" target="_blank">Inquire on WhatsApp</a></div>
 </section>
 
+<!-- HOST / TRUST -->
+<section class="section" id="host" style="padding-top:2rem;padding-bottom:1rem;">
+  <div class="section-header fade-up"><p class="section-eyebrow">Your Host</p><h2 class="section-title">Meet Abdol — Your Luxor Superhost</h2><p class="section-subtitle">A Superhost with 7+ years of hosting and 1,800+ glowing reviews. Tap below to view Abdol's verified Airbnb profile.</p></div>
+  <a href="https://www.airbnb.co.uk/users/show/252258998" target="_blank" rel="noopener" style="display:block;" aria-label="View Abdol's verified Airbnb host profile">
+    <img class="credentials-image" src="/optimized-assets/villa-assets/abdol-airbnb-credentials.webp" alt="Abdol Airbnb host credentials — guest rating, reviews, years hosting, and licensed tour guide profile" loading="lazy">
+  </a>
+</section>
+
 <!-- RESTAURANT -->
 <section class="section" id="restaurant" style="padding-top:2rem;padding-bottom:2rem;">
   <div class="section-header fade-up"><p class="section-eyebrow">Dine With Us</p><h2 class="section-title">Royal Nile View Restaurant</h2><p class="section-subtitle">The best Nile panorama in Luxor — authentic Egyptian cuisine, fresh juices, and unforgettable sunsets from our panoramic rooftop.</p></div>
@@ -436,7 +473,7 @@ body.modal-open { overflow:hidden; }
 
 <!-- CONTACT CTA -->
 <section class="section" id="contact" style="padding-top:2rem;">
-  <div class="cta-banner fade-up"><h3>Ready to Experience the Nile?</h3><img class="credentials-image" src="/optimized-assets/villa-assets/abdol-airbnb-credentials.webp" alt="Abdol Airbnb credentials showing guest rating, reviews, years hosting, and licensed tour guide profile" loading="lazy"><p>Message us directly for availability, rates, and personalised stay or tour support.</p>
+  <div class="cta-banner fade-up"><h3>Ready to Experience the Nile?</h3><p>Message us directly for availability, rates, and personalised stay or tour support.</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;"><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20booking%20a%20villa." class="btn btn-primary" target="_blank">WhatsApp Us</a></div>
   </div>
 </section>
@@ -445,7 +482,8 @@ body.modal-open { overflow:hidden; }
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand"><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments and penthouses on Luxor's West Bank. Hosted by Abdol — Superhost with 7+ years and 1,800+ glowing reviews.</p></div>
-    <div class="footer-col"><h5>Villas</h5><ul><li><a href="#" onclick="openVillaModal('sky-penthouse-1')">Sky Penthouse 1</a></li><li><a href="#" onclick="openVillaModal('sky-penthouse-2')">Sky Penthouse 2</a></li><li><a href="#" onclick="openVillaModal('nile-view-luxury-1')">Luxury Nile View 1</a></li><li><a href="#" onclick="openVillaModal('nile-view-luxury-2')">Luxury Nile View 2</a></li><li><a href="#" onclick="openVillaModal('royal-home-pool-view')">Pool View Apartment</a></li><li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
+    <div class="footer-col"><h5>Villas</h5><ul><li><a href="/villas/sky-penthouse-1">Sky Penthouse 1</a></li><li><a href="/villas/sky-penthouse-2">Sky Penthouse 2</a></li><li><a href="/villas/nile-view-luxury-1">Luxury Nile View 1</a></li><li><a href="/villas/nile-view-luxury-2">Luxury Nile View 2</a></li><li><a href="/villas/royal-home-pool-view">Pool View Apartment</a></li><li><a href="/villas/royal-home-nile-view">Royal Home Nile View</a></li><li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
+    <div class="footer-col"><h5>Tours</h5><ul><li><a href="/hot-air-balloon-luxor">Hot Air Balloon Ride</a></li><li><a href="/valley-of-the-kings-tour">Valley of the Kings Tour</a></li><li><a href="/karnak-luxor-temple-tour">Karnak &amp; Luxor Temple Tour</a></li><li><a href="/luxor-desert-safari">Desert Quad Safari</a></li><li><a href="/abu-simbel-tour">Abu Simbel Tour</a></li><li><a href="/aswan-philae-temple-tour">Aswan &amp; Philae Tour</a></li><li><a href="/sunset-nile-boat-cruise">Sunset Nile Cruise</a></li></ul></div>
     <div class="footer-col"><h5>Connect</h5><ul><li><a href="https://wa.me/201204421652" target="_blank">WhatsApp</a></li><li><a href="mailto:royalhomeluxor@gmail.com">Email Us</a></li></ul></div>
   </div>
   <div class="footer-bottom"><span>&copy; 2026 Royal Nile Villas. All rights reserved.</span><span>Luxor, Egypt — West Bank</span></div>
@@ -1052,13 +1090,14 @@ function renderVillas(villaStatuses, ci, co) {
     const sc=villa.available===true?'available':villa.available===false?'unavailable-text':'';
     const st=villa.available===true?'Available':villa.available===false?'Booked':'';
     const isUn=villa.available===false;
-    return `<div class="villa-card fade-up ${isUn?'unavailable':''}" onclick="${isUn?'':'openVillaModal(\''+villa.id+'\')'}" style="cursor:${isUn?'default':'pointer'}">
+    return `<div class="villa-card fade-up ${isUn?'unavailable':''}" style="position:relative;cursor:pointer;">
+      <a class="villa-link" href="/villas/${villa.id}" aria-label="View ${villa.name}" style="position:absolute;inset:0;z-index:1;"></a>
       <div class="villa-image"><img src="${vPhoto(villa)}" alt="${villa.name}" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)';this.style.opacity='0.3';"><span class="villa-badge">${villa.floor}</span><span class="villa-rating"><span class="star">★</span> ${villa.rating} · ${villa.reviews}</span></div>
       <div class="villa-body">${villa.available!==null?`<div class="villa-status ${sc}"><span class="dot"></span> ${st}</div>`:''}
         <h3 class="villa-name">${villa.name}</h3>
         <p class="villa-location">📍 ${villa.location} · ${villa.viewType}</p>
         <div class="villa-features"><span class="villa-feature">🛏 ${villa.bedrooms} BR</span><span class="villa-feature">🛌 ${villa.beds} Beds</span><span class="villa-feature">🚿 ${villa.bathrooms} BA</span><span class="villa-feature">${villa.bedsConfig}</span></div>
-        <div class="villa-footer">
+        <div class="villa-footer" style="position:relative;z-index:2;">
           <a href="${villa.airbnbUrl}" target="_blank" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">Airbnb</a>
           <a href="${villa.bookingUrl}" target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Booking.com</a>
         </div>
@@ -1213,15 +1252,16 @@ function openTourModal(tourId) {
 // ============================================
 // RENDER TOURS
 // ============================================
+const TOUR_PAGE={balloon:'hot-air-balloon-luxor','west-bank':'valley-of-the-kings-tour','east-bank':'karnak-luxor-temple-tour',desert:'luxor-desert-safari','abu-simbel':'abu-simbel-tour',aswan:'aswan-philae-temple-tour','nile-boat-cruise':'sunset-nile-boat-cruise','red-sea':'hurghada-snorkelling-adventure','abydos-dendera':'abydos-dendera-tour'};
 function renderTours() {
   document.getElementById('toursGrid').innerHTML=TOURS.map(t=>`
-    <div class="tour-card fade-up" onclick="openTourModal('${t.id}')">
+    <a class="tour-card fade-up" href="/${TOUR_PAGE[t.id]||''}" style="text-decoration:none;color:inherit;display:block;">
       <div class="tour-image"><img src="${optimizedImage(t.coverImage||t.photos[0])}" alt="${t.name}" loading="lazy" onerror="this.parentElement.style.background='var(--bg-warm)';this.style.opacity='0.3';"></div>
       <div class="tour-body">
         <h3 class="tour-name">${t.name}</h3>
         <p class="tour-desc">${t.desc}</p>
       </div>
-    </div>
+    </a>
   `).join('');
   requestAnimationFrame(()=>{ document.querySelectorAll('.tour-card.fade-up').forEach(el=>el.classList.add('visible')); });
 }
