@@ -16,6 +16,7 @@ const SITE = {
   // Weighted aggregate across the 8 listings below (sum reviews = 1345).
   aggregate: { ratingValue: '4.93', reviewCount: 1345 },
   ga: 'G-12JHJ887DG',
+  metaPixel: '665393768919342',
   ogImage: '/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp',
 };
 

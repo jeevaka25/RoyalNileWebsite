@@ -3,12 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','665393768919342');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=665393768919342&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-12JHJ887DG"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','G-12JHJ887DG');
-document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href]'):null;if(!a)return;var h=a.href||'',ev=null;if(/wa\.me|api\.whatsapp\.com/i.test(h))ev='whatsapp_click';else if(/airbnb\./i.test(h))ev='airbnb_click';else if(/booking\.com/i.test(h))ev='booking_click';if(ev&&typeof gtag==='function')gtag('event',ev,{link_url:h,page_location:location.href,page_path:location.pathname});});
+document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href]'):null;if(!a)return;var h=a.href||'',ev=null;if(/wa\.me|api\.whatsapp\.com/i.test(h))ev='whatsapp_click';else if(/airbnb\./i.test(h))ev='airbnb_click';else if(/booking\.com/i.test(h))ev='booking_click';if(!ev)return;if(typeof gtag==='function')gtag('event',ev,{link_url:h,page_location:location.href,page_path:location.pathname});if(typeof fbq==='function'){if(ev==='whatsapp_click')fbq('track','Lead',{content_name:'WhatsApp Inquiry'});else if(ev==='airbnb_click')fbq('track','InitiateCheckout',{content_category:'airbnb'});else if(ev==='booking_click')fbq('track','InitiateCheckout',{content_category:'booking'});}});
 </script>
 <title>Royal Home Luxor — Pool View | Luxor West Bank Villa with Pool</title>
 <meta name="description" content="Ground-floor apartment with private entrance and direct pool access. Lounge in the rose garden hammock after a day exploring ancient temples. Rooftop… Book this 2-bedroom Luxor villa.">
