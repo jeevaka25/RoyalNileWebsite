@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 const FETCH_TIMEOUT_SECONDS = 5;
 const MAX_CALENDARS = 8;
+const BOOKING_CALENDAR_CONFIG = '../../booking-calendars.php';
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: public, max-age=0, s-maxage=300, stale-while-revalidate=300');
@@ -33,6 +34,34 @@ function isAllowedAirbnbUrl(mixed $value): bool {
         && ($url['host'] ?? '') === 'www.airbnb.co.uk'
         && preg_match('#^/calendar/ical/\d+\.ics$#', $url['path'] ?? '')
         && str_contains($url['query'] ?? '', 't=');
+}
+
+function isAllowedBookingUrl(mixed $value): bool {
+    if (!is_string($value) || !filter_var($value, FILTER_VALIDATE_URL)) return false;
+    $url = parse_url($value);
+    $host = $url['host'] ?? '';
+    $path = $url['path'] ?? '';
+    return ($url['scheme'] ?? '') === 'https'
+        && (
+            ($host === 'ical.booking.com' && $path === '/v1/export')
+            || ($host === 'admin.booking.com' && $path === '/hotel/hoteladmin/ical.html')
+        )
+        && str_contains($url['query'] ?? '', 't=');
+}
+
+function loadBookingCalendars(): array {
+    $path = __DIR__ . '/' . BOOKING_CALENDAR_CONFIG;
+    if (!is_file($path)) return [];
+    try {
+        $calendars = require $path;
+    } catch (Throwable $error) {
+        return [];
+    }
+    if (!is_array($calendars)) return [];
+    return array_filter(
+        $calendars,
+        fn(mixed $url): bool => isAllowedBookingUrl($url),
+    );
 }
 
 function parseICalDate(string $value): ?DateTimeImmutable {
@@ -92,6 +121,7 @@ if (!is_array($payload)) respond(400, ['error' => 'Invalid JSON body.']);
 $checkin = parseDateParam($payload['checkin'] ?? null);
 $checkout = parseDateParam($payload['checkout'] ?? null);
 $calendars = array_slice(is_array($payload['calendars'] ?? null) ? $payload['calendars'] : [], 0, MAX_CALENDARS);
+$bookingCalendars = loadBookingCalendars();
 
 if (!$checkin || !$checkout || $checkout <= $checkin || !$calendars) {
     respond(400, ['error' => 'Valid checkin, checkout, and calendars are required.']);
@@ -102,24 +132,43 @@ foreach ($calendars as $calendar) {
     if (!is_array($calendar) || !is_string($calendar['id'] ?? null) || !isAllowedAirbnbUrl($calendar['icalUrl'] ?? null)) {
         continue;
     }
-    try {
-        $booked = fetchCalendar($calendar['icalUrl']);
+    $sources = [
+        ['name' => 'airbnb-ical', 'url' => $calendar['icalUrl']],
+    ];
+    if (isset($bookingCalendars[$calendar['id']])) {
+        $sources[] = ['name' => 'booking-ical', 'url' => $bookingCalendars[$calendar['id']]];
+    }
+
+    $booked = [];
+    $successfulSources = [];
+    $failedSources = [];
+    foreach ($sources as $source) {
+        try {
+            $booked += fetchCalendar($source['url']);
+            $successfulSources[] = $source['name'];
+        } catch (Throwable $error) {
+            $failedSources[] = $source['name'];
+        }
+    }
+
+    if ($successfulSources) {
+        $available = isAvailable($booked, $checkin, $checkout);
         $results[] = [
             'id' => $calendar['id'],
             'roomId' => (string) ($calendar['roomId'] ?? ''),
-            'available' => isAvailable($booked, $checkin, $checkout),
+            'available' => $available === false ? false : ($failedSources ? null : true),
             'bookedDateCount' => count($booked),
-            'source' => 'airbnb-ical',
-            'failedSources' => [],
+            'source' => implode('+', $successfulSources),
+            'failedSources' => $failedSources,
         ];
-    } catch (Throwable $error) {
+    } else {
         $results[] = [
             'id' => $calendar['id'],
             'roomId' => (string) ($calendar['roomId'] ?? ''),
             'available' => null,
             'source' => 'unverified',
-            'failedSources' => ['airbnb-ical'],
-            'error' => 'Calendar could not be checked.',
+            'failedSources' => $failedSources,
+            'error' => 'Calendars could not be checked.',
         ];
     }
 }
