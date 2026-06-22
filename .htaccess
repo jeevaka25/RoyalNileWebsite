@@ -1,0 +1,47 @@
+Options -Indexes
+DirectoryIndex index.html
+RewriteEngine On
+
+# Hostinger/PHP equivalent of the Vercel availability function.
+RewriteRule ^api/availability/?$ api/availability.php [L,QSA]
+
+# Tour aliases.
+RewriteRule ^(hot-air-balloon-luxor|hot-air-balloon-ride|hot-air-balloon-tour|balloon-tour|balloon-ride|balloon)/?$ hot-air-balloon-luxor.html [L]
+RewriteRule ^(valley-of-the-kings-tour|west-bank-tour|luxor-west-bank-tour|west-bank)/?$ valley-of-the-kings-tour.html [L]
+RewriteRule ^(karnak-luxor-temple-tour|east-bank-tour|luxor-east-bank-tour|east-bank)/?$ karnak-luxor-temple-tour.html [L]
+RewriteRule ^(luxor-desert-safari|desert-quad-safari|quad-bike-safari|desert)/?$ luxor-desert-safari.html [L]
+RewriteRule ^(abu-simbel-tour|abu-simbel-expedition|aswan-abusimbel-tour|abu-simbel)/?$ abu-simbel-tour.html [L]
+RewriteRule ^(aswan-philae-temple-tour|aswan-tour|aswan-philae-temple|aswan-and-philae-temple|aswan)/?$ aswan-philae-temple-tour.html [L]
+RewriteRule ^(sunset-nile-boat-cruise|nile-boat-cruise|nile-sunset-cruise|nile-cruise)/?$ sunset-nile-boat-cruise.html [L]
+RewriteRule ^(hurghada-snorkelling-adventure|hurghada-snorkeling-adventure|red-sea-snorkelling|red-sea-snorkeling|red-sea)/?$ hurghada-snorkelling-adventure.html [L]
+RewriteRule ^(abydos-dendera-tour|abydos-and-dendera-tour|abydos-dendera)/?$ abydos-dendera-tour.html [L]
+RewriteRule ^(pyramids-sphinx-tour|wonders-of-cairo-tour)/?$ index.html [L]
+
+# Clean villa URLs.
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(villas/[^/.]+)/?$ $1.html [L]
+
+# Serve real files and directories without rewriting.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  <FilesMatch "\.(webp|avif|jpg|jpeg|png|gif|svg|ico|mp4|webm|woff2?)$">
+    Header set Cache-Control "public, max-age=86400, stale-while-revalidate=604800"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
