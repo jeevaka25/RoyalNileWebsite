@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 const FETCH_TIMEOUT_SECONDS = 5;
 const MAX_CALENDARS = 8;
+const CALENDAR_CACHE_SECONDS = 300;
 const BOOKING_CALENDAR_CONFIG = '../../booking-calendars.php';
 
 header('Content-Type: application/json; charset=utf-8');
@@ -86,26 +87,82 @@ function bookedDatesFromICal(string $text): array {
     return $booked;
 }
 
-function fetchCalendar(string $url): array {
-    if (!function_exists('curl_init')) {
-        throw new RuntimeException('The cURL PHP extension is unavailable.');
+function calendarCachePath(string $url): string {
+    return sys_get_temp_dir() . '/royal-nile-calendar-' . hash('sha256', $url) . '.json';
+}
+
+function readCalendarCache(string $url): ?array {
+    $path = calendarCachePath($url);
+    if (!is_file($path) || time() - (int) filemtime($path) > CALENDAR_CACHE_SECONDS) return null;
+    $cached = json_decode(file_get_contents($path) ?: '', true);
+    return is_array($cached) ? $cached : null;
+}
+
+function writeCalendarCache(string $url, array $booked): void {
+    @file_put_contents(calendarCachePath($url), json_encode($booked), LOCK_EX);
+}
+
+function fetchCalendars(array $sources): array {
+    $results = [];
+    $pending = [];
+
+    foreach ($sources as $key => $source) {
+        $cached = readCalendarCache($source['url']);
+        if ($cached !== null) {
+            $results[$key] = ['ok' => true, 'booked' => $cached, 'cached' => true];
+        } else {
+            $pending[$key] = $source;
+        }
     }
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_CONNECTTIMEOUT => FETCH_TIMEOUT_SECONDS,
-        CURLOPT_TIMEOUT => FETCH_TIMEOUT_SECONDS,
-        CURLOPT_USERAGENT => 'RoyalNileWebsite/1.0',
-    ]);
-    $body = curl_exec($ch);
-    $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-    $error = curl_error($ch);
-    curl_close($ch);
-    if (!is_string($body) || $status < 200 || $status >= 300) {
-        throw new RuntimeException($error ?: "Calendar returned HTTP $status");
+
+    if (!$pending) return $results;
+    if (!function_exists('curl_multi_init')) {
+        foreach ($pending as $key => $source) {
+            $results[$key] = ['ok' => false, 'booked' => [], 'cached' => false];
+        }
+        return $results;
     }
-    return bookedDatesFromICal($body);
+
+    $multi = curl_multi_init();
+    $handles = [];
+    foreach ($pending as $key => $source) {
+        $handle = curl_init($source['url']);
+        curl_setopt_array($handle, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_CONNECTTIMEOUT => FETCH_TIMEOUT_SECONDS,
+            CURLOPT_TIMEOUT => FETCH_TIMEOUT_SECONDS,
+            CURLOPT_USERAGENT => 'RoyalNileWebsite/1.0',
+        ]);
+        curl_multi_add_handle($multi, $handle);
+        $handles[$key] = $handle;
+    }
+
+    do {
+        $status = curl_multi_exec($multi, $active);
+        if ($active) {
+            $selected = curl_multi_select($multi, 1.0);
+            if ($selected === -1) usleep(10000);
+        }
+    } while ($active && $status === CURLM_OK);
+
+    foreach ($handles as $key => $handle) {
+        $body = curl_multi_getcontent($handle);
+        $status = (int) curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
+        $ok = is_string($body) && $status >= 200 && $status < 300 && curl_errno($handle) === 0;
+        if ($ok) {
+            $booked = bookedDatesFromICal($body);
+            writeCalendarCache($pending[$key]['url'], $booked);
+            $results[$key] = ['ok' => true, 'booked' => $booked, 'cached' => false];
+        } else {
+            $results[$key] = ['ok' => false, 'booked' => [], 'cached' => false];
+        }
+        curl_multi_remove_handle($multi, $handle);
+        curl_close($handle);
+    }
+    curl_multi_close($multi);
+
+    return $results;
 }
 
 function isAvailable(array $booked, DateTimeImmutable $checkin, DateTimeImmutable $checkout): bool {
@@ -127,7 +184,8 @@ if (!$checkin || !$checkout || $checkout <= $checkin || !$calendars) {
     respond(400, ['error' => 'Valid checkin, checkout, and calendars are required.']);
 }
 
-$results = [];
+$properties = [];
+$sourcesToFetch = [];
 foreach ($calendars as $calendar) {
     if (!is_array($calendar) || !is_string($calendar['id'] ?? null) || !isAllowedAirbnbUrl($calendar['icalUrl'] ?? null)) {
         continue;
@@ -139,14 +197,30 @@ foreach ($calendars as $calendar) {
         $sources[] = ['name' => 'booking-ical', 'url' => $bookingCalendars[$calendar['id']]];
     }
 
+    $properties[] = [
+        'id' => $calendar['id'],
+        'roomId' => (string) ($calendar['roomId'] ?? ''),
+        'sources' => $sources,
+    ];
+    foreach ($sources as $source) {
+        $sourcesToFetch[$calendar['id'] . ':' . $source['name']] = $source;
+    }
+}
+
+$fetchedCalendars = fetchCalendars($sourcesToFetch);
+$results = [];
+foreach ($properties as $property) {
     $booked = [];
     $successfulSources = [];
     $failedSources = [];
-    foreach ($sources as $source) {
-        try {
-            $booked += fetchCalendar($source['url']);
+    $cachedSources = [];
+    foreach ($property['sources'] as $source) {
+        $fetched = $fetchedCalendars[$property['id'] . ':' . $source['name']] ?? ['ok' => false, 'booked' => [], 'cached' => false];
+        if ($fetched['ok']) {
+            $booked += $fetched['booked'];
             $successfulSources[] = $source['name'];
-        } catch (Throwable $error) {
+            if ($fetched['cached']) $cachedSources[] = $source['name'];
+        } else {
             $failedSources[] = $source['name'];
         }
     }
@@ -154,17 +228,18 @@ foreach ($calendars as $calendar) {
     if ($successfulSources) {
         $available = isAvailable($booked, $checkin, $checkout);
         $results[] = [
-            'id' => $calendar['id'],
-            'roomId' => (string) ($calendar['roomId'] ?? ''),
+            'id' => $property['id'],
+            'roomId' => $property['roomId'],
             'available' => $available === false ? false : ($failedSources ? null : true),
             'bookedDateCount' => count($booked),
             'source' => implode('+', $successfulSources),
             'failedSources' => $failedSources,
+            'cachedSources' => $cachedSources,
         ];
     } else {
         $results[] = [
-            'id' => $calendar['id'],
-            'roomId' => (string) ($calendar['roomId'] ?? ''),
+            'id' => $property['id'],
+            'roomId' => $property['roomId'],
             'available' => null,
             'source' => 'unverified',
             'failedSources' => $failedSources,
