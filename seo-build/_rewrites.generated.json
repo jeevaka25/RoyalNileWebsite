@@ -1,5 +1,37 @@
 [
   {
+    "source": "/luxor-solar-eclipse-2027-package",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/luxor-solar-eclipse-2027-package/",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/2027-luxor-solar-eclipse-package",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/2027-luxor-solar-eclipse-package/",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/luxor-eclipse-package",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/luxor-eclipse-package/",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/solar-eclipse-luxor-2027",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
+    "source": "/solar-eclipse-luxor-2027/",
+    "destination": "/luxor-solar-eclipse-2027-package.html"
+  },
+  {
     "source": "/hot-air-balloon-luxor",
     "destination": "/hot-air-balloon-luxor.html"
   },

@@ -805,6 +805,7 @@ function optimizedImage(src) {
   if (/^(villa-assets|tour-assets|restaurant-assets)\//.test(src) && /\.(png|jpe?g)$/i.test(src)) {
     return '/optimized-assets/' + src.replace(/\.(png|jpe?g)$/i, '.webp');
   }
+  if (/^(villa-assets|tour-assets|restaurant-assets)\//.test(src)) return '/' + src;
   return src;
 }
 
@@ -817,6 +818,20 @@ function siteAsset(src) {
 // TOUR DATA
 // ============================================
 const TOURS = [
+  { id:'eclipse-2027', name:'Luxor Solar Eclipse 2027 Package', icon:'☀️', desc:'A minimum four-night Royal Nile Villas stay for the 2 August 2027 total solar eclipse, with panoramic Nile and sky views, full board and private airport transfers.',
+    details:'Plan the 2 August 2027 total solar eclipse from Royal Nile Villas on Luxor\'s West Bank. This premium package requires a minimum four-night accommodation booking and includes three meals each day, bottled water, soft drinks, and private Luxor Airport pickup and drop-off. Our property offers completely unobstructed panoramic Nile and sky views, creating an exceptional base for eclipse viewing. Premium tours are optional extras on request: private West Bank Wonders, private East Bank Magical Temple Tour, private sunset Nile boat ride with dinner, and a shared sunrise hot air balloon flight. Price and booking terms are confirmed personally through WhatsApp.',
+    priceNote:'Price confirmed upon WhatsApp inquiry',
+    galleryNote:'Eclipse scenes are artist’s visualisations. Temple and boat access on eclipse day is not included or guaranteed unless confirmed in writing.',
+    included:['Minimum four-night Royal Nile Villas accommodation','Completely unobstructed panoramic Nile and sky views','Three meals per day','Bottled water and soft drinks','Private Luxor Airport pickup and drop-off','Price confirmed by WhatsApp inquiry','Optional premium tours available at extra cost','West Bank, East Bank and Nile dinner tours are private; balloon flight is shared'],
+    coverImage:'tour-assets/eclipse-2027/01-royal-nile-terrace-totality.webp',
+    photoAlts:['Total solar eclipse above the panoramic Royal Nile Villas terrace','Artist’s visualisation of the 2027 eclipse viewed from a Nile boat in Luxor','Artist’s visualisation of totality above Luxor Temple','Artist’s visualisation of the eclipse framed by Karnak Temple columns','Artist’s visualisation of totality above Hatshepsut Temple'],
+    photos:[
+      'tour-assets/eclipse-2027/01-royal-nile-terrace-totality.webp',
+      'tour-assets/eclipse-2027/02-nile-boat-totality.webp',
+      'tour-assets/eclipse-2027/03-luxor-temple-totality.webp',
+      'tour-assets/eclipse-2027/04-karnak-totality.webp',
+      'tour-assets/eclipse-2027/05-hatshepsut-totality.webp',
+    ]},
   { id:'balloon', name:'Hot Air Balloon Sunrise', icon:'🎈', desc:'Float above the Valley of the Kings at dawn. Watch the sun paint ancient temples gold from 2,000 feet — an unforgettable once-in-a-lifetime experience.',
     details:'Depart before sunrise from the West Bank launch site. Your expert pilot guides the balloon over the Valley of the Kings, Queen Hatshepsut Temple, and the Nile River. Flight duration is usually 45-60 minutes. Includes hotel pickup and drop-off and a flight certificate. Photography opportunities are unmatched.',
     included:['Hotel pickup & drop-off','Professional balloon pilot','45-60 minute flight','Flight certificate','Sunrise views over ancient Luxor'],
@@ -1021,6 +1036,7 @@ TOURS.forEach(tour => {
 });
 
 const TOUR_ROUTE_ALIASES = {
+  'eclipse-2027': ['luxor-solar-eclipse-2027-package', '2027-luxor-solar-eclipse-package', 'luxor-eclipse-package', 'solar-eclipse-luxor-2027'],
   'balloon': ['hot-air-balloon-ride', 'hot-air-balloon-luxor', 'hot-air-balloon-tour', 'balloon-tour', 'balloon-ride'],
   'west-bank': ['west-bank-tour', 'luxor-west-bank-tour', 'valley-of-the-kings-tour'],
   'east-bank': ['east-bank-tour', 'luxor-east-bank-tour', 'karnak-luxor-temple-tour'],
@@ -1303,7 +1319,7 @@ function openTourModal(tourId) {
   const t=TOURS.find(x=>x.id===tourId); if(!t) return;
   const modal=document.getElementById('modalContent');
   const waMsg=encodeURIComponent(`Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
-  const photosHtml=t.photos.map((p,i)=>`<img src="${optimizedImage(p)}" alt="${t.name} photo ${i+1}" loading="lazy" onerror="this.style.display='none'">`).join('');
+  const photosHtml=t.photos.map((p,i)=>`<img src="${optimizedImage(p)}" alt="${t.photoAlts?.[i]||`${t.name} photo ${i+1}`}" loading="lazy" onerror="this.style.display='none'">`).join('');
   const included=t.included||['Hotel pickup & drop-off','Private transfers','Bottled water provided'];
   const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
   const heroPoster=optimizedImage(t.heroPoster||t.coverImage||t.photos[0]);
@@ -1319,6 +1335,7 @@ function openTourModal(tourId) {
     <div class="modal-body">
       ${heroVideo || `<div style="font-size:2.5rem;margin-bottom:0.5rem;">${t.icon}</div><h2>${t.name}</h2>`}
       <p class="modal-desc" style="margin-top:1rem;">${t.details}</p>
+      ${t.priceNote?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:700;">${t.priceNote}</p>`:''}
       ${ticketNote}
       <h4 style="font-family:var(--font-display);margin-bottom:0.5rem;color:var(--text);">What's Included</h4>
       <div class="modal-amenities">${included.map(item=>`<div class="modal-amenity">${item}</div>`).join('')}</div>
@@ -1327,6 +1344,7 @@ function openTourModal(tourId) {
         <button class="btn btn-outline" onclick="closeModal()">Close</button>
       </div>
       <div class="modal-gallery">${photosHtml}</div>
+      ${t.galleryNote?`<p class="modal-desc" style="margin-top:1rem;font-size:0.78rem;">${t.galleryNote}</p>`:''}
     </div>`;
   document.getElementById('modalOverlay').classList.add('active');
   document.body.classList.add('modal-open');
@@ -1337,7 +1355,7 @@ function openTourModal(tourId) {
 // ============================================
 // RENDER TOURS
 // ============================================
-const TOUR_PAGE={balloon:'hot-air-balloon-luxor','west-bank':'valley-of-the-kings-tour','east-bank':'karnak-luxor-temple-tour',desert:'luxor-desert-safari','abu-simbel':'abu-simbel-tour',aswan:'aswan-philae-temple-tour','nile-boat-cruise':'sunset-nile-boat-cruise','red-sea':'hurghada-snorkelling-adventure','abydos-dendera':'abydos-dendera-tour'};
+const TOUR_PAGE={'eclipse-2027':'luxor-solar-eclipse-2027-package',balloon:'hot-air-balloon-luxor','west-bank':'valley-of-the-kings-tour','east-bank':'karnak-luxor-temple-tour',desert:'luxor-desert-safari','abu-simbel':'abu-simbel-tour',aswan:'aswan-philae-temple-tour','nile-boat-cruise':'sunset-nile-boat-cruise','red-sea':'hurghada-snorkelling-adventure','abydos-dendera':'abydos-dendera-tour'};
 function renderTours() {
   document.getElementById('toursGrid').innerHTML=TOURS.map(t=>`
     <a class="tour-card fade-up" href="/${TOUR_PAGE[t.id]||''}" style="text-decoration:none;color:inherit;display:block;">

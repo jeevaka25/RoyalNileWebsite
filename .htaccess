@@ -2,6 +2,9 @@ Options -Indexes
 DirectoryIndex index.html
 RewriteEngine On
 
+# Luxor total solar eclipse 2027 accommodation package
+RewriteRule ^(luxor-solar-eclipse-2027-package|2027-luxor-solar-eclipse-package|luxor-eclipse-package|solar-eclipse-luxor-2027)/?$ luxor-solar-eclipse-2027-package.html [L]
+
 # Hostinger/PHP equivalent of the Vercel availability function.
 RewriteRule ^api/availability/?$ api/availability.php [L,QSA]
 

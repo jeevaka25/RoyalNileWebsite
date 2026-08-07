@@ -32,6 +32,7 @@ function optimizedImage(src) {
   if (/^(villa-assets|tour-assets|restaurant-assets)\//.test(src) && /\.(png|jpe?g)$/i.test(src)) {
     return '/optimized-assets/' + src.replace(/\.(png|jpe?g)$/i, '.webp');
   }
+  if (/^(villa-assets|tour-assets|restaurant-assets)\//.test(src)) return '/' + src;
   return src;
 }
 function siteAsset(src) {
@@ -43,6 +44,43 @@ function siteAsset(src) {
 // TOURS — primarySlug is the canonical URL; aliases 301-consolidate to it.
 // ============================================================
 const TOURS = [
+  {
+    id: 'eclipse-2027',
+    primarySlug: 'luxor-solar-eclipse-2027-package',
+    aliases: ['2027-luxor-solar-eclipse-package', 'luxor-eclipse-package', 'solar-eclipse-luxor-2027'],
+    h1: 'Luxor Solar Eclipse 2027 Accommodation Package',
+    title: 'Luxor Solar Eclipse 2027 Package | Royal Nile Villas Stay',
+    metaDesc: 'Book a minimum four-night Luxor solar eclipse 2027 package at Royal Nile Villas with panoramic Nile and sky views, full board and private airport transfers.',
+    duration: 'Minimum 4-night stay',
+    overview: 'Experience the total solar eclipse on 2 August 2027 from a premium West Bank base at Royal Nile Villas. The package requires a minimum four-night accommodation booking and includes three meals per day, bottled water, soft drinks, and private Luxor Airport pickup and drop-off. The property offers completely unobstructed panoramic views across the Nile and open sky, making it an exceptional base for eclipse viewing. Optional private tours can be added around the event, while the sunrise balloon flight operates as a shared experience.',
+    highlights: [
+      'Minimum four-night accommodation at Royal Nile Villas',
+      'Completely unobstructed panoramic Nile and sky views',
+      'Three meals per day included',
+      'Bottled water and soft drinks included',
+      'Private Luxor Airport pickup and drop-off',
+      'Optional private West Bank Wonders tour',
+      'Optional private East Bank Magical Temple Tour',
+      'Optional private sunset Nile boat ride with dinner',
+      'Optional shared sunrise hot air balloon flight',
+      'Price confirmed through WhatsApp inquiry',
+    ],
+    coverImage: 'tour-assets/eclipse-2027/01-royal-nile-terrace-totality.webp',
+    photos: ['tour-assets/eclipse-2027/01-royal-nile-terrace-totality.webp','tour-assets/eclipse-2027/02-nile-boat-totality.webp','tour-assets/eclipse-2027/03-luxor-temple-totality.webp','tour-assets/eclipse-2027/04-karnak-totality.webp','tour-assets/eclipse-2027/05-hatshepsut-totality.webp'],
+    photoAlts: ['Total solar eclipse above the panoramic Royal Nile Villas terrace','Artist’s visualisation of the 2027 eclipse viewed from a Nile boat in Luxor','Artist’s visualisation of totality above Luxor Temple','Artist’s visualisation of the eclipse framed by Karnak Temple columns','Artist’s visualisation of totality above Hatshepsut Temple'],
+    ticketsExtra: false,
+    galleryNote: 'Eclipse scenes are artist’s visualisations. Temple and boat images do not imply confirmed eclipse-day access; the current written viewing arrangements will be provided with your quotation.',
+    priceNote: 'Price confirmed upon WhatsApp inquiry',
+    faqs: [
+      ['When is the Luxor total solar eclipse?', 'The total solar eclipse is on Monday, 2 August 2027. Current calculations place maximum eclipse in Luxor at about 13:05 local time, with approximately 6 minutes 22 seconds of totality depending on the exact coordinates.'],
+      ['What is included in the Royal Nile Villas eclipse package?', 'The package includes a minimum four-night accommodation booking, three meals per day, bottled water, soft drinks, and private pickup and drop-off at Luxor Airport.'],
+      ['Can we view the eclipse from Royal Nile Villas?', 'Royal Nile Villas offers completely unobstructed panoramic views across the Nile and open sky. Your written quotation will confirm the current property viewing arrangements, guest capacity and any operational details.'],
+      ['Are Luxor tours included in the package price?', 'No. Tours are optional extras and can be organised around your stay. Ask for the West Bank Wonders tour, East Bank Magical Temple Tour, a sunset Nile boat ride with dinner, or a sunrise hot air balloon flight.'],
+      ['Which optional experiences are private?', 'The West Bank tour, East Bank tour and sunset Nile boat ride with dinner are private to your booking group. The sunrise hot air balloon flight is shared with other passengers.'],
+      ['How much does the 2027 eclipse package cost?', 'Pricing depends on dates, party size, apartment choice and requested extras. Contact us on WhatsApp for availability, a confirmed price and the applicable booking terms.'],
+      ['Do the temple images mean eclipse-day temple access is included?', 'No. The gallery contains artist’s visualisations of the eclipse around Luxor. Temple access on eclipse day is not included or guaranteed unless it is explicitly confirmed in writing.'],
+    ],
+  },
   {
     id: 'balloon',
     primarySlug: 'hot-air-balloon-luxor',
