@@ -248,6 +248,21 @@ body.modal-open { overflow:hidden; }
 .tour-name { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--text); margin-bottom:0.3rem; line-height:1.3; }
 .tour-desc { font-size:0.82rem; color:var(--text-secondary); line-height:1.5; }
 
+/* EGYPT TRAVEL GUIDE */
+.guide-preview { background:#070707; color:#f5f5f0; }
+.guide-preview .section-eyebrow { color:#c5a059; }
+.guide-preview .section-title { color:#f5f5f0; }
+.guide-preview .section-subtitle { color:#aaa9a1; }
+.guide-preview-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+.guide-preview-card { display:block; overflow:hidden; border:1px solid rgba(197,160,89,.18); border-radius:var(--radius-lg); background:#0c0c0c; transition:var(--transition); }
+.guide-preview-card:hover { transform:translateY(-4px); border-color:rgba(197,160,89,.48); box-shadow:0 18px 42px rgba(0,0,0,.25); }
+.guide-preview-card img { width:100%; aspect-ratio:16/10; object-fit:cover; opacity:.88; }
+.guide-preview-card div { padding:1.25rem; }
+.guide-preview-card span { display:block; color:#c5a059; font-size:.62rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:.55rem; }
+.guide-preview-card h3 { color:#f5f5f0; font-family:var(--font-display); font-size:1.2rem; line-height:1.3; font-weight:500; }
+.guide-preview-link { display:inline-flex; margin-top:2rem; border:1px solid #c5a059; color:#c5a059; border-radius:50px; padding:.8rem 1.3rem; font-size:.72rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.guide-preview-link:hover { color:#080808; background:#c5a059; text-decoration:none; }
+
 /* CTA */
 .cta-banner { background:linear-gradient(135deg, rgba(193,122,62,0.06), rgba(42,127,138,0.04)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center; }
 .cta-banner h3 { font-family:var(--font-display); font-size:1.8rem; color:var(--text); margin-bottom:0.6rem; }
@@ -293,6 +308,7 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   .modal-gallery { grid-template-columns:1fr 1fr; grid-template-rows:180px 180px; grid-auto-rows:180px; }
   .modal-gallery img:first-child { grid-row:auto; grid-column:1/3; }
   .modal-amenities { grid-template-columns:1fr; }
+  .guide-preview-grid { grid-template-columns:1fr 1fr; }
 }
 @media (max-width:768px) {
   .nav-links { display:none; }
@@ -307,6 +323,7 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   .search-submit { width:100%; grid-column:1/3; padding:0.55rem 0.75rem; font-size:0.74rem; }
   .villa-grid { grid-template-columns:1fr; }
   .tours-grid { grid-template-columns:1fr; }
+  .guide-preview-grid { grid-template-columns:1fr; }
   .section { padding:3.5rem 1.2rem; }
   .modal-gallery { grid-template-columns:1fr; grid-template-rows:200px 150px 150px; grid-auto-rows:150px; }
   .modal-gallery img:first-child { grid-column:auto; }
@@ -354,6 +371,7 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
       <li><a href="#villas">Villas</a></li>
       <li><a href="#tours">Tours</a></li>
       <li><a href="/restaurant.html">Restaurant</a></li>
+      <li><a href="/egypt-travel-guide/">Egypt Travel Guide</a></li>
       <li><a href="#location">Location</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20booking%20a%20villa." class="nav-cta" target="_blank">Book Now</a></li>
@@ -443,6 +461,17 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   <div class="cta-banner fade-up" style="margin-top:3rem;"><h3>The Complete Luxor Experience</h3><p>Balloon + West Bank + East Bank + Sunset Cruise — Save $$$ with our custom tour packages. Complimentary airport transfer with 3+ tours booked.</p><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20the%20Complete%20Luxor%20Experience%20package." class="btn btn-teal" target="_blank">Inquire on WhatsApp</a></div>
 </section>
 
+<!-- EGYPT TRAVEL GUIDE -->
+<section class="section guide-preview" id="travel-guide">
+  <div class="section-header fade-up"><p class="section-eyebrow">Local Field Notes</p><h2 class="section-title">Egypt Travel Guide</h2><p class="section-subtitle">Honest, practical guides to choosing a Luxor base, travelling between the two banks and planning the 2027 total solar eclipse.</p></div>
+  <div class="guide-preview-grid fade-up">
+    <a class="guide-preview-card" href="/egypt-travel-guide/where-to-stay-luxor-west-bank/"><img src="/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp" alt="Royal Nile Villas pool and garden on Luxor West Bank" loading="lazy"><div><span>9 min read</span><h3>Where to Stay on Luxor’s West Bank</h3></div></a>
+    <a class="guide-preview-card" href="/egypt-travel-guide/luxor-apartment-vs-hotel/"><img src="/optimized-assets/villa-assets/imagen-enhanced/nile-view-luxury-1/07-living-room-sofa.webp" alt="Spacious Luxor apartment living room" loading="lazy"><div><span>9 min read</span><h3>Luxor Apartment vs Hotel</h3></div></a>
+    <a class="guide-preview-card" href="/egypt-travel-guide/where-to-stay-luxor-solar-eclipse-2027/"><img src="/optimized-assets/travel-guide/luxor-eclipse-villa-2027.webp" alt="Total solar eclipse over a West Bank Luxor villa" loading="lazy"><div><span>11 min read</span><h3>Where to Stay for the 2027 Luxor Eclipse</h3></div></a>
+  </div>
+  <div style="text-align:center"><a class="guide-preview-link" href="/egypt-travel-guide/">Explore the Egypt Travel Guide →</a></div>
+</section>
+
 <!-- HOST / TRUST -->
 <section class="section" id="host" style="padding-top:2rem;padding-bottom:1rem;">
   <div class="section-header fade-up"><p class="section-eyebrow">Your Host</p><h2 class="section-title">Meet Abdol — Your Luxor Superhost</h2><p class="section-subtitle">A Superhost with 7+ years of hosting and 1,800+ glowing reviews. Tap below to view Abdol's verified Airbnb profile.</p></div>
@@ -508,7 +537,7 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
     <div class="footer-brand"><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments and penthouses on Luxor's West Bank. Hosted by Abdol — Superhost with 7+ years and 1,800+ glowing reviews.</p></div>
     <div class="footer-col"><h5>Villas</h5><ul><li><a href="/villas/sky-penthouse-1">Sky Penthouse 1</a></li><li><a href="/villas/sky-penthouse-2">Sky Penthouse 2</a></li><li><a href="/villas/nile-view-luxury-1">Luxury Nile View 1</a></li><li><a href="/villas/nile-view-luxury-2">Luxury Nile View 2</a></li><li><a href="/villas/royal-home-pool-view">Pool View Apartment</a></li><li><a href="/villas/royal-home-nile-view">Royal Home Nile View</a></li><li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
     <div class="footer-col"><h5>Tours</h5><ul><li><a href="/hot-air-balloon-luxor">Hot Air Balloon Ride</a></li><li><a href="/valley-of-the-kings-tour">Valley of the Kings Tour</a></li><li><a href="/karnak-luxor-temple-tour">Karnak &amp; Luxor Temple Tour</a></li><li><a href="/luxor-desert-safari">Desert Quad Safari</a></li><li><a href="/abu-simbel-tour">Abu Simbel Tour</a></li><li><a href="/aswan-philae-temple-tour">Aswan &amp; Philae Tour</a></li><li><a href="/sunset-nile-boat-cruise">Sunset Nile Cruise</a></li></ul></div>
-    <div class="footer-col"><h5>Connect</h5><ul><li><a href="https://wa.me/201204421652" target="_blank">WhatsApp</a></li><li><a href="mailto:royalhomeluxor@gmail.com">Email Us</a></li></ul></div>
+    <div class="footer-col"><h5>Connect</h5><ul><li><a href="/egypt-travel-guide/">Egypt Travel Guide</a></li><li><a href="https://wa.me/201204421652" target="_blank">WhatsApp</a></li><li><a href="mailto:royalhomeluxor@gmail.com">Email Us</a></li></ul></div>
   </div>
   <div class="footer-bottom"><span>&copy; 2026 Royal Nile Villas. All rights reserved.</span><span>Luxor, Egypt — West Bank</span></div>
   <p class="footer-legal">All website content, branding, text, photography, and design are the property of Royal Nile Villas unless otherwise credited. Unauthorized reproduction, copying, or commercial use is prohibited.</p>
