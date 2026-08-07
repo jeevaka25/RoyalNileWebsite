@@ -819,10 +819,11 @@ function siteAsset(src) {
 // ============================================
 const TOURS = [
   { id:'eclipse-2027', name:'Luxor Solar Eclipse 2027 Package', icon:'☀️', desc:'A minimum four-night Royal Nile Villas stay for the 2 August 2027 total solar eclipse, with panoramic Nile and sky views, full board and private airport transfers.',
-    details:'Plan the 2 August 2027 total solar eclipse from Royal Nile Villas on Luxor\'s West Bank. This premium package requires a minimum four-night accommodation booking and includes three meals each day, bottled water, soft drinks, and private Luxor Airport pickup and drop-off. Our property offers completely unobstructed panoramic Nile and sky views, creating an exceptional base for eclipse viewing. Premium tours are optional extras on request: private West Bank Wonders, private East Bank Magical Temple Tour, private sunset Nile boat ride with dinner, and a shared sunrise hot air balloon flight. Price and booking terms are confirmed personally through WhatsApp.',
+    details:'Plan the 2 August 2027 total solar eclipse from Royal Nile Villas on Luxor\'s West Bank. This premium package requires a minimum four-night accommodation booking and includes three meals each day, bottled water, soft drinks, and private Luxor Airport pickup and drop-off. Our property offers completely unobstructed panoramic Nile and sky views, creating an exceptional base for eclipse viewing. Premium tours are optional extras on request: private West Bank Wonders, private East Bank Magical Temple Tour, private sunset Nile boat ride with dinner, and a shared sunrise hot air balloon flight. A non-refundable 25% deposit is required to hold the booking; your written quotation confirms the remaining balance schedule and cancellation terms.',
     priceNote:'Price confirmed upon WhatsApp inquiry',
+    depositNote:'A non-refundable 25% deposit is required to hold the booking.',
     galleryNote:'Eclipse scenes are artist’s visualisations. Temple and boat access on eclipse day is not included or guaranteed unless confirmed in writing.',
-    included:['Minimum four-night Royal Nile Villas accommodation','Completely unobstructed panoramic Nile and sky views','Three meals per day','Bottled water and soft drinks','Private Luxor Airport pickup and drop-off','Price confirmed by WhatsApp inquiry','Optional premium tours available at extra cost','West Bank, East Bank and Nile dinner tours are private; balloon flight is shared'],
+    included:['Minimum four-night Royal Nile Villas accommodation','Completely unobstructed panoramic Nile and sky views','Three meals per day','Bottled water and soft drinks','Private Luxor Airport pickup and drop-off','Price confirmed by WhatsApp inquiry','Non-refundable 25% deposit required to hold the booking','Optional premium tours available at extra cost','West Bank, East Bank and Nile dinner tours are private; balloon flight is shared'],
     coverImage:'tour-assets/eclipse-2027/01-royal-nile-terrace-totality.webp',
     photoAlts:['Total solar eclipse above the panoramic Royal Nile Villas terrace','Artist’s visualisation of the 2027 eclipse viewed from a Nile boat in Luxor','Artist’s visualisation of totality above Luxor Temple','Artist’s visualisation of the eclipse framed by Karnak Temple columns','Artist’s visualisation of totality above Hatshepsut Temple'],
     photos:[
@@ -1318,7 +1319,9 @@ if(heroVideo) {
 function openTourModal(tourId) {
   const t=TOURS.find(x=>x.id===tourId); if(!t) return;
   const modal=document.getElementById('modalContent');
-  const waMsg=encodeURIComponent(`Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
+  const waMsg=encodeURIComponent(t.id==='eclipse-2027'
+    ? `Hi! I'm interested in the "${t.name}" package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?`
+    : `Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
   const photosHtml=t.photos.map((p,i)=>`<img src="${optimizedImage(p)}" alt="${t.photoAlts?.[i]||`${t.name} photo ${i+1}`}" loading="lazy" onerror="this.style.display='none'">`).join('');
   const included=t.included||['Hotel pickup & drop-off','Private transfers','Bottled water provided'];
   const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
@@ -1336,6 +1339,7 @@ function openTourModal(tourId) {
       ${heroVideo || `<div style="font-size:2.5rem;margin-bottom:0.5rem;">${t.icon}</div><h2>${t.name}</h2>`}
       <p class="modal-desc" style="margin-top:1rem;">${t.details}</p>
       ${t.priceNote?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:700;">${t.priceNote}</p>`:''}
+      ${t.depositNote?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:700;">${t.depositNote}</p>`:''}
       ${ticketNote}
       <h4 style="font-family:var(--font-display);margin-bottom:0.5rem;color:var(--text);">What's Included</h4>
       <div class="modal-amenities">${included.map(item=>`<div class="modal-amenity">${item}</div>`).join('')}</div>

@@ -187,9 +187,10 @@ function tourPage(t) {
   const related = TOURS.filter((x) => x.id !== t.id).slice(0, 4).map((x) => `<a class="related-card" href="/${x.primarySlug}"><img src="${img(x.coverImage || x.photos[0])}" alt="${esc(x.h1)}" loading="lazy"><span>${esc(x.h1.replace(/ from Luxor| at Sunrise| \(East Bank\)/,''))}</span></a>`).join('');
   const ticketNote = t.ticketsExtra ? `<div class="note">Entrance tickets are extra and must be purchased by tourist credit card at each site's ticket office, as required by local law.</div>` : '';
   const galleryNote = t.galleryNote ? `<div class="note">${esc(t.galleryNote)}</div>` : '';
+  const depositNote = t.depositNote ? `<div class="note">${esc(t.depositNote)}</div>` : '';
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
 
-  const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) } };
+  const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) }, ...(t.depositNote ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Deposit', value: t.depositNote }] } : {}) };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Tours', url: ORIGIN + '/#tours' }, { name: t.h1, url: canonical }]);
 
   return head({ title: t.title, desc: t.metaDesc, canonical, ogImage: cover, jsonld: [tourLd, faqLd(t.faqs), crumbs], ogType: 'website' })
@@ -203,13 +204,13 @@ ${heroVideo}
 <div class="layout"><div>
 <p class="lede">${esc(t.overview)}</p>
 <h2>Tour highlights</h2><ul class="checklist">${t.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
-${ticketNote}
+${ticketNote}${depositNote}
 <h2>Photo gallery</h2><div class="gallery">${galleryImgs}</div>${galleryNote}
 <h2>Frequently asked questions</h2>${t.faqs.map(([q, a]) => `<div class="faq"><h3>${esc(q)}</h3><p>${esc(a)}</p></div>`).join('')}
 </div>
 <aside><div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
-<a class="btn btn-primary" target="_blank" rel="noopener" href="${wa(`Hi! I'm interested in the ${t.h1} tour. Can you tell me more about availability and pricing?`)}">Inquire on WhatsApp</a>
+<a class="btn btn-primary" target="_blank" rel="noopener" href="${wa(t.depositNote ? `Hi! I'm interested in the ${t.h1} package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?` : `Hi! I'm interested in the ${t.h1} tour. Can you tell me more about availability and pricing?`)}">Inquire on WhatsApp</a>
 <a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div></aside>
 </div>
 <section class="related"><h2>Other Luxor experiences</h2><div class="related-grid">${related}</div></section>
