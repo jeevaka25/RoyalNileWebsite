@@ -8,31 +8,16 @@ const ORIGIN = 'https://egyptvillastours.com';
 const GUIDE_ROOT = path.join(ROOT, 'egypt-travel-guide');
 const TODAY = '2026-08-07';
 const WHATSAPP = 'https://wa.me/201204421652';
-const EGYPTIAN_ECLIPSE_GUIDES = [
-  {
-    href: 'https://www.egyptian.tours/egypt-travel-guide/luxor-total-solar-eclipse-2027/',
-    image: 'https://www.egyptian.tours/travel-guide-assets/luxor-total-solar-eclipse-2027.webp',
-    readTime: '10 min read · Egyptian Tours',
-    title: '2027 Total Solar Eclipse in Luxor: Date, Local Times, Duration and Travel Guide',
-    dek: 'Start with the essential eclipse facts, viewing conditions, August heat planning and the decisions travellers should make well before arrival.',
-  },
-  {
-    href: 'https://www.egyptian.tours/egypt-travel-guide/luxor-eclipse-2027-tour-itinerary/',
-    image: '/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp',
-    readTime: '10 min read · Egyptian Tours',
-    title: 'Luxor Eclipse 2027: A Realistic Five-Day Tour Itinerary',
-    dek: 'A practical five-day plan that balances eclipse day, ancient sites, sensible pacing and the realities of travelling in Luxor in August.',
-  },
+const ECLIPSE_GUIDE_ORDER = [
+  'luxor-total-solar-eclipse-2027',
+  'luxor-eclipse-2027-tour-itinerary',
+  'where-to-stay-luxor-solar-eclipse-2027',
 ];
-const ROYAL_ECLIPSE_SLUG = 'where-to-stay-luxor-solar-eclipse-2027';
 const ORDERED_ARTICLES = [
-  ...ARTICLES.filter((article) => article.slug === ROYAL_ECLIPSE_SLUG),
-  ...ARTICLES.filter((article) => article.slug !== ROYAL_ECLIPSE_SLUG),
+  ...ECLIPSE_GUIDE_ORDER.flatMap((slug) => ARTICLES.filter((article) => article.slug === slug)),
+  ...ARTICLES.filter((article) => !ECLIPSE_GUIDE_ORDER.includes(article.slug)),
 ];
-const HUB_ITEMS = [
-  ...EGYPTIAN_ECLIPSE_GUIDES,
-  ...ORDERED_ARTICLES.map((article) => ({ ...article, href: `/egypt-travel-guide/${article.slug}/` })),
-];
+const HUB_ITEMS = ORDERED_ARTICLES.map((article) => ({ ...article, href: `/egypt-travel-guide/${article.slug}/` }));
 
 const esc = (value = '') => String(value)
   .replace(/&/g, '&amp;')
