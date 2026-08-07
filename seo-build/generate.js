@@ -64,6 +64,9 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 .btn:hover{text-decoration:none;transform:translateY(-1px);}
 .btn-primary{background:var(--primary);color:#fff;}.btn-primary:hover{background:var(--primary-dark);}
 .btn-outline{border:1.5px solid var(--primary);color:var(--primary);}.btn-outline:hover{background:var(--primary);color:#fff;}
+.mobile-booking-card{display:none;margin:1.6rem 0 1.9rem;}
+.mobile-booking-card .card{position:static;}
+.mobile-whatsapp-fab{display:none;}
 .related{margin:2rem 0 3rem;}
 .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
 .related-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);}
@@ -76,7 +79,7 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 .footer h5{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);margin-bottom:.7rem;}
 .footer ul{list-style:none;}.footer li{margin-bottom:.4rem;}.footer a{color:var(--text-secondary);font-size:.84rem;}
 .footer-bottom{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 2rem;font-size:.74rem;color:var(--text-muted);border-top:1px solid var(--border);}
-@media(max-width:820px){.layout{grid-template-columns:1fr;}.card{position:static;}.nav-links{display:none;}.footer-inner{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:820px){body{padding-bottom:4.5rem;}.layout{grid-template-columns:1fr;}.card{position:static;}.desktop-booking-card{display:none;}.mobile-booking-card{display:block;}.mobile-whatsapp-fab{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:calc(1rem + env(safe-area-inset-bottom));z-index:900;display:flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.24);transition:transform .2s,box-shadow .2s;}.mobile-whatsapp-fab:hover{color:#fff;text-decoration:none;transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.28);}.mobile-whatsapp-fab:focus-visible{outline:3px solid #fff;outline-offset:3px;}.mobile-whatsapp-fab svg{width:25px;height:25px;fill:currentColor;}.nav-links{display:none;}.footer-inner{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
 `;
 
 function head({ title, desc, canonical, ogImage, jsonld, ogType = 'website' }) {
@@ -178,6 +181,10 @@ function providerLd() {
   return { '@type': 'TravelAgency', name: SITE.brand, url: ORIGIN + '/', telephone: '+' + SITE.whatsapp, address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry } };
 }
 
+function mobileWhatsappFab(href, label) {
+  return `<a class="mobile-whatsapp-fab" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}" title="${esc(label)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.999-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 7.021 2.91 9.83 9.83 0 0 1 2.9 7.026c-.003 5.45-4.437 9.884-9.926 9.884m8.413-18.297A11.82 11.82 0 0 0 12.055 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.689 1.448h.005c6.557 0 11.893-5.335 11.896-11.893a11.82 11.82 0 0 0-3.488-8.413Z"/></svg></a>`;
+}
+
 // ---------------- TOUR PAGE ----------------
 function tourPage(t) {
   const canonical = `${ORIGIN}/${t.primarySlug}`;
@@ -189,6 +196,11 @@ function tourPage(t) {
   const galleryNote = t.galleryNote ? `<div class="note">${esc(t.galleryNote)}</div>` : '';
   const depositNote = t.depositNote ? `<div class="note">${esc(t.depositNote)}</div>` : '';
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
+  const inquiryUrl = wa(t.depositNote ? `Hi! I'm interested in the ${t.h1} package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?` : `Hi! I'm interested in the ${t.h1} tour. Can you tell me more about availability and pricing?`);
+  const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews</p>
+<p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
+<a class="btn btn-primary" target="_blank" rel="noopener" href="${inquiryUrl}">Inquire on WhatsApp</a>
+<a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div>`;
 
   const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) }, ...(t.depositNote ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Deposit', value: t.depositNote }] } : {}) };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Tours', url: ORIGIN + '/#tours' }, { name: t.h1, url: canonical }]);
@@ -205,16 +217,14 @@ ${heroVideo}
 <p class="lede">${esc(t.overview)}</p>
 <h2>Tour highlights</h2><ul class="checklist">${t.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
 ${ticketNote}${depositNote}
+<div class="mobile-booking-card">${bookingCard}</div>
 <h2>Photo gallery</h2><div class="gallery">${galleryImgs}</div>${galleryNote}
 <h2>Frequently asked questions</h2>${t.faqs.map(([q, a]) => `<div class="faq"><h3>${esc(q)}</h3><p>${esc(a)}</p></div>`).join('')}
 </div>
-<aside><div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews</p>
-<p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
-<a class="btn btn-primary" target="_blank" rel="noopener" href="${wa(t.depositNote ? `Hi! I'm interested in the ${t.h1} package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?` : `Hi! I'm interested in the ${t.h1} tour. Can you tell me more about availability and pricing?`)}">Inquire on WhatsApp</a>
-<a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div></aside>
+<aside class="desktop-booking-card">${bookingCard}</aside>
 </div>
 <section class="related"><h2>Other Luxor experiences</h2><div class="related-grid">${related}</div></section>
-</div>`
+</div>${mobileWhatsappFab(inquiryUrl, `Enquire about ${t.h1} on WhatsApp`)}`
     + footer();
 }
 
@@ -227,6 +237,12 @@ function villaPage(v) {
   const related = VILLAS.filter((x) => x.id !== v.id).slice(0, 4).map((x) => `<a class="related-card" href="/villas/${x.id}"><img src="${img(x.cover || x.photos[0])}" alt="${esc(x.name)}" loading="lazy"><span>${esc(x.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</span></a>`).join('');
   const title = `${v.name} | Luxor West Bank Villa with Pool`;
   const desc = `${v.description.slice(0, 150)}`.replace(/\s+\S*$/, '') + '… Book this ' + v.bedrooms + '-bedroom Luxor villa.';
+  const inquiryUrl = wa(`Hi! I'm interested in booking the ${v.name}. Is it available?`);
+  const bookingCard = `<div class="card"><h3>${esc(v.name)}</h3><p class="rating">★ ${v.rating} · ${v.reviews} reviews · ${esc(v.floor)}</p>
+<p style="font-size:.9rem;color:var(--text-secondary)">${esc(v.bedsConfig)} · sleeps ${v.guests} · ${esc(v.viewType)}.</p>
+<a class="btn btn-primary" target="_blank" rel="noopener" href="${inquiryUrl}">Book direct on WhatsApp</a>
+<a class="btn btn-outline" target="_blank" rel="noopener" href="${v.airbnbUrl}">View on Airbnb</a>
+<a class="btn btn-outline" target="_blank" rel="noopener" href="${v.bookingUrl}">View on Booking.com</a></div>`;
 
   const productLd = { '@context': 'https://schema.org', '@type': 'Product', name: v.name, description: v.description, image: abs(poster), brand: { '@type': 'Brand', name: SITE.brand }, url: canonical, aggregateRating: { '@type': 'AggregateRating', ratingValue: String(v.rating), reviewCount: v.reviews, bestRating: '5' } };
   const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
@@ -246,17 +262,14 @@ function villaPage(v) {
 <p class="lede">${esc(v.description)}</p>
 <h2>What this villa offers</h2><ul class="checklist">${v.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
 <div class="note">Located in Al Aqaletah on Luxor’s tranquil West Bank — 15 min to the Valley of the Kings, 10 min to the balloon launch, 5 min to the ferry. Free shuttle to the West Bank ferry, on-site 14-metre pool and Nile-view rooftop restaurant.</div>
+<div class="mobile-booking-card">${bookingCard}</div>
 <h2>Photo gallery</h2><div class="gallery">${galleryImgs}</div>
 <h2>Frequently asked questions</h2>${faqs.map(([q, a]) => `<div class="faq"><h3>${esc(q)}</h3><p>${esc(a)}</p></div>`).join('')}
 </div>
-<aside><div class="card"><h3>${esc(v.name)}</h3><p class="rating">★ ${v.rating} · ${v.reviews} reviews · ${esc(v.floor)}</p>
-<p style="font-size:.9rem;color:var(--text-secondary)">${esc(v.bedsConfig)} · sleeps ${v.guests} · ${esc(v.viewType)}.</p>
-<a class="btn btn-primary" target="_blank" rel="noopener" href="${wa(`Hi! I'm interested in booking the ${v.name}. Is it available?`)}">Book direct on WhatsApp</a>
-<a class="btn btn-outline" target="_blank" rel="noopener" href="${v.airbnbUrl}">View on Airbnb</a>
-<a class="btn btn-outline" target="_blank" rel="noopener" href="${v.bookingUrl}">View on Booking.com</a></div></aside>
+<aside class="desktop-booking-card">${bookingCard}</aside>
 </div>
 <section class="related"><h2>More Royal Nile villas</h2><div class="related-grid">${related}</div></section>
-</div>`
+</div>${mobileWhatsappFab(inquiryUrl, `Enquire about ${v.name} on WhatsApp`)}`
     + footer();
 }
 
