@@ -64,6 +64,22 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 .btn:hover{text-decoration:none;transform:translateY(-1px);}
 .btn-primary{background:var(--primary);color:#fff;}.btn-primary:hover{background:var(--primary-dark);}
 .btn-outline{border:1.5px solid var(--primary);color:var(--primary);}.btn-outline:hover{background:var(--primary);color:#fff;}
+.btn-3d{position:relative;isolation:isolate;overflow:hidden;border:0;color:#fff!important;text-shadow:0 1px 1px rgba(0,0,0,.2);transform:translateY(0);}
+.btn-3d::after{content:'';position:absolute;z-index:1;top:-70%;left:-75%;width:38%;height:240%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.68),transparent);transform:rotate(18deg);animation:button-sheen 4.8s ease-in-out infinite;}
+.btn-3d:hover{color:#fff!important;text-decoration:none;transform:translateY(-2px);filter:saturate(1.06);}
+.btn-3d:active{transform:translateY(4px);}
+.btn-whatsapp{background:linear-gradient(145deg,#39dc78,#159447);box-shadow:0 6px 0 #0d6f35,0 11px 22px rgba(18,140,70,.28);}
+.btn-whatsapp:hover{background:linear-gradient(145deg,#45e486,#168b45);box-shadow:0 8px 0 #0d6f35,0 14px 28px rgba(18,140,70,.32);}
+.btn-whatsapp:active{box-shadow:0 2px 0 #0d6f35,0 5px 12px rgba(18,140,70,.24);}
+.btn-airbnb{background:linear-gradient(145deg,#ff6b70,#e33d47);box-shadow:0 6px 0 #b82f37,0 11px 22px rgba(227,61,71,.26);}
+.btn-airbnb:hover{background:linear-gradient(145deg,#ff777c,#dd3540);box-shadow:0 8px 0 #b82f37,0 14px 28px rgba(227,61,71,.3);}
+.btn-airbnb:active{box-shadow:0 2px 0 #b82f37,0 5px 12px rgba(227,61,71,.22);}
+.btn-booking{background:linear-gradient(145deg,#1683d8,#075aa7);box-shadow:0 6px 0 #06427a,0 11px 22px rgba(0,83,159,.27);}
+.btn-booking:hover{background:linear-gradient(145deg,#2491e3,#07569d);box-shadow:0 8px 0 #06427a,0 14px 28px rgba(0,83,159,.31);}
+.btn-booking:active{box-shadow:0 2px 0 #06427a,0 5px 12px rgba(0,83,159,.22);}
+@keyframes button-sheen{0%,68%{left:-75%;}88%,100%{left:145%;}}
+@media(prefers-reduced-motion:reduce){.btn-3d::after{animation:none;}}
+.mobile-top-actions{display:none;}
 .mobile-booking-card{display:none;margin:1.6rem 0 1.9rem;}
 .mobile-booking-card .card{position:static;}
 .mobile-whatsapp-fab{display:none;}
@@ -79,7 +95,7 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 .footer h5{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);margin-bottom:.7rem;}
 .footer ul{list-style:none;}.footer li{margin-bottom:.4rem;}.footer a{color:var(--text-secondary);font-size:.84rem;}
 .footer-bottom{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 2rem;font-size:.74rem;color:var(--text-muted);border-top:1px solid var(--border);}
-@media(max-width:820px){body{padding-bottom:4.5rem;}.layout{grid-template-columns:1fr;}.card{position:static;}.desktop-booking-card{display:none;}.mobile-booking-card{display:block;}.mobile-whatsapp-fab{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:calc(1rem + env(safe-area-inset-bottom));z-index:900;display:flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.24);transition:transform .2s,box-shadow .2s;}.mobile-whatsapp-fab:hover{color:#fff;text-decoration:none;transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.28);}.mobile-whatsapp-fab:focus-visible{outline:3px solid #fff;outline-offset:3px;}.mobile-whatsapp-fab svg{width:25px;height:25px;fill:currentColor;}.nav-links{display:none;}.footer-inner{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:820px){body{padding-bottom:4.5rem;}.hero{margin-bottom:.9rem;}.layout{grid-template-columns:1fr;}.card{position:static;}.desktop-booking-card{display:none;}.mobile-top-actions{display:grid;gap:.7rem;margin:0 0 1.5rem;}.mobile-top-actions.apartment-actions{grid-template-columns:1fr 1fr;}.mobile-top-actions .btn{margin:0;padding:.78rem .55rem;font-size:.78rem;}.mobile-booking-card{display:block;}.mobile-whatsapp-fab{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:calc(1rem + env(safe-area-inset-bottom));z-index:900;display:flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.24);transition:transform .2s,box-shadow .2s;}.mobile-whatsapp-fab:hover{color:#fff;text-decoration:none;transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.28);}.mobile-whatsapp-fab:focus-visible{outline:3px solid #fff;outline-offset:3px;}.mobile-whatsapp-fab svg{width:25px;height:25px;fill:currentColor;}.nav-links{display:none;}.footer-inner{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
 `;
 
 function head({ title, desc, canonical, ogImage, jsonld, ogType = 'website' }) {
@@ -197,9 +213,9 @@ function tourPage(t) {
   const depositNote = t.depositNote ? `<div class="note">${esc(t.depositNote)}</div>` : '';
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
   const inquiryUrl = wa(t.depositNote ? `Hi! I'm interested in the ${t.h1} package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?` : `Hi! I'm interested in the ${t.h1} tour. Can you tell me more about availability and pricing?`);
-  const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews</p>
+  const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews · 4.91 ★ rating</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
-<a class="btn btn-primary" target="_blank" rel="noopener" href="${inquiryUrl}">Inquire on WhatsApp</a>
+<a class="btn btn-3d btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}">Inquire on WhatsApp</a>
 <a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div>`;
 
   const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) }, ...(t.depositNote ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Deposit', value: t.depositNote }] } : {}) };
@@ -213,6 +229,7 @@ ${heroVideo}
 <div class="hero-inner"><p class="eyebrow">Luxor Tours & Experiences</p><h1>${esc(t.h1)}</h1>
 <div class="meta-row"><span class="pill">⏱ ${esc(t.duration)}</span><span class="pill">🚐 Hotel pickup</span><span class="pill">📍 Luxor, Egypt</span></div></div>
 </section>
+<div class="mobile-top-actions"><a class="btn btn-3d btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}">Inquire on WhatsApp</a></div>
 <div class="layout"><div>
 <p class="lede">${esc(t.overview)}</p>
 <h2>Tour highlights</h2><ul class="checklist">${t.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
@@ -240,9 +257,9 @@ function villaPage(v) {
   const inquiryUrl = wa(`Hi! I'm interested in booking the ${v.name}. Is it available?`);
   const bookingCard = `<div class="card"><h3>${esc(v.name)}</h3><p class="rating">★ ${v.rating} · ${v.reviews} reviews · ${esc(v.floor)}</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(v.bedsConfig)} · sleeps ${v.guests} · ${esc(v.viewType)}.</p>
-<a class="btn btn-primary" target="_blank" rel="noopener" href="${inquiryUrl}">Book direct on WhatsApp</a>
-<a class="btn btn-outline" target="_blank" rel="noopener" href="${v.airbnbUrl}">View on Airbnb</a>
-<a class="btn btn-outline" target="_blank" rel="noopener" href="${v.bookingUrl}">View on Booking.com</a></div>`;
+<a class="btn btn-3d btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}">Book direct on WhatsApp</a>
+<a class="btn btn-3d btn-airbnb" target="_blank" rel="noopener" href="${v.airbnbUrl}">Reserve on Airbnb</a>
+<a class="btn btn-3d btn-booking" target="_blank" rel="noopener" href="${v.bookingUrl}">Reserve on Booking.com</a></div>`;
 
   const productLd = { '@context': 'https://schema.org', '@type': 'Product', name: v.name, description: v.description, image: abs(poster), brand: { '@type': 'Brand', name: SITE.brand }, url: canonical, aggregateRating: { '@type': 'AggregateRating', ratingValue: String(v.rating), reviewCount: v.reviews, bestRating: '5' } };
   const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
@@ -258,6 +275,10 @@ function villaPage(v) {
     + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/#villas">Villas</a> › ${esc(v.name)}</div>
 <section class="hero" style="background-image:url('${poster}')"><div class="hero-inner"><p class="eyebrow">Luxor West Bank · ${esc(v.viewType)}</p><h1>${esc(v.name)}</h1>
 <div class="meta-row"><span class="pill">★ ${v.rating} · ${v.reviews} reviews</span><span class="pill">🛏 ${v.bedrooms} bedrooms</span><span class="pill">🚿 ${v.bathrooms} bath</span><span class="pill">👥 up to ${v.guests} guests</span></div></div></section>
+<div class="mobile-top-actions apartment-actions">
+<a class="btn btn-3d btn-airbnb" target="_blank" rel="noopener" href="${v.airbnbUrl}">Reserve on Airbnb</a>
+<a class="btn btn-3d btn-booking" target="_blank" rel="noopener" href="${v.bookingUrl}">Reserve on Booking.com</a>
+</div>
 <div class="layout"><div>
 <p class="lede">${esc(v.description)}</p>
 <h2>What this villa offers</h2><ul class="checklist">${v.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>

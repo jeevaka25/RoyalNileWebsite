@@ -634,6 +634,16 @@ const VILLAS = [
   },
 ];
 
+// Give every apartment a fair chance to lead the homepage on each new page view.
+const VILLA_DISPLAY_ORDER = (()=>{
+  const shuffled=VILLAS.slice();
+  for(let i=shuffled.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];
+  }
+  return shuffled;
+})();
+
 const SITE_VILLA_PHOTOS = {
   'royal-home-nile-view': [
     'villa-assets/imagen-enhanced/royal-home-nile-view/01-overhead-pool.png',
@@ -1106,7 +1116,7 @@ async function fetchICal(url, options = {}) {
 async function fetchAvailabilityStatuses(checkinValue, checkoutValue, villaIds) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), AVAILABILITY_API_TIMEOUT_MS);
-  const selectedVillas = villaIds ? VILLAS.filter(villa => villaIds.includes(villa.id)) : VILLAS;
+  const selectedVillas = villaIds ? VILLA_DISPLAY_ORDER.filter(villa => villaIds.includes(villa.id)) : VILLA_DISPLAY_ORDER;
   try {
     const response = await fetch('/api/availability', {
       method: 'POST',
@@ -1160,7 +1170,7 @@ async function checkAvailability() {
 function resetSearch() {
   document.getElementById('resultsHeader').classList.remove('visible');
   document.getElementById('checkin').value=''; document.getElementById('checkout').value='';
-  renderVillas(VILLAS.map(v=>({...v,available:null})));
+  renderVillas(VILLA_DISPLAY_ORDER.map(v=>({...v,available:null})));
 }
 
 // ============================================
@@ -1380,7 +1390,7 @@ function renderTours() {
 // INIT
 // ============================================
 document.addEventListener('DOMContentLoaded',()=>{
-  renderVillas(VILLAS.map(v=>({...v,available:null})));
+  renderVillas(VILLA_DISPLAY_ORDER.map(v=>({...v,available:null})));
   renderTours();
 
   const fpCfg={dateFormat:'Y-m-d',minDate:'today',disableMobile:true,static:true};
