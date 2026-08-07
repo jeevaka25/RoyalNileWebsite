@@ -8,6 +8,31 @@ const ORIGIN = 'https://egyptvillastours.com';
 const GUIDE_ROOT = path.join(ROOT, 'egypt-travel-guide');
 const TODAY = '2026-08-07';
 const WHATSAPP = 'https://wa.me/201204421652';
+const EGYPTIAN_ECLIPSE_GUIDES = [
+  {
+    href: 'https://www.egyptian.tours/egypt-travel-guide/luxor-total-solar-eclipse-2027/',
+    image: 'https://www.egyptian.tours/travel-guide-assets/luxor-total-solar-eclipse-2027.webp',
+    readTime: '10 min read · Egyptian Tours',
+    title: '2027 Total Solar Eclipse in Luxor: Date, Local Times, Duration and Travel Guide',
+    dek: 'Start with the essential eclipse facts, viewing conditions, August heat planning and the decisions travellers should make well before arrival.',
+  },
+  {
+    href: 'https://www.egyptian.tours/egypt-travel-guide/luxor-eclipse-2027-tour-itinerary/',
+    image: '/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp',
+    readTime: '10 min read · Egyptian Tours',
+    title: 'Luxor Eclipse 2027: A Realistic Five-Day Tour Itinerary',
+    dek: 'A practical five-day plan that balances eclipse day, ancient sites, sensible pacing and the realities of travelling in Luxor in August.',
+  },
+];
+const ROYAL_ECLIPSE_SLUG = 'where-to-stay-luxor-solar-eclipse-2027';
+const ORDERED_ARTICLES = [
+  ...ARTICLES.filter((article) => article.slug === ROYAL_ECLIPSE_SLUG),
+  ...ARTICLES.filter((article) => article.slug !== ROYAL_ECLIPSE_SLUG),
+];
+const HUB_ITEMS = [
+  ...EGYPTIAN_ECLIPSE_GUIDES,
+  ...ORDERED_ARTICLES.map((article) => ({ ...article, href: `/egypt-travel-guide/${article.slug}/` })),
+];
 
 const esc = (value = '') => String(value)
   .replace(/&/g, '&amp;')
@@ -15,7 +40,7 @@ const esc = (value = '') => String(value)
   .replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
 
-const absolute = (value) => `${ORIGIN}${value.startsWith('/') ? value : `/${value}`}`;
+const absolute = (value) => /^https?:\/\//.test(value) ? value : `${ORIGIN}${value.startsWith('/') ? value : `/${value}`}`;
 
 const CSS = `
 :root{--bg:#fcfbf7;--bg-warm:#f4f0e7;--card:#fff;--primary:#147481;--primary-light:#2d9aa7;--primary-dark:#0d5862;--primary-glow:rgba(20,116,129,.14);--gold:#c8a45d;--text:#1f2a2c;--text-secondary:#5d6969;--text-muted:#8d9895;--border:#e7e0d1;--border-light:#f0eadf;--shadow:0 4px 20px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.1);--display:'Playfair Display',Georgia,serif;--body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
@@ -40,15 +65,15 @@ const head = ({ title, description, canonical, image, type = 'article', schema }
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
 <style>${CSS}</style><script type="application/ld+json">${JSON.stringify(schema)}</script></head>`;
 
-const articleCard = (article, index) => `<a class="card${index === 0 ? ' featured' : ''}" href="/egypt-travel-guide/${article.slug}/"><img src="${article.image}" alt="" loading="${index < 2 ? 'eager' : 'lazy'}"><div class="card-content"><span class="kicker">${esc(article.readTime)}</span><h2>${esc(article.title)}</h2><p>${esc(article.dek)}</p><span class="read">Read article →</span></div></a>`;
+const articleCard = (article, index) => `<a class="card${index === 0 ? ' featured' : ''}" href="${article.href}"><img src="${article.image}" alt="" loading="${index < 3 ? 'eager' : 'lazy'}"><div class="card-content"><span class="kicker">${esc(article.readTime)}</span><h2>${esc(article.title)}</h2><p>${esc(article.dek)}</p><span class="read">Read article →</span></div></a>`;
 
 const buildHub = () => {
   const canonical = `${ORIGIN}/egypt-travel-guide/`;
   const schema = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Egypt Travel Guide', description: 'Practical Luxor accommodation and travel advice from Royal Nile Villas.', url: canonical },
-    { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: ARTICLES.map((article, index) => ({ '@type': 'ListItem', position: index + 1, name: article.title, url: `${canonical}${article.slug}/` })) },
+    { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: HUB_ITEMS.map((article, index) => ({ '@type': 'ListItem', position: index + 1, name: article.title, url: absolute(article.href) })) },
   ];
-  return `${head({ title: 'Egypt Travel Guide | Luxor West Bank Stays & Local Advice', description: 'Practical guides to Luxor West Bank accommodation, apartments, family stays, the Valley of the Kings and the 2027 total solar eclipse.', canonical, image: ARTICLES[0].image, type: 'website', schema })}<body>${nav()}<main class="wrap"><nav class="breadcrumb"><a href="/">Home</a> › Egypt Travel Guide</nav><span class="kicker">Royal Nile Villas · Local Field Notes</span><h1>Egypt Travel Guide</h1><p class="dek">Clear, practical advice for choosing where to stay in Luxor, moving between the two banks and planning the experiences that begin on our doorstep.</p><div class="cards">${ARTICLES.map(articleCard).join('')}</div></main>${footer}</body></html>`;
+  return `${head({ title: 'Egypt Travel Guide | Luxor West Bank Stays & Local Advice', description: 'Practical guides to Luxor West Bank accommodation, apartments, family stays, the Valley of the Kings and the 2027 total solar eclipse.', canonical, image: HUB_ITEMS[0].image, type: 'website', schema })}<body>${nav()}<main class="wrap"><nav class="breadcrumb"><a href="/">Home</a> › Egypt Travel Guide</nav><span class="kicker">Royal Nile Villas · Local Field Notes</span><h1>Egypt Travel Guide</h1><p class="dek">Clear, practical advice for choosing where to stay in Luxor, moving between the two banks and planning the experiences that begin on our doorstep.</p><div class="cards">${HUB_ITEMS.map(articleCard).join('')}</div></main>${footer}</body></html>`;
 };
 
 const buildArticle = (article) => {
