@@ -18,19 +18,19 @@ gtag('js',new Date());gtag('config','G-12JHJ887DG');
 document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href]'):null;if(!a)return;var h=a.href||'',ev=null;if(/wa\.me|api\.whatsapp\.com/i.test(h))ev='whatsapp_click';else if(/airbnb\./i.test(h))ev='airbnb_click';else if(/booking\.com/i.test(h))ev='booking_click';if(!ev)return;if(typeof gtag==='function')gtag('event',ev,{link_url:h,page_location:location.href,page_path:location.pathname});if(typeof fbq==='function')fbq('track','Lead',{content_category:ev.replace('_click','')});},true);
 </script>
 <title>Royal Nile Villas — Luxury Holiday Stays in Luxor, Egypt</title>
-<meta name="description" content="Discover our collection of luxury Nile-view villas and penthouses in Luxor. Private pools, panoramic sunsets, and bespoke ancient Egypt tours.">
+<meta name="description" content="Luxury Nile-view apartments and penthouses on Luxor's West Bank, now offering a dedicated accommodation package for the 2 August 2027 total solar eclipse.">
 <link rel="canonical" href="https://egyptvillastours.com/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Royal Nile Villas">
 <meta property="og:title" content="Royal Nile Villas — Luxury Nile-View Villas & Tours in Luxor, Egypt">
-<meta property="og:description" content="Luxury Nile-view villas and penthouses with private pools on Luxor's West Bank, plus bespoke ancient Egypt tours. Hosted by a Superhost with 1,800+ reviews.">
+<meta property="og:description" content="Luxury Nile-view apartments and penthouses on Luxor's West Bank, now offering a dedicated accommodation package for the 2 August 2027 total solar eclipse.">
 <meta property="og:url" content="https://egyptvillastours.com/">
 <meta property="og:image" content="https://egyptvillastours.com/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Royal Nile Villas — Luxury Villas & Tours in Luxor, Egypt">
-<meta name="twitter:description" content="Nile-view villas with private pools on Luxor's West Bank, plus bespoke ancient Egypt tours.">
+<meta name="twitter:description" content="Luxury Nile-view stays on Luxor's West Bank, including a dedicated accommodation package for the 2 August 2027 total solar eclipse.">
 <meta name="twitter:image" content="https://egyptvillastours.com/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
@@ -106,6 +106,7 @@ body.modal-open { overflow:hidden; }
 .hero h1 { font-family:var(--font-display); font-size:clamp(2.6rem, 7vw, 5rem); font-weight:700; line-height:1.12; color:var(--text); margin-bottom:0.3rem; }
 .hero h1 em { font-style:italic; color:var(--primary); }
 .hero-subtitle { font-size:clamp(0.95rem, 1.8vw, 1.15rem); color:var(--text-secondary); max-width:560px; margin:1.2rem auto 2.2rem; line-height:1.7; }
+.hero-actions { display:flex; justify-content:center; align-items:center; gap:0.8rem; flex-wrap:wrap; }
 .btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; border-radius:50px; font-family:var(--font-body); font-size:0.82rem; font-weight:600; letter-spacing:0.5px; text-decoration:none; transition:var(--transition); cursor:pointer; border:none; }
 .btn-primary { background:var(--primary); color:#fff; box-shadow:0 4px 16px var(--primary-glow); }
 .btn-primary:hover { background:var(--primary-dark); transform:translateY(-2px); box-shadow:0 8px 28px rgba(193,122,62,0.25); }
@@ -343,6 +344,8 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
 }
 @media (max-width:480px) {
   .hero h1 { font-size:2rem; }
+  .hero-actions { align-items:stretch; flex-direction:column; max-width:280px; margin:0 auto; }
+  .hero-actions .btn { justify-content:center; }
   .search-wrapper { margin:-1rem 0.8rem 1.7rem; }
   .search-bar { padding:0.65rem; gap:0.45rem; }
   .location-info { padding:1.8rem 1.2rem; }
@@ -406,9 +409,13 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content fade-up visible">
-    <p class="hero-eyebrow">Luxor · West Bank, Egypt</p>
+    <p class="hero-eyebrow">Luxor West Bank · Eclipse 2027 Packages Available</p>
     <h1>Luxury Nile-View Villas in <em>Luxor</em></h1>
-    <p class="hero-subtitle">Handpicked private-pool villas and penthouses on Luxor's tranquil West Bank — plus bespoke Valley of the Kings tours, sunrise hot air balloon rides, and Nile cruises.</p>
+    <p class="hero-subtitle">Luxury apartments and penthouses on Luxor's tranquil West Bank — now offering a dedicated accommodation package for the total solar eclipse on 2 August 2027, alongside private tours, balloon rides, and Nile experiences.</p>
+    <div class="hero-actions">
+      <a href="/luxor-solar-eclipse-2027-package" class="btn btn-primary">View Eclipse 2027 Package</a>
+      <a href="#search" class="btn btn-outline">Search Villa Availability</a>
+    </div>
   </div>
   <div class="scroll-indicator"><span>Discover</span><div class="line"></div></div>
 </section>
