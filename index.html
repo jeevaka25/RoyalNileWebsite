@@ -93,7 +93,6 @@ body.modal-open { overflow:hidden; }
 .nav-cta { background:var(--primary); color:#fff!important; padding:0.55rem 1.5rem!important; border-radius:50px; font-weight:600!important; letter-spacing:0.5px!important; }
 .nav-cta:hover { background:var(--primary-dark); transform:translateY(-1px); box-shadow:0 6px 20px var(--primary-glow); }
 .nav-cta::after { display:none!important; }
-.nav-guide-short { display:none; margin-left:auto; color:var(--primary-dark); text-decoration:none; font-size:0.7rem; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; border:1px solid rgba(193,122,62,0.38); border-radius:999px; padding:0.45rem 0.8rem; background:rgba(254,253,251,0.86); }
 .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:5px; }
 .nav-toggle span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:var(--transition); }
 
@@ -305,7 +304,6 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   .nav-inner { gap:0.75rem; }
   .nav-links { display:none; }
   .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(254,253,251,0.98); backdrop-filter:blur(20px); padding:2rem; gap:1.5rem; border-bottom:1px solid var(--border); }
-  .nav-guide-short { display:inline-flex; }
   .nav-toggle { display:flex; }
 }
 @media (max-width:900px) {
@@ -323,8 +321,8 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   .nav-links { display:none; }
   .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(254,253,251,0.98); backdrop-filter:blur(20px); padding:2rem; gap:1.5rem; border-bottom:1px solid var(--border); }
   .nav-toggle { display:flex; }
-  .hero { min-height:80vh; padding:5rem 1.2rem 3rem; }
-  .search-wrapper { position:relative; top:auto; z-index:5; max-width:none; margin:-1.4rem 1rem 2rem; padding:0; }
+  .hero { min-height:88vh; min-height:88svh; padding:5rem 1.2rem 7rem; }
+  .search-wrapper { position:relative; top:auto; z-index:5; max-width:none; margin:0.8rem 1rem 2rem; padding:0; }
   .search-bar { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; padding:0.75rem; border-radius:var(--radius); align-items:end; }
   .search-field { min-width:0; flex:auto; }
   .search-field label { font-size:0.55rem; letter-spacing:1px; margin-bottom:0.18rem; }
@@ -346,7 +344,7 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   .hero h1 { font-size:2rem; }
   .hero-actions { align-items:stretch; flex-direction:column; max-width:280px; margin:0 auto; }
   .hero-actions .btn { justify-content:center; }
-  .search-wrapper { margin:-1rem 0.8rem 1.7rem; }
+  .search-wrapper { margin:0.8rem 0.8rem 1.7rem; }
   .search-bar { padding:0.65rem; gap:0.45rem; }
   .location-info { padding:1.8rem 1.2rem; }
   .amenities-section { padding:2.4rem 1.2rem 0.6rem; }
@@ -387,7 +385,6 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20booking%20a%20villa." class="nav-cta" target="_blank">Book Now</a></li>
     </ul>
-    <a class="nav-guide-short" href="/egypt-travel-guide/">Travel Guide</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -409,12 +406,11 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content fade-up visible">
-    <p class="hero-eyebrow">Luxor West Bank · Eclipse 2027 Packages Available</p>
+    <p class="hero-eyebrow">Luxor West Bank · Solar Eclipse 2027 Packages</p>
     <h1>Luxury Nile-View Villas in <em>Luxor</em></h1>
-    <p class="hero-subtitle">Luxury apartments and penthouses on Luxor's tranquil West Bank — now offering a dedicated accommodation package for the total solar eclipse on 2 August 2027, alongside private tours, balloon rides, and Nile experiences.</p>
+    <p class="hero-subtitle">Luxury apartments and penthouses on Luxor’s tranquil West Bank — packages for solar eclipse 2027 available.</p>
     <div class="hero-actions">
-      <a href="/luxor-solar-eclipse-2027-package" class="btn btn-primary">View Eclipse 2027 Package</a>
-      <a href="#search" class="btn btn-outline">Search Villa Availability</a>
+      <a href="/luxor-solar-eclipse-2027-package" class="btn btn-primary">Solar Eclipse 2027 Package</a>
     </div>
   </div>
   <div class="scroll-indicator"><span>Discover</span><div class="line"></div></div>
