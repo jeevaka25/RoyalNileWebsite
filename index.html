@@ -233,6 +233,11 @@ body.modal-open { overflow:hidden; }
 .modal-amenity { font-size:0.82rem; color:var(--text-secondary); display:flex; align-items:center; gap:0.5rem; }
 .modal-amenity::before { content:'•'; color:var(--primary); font-weight:bold; }
 .modal-actions { display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:1.5rem; }
+.tour-quote-form { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:1.5rem; padding:1.1rem; background:var(--bg-warm); border:1px solid var(--border-light); border-radius:var(--radius); }
+.tour-quote-form label { display:grid; gap:0.35rem; color:var(--text); font-size:0.68rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; }
+.tour-quote-form input { min-height:48px; width:100%; padding:0.7rem 0.8rem; border:1px solid #cfc6b6; border-radius:4px; background:var(--card); color:var(--text); font:500 0.92rem var(--font-body); }
+.tour-quote-form input:focus { border-color:var(--primary); outline:2px solid rgba(20,116,129,0.15); outline-offset:1px; }
+.tour-quote-form .btn { grid-column:1/-1; width:100%; border:0; border-radius:4px; cursor:pointer; }
 .modal-search-inline { background:var(--bg-warm); border-radius:var(--radius); padding:1.2rem; margin-top:1.5rem; display:flex; gap:0.8rem; align-items:flex-end; flex-wrap:wrap; border:1px solid var(--border-light); }
 .modal-search-inline .search-field { min-width:120px; }
 .modal-search-inline .search-field input { background:var(--card); }
@@ -337,6 +342,8 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   .modal-overlay { padding:0.6rem; align-items:flex-start; }
   .modal { max-height:calc(100vh - 1.2rem); border-radius:var(--radius-lg); }
   .modal-body { padding:1rem; }
+  .tour-quote-form { grid-template-columns:1fr; }
+  .tour-quote-form .btn { grid-column:1; }
   .tour-modal-hero { min-height:300px; margin:-0.55rem -0.55rem 1.3rem; border-radius:var(--radius) var(--radius) var(--radius) var(--radius); }
   .tour-modal-hero h2 { font-size:2.45rem; }
 }
@@ -470,7 +477,7 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
 <section class="section" id="tours" style="padding-top:2rem;">
   <div class="section-header fade-up"><p class="section-eyebrow">Curated Experiences</p><h2 class="section-title">Tours & Adventures</h2><p class="section-subtitle">Unlock ancient Egypt with our handcrafted tours. Sunrise balloons, temple explorations, desert safaris, and sunset feluccas.</p></div>
   <div class="tours-grid" id="toursGrid"></div>
-  <div class="cta-banner fade-up" style="margin-top:3rem;"><h3>The Complete Luxor Experience</h3><p>Balloon + West Bank + East Bank + Sunset Cruise — Save $$$ with our custom tour packages. Complimentary airport transfer with 3+ tours booked.</p><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20the%20Complete%20Luxor%20Experience%20package." class="btn btn-teal" target="_blank">Inquire on WhatsApp</a></div>
+  <div class="cta-banner fade-up" style="margin-top:3rem;"><h3>The Complete Luxor Experience</h3><p>Balloon + West Bank + East Bank + Sunset Cruise — Save $$$ with our custom tour packages. Complimentary airport transfer with 3+ tours booked.</p><a href="https://wa.me/201204421652?text=Hi!%20I'm%20interested%20in%20the%20Complete%20Luxor%20Experience.%20Date%3A%20%5Benter%20date%5D.%20People%3A%20%5Benter%20number%5D." class="btn btn-teal" target="_blank" onclick="openQuickTourInquiry('Complete Luxor Experience');return false;">Inquire on WhatsApp</a></div>
 </section>
 
 <!-- EGYPT TRAVEL GUIDE -->
@@ -1329,12 +1336,51 @@ if(heroVideo) {
 // ============================================
 // TOUR MODAL
 // ============================================
+function tourInquiryFormHtml() {
+  return `<form class="tour-quote-form" onsubmit="return submitTourInquiry(event)">
+    <label>Preferred tour date<input name="tourDate" type="date" required></label>
+    <label>Number of people<input name="tourPeople" type="number" min="1" max="50" step="1" inputmode="numeric" placeholder="e.g. 2" required></label>
+    <button class="btn btn-primary" type="submit">Continue to WhatsApp</button>
+  </form>`;
+}
+
+function configureTourInquiryForm(container, tourName, depositRequired) {
+  const form=container.querySelector('.tour-quote-form');
+  if(!form) return;
+  form.dataset.tourName=tourName;
+  form.dataset.depositRequired=depositRequired?'true':'false';
+  const dateInput=form.elements.tourDate;
+  dateInput.min=formatDate(new Date());
+}
+
+function submitTourInquiry(event) {
+  event.preventDefault();
+  const form=event.currentTarget;
+  if(!form.reportValidity()) return false;
+  let message=`Hi! I'm interested in ${form.dataset.tourName}. Date: ${form.elements.tourDate.value}. People: ${form.elements.tourPeople.value}.`;
+  if(form.dataset.depositRequired==='true') message+=' I understand a non-refundable 25% deposit is required.';
+  window.location.href=`https://wa.me/201204421652?text=${encodeURIComponent(message)}`;
+  return false;
+}
+
+function openQuickTourInquiry(tourName, depositRequired=false) {
+  const modal=document.getElementById('modalContent');
+  modal.innerHTML=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <p class="section-eyebrow">Quick enquiry</p>
+      <h2>${tourName}</h2>
+      <p class="modal-desc">Add two details so we can quote accurately.</p>
+      ${tourInquiryFormHtml()}
+    </div>`;
+  configureTourInquiryForm(modal,tourName,depositRequired);
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.classList.add('modal-open');
+}
+
 function openTourModal(tourId) {
   const t=TOURS.find(x=>x.id===tourId); if(!t) return;
   const modal=document.getElementById('modalContent');
-  const waMsg=encodeURIComponent(t.id==='eclipse-2027'
-    ? `Hi! I'm interested in the "${t.name}" package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?`
-    : `Hi! I'm interested in the "${t.name}" tour. Can you tell me more about availability and pricing?`);
   const photosHtml=t.photos.map((p,i)=>`<img src="${optimizedImage(p)}" alt="${t.photoAlts?.[i]||`${t.name} photo ${i+1}`}" loading="lazy" onerror="this.style.display='none'">`).join('');
   const included=t.included||['Hotel pickup & drop-off','Private transfers','Bottled water provided'];
   const ticketNote=TICKET_EXTRA_TOUR_IDS.has(t.id)?`<p class="modal-desc" style="margin-top:-0.7rem;margin-bottom:1rem;color:var(--primary);font-weight:600;">${TOUR_TICKET_NOTE}</p>`:'';
@@ -1356,13 +1402,15 @@ function openTourModal(tourId) {
       ${ticketNote}
       <h4 style="font-family:var(--font-display);margin-bottom:0.5rem;color:var(--text);">What's Included</h4>
       <div class="modal-amenities">${included.map(item=>`<div class="modal-amenity">${item}</div>`).join('')}</div>
+      <p class="modal-desc" style="margin-bottom:-0.6rem;">Add your preferred date and party size for an accurate quote.</p>
+      ${tourInquiryFormHtml()}
       <div class="modal-actions">
-        <a href="https://wa.me/201204421652?text=${waMsg}" target="_blank" class="btn btn-primary">Inquire on WhatsApp</a>
         <button class="btn btn-outline" onclick="closeModal()">Close</button>
       </div>
       <div class="modal-gallery">${photosHtml}</div>
       ${t.galleryNote?`<p class="modal-desc" style="margin-top:1rem;font-size:0.78rem;">${t.galleryNote}</p>`:''}
     </div>`;
+  configureTourInquiryForm(modal,t.name,t.id==='eclipse-2027');
   document.getElementById('modalOverlay').classList.add('active');
   document.body.classList.add('modal-open');
   enableGalleryLightbox(modal);

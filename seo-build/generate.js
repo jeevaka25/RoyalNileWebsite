@@ -79,6 +79,18 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 .mobile-booking-card{display:none;margin:1.6rem 0 1.9rem;}
 .mobile-booking-card .card{position:static;}
 .mobile-whatsapp-fab{display:none;}
+.tour-inquiry-overlay{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:1.25rem;background:rgba(15,27,29,.72);backdrop-filter:blur(6px);}
+.tour-inquiry-overlay.open{display:flex;}
+.tour-inquiry-dialog{position:relative;width:min(100%,430px);border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);padding:1.7rem;box-shadow:var(--shadow-lg);}
+.tour-inquiry-dialog .eyebrow{margin-bottom:.35rem;}
+.tour-inquiry-dialog h2{margin:0 2rem .4rem 0;font-size:1.65rem;}
+.tour-inquiry-copy{margin-bottom:1.15rem;color:var(--text-secondary);font-size:.9rem;}
+.tour-inquiry-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--text-secondary);font-size:1rem;cursor:pointer;}
+.tour-inquiry-form{display:grid;gap:.9rem;}
+.tour-inquiry-form label{display:grid;gap:.35rem;color:var(--text);font-size:.75rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;}
+.tour-inquiry-form input{width:100%;min-height:48px;border:1px solid #cfc6b6;border-radius:4px;background:#fff;padding:.72rem .85rem;color:var(--text);font:500 .95rem var(--font-body);}
+.tour-inquiry-form input:focus{border-color:var(--primary);outline:2px solid rgba(20,116,129,.15);outline-offset:1px;}
+.tour-inquiry-form .btn{width:100%;margin-top:.25rem;border-radius:2px;cursor:pointer;}
 .related{margin:2rem 0 3rem;}
 .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
 .related-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);}
@@ -193,8 +205,64 @@ function providerLd() {
   return { '@type': 'TravelAgency', name: SITE.brand, url: ORIGIN + '/', telephone: '+' + SITE.whatsapp, address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry } };
 }
 
-function mobileWhatsappFab(href, label) {
-  return `<a class="mobile-whatsapp-fab" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}" title="${esc(label)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.999-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 7.021 2.91 9.83 9.83 0 0 1 2.9 7.026c-.003 5.45-4.437 9.884-9.926 9.884m8.413-18.297A11.82 11.82 0 0 0 12.055 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.689 1.448h.005c6.557 0 11.893-5.335 11.896-11.893a11.82 11.82 0 0 0-3.488-8.413Z"/></svg></a>`;
+function mobileWhatsappFab(href, label, tour) {
+  const inquiryAttrs = tour ? ` data-tour-inquiry="true" data-tour-name="${esc(tour.h1)}" data-tour-deposit="${tour.depositNote ? 'true' : 'false'}"` : '';
+  return `<a class="mobile-whatsapp-fab" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}" title="${esc(label)}"${inquiryAttrs}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.999-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 7.021 2.91 9.83 9.83 0 0 1 2.9 7.026c-.003 5.45-4.437 9.884-9.926 9.884m8.413-18.297A11.82 11.82 0 0 0 12.055 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.689 1.448h.005c6.557 0 11.893-5.335 11.896-11.893a11.82 11.82 0 0 0-3.488-8.413Z"/></svg></a>`;
+}
+
+function tourInquiryPrompt() {
+  return `<div class="tour-inquiry-overlay" id="tourInquiryOverlay" aria-hidden="true">
+<div class="tour-inquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="tourInquiryTitle">
+<button class="tour-inquiry-close" id="tourInquiryClose" type="button" aria-label="Close">&#10005;</button>
+<p class="eyebrow">Quick enquiry</p>
+<h2 id="tourInquiryTitle">Plan your tour</h2>
+<p class="tour-inquiry-copy">Add two details so we can quote accurately.</p>
+<form class="tour-inquiry-form" id="tourInquiryForm">
+<label for="tourInquiryDate">Preferred tour date<input id="tourInquiryDate" name="date" type="date" required></label>
+<label for="tourInquiryPeople">Number of people<input id="tourInquiryPeople" name="people" type="number" min="1" max="50" step="1" inputmode="numeric" placeholder="e.g. 2" required></label>
+<button class="btn btn-luxury btn-whatsapp" type="submit">Continue to WhatsApp</button>
+</form>
+</div></div>
+<script>
+(function(){
+  var overlay=document.getElementById('tourInquiryOverlay');
+  if(!overlay)return;
+  var form=document.getElementById('tourInquiryForm');
+  var dateInput=document.getElementById('tourInquiryDate');
+  var peopleInput=document.getElementById('tourInquiryPeople');
+  var closeButton=document.getElementById('tourInquiryClose');
+  var activeTrigger=null;
+  function open(trigger){
+    activeTrigger=trigger;
+    dateInput.value='';peopleInput.value='';
+    dateInput.min=new Date().toISOString().slice(0,10);
+    overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){dateInput.focus();},20);
+  }
+  function close(){
+    overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(activeTrigger)activeTrigger.focus();
+  }
+  document.addEventListener('click',function(e){
+    var trigger=e.target.closest?e.target.closest('[data-tour-inquiry]'):null;
+    if(!trigger)return;
+    e.preventDefault();open(trigger);
+  });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.reportValidity()||!activeTrigger)return;
+    var name=activeTrigger.getAttribute('data-tour-name');
+    var message="Hi! I'm interested in "+name+". Date: "+dateInput.value+". People: "+peopleInput.value+".";
+    if(activeTrigger.getAttribute('data-tour-deposit')==='true')message+=' I understand a non-refundable 25% deposit is required.';
+    window.location.href='https://wa.me/${SITE.whatsapp}?text='+encodeURIComponent(message);
+  });
+  closeButton.addEventListener('click',close);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))close();});
+})();
+</script>`;
 }
 
 // ---------------- TOUR PAGE ----------------
@@ -208,10 +276,11 @@ function tourPage(t) {
   const galleryNote = t.galleryNote ? `<div class="note">${esc(t.galleryNote)}</div>` : '';
   const depositNote = t.depositNote ? `<div class="note">${esc(t.depositNote)}</div>` : '';
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
-  const inquiryUrl = wa(t.depositNote ? `Hi! I'm interested in the ${t.h1} package. I understand that a non-refundable 25% deposit is required to hold the booking. Can you send availability, pricing, the remaining balance schedule and cancellation terms?` : `Hi! I'm interested in the ${t.h1} tour. Can you tell me more about availability and pricing?`);
+  const inquiryUrl = wa(t.depositNote ? `Hi! I'm interested in ${t.h1}. Date: [enter date]. People: [enter number]. I understand a non-refundable 25% deposit is required.` : `Hi! I'm interested in ${t.h1}. Date: [enter date]. People: [enter number].`);
+  const inquiryAttrs = `data-tour-inquiry="true" data-tour-name="${esc(t.h1)}" data-tour-deposit="${t.depositNote ? 'true' : 'false'}"`;
   const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews · 4.91 ★ rating</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
-<a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}">Inquire on WhatsApp</a>
+<a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}" ${inquiryAttrs}>Inquire on WhatsApp</a>
 <a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div>`;
 
   const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) }, ...(t.depositNote ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Deposit', value: t.depositNote }] } : {}) };
@@ -225,7 +294,7 @@ ${heroVideo}
 <div class="hero-inner"><p class="eyebrow">Luxor Tours & Experiences</p><h1>${esc(t.h1)}</h1>
 <div class="meta-row"><span class="pill">⏱ ${esc(t.duration)}</span><span class="pill">🚐 Hotel pickup</span><span class="pill">📍 Luxor, Egypt</span></div></div>
 </section>
-<div class="mobile-top-actions"><a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}">Inquire on WhatsApp</a></div>
+<div class="mobile-top-actions"><a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}" ${inquiryAttrs}>Inquire on WhatsApp</a></div>
 <div class="layout"><div>
 <p class="lede">${esc(t.overview)}</p>
 <h2>Tour highlights</h2><ul class="checklist">${t.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
@@ -237,7 +306,7 @@ ${ticketNote}${depositNote}
 <aside class="desktop-booking-card">${bookingCard}</aside>
 </div>
 <section class="related"><h2>Other Luxor experiences</h2><div class="related-grid">${related}</div></section>
-</div>${mobileWhatsappFab(inquiryUrl, `Enquire about ${t.h1} on WhatsApp`)}`
+</div>${mobileWhatsappFab(inquiryUrl, `Enquire about ${t.h1} on WhatsApp`, t)}${tourInquiryPrompt()}`
     + footer();
 }
 

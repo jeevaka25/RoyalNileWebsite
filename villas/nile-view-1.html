@@ -105,6 +105,18 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 .mobile-booking-card{display:none;margin:1.6rem 0 1.9rem;}
 .mobile-booking-card .card{position:static;}
 .mobile-whatsapp-fab{display:none;}
+.tour-inquiry-overlay{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:1.25rem;background:rgba(15,27,29,.72);backdrop-filter:blur(6px);}
+.tour-inquiry-overlay.open{display:flex;}
+.tour-inquiry-dialog{position:relative;width:min(100%,430px);border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);padding:1.7rem;box-shadow:var(--shadow-lg);}
+.tour-inquiry-dialog .eyebrow{margin-bottom:.35rem;}
+.tour-inquiry-dialog h2{margin:0 2rem .4rem 0;font-size:1.65rem;}
+.tour-inquiry-copy{margin-bottom:1.15rem;color:var(--text-secondary);font-size:.9rem;}
+.tour-inquiry-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--text-secondary);font-size:1rem;cursor:pointer;}
+.tour-inquiry-form{display:grid;gap:.9rem;}
+.tour-inquiry-form label{display:grid;gap:.35rem;color:var(--text);font-size:.75rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;}
+.tour-inquiry-form input{width:100%;min-height:48px;border:1px solid #cfc6b6;border-radius:4px;background:#fff;padding:.72rem .85rem;color:var(--text);font:500 .95rem var(--font-body);}
+.tour-inquiry-form input:focus{border-color:var(--primary);outline:2px solid rgba(20,116,129,.15);outline-offset:1px;}
+.tour-inquiry-form .btn{width:100%;margin-top:.25rem;border-radius:2px;cursor:pointer;}
 .related{margin:2rem 0 3rem;}
 .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
 .related-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);}
