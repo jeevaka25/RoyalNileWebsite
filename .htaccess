@@ -2,6 +2,16 @@ Options -Indexes
 DirectoryIndex index.html
 RewriteEngine On
 
+# Permanent redirects for legacy URLs reported in Search Console.
+# Keep these ahead of the internal clean-URL rewrites below.
+RewriteRule ^balloon-ride/?$ /hot-air-balloon-luxor [R=301,L]
+RewriteRule ^nile-view-apartment/?$ /villas/royal-home-nile-view [R=301,L]
+RewriteRule ^pool-view-apartment/?$ /villas/royal-home-pool-view [R=301,L]
+RewriteRule ^royal-home-villa/?$ /villas/royal-home-nile-view [R=301,L]
+RewriteRule ^royal-nile-nile-view-apartment-1/?$ /villas/nile-view-1 [R=301,L]
+RewriteRule ^(royal-nile-villas|contact-us-2)/?$ / [R=301,L]
+RewriteRule ^(the-4-most-incredible-least-known-monuments-egypt|top-10-things-to-do-in-egypt-2025)/?$ /egypt-travel-guide/ [R=301,L]
+
 # Luxor total solar eclipse 2027 accommodation package
 RewriteRule ^(luxor-solar-eclipse-2027-package|2027-luxor-solar-eclipse-package|luxor-eclipse-package|solar-eclipse-luxor-2027)/?$ luxor-solar-eclipse-2027-package.html [L]
 
