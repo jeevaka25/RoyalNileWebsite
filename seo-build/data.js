@@ -9,6 +9,8 @@ const SITE = {
   origin: 'https://egyptvillastours.com',        // canonical host (non-www)
   whatsapp: '201204421652',
   email: 'royalhomeluxor@gmail.com',
+  googleBusinessProfile: 'https://share.google/P6PPmkbxRYg6QhLie',
+  royalHomeGoogleBusinessProfile: 'https://share.google/xxd26OMK5AOtsgYik',
   geo: { lat: 25.691162, lng: 32.623042 },
   addressLocality: 'Al Aqaletah, West Bank',
   addressRegion: 'Luxor',

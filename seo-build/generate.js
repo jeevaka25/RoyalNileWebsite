@@ -163,7 +163,7 @@ function footer() {
   const tourLinks = TOURS.map((t) => `<li><a href="/${t.primarySlug}">${esc(t.h1.replace(/ from Luxor| at Sunrise| \(East Bank\)/,''))}</a></li>`).join('');
   const villaLinks = VILLAS.slice(0, 6).map((v) => `<li><a href="/villas/${v.id}">${esc(v.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</a></li>`).join('');
   return `<footer class="footer"><div class="footer-inner">
-<div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with 7+ years and 1,800+ reviews.</p></div>
+<div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with 7+ years and 1,800+ reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
 <div><h5>Tours</h5><ul>${tourLinks}</ul></div>
 <div><h5>Villas</h5><ul>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
 </div><div class="footer-bottom">&copy; ${new Date().getFullYear()} Royal Nile Villas — West Bank, Luxor, Egypt. All rights reserved.</div></footer>
@@ -202,7 +202,7 @@ function faqLd(faqs) {
   return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 }
 function providerLd() {
-  return { '@type': 'TravelAgency', name: SITE.brand, url: ORIGIN + '/', telephone: '+' + SITE.whatsapp, address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry } };
+  return { '@type': 'TravelAgency', name: SITE.brand, url: ORIGIN + '/', telephone: '+' + SITE.whatsapp, sameAs: [SITE.googleBusinessProfile], address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry } };
 }
 
 function mobileWhatsappFab(href, label, tour) {
@@ -327,7 +327,8 @@ function villaPage(v) {
 <a class="btn btn-luxury btn-booking" target="_blank" rel="noopener" href="${v.bookingUrl}">Reserve on Booking.com</a></div>`;
 
   const productLd = { '@context': 'https://schema.org', '@type': 'Product', name: v.name, description: v.description, image: abs(poster), brand: { '@type': 'Brand', name: SITE.brand }, url: canonical, aggregateRating: { '@type': 'AggregateRating', ratingValue: String(v.rating), reviewCount: v.reviews, bestRating: '5' } };
-  const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
+  const businessProfile = v.id.startsWith('royal-home-') ? SITE.royalHomeGoogleBusinessProfile : SITE.googleBusinessProfile;
+  const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, sameAs: [businessProfile, v.airbnbUrl, v.bookingUrl], numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Villas', url: ORIGIN + '/#villas' }, { name: v.name, url: canonical }]);
   const faqs = [
     ['How far is the villa from the Valley of the Kings?', 'The villa is on Luxor’s West Bank in Al Aqaletah — about 15 minutes from the Valley of the Kings, 10 minutes from the balloon launch site and 5 minutes from the West Bank ferry, with a free shuttle to the ferry.'],

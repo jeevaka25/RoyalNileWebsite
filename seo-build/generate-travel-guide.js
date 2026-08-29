@@ -7,7 +7,7 @@ const ROOT = path.join(__dirname, '..');
 const ORIGIN = 'https://egyptvillastours.com';
 const GUIDE_ROOT = path.join(ROOT, 'egypt-travel-guide');
 const DEFAULT_ARTICLE_DATE = '2026-08-07';
-const GUIDE_UPDATED = '2026-08-28';
+const GUIDE_UPDATED = '2026-08-29';
 const WHATSAPP = 'https://wa.me/201204421652';
 const ECLIPSE_GUIDE_ORDER = [
   'luxor-total-solar-eclipse-2027',
@@ -42,7 +42,7 @@ const nav = (current = 'guide') => `<nav class="nav"><div class="nav-inner">
   <div class="nav-links"><a href="/#villas">Villas</a><a href="/#tours">Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/"${current === 'guide' ? ' aria-current="page"' : ''}>Egypt Travel Guide</a><a class="book" href="${WHATSAPP}" target="_blank" rel="noopener">Book Now</a></div>
 </div></nav>`;
 
-const footer = `<footer class="footer"><div class="footer-inner"><div>Royal Nile Villas · Premium West Bank apartments, local transfers and private tours.</div><div><a href="/">Villas</a> · <a href="/egypt-travel-guide/">Egypt Travel Guide</a> · <a href="https://www.egyptian.tours/">Egyptian Tours</a></div></div></footer>`;
+const footer = `<footer class="footer"><div class="footer-inner"><div>Royal Nile Villas · Premium West Bank apartments, local transfers and private tours.</div><div><a href="/">Villas & Tours</a> · <a href="/egypt-travel-guide/">Egypt Travel Guide</a> · <a href="https://share.google/P6PPmkbxRYg6QhLie" target="_blank" rel="noopener">Royal Nile Villas on Google</a> · <a href="https://share.google/xxd26OMK5AOtsgYik" target="_blank" rel="noopener">Royal Home Villa on Google</a></div></div></footer>`;
 
 const head = ({ title, description, canonical, image, type = 'article', schema }) => `<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -80,10 +80,11 @@ const buildArticle = (article) => {
     const inlineImages = (article.inlineImages || []).filter((image) => image.afterSection === index + 1).map((image) => `<figure class="article-image"><img src="${esc(image.src)}" alt="${esc(image.alt)}" loading="lazy"><figcaption>${esc(image.caption)}</figcaption></figure>`).join('');
     return `<section class="article-section"><h2>${esc(section.heading)}</h2><p>${esc(section.body)}</p></section>${inlineImages}`;
   }).join('');
+  const relatedLinks = article.relatedLinks?.length ? `<section class="sources"><h2>Plan the rest of your Luxor eclipse trip</h2><ul>${article.relatedLinks.map((link) => `<li><a href="${esc(link.url)}">${esc(link.label)}</a></li>`).join('')}</ul></section>` : '';
   const sources = article.sources?.length ? `<section class="sources"><h2>Sources and further reading</h2><ul>${article.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}</a></li>`).join('')}</ul></section>` : '';
   const caption = article.imageCaption ? `<p class="hero-caption">${esc(article.imageCaption)}</p>` : '';
   const whatsappMessage = article.whatsappMessage || `Hi! I read “${article.title}” and would like help choosing a Royal Nile Villas apartment.`;
-  return `${head({ title: `${article.title} | Royal Nile Villas`, description: article.description, canonical, image: article.image, schema })}<body>${nav()}<main class="wrap"><nav class="breadcrumb"><a href="/">Home</a> › <a href="/egypt-travel-guide/">Egypt Travel Guide</a> › ${esc(article.title)}</nav><header><span class="kicker">Egypt Travel Guide · ${esc(article.readTime)}</span><h1>${esc(article.title)}</h1><p class="dek">${esc(article.dek)}</p><p class="meta">Published ${published} · Updated ${modified}</p></header><figure class="hero"><img src="${article.image}" alt="${esc(article.title)}"></figure>${caption}<div class="grid"><div class="article-body">${sections}${sources}<a class="back" href="/egypt-travel-guide/">← All guide articles</a></div><aside class="aside"><section class="aside-card"><span class="kicker">Booking checklist</span><ul class="tips">${article.tips.map((tip) => `<li>${esc(tip)}</li>`).join('')}</ul></section><section class="aside-card cta"><h2>${esc(article.ctaTitle)}</h2><p>${esc(article.ctaBody)}</p><a class="btn" href="${WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" rel="noopener">Check availability →</a></section></aside></div></main>${footer}</body></html>`;
+  return `${head({ title: `${article.seoTitle || article.title} | Royal Nile Villas`, description: article.description, canonical, image: article.image, schema })}<body>${nav()}<main class="wrap"><nav class="breadcrumb"><a href="/">Home</a> › <a href="/egypt-travel-guide/">Egypt Travel Guide</a> › ${esc(article.title)}</nav><header><span class="kicker">Egypt Travel Guide · ${esc(article.readTime)}</span><h1>${esc(article.title)}</h1><p class="dek">${esc(article.dek)}</p><p class="meta">Published ${published} · Updated ${modified}</p></header><figure class="hero"><img src="${article.image}" alt="${esc(article.title)}"></figure>${caption}<div class="grid"><div class="article-body">${sections}${relatedLinks}${sources}<a class="back" href="/egypt-travel-guide/">← All guide articles</a></div><aside class="aside"><section class="aside-card"><span class="kicker">Booking checklist</span><ul class="tips">${article.tips.map((tip) => `<li>${esc(tip)}</li>`).join('')}</ul></section><section class="aside-card cta"><h2>${esc(article.ctaTitle)}</h2><p>${esc(article.ctaBody)}</p><a class="btn" href="${WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" rel="noopener">Check availability →</a></section></aside></div></main>${footer}</body></html>`;
 };
 
 fs.mkdirSync(GUIDE_ROOT, { recursive: true });

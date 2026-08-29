@@ -6,7 +6,7 @@ RewriteEngine On
 RewriteRule ^(luxor-solar-eclipse-2027-package|2027-luxor-solar-eclipse-package|luxor-eclipse-package|solar-eclipse-luxor-2027)/?$ luxor-solar-eclipse-2027-package.html [L]
 
 # Hostinger/PHP equivalent of the Vercel availability function.
-RewriteRule ^api/availability/?$ api/availability.php [L,QSA]
+RewriteRule ^api/availability/?$ api/availability-hostinger.php [L,QSA]
 
 # Tour aliases.
 RewriteRule ^(hot-air-balloon-luxor|hot-air-balloon-ride|hot-air-balloon-tour|balloon-tour|balloon-ride|balloon)/?$ hot-air-balloon-luxor.html [L]
