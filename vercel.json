@@ -12,6 +12,26 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/balloon-ride", "destination": "/hot-air-balloon-luxor", "permanent": true },
+    { "source": "/balloon-ride/", "destination": "/hot-air-balloon-luxor", "permanent": true },
+    { "source": "/nile-view-apartment", "destination": "/villas/royal-home-nile-view", "permanent": true },
+    { "source": "/nile-view-apartment/", "destination": "/villas/royal-home-nile-view", "permanent": true },
+    { "source": "/pool-view-apartment", "destination": "/villas/royal-home-pool-view", "permanent": true },
+    { "source": "/pool-view-apartment/", "destination": "/villas/royal-home-pool-view", "permanent": true },
+    { "source": "/royal-home-villa", "destination": "/villas/royal-home-nile-view", "permanent": true },
+    { "source": "/royal-home-villa/", "destination": "/villas/royal-home-nile-view", "permanent": true },
+    { "source": "/royal-nile-nile-view-apartment-1", "destination": "/villas/nile-view-1", "permanent": true },
+    { "source": "/royal-nile-nile-view-apartment-1/", "destination": "/villas/nile-view-1", "permanent": true },
+    { "source": "/royal-nile-villas", "destination": "/", "permanent": true },
+    { "source": "/royal-nile-villas/", "destination": "/", "permanent": true },
+    { "source": "/contact-us-2", "destination": "/#contact", "permanent": true },
+    { "source": "/contact-us-2/", "destination": "/#contact", "permanent": true },
+    { "source": "/the-4-most-incredible-least-known-monuments-egypt", "destination": "/egypt-travel-guide/", "permanent": true },
+    { "source": "/the-4-most-incredible-least-known-monuments-egypt/", "destination": "/egypt-travel-guide/", "permanent": true },
+    { "source": "/top-10-things-to-do-in-egypt-2025", "destination": "/egypt-travel-guide/", "permanent": true },
+    { "source": "/top-10-things-to-do-in-egypt-2025/", "destination": "/egypt-travel-guide/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/hot-air-balloon-luxor",

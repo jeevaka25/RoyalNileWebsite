@@ -188,11 +188,13 @@ const ARTICLES = [
   },
   {
     slug: 'luxor-total-solar-eclipse-2027',
-    title: '2027 Total Solar Eclipse in Luxor: Date, Local Times, Duration and Travel Guide',
-    description: 'Plan the August 2, 2027 total solar eclipse in Luxor, Egypt with verified local times, 6-minute totality, eye-safety guidance, heat planning and travel logistics.',
-    dek: 'The essential planning guide to Luxor’s August 2, 2027 total eclipse—from local contact times to heat, eye safety and accommodation.',
+    title: 'What Time Is the 2027 Solar Eclipse in Luxor? Local Times and Duration',
+    seoTitle: '2027 Solar Eclipse in Luxor: Local Time and Duration',
+    description: 'The 2027 solar eclipse in Luxor is on August 2, with the partial phase from about 11:40 to 14:26, maximum near 13:05 and totality lasting about 6 minutes 22 seconds.',
+    dek: 'Luxor’s total solar eclipse is on August 2, 2027: partial eclipse from about 11:40 to 14:26 local time, maximum near 13:05 and roughly 6 minutes 22 seconds of totality.',
     image: '/optimized-assets/travel-guide/luxor-eclipse-villa-2027.webp',
     readTime: '10 min read',
+    dateModified: '2026-08-29',
     sections: [
       { heading: 'The essential Luxor eclipse facts', body: 'Luxor will experience a total solar eclipse on Monday, August 2, 2027. Current calculations for the city place the beginning of the partial phase at about 11:40 local time, maximum eclipse around 13:05 and the end near 14:26. Totality lasts approximately 6 minutes 22 seconds at Luxor, although the precise duration and contact times vary by exact viewing coordinates. Recheck an authoritative eclipse calculator for your final location closer to the date rather than relying on a screenshot saved years earlier.' },
       { heading: 'Why Luxor is attracting eclipse travellers', body: 'The city lies close to the zone of exceptionally long totality and combines the astronomical event with Karnak, Luxor Temple and the Theban necropolis. Historical cloud statistics for early August are encouraging, but clear-sky climatology is not a guarantee: dust, haze and local conditions still matter. Demand is already intense, with specialist eclipse tours and several accommodation packages sold out or waitlisted. Travellers who want flexibility should secure legitimate accommodation and transport before buying a complicated sightseeing programme.' },
@@ -208,6 +210,11 @@ const ARTICLES = [
       { label: 'Luxor local eclipse times', url: 'https://www.timeanddate.com/eclipse/in/egypt/luxor?iso=20270802' },
       { label: 'American Astronomical Society eye-safety guidance', url: 'https://eclipse.aas.org/eye-safety' },
       { label: 'Sky & Telescope Luxor 2027 travel programme', url: 'https://skyandtelescope.org/astronomy-travel/luxor-2027/' },
+    ],
+    relatedLinks: [
+      { label: 'Compare where to stay in Luxor for the 2027 eclipse', url: '/egypt-travel-guide/where-to-stay-luxor-solar-eclipse-2027/' },
+      { label: 'View the Royal Nile Villas eclipse accommodation package', url: '/luxor-solar-eclipse-2027-package' },
+      { label: 'Plan a flexible five-day Luxor eclipse itinerary', url: '/egypt-travel-guide/luxor-eclipse-2027-tour-itinerary/' },
     ],
     ctaTitle: 'Join the Royal Nile Villas Eclipse 2027 priority list',
     ctaBody: 'Tell us your dates, party size and preferred apartment. We will state clearly what is confirmed for accommodation, transport and eclipse-day access.',
