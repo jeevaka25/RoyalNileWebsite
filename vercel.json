@@ -13,6 +13,7 @@
     }
   ],
   "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.egyptvillastours.com" }], "destination": "https://egyptvillastours.com/:path*", "permanent": true },
     { "source": "/balloon-ride", "destination": "/hot-air-balloon-luxor", "permanent": true },
     { "source": "/balloon-ride/", "destination": "/hot-air-balloon-luxor", "permanent": true },
     { "source": "/nile-view-apartment", "destination": "/villas/royal-home-nile-view", "permanent": true },
