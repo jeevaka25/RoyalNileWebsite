@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { SITE, TOURS, VILLAS, wa, optimizedImage, siteAsset } = require('./data.js');
 
+const { HOST_TRUST, VILLA_SEO } = require('./seo-content.js');
 const ROOT = path.join(__dirname, '..');
 const ORIGIN = SITE.origin;
 
@@ -117,14 +118,15 @@ function head({ title, desc, canonical, ogImage, jsonld, ogType = 'website' }) {
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','${SITE.metaPixel}');fbq('track','PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${SITE.metaPixel}&ev=PageView&noscript=1"/></noscript>
+<noscript><img alt="" aria-hidden="true" height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${SITE.metaPixel}&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
+<script defer src="/analytics-events.js"></script>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga}"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','${SITE.ga}');
-document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href]'):null;if(!a)return;var h=a.href||'',ev=null;if(/wa\\.me|api\\.whatsapp\\.com/i.test(h))ev='whatsapp_click';else if(/airbnb\\./i.test(h))ev='airbnb_click';else if(/booking\\.com/i.test(h))ev='booking_click';if(!ev)return;if(typeof gtag==='function')gtag('event',ev,{link_url:h,page_location:location.href,page_path:location.pathname});if(typeof fbq==='function')fbq('track','Lead',{content_category:ev.replace('_click','')});},true);
+
 </script>
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -163,7 +165,7 @@ function footer() {
   const tourLinks = TOURS.map((t) => `<li><a href="/${t.primarySlug}">${esc(t.h1.replace(/ from Luxor| at Sunrise| \(East Bank\)/,''))}</a></li>`).join('');
   const villaLinks = VILLAS.slice(0, 6).map((v) => `<li><a href="/villas/${v.id}">${esc(v.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</a></li>`).join('');
   return `<footer class="footer"><div class="footer-inner">
-<div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with 7+ years and 1,800+ reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
+<div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with 7+ years and ${HOST_TRUST.reviews} Airbnb reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
 <div><h5>Tours</h5><ul>${tourLinks}</ul></div>
 <div><h5>Villas</h5><ul>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
 </div><div class="footer-bottom">&copy; ${new Date().getFullYear()} Royal Nile Villas — West Bank, Luxor, Egypt. All rights reserved.</div></footer>
@@ -256,6 +258,7 @@ function tourInquiryPrompt() {
     var name=activeTrigger.getAttribute('data-tour-name');
     var message="Hi! I'm interested in "+name+". Date: "+dateInput.value+". People: "+peopleInput.value+".";
     if(activeTrigger.getAttribute('data-tour-deposit')==='true')message+=' I understand a non-refundable 25% deposit is required.';
+    document.dispatchEvent(new Event('royal-inquiry-outbound'));
     window.location.href='https://wa.me/${SITE.whatsapp}?text='+encodeURIComponent(message);
   });
   closeButton.addEventListener('click',close);
@@ -278,12 +281,12 @@ function tourPage(t) {
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
   const inquiryUrl = wa(t.depositNote ? `Hi! I'm interested in ${t.h1}. Date: [enter date]. People: [enter number]. I understand a non-refundable 25% deposit is required.` : `Hi! I'm interested in ${t.h1}. Date: [enter date]. People: [enter number].`);
   const inquiryAttrs = `data-tour-inquiry="true" data-tour-name="${esc(t.h1)}" data-tour-deposit="${t.depositNote ? 'true' : 'false'}"`;
-  const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · 1,800+ reviews · 4.91 ★ rating</p>
+  const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · ${HOST_TRUST.reviews} Airbnb reviews · ${HOST_TRUST.rating} ★ rating</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
 <a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}" ${inquiryAttrs}>Inquire on WhatsApp</a>
 <a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div>`;
 
-  const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) }, ...(t.depositNote ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Deposit', value: t.depositNote }] } : {}) };
+  const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) } };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Tours', url: ORIGIN + '/#tours' }, { name: t.h1, url: canonical }]);
 
   return head({ title: t.title, desc: t.metaDesc, canonical, ogImage: cover, jsonld: [tourLd, faqLd(t.faqs), crumbs], ogType: 'website' })
@@ -316,9 +319,9 @@ function villaPage(v) {
   const cover = v.cover || v.photos[0];
   const poster = img(cover);
   const galleryImgs = v.photos.slice(0, 6).map((p, i) => `<img src="${img(p)}" alt="${esc(v.name)} — interior/exterior photo ${i + 1}" loading="lazy">`).join('');
-  const related = VILLAS.filter((x) => x.id !== v.id).slice(0, 4).map((x) => `<a class="related-card" href="/villas/${x.id}"><img src="${img(x.cover || x.photos[0])}" alt="${esc(x.name)}" loading="lazy"><span>${esc(x.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</span></a>`).join('');
-  const title = `${v.name} | Luxor West Bank Villa with Pool`;
-  const desc = `${v.description.slice(0, 150)}`.replace(/\s+\S*$/, '') + '… Book this ' + v.bedrooms + '-bedroom Luxor villa.';
+  const related = VILLAS.filter((x) => x.id !== v.id).map((x) => `<a class="related-card" href="/villas/${x.id}"><img src="${img(x.cover || x.photos[0])}" alt="${esc(x.name)}" loading="lazy"><span>${esc(x.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</span></a>`).join('');
+  const title = `${VILLA_SEO[v.id][0]} | Royal Nile Villas`;
+  const desc = VILLA_SEO[v.id][1];
   const inquiryUrl = wa(`Hi! I'm interested in booking the ${v.name}. Is it available?`);
   const bookingCard = `<div class="card"><h3>${esc(v.name)}</h3><p class="rating">★ ${v.rating} · ${v.reviews} reviews · ${esc(v.floor)}</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(v.bedsConfig)} · sleeps ${v.guests} · ${esc(v.viewType)}.</p>
@@ -331,7 +334,7 @@ function villaPage(v) {
   const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, sameAs: [businessProfile, v.airbnbUrl, v.bookingUrl], numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Villas', url: ORIGIN + '/#villas' }, { name: v.name, url: canonical }]);
   const faqs = [
-    ['How far is the villa from the Valley of the Kings?', 'The villa is on Luxor’s West Bank in Al Aqaletah — about 15 minutes from the Valley of the Kings, 10 minutes from the balloon launch site and 5 minutes from the West Bank ferry, with a free shuttle to the ferry.'],
+    ['How far is the villa from the Valley of the Kings?', 'The villa is on Luxor’s West Bank in Al Aqaletah — about 15 minutes from the Valley of the Kings, about 15 minutes from the balloon launch site and 5 minutes from the West Bank ferry, with a free shuttle to the ferry.'],
     ['Is airport pickup available?', 'Yes. Airport pickup and drop-off can be arranged, along with private tours and a free shuttle to the West Bank ferry.'],
     ['How do I book?', 'Message us directly on WhatsApp for the best direct rates and availability, or book instantly via our Airbnb and Booking.com listings.'],
   ];
@@ -348,7 +351,7 @@ function villaPage(v) {
 <div class="layout"><div>
 <p class="lede">${esc(v.description)}</p>
 <h2>What this villa offers</h2><ul class="checklist">${v.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
-<div class="note">Located in Al Aqaletah on Luxor’s tranquil West Bank — 15 min to the Valley of the Kings, 10 min to the balloon launch, 5 min to the ferry. Free shuttle to the West Bank ferry, on-site 14-metre pool and Nile-view rooftop restaurant.</div>
+<div class="note">Located in Al Aqaletah on Luxor’s tranquil West Bank — 15 min to the Valley of the Kings, about 15 min to the balloon launch, 5 min to the ferry. Free shuttle to the West Bank ferry, on-site 14-metre pool and Nile-view rooftop restaurant.</div>
 <div class="mobile-booking-card">${bookingCard}</div>
 <h2>Photo gallery</h2><div class="gallery">${galleryImgs}</div>
 <h2>Frequently asked questions</h2>${faqs.map(([q, a]) => `<div class="faq"><h3>${esc(q)}</h3><p>${esc(a)}</p></div>`).join('')}

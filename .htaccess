@@ -2,6 +2,10 @@ Options -Indexes
 DirectoryIndex index.html
 RewriteEngine On
 
+# One public host, preserving the complete path and query string.
+RewriteCond %{HTTP_HOST} ^www\.egyptvillastours\.com$ [NC]
+RewriteRule ^ https://egyptvillastours.com%{REQUEST_URI} [R=301,L,NE]
+
 # Permanent redirects for legacy URLs reported in Search Console.
 # Keep these ahead of the internal clean-URL rewrites below.
 RewriteRule ^balloon-ride/?$ /hot-air-balloon-luxor [R=301,L]

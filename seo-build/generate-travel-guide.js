@@ -1,13 +1,15 @@
 /* Build the Egypt Travel Guide hub and individual long-tail article pages. */
 const fs = require('fs');
 const path = require('path');
+const { SITE } = require('./data.js');
 const { ARTICLES } = require('./travel-guide-data.js');
+const { GUIDE_CLUSTERS, GUIDE_TITLES } = require('./seo-content.js');
 
 const ROOT = path.join(__dirname, '..');
 const ORIGIN = 'https://egyptvillastours.com';
 const GUIDE_ROOT = path.join(ROOT, 'egypt-travel-guide');
 const DEFAULT_ARTICLE_DATE = '2026-08-07';
-const GUIDE_UPDATED = '2026-08-29';
+const GUIDE_UPDATED = '2026-08-30';
 const WHATSAPP = 'https://wa.me/201204421652';
 const ECLIPSE_GUIDE_ORDER = [
   'luxor-total-solar-eclipse-2027',
@@ -51,6 +53,9 @@ const head = ({ title, description, canonical, image, type = 'article', schema }
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${absolute(image)}">
 <meta name="theme-color" content="#147481"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${SITE.ga}');</script>
+<script defer src="/analytics-events.js"></script>
 <style>${CSS}</style><script type="application/ld+json">${JSON.stringify(schema)}</script></head>`;
 
 const articleCard = (article, index) => `<a class="card${index === 0 ? ' featured' : ''}" href="${article.href}"><img src="${article.image}" alt="" loading="${index < 3 ? 'eager' : 'lazy'}"><div class="card-content"><span class="kicker">${esc(article.readTime)}</span><h2>${esc(article.title)}</h2><p>${esc(article.dek)}</p><span class="read">Read article →</span></div></a>`;
@@ -67,7 +72,7 @@ const buildHub = () => {
 const buildArticle = (article) => {
   const canonical = `${ORIGIN}/egypt-travel-guide/${article.slug}/`;
   const published = article.datePublished || DEFAULT_ARTICLE_DATE;
-  const modified = article.dateModified || published;
+  const modified = '2026-08-30';
   const schema = [
     { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.description, image: absolute(article.image), datePublished: published, dateModified: modified, author: { '@type': 'Organization', name: 'Royal Nile Villas' }, publisher: { '@type': 'Organization', name: 'Royal Nile Villas', url: ORIGIN }, mainEntityOfPage: canonical },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -80,11 +85,15 @@ const buildArticle = (article) => {
     const inlineImages = (article.inlineImages || []).filter((image) => image.afterSection === index + 1).map((image) => `<figure class="article-image"><img src="${esc(image.src)}" alt="${esc(image.alt)}" loading="lazy"><figcaption>${esc(image.caption)}</figcaption></figure>`).join('');
     return `<section class="article-section"><h2>${esc(section.heading)}</h2><p>${esc(section.body)}</p></section>${inlineImages}`;
   }).join('');
-  const relatedLinks = article.relatedLinks?.length ? `<section class="sources"><h2>Plan the rest of your Luxor eclipse trip</h2><ul>${article.relatedLinks.map((link) => `<li><a href="${esc(link.url)}">${esc(link.label)}</a></li>`).join('')}</ul></section>` : '';
+  const cluster = GUIDE_CLUSTERS.find((slugs) => slugs.includes(article.slug)) || [];
+  const contextual = cluster.filter((slug) => slug !== article.slug).map((slug) => ARTICLES.find((item) => item.slug === slug)).filter(Boolean).map((item) => ({ url: `/egypt-travel-guide/${item.slug}/`, label: item.title }));
+  const links = [...(article.relatedLinks || []), ...contextual, { url: '/#villas', label: 'Compare all eight Luxor apartments' }, { url: '/#tours', label: 'Add private tours to your stay' }];
+  const uniqueLinks = links.filter((link, index) => links.findIndex((item) => item.url === link.url) === index);
+  const relatedLinks = uniqueLinks.length ? `<section class="sources"><h2>Plan the rest of your Luxor trip</h2><ul>${uniqueLinks.map((link) => `<li><a href="${esc(link.url)}">${esc(link.label)}</a></li>`).join('')}</ul></section>` : '';
   const sources = article.sources?.length ? `<section class="sources"><h2>Sources and further reading</h2><ul>${article.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}</a></li>`).join('')}</ul></section>` : '';
   const caption = article.imageCaption ? `<p class="hero-caption">${esc(article.imageCaption)}</p>` : '';
   const whatsappMessage = article.whatsappMessage || `Hi! I read “${article.title}” and would like help choosing a Royal Nile Villas apartment.`;
-  return `${head({ title: `${article.seoTitle || article.title} | Royal Nile Villas`, description: article.description, canonical, image: article.image, schema })}<body>${nav()}<main class="wrap"><nav class="breadcrumb"><a href="/">Home</a> › <a href="/egypt-travel-guide/">Egypt Travel Guide</a> › ${esc(article.title)}</nav><header><span class="kicker">Egypt Travel Guide · ${esc(article.readTime)}</span><h1>${esc(article.title)}</h1><p class="dek">${esc(article.dek)}</p><p class="meta">Published ${published} · Updated ${modified}</p></header><figure class="hero"><img src="${article.image}" alt="${esc(article.title)}"></figure>${caption}<div class="grid"><div class="article-body">${sections}${relatedLinks}${sources}<a class="back" href="/egypt-travel-guide/">← All guide articles</a></div><aside class="aside"><section class="aside-card"><span class="kicker">Booking checklist</span><ul class="tips">${article.tips.map((tip) => `<li>${esc(tip)}</li>`).join('')}</ul></section><section class="aside-card cta"><h2>${esc(article.ctaTitle)}</h2><p>${esc(article.ctaBody)}</p><a class="btn" href="${WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" rel="noopener">Check availability →</a></section></aside></div></main>${footer}</body></html>`;
+  return `${head({ title: `${GUIDE_TITLES[article.slug] || article.seoTitle || article.title} | Royal Nile Villas`, description: article.description, canonical, image: article.image, schema })}<body>${nav()}<main class="wrap"><nav class="breadcrumb"><a href="/">Home</a> › <a href="/egypt-travel-guide/">Egypt Travel Guide</a> › ${esc(article.title)}</nav><header><span class="kicker">Egypt Travel Guide · ${esc(article.readTime)}</span><h1>${esc(article.title)}</h1><p class="dek">${esc(article.dek)}</p><p class="meta">Published ${published} · Updated ${modified}</p></header><figure class="hero"><img src="${article.image}" alt="${esc(article.title)}"></figure>${caption}<div class="grid"><div class="article-body">${sections}${relatedLinks}${sources}<a class="back" href="/egypt-travel-guide/">← All guide articles</a></div><aside class="aside"><section class="aside-card"><span class="kicker">Booking checklist</span><ul class="tips">${article.tips.map((tip) => `<li>${esc(tip)}</li>`).join('')}</ul></section><section class="aside-card cta"><h2>${esc(article.ctaTitle)}</h2><p>${esc(article.ctaBody)}</p><a class="btn" href="${WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}" target="_blank" rel="noopener">Check availability →</a></section></aside></div></main>${footer}</body></html>`;
 };
 
 fs.mkdirSync(GUIDE_ROOT, { recursive: true });
@@ -100,7 +109,7 @@ let sitemap = fs.readFileSync(sitemapPath, 'utf8');
 sitemap = sitemap.replace(/\n\s*<url><loc>https:\/\/egyptvillastours\.com\/egypt-travel-guide\/.*?<\/url>/gs, '');
 const entries = [
   `<url><loc>${ORIGIN}/egypt-travel-guide/</loc><lastmod>${GUIDE_UPDATED}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>`,
-  ...ARTICLES.map((article) => `<url><loc>${ORIGIN}/egypt-travel-guide/${article.slug}/</loc><lastmod>${article.dateModified || DEFAULT_ARTICLE_DATE}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`),
+  ...ARTICLES.map((article) => `<url><loc>${ORIGIN}/egypt-travel-guide/${article.slug}/</loc><lastmod>2026-08-30</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`),
 ].map((entry) => `  ${entry}`).join('\n');
 sitemap = sitemap.replace('</urlset>', `${entries}\n</urlset>`);
 fs.writeFileSync(sitemapPath, sitemap);
