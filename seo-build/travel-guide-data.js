@@ -1,4 +1,7 @@
+const HAWARA_ARTICLE = require('./hawara-article.json');
+
 const ARTICLES = [
+  HAWARA_ARTICLE,
   {
     slug: 'where-to-stay-near-luxor-hot-air-balloon-launch-west-bank',
     title: 'Sunrise Hot Air Balloon Luxor: Stay 10 Minutes from the West Bank Launch Field',
