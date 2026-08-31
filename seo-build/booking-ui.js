@@ -1,5 +1,12 @@
 const { VILLAS, wa, optimizedImage } = require('./data');
 const FEATURED_IDS = ['nile-view-luxury-2', 'nile-view-2'];
+function versionBookingAssets(html) {
+  const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+  return html.replace(/(href|src)="\/(booking-ui\.css|availability-search\.js|villa-data\.js|villa-collection-search\.js)(?:\?[^"\s]*)?"/g, (_, attr, file) => {
+    const hash = crypto.createHash('sha256').update(fs.readFileSync(path.join(__dirname,'..',file))).digest('hex').slice(0,12);
+    return `${attr}="/${file}?v=${hash}"`;
+  });
+}
 
 function searchBar() {
   return `<aside class="booking-dock" aria-label="Apartment availability"><form id="availabilityForm" class="booking-form">
@@ -27,6 +34,6 @@ function updateHome() {
   let html = fs.readFileSync(file, 'utf8');
   html = html.replace(/<!-- BOOKING DOCK START -->[\s\S]*?<!-- BOOKING DOCK END -->/, `<!-- BOOKING DOCK START -->${searchBar()}<!-- BOOKING DOCK END -->`);
   html = html.replace(/<!-- FEATURED STAYS START -->[\s\S]*?<!-- FEATURED STAYS END -->/, `<!-- FEATURED STAYS START -->${featuredProperties()}<!-- FEATURED STAYS END -->`);
-  fs.writeFileSync(file, html);
+  fs.writeFileSync(file, versionBookingAssets(html));
 }
-module.exports = { searchBar, searchResults, featuredProperties, updateHome, FEATURED_IDS };
+module.exports = { searchBar, searchResults, featuredProperties, updateHome, FEATURED_IDS, versionBookingAssets };

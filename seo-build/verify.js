@@ -41,8 +41,8 @@ assert.ok(read('villas/index.html').includes('For entire villa bookings,'));
 assert.equal((read('villas/index.html').match(/Book on Airbnb/g) || []).length, 8);
 for (const file of ['index.html', 'villas/index.html']) {
   assert.ok(read(file).includes('id="availabilityForm"'));
-  assert.ok(read(file).includes('src="/villa-data.js"'));
-  assert.ok(read(file).includes('src="/availability-search.js"'));
+  assert.ok(read(file).includes('src="/villa-data.js?v='));
+  assert.ok(read(file).includes('src="/availability-search.js?v='));
 }
 for (const kind of ['villas','tours']) {
   assert.ok(read(`${kind}/index.html`).includes('https://www.airbnb.co.uk/users/show/252258998'));
