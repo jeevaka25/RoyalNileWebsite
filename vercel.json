@@ -12,346 +12,1146 @@
     }
   ],
   "redirects": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "www.egyptvillastours.com" }], "destination": "https://egyptvillastours.com/:path*", "permanent": true },
-    { "source": "/villas", "destination": "/villas/", "permanent": true },
-    { "source": "/tours", "destination": "/tours/", "permanent": true },
-    { "source": "/tour", "destination": "/tours/", "permanent": true },
-    { "source": "/tour/", "destination": "/tours/", "permanent": true },
-    { "source": "/villas/index.html", "destination": "/villas/", "permanent": true },
-    { "source": "/tours/index.html", "destination": "/tours/", "permanent": true },
-    { "source": "/balloon-ride", "destination": "/hot-air-balloon-luxor", "permanent": true },
-    { "source": "/balloon-ride/", "destination": "/hot-air-balloon-luxor", "permanent": true },
-    { "source": "/nile-view-apartment", "destination": "/villas/royal-home-nile-view", "permanent": true },
-    { "source": "/nile-view-apartment/", "destination": "/villas/royal-home-nile-view", "permanent": true },
-    { "source": "/pool-view-apartment", "destination": "/villas/royal-home-pool-view", "permanent": true },
-    { "source": "/pool-view-apartment/", "destination": "/villas/royal-home-pool-view", "permanent": true },
-    { "source": "/royal-home-villa", "destination": "/villas/royal-home-nile-view", "permanent": true },
-    { "source": "/royal-home-villa/", "destination": "/villas/royal-home-nile-view", "permanent": true },
-    { "source": "/royal-nile-nile-view-apartment-1", "destination": "/villas/nile-view-1", "permanent": true },
-    { "source": "/royal-nile-nile-view-apartment-1/", "destination": "/villas/nile-view-1", "permanent": true },
-    { "source": "/royal-nile-villas", "destination": "/", "permanent": true },
-    { "source": "/royal-nile-villas/", "destination": "/", "permanent": true },
-    { "source": "/contact-us-2", "destination": "/#contact", "permanent": true },
-    { "source": "/contact-us-2/", "destination": "/#contact", "permanent": true },
-    { "source": "/the-4-most-incredible-least-known-monuments-egypt", "destination": "/egypt-travel-guide/", "permanent": true },
-    { "source": "/the-4-most-incredible-least-known-monuments-egypt/", "destination": "/egypt-travel-guide/", "permanent": true },
-    { "source": "/top-10-things-to-do-in-egypt-2025", "destination": "/egypt-travel-guide/", "permanent": true },
-    { "source": "/top-10-things-to-do-in-egypt-2025/", "destination": "/egypt-travel-guide/", "permanent": true }
-  ],
-  "rewrites": [
-    { "source": "/villas/", "destination": "/villas/index.html" },
-    { "source": "/tours/", "destination": "/tours/index.html" },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.egyptvillastours.com"
+        }
+      ],
+      "destination": "https://egyptvillastours.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/villas",
+      "destination": "/villas/",
+      "permanent": true
+    },
+    {
+      "source": "/tours",
+      "destination": "/tours/",
+      "permanent": true
+    },
+    {
+      "source": "/tour",
+      "destination": "/tours/",
+      "permanent": true
+    },
+    {
+      "source": "/tour/",
+      "destination": "/tours/",
+      "permanent": true
+    },
+    {
+      "source": "/villas/index.html",
+      "destination": "/villas/",
+      "permanent": true
+    },
+    {
+      "source": "/tours/index.html",
+      "destination": "/tours/",
+      "permanent": true
+    },
+    {
+      "source": "/nile-view-apartment",
+      "destination": "/villas/royal-home-nile-view",
+      "permanent": true
+    },
+    {
+      "source": "/nile-view-apartment/",
+      "destination": "/villas/royal-home-nile-view",
+      "permanent": true
+    },
+    {
+      "source": "/pool-view-apartment",
+      "destination": "/villas/royal-home-pool-view",
+      "permanent": true
+    },
+    {
+      "source": "/pool-view-apartment/",
+      "destination": "/villas/royal-home-pool-view",
+      "permanent": true
+    },
+    {
+      "source": "/royal-home-villa",
+      "destination": "/villas/royal-home-nile-view",
+      "permanent": true
+    },
+    {
+      "source": "/royal-home-villa/",
+      "destination": "/villas/royal-home-nile-view",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-nile-view-apartment-1",
+      "destination": "/villas/nile-view-1",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-nile-view-apartment-1/",
+      "destination": "/villas/nile-view-1",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-villas",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-villas/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us-2",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us-2/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/the-4-most-incredible-least-known-monuments-egypt",
+      "destination": "/egypt-travel-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/the-4-most-incredible-least-known-monuments-egypt/",
+      "destination": "/egypt-travel-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/top-10-things-to-do-in-egypt-2025",
+      "destination": "/egypt-travel-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/top-10-things-to-do-in-egypt-2025/",
+      "destination": "/egypt-travel-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-solar-eclipse-2027-package",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-solar-eclipse-2027-package/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-solar-eclipse-2027-package.html",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-solar-eclipse-2027-package.html/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/2027-luxor-solar-eclipse-package",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/2027-luxor-solar-eclipse-package/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/2027-luxor-solar-eclipse-package.html",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/2027-luxor-solar-eclipse-package.html/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-eclipse-package",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-eclipse-package/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-eclipse-package.html",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-eclipse-package.html/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/solar-eclipse-luxor-2027",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/solar-eclipse-luxor-2027/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/solar-eclipse-luxor-2027.html",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/solar-eclipse-luxor-2027.html/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
     {
       "source": "/hot-air-balloon-luxor",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/hot-air-balloon-luxor/",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/hot-air-balloon-luxor.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/hot-air-balloon-luxor.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/hot-air-balloon-ride",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/hot-air-balloon-ride/",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/hot-air-balloon-ride.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/hot-air-balloon-ride.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/hot-air-balloon-tour",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/hot-air-balloon-tour/",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/hot-air-balloon-tour.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/hot-air-balloon-tour.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/balloon-tour",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/balloon-tour/",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/balloon-tour.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/balloon-tour.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/balloon-ride",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/balloon-ride/",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/balloon-ride.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/balloon-ride.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/balloon",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/balloon/",
-      "destination": "/hot-air-balloon-luxor.html"
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/balloon.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/balloon.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
     },
     {
       "source": "/valley-of-the-kings-tour",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/valley-of-the-kings-tour/",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/valley-of-the-kings-tour.html",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/valley-of-the-kings-tour.html/",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/west-bank-tour",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/west-bank-tour/",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/west-bank-tour.html",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/west-bank-tour.html/",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/luxor-west-bank-tour",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/luxor-west-bank-tour/",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-west-bank-tour.html",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-west-bank-tour.html/",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/west-bank",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/west-bank/",
-      "destination": "/valley-of-the-kings-tour.html"
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/west-bank.html",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/west-bank.html/",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
     },
     {
       "source": "/karnak-luxor-temple-tour",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/karnak-luxor-temple-tour/",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/karnak-luxor-temple-tour.html",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/karnak-luxor-temple-tour.html/",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/east-bank-tour",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/east-bank-tour/",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/east-bank-tour.html",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/east-bank-tour.html/",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/luxor-east-bank-tour",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/luxor-east-bank-tour/",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-east-bank-tour.html",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-east-bank-tour.html/",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/east-bank",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/east-bank/",
-      "destination": "/karnak-luxor-temple-tour.html"
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/east-bank.html",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/east-bank.html/",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
     },
     {
       "source": "/luxor-desert-safari",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/luxor-desert-safari/",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-desert-safari.html",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/luxor-desert-safari.html/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/desert-quad-safari",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/desert-quad-safari/",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/desert-quad-safari.html",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/desert-quad-safari.html/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/quad-bike-safari",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/quad-bike-safari/",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/quad-bike-safari.html",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/quad-bike-safari.html/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/desert",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/desert/",
-      "destination": "/luxor-desert-safari.html"
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/desert.html",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/desert.html/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
     },
     {
       "source": "/abu-simbel-tour",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/abu-simbel-tour/",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abu-simbel-tour.html",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abu-simbel-tour.html/",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/abu-simbel-expedition",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/abu-simbel-expedition/",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abu-simbel-expedition.html",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abu-simbel-expedition.html/",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-abusimbel-tour",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-abusimbel-tour/",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-abusimbel-tour.html",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-abusimbel-tour.html/",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/abu-simbel",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/abu-simbel/",
-      "destination": "/abu-simbel-tour.html"
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abu-simbel.html",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abu-simbel.html/",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-philae-temple-tour",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-philae-temple-tour/",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-philae-temple-tour.html",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-philae-temple-tour.html/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-tour",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-tour/",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-tour.html",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-tour.html/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-philae-temple",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-philae-temple/",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-philae-temple.html",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-philae-temple.html/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-and-philae-temple",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan-and-philae-temple/",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-and-philae-temple.html",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan-and-philae-temple.html/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/aswan/",
-      "destination": "/aswan-philae-temple-tour.html"
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan.html",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/aswan.html/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
     },
     {
       "source": "/sunset-nile-boat-cruise",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/sunset-nile-boat-cruise/",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/sunset-nile-boat-cruise.html",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/sunset-nile-boat-cruise.html/",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/nile-boat-cruise",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/nile-boat-cruise/",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/nile-boat-cruise.html",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/nile-boat-cruise.html/",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/nile-sunset-cruise",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/nile-sunset-cruise/",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/nile-sunset-cruise.html",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/nile-sunset-cruise.html/",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/nile-cruise",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/nile-cruise/",
-      "destination": "/sunset-nile-boat-cruise.html"
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/nile-cruise.html",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/nile-cruise.html/",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
     },
     {
       "source": "/hurghada-snorkelling-adventure",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/hurghada-snorkelling-adventure/",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/hurghada-snorkelling-adventure.html",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/hurghada-snorkelling-adventure.html/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/hurghada-snorkeling-adventure",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/hurghada-snorkeling-adventure/",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/hurghada-snorkeling-adventure.html",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/hurghada-snorkeling-adventure.html/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/red-sea-snorkelling",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/red-sea-snorkelling/",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/red-sea-snorkelling.html",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/red-sea-snorkelling.html/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/red-sea-snorkeling",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/red-sea-snorkeling/",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/red-sea-snorkeling.html",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/red-sea-snorkeling.html/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/red-sea",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/red-sea/",
-      "destination": "/hurghada-snorkelling-adventure.html"
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/red-sea.html",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/red-sea.html/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
     },
     {
       "source": "/abydos-dendera-tour",
-      "destination": "/abydos-dendera-tour.html"
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
     },
     {
       "source": "/abydos-dendera-tour/",
-      "destination": "/abydos-dendera-tour.html"
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abydos-dendera-tour.html",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abydos-dendera-tour.html/",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
     },
     {
       "source": "/abydos-and-dendera-tour",
-      "destination": "/abydos-dendera-tour.html"
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
     },
     {
       "source": "/abydos-and-dendera-tour/",
-      "destination": "/abydos-dendera-tour.html"
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abydos-and-dendera-tour.html",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abydos-and-dendera-tour.html/",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
     },
     {
       "source": "/abydos-dendera",
-      "destination": "/abydos-dendera-tour.html"
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
     },
     {
       "source": "/abydos-dendera/",
-      "destination": "/abydos-dendera-tour.html"
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abydos-dendera.html",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/abydos-dendera.html/",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/luxor-solar-eclipse-2027-package/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/tours/luxor-solar-eclipse-2027-package.html",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/tours/luxor-solar-eclipse-2027-package.html/",
+      "destination": "/tours/luxor-solar-eclipse-2027-package",
+      "permanent": true
+    },
+    {
+      "source": "/tours/hot-air-balloon-luxor/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/tours/hot-air-balloon-luxor.html",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/tours/hot-air-balloon-luxor.html/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/tours/valley-of-the-kings-tour/",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/valley-of-the-kings-tour.html",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/valley-of-the-kings-tour.html/",
+      "destination": "/tours/valley-of-the-kings-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/karnak-luxor-temple-tour/",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/karnak-luxor-temple-tour.html",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/karnak-luxor-temple-tour.html/",
+      "destination": "/tours/karnak-luxor-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/luxor-desert-safari/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/tours/luxor-desert-safari.html",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/tours/luxor-desert-safari.html/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abu-simbel-tour/",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abu-simbel-tour.html",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abu-simbel-tour.html/",
+      "destination": "/tours/abu-simbel-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/aswan-philae-temple-tour/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/aswan-philae-temple-tour.html",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/aswan-philae-temple-tour.html/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/sunset-nile-boat-cruise/",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/tours/sunset-nile-boat-cruise.html",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/tours/sunset-nile-boat-cruise.html/",
+      "destination": "/tours/sunset-nile-boat-cruise",
+      "permanent": true
+    },
+    {
+      "source": "/tours/hurghada-snorkelling-adventure/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/tours/hurghada-snorkelling-adventure.html",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/tours/hurghada-snorkelling-adventure.html/",
+      "destination": "/tours/hurghada-snorkelling-adventure",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abydos-dendera-tour/",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abydos-dendera-tour.html",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/abydos-dendera-tour.html/",
+      "destination": "/tours/abydos-dendera-tour",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/villas/",
+      "destination": "/villas/index.html"
+    },
+    {
+      "source": "/tours/",
+      "destination": "/tours/index.html"
     },
     {
       "source": "/villas/royal-home-nile-view",
@@ -432,6 +1232,46 @@
     {
       "source": "/wonders-of-cairo-tour/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/tours/luxor-solar-eclipse-2027-package",
+      "destination": "/tours/luxor-solar-eclipse-2027-package.html"
+    },
+    {
+      "source": "/tours/hot-air-balloon-luxor",
+      "destination": "/tours/hot-air-balloon-luxor.html"
+    },
+    {
+      "source": "/tours/valley-of-the-kings-tour",
+      "destination": "/tours/valley-of-the-kings-tour.html"
+    },
+    {
+      "source": "/tours/karnak-luxor-temple-tour",
+      "destination": "/tours/karnak-luxor-temple-tour.html"
+    },
+    {
+      "source": "/tours/luxor-desert-safari",
+      "destination": "/tours/luxor-desert-safari.html"
+    },
+    {
+      "source": "/tours/abu-simbel-tour",
+      "destination": "/tours/abu-simbel-tour.html"
+    },
+    {
+      "source": "/tours/aswan-philae-temple-tour",
+      "destination": "/tours/aswan-philae-temple-tour.html"
+    },
+    {
+      "source": "/tours/sunset-nile-boat-cruise",
+      "destination": "/tours/sunset-nile-boat-cruise.html"
+    },
+    {
+      "source": "/tours/hurghada-snorkelling-adventure",
+      "destination": "/tours/hurghada-snorkelling-adventure.html"
+    },
+    {
+      "source": "/tours/abydos-dendera-tour",
+      "destination": "/tours/abydos-dendera-tour.html"
     }
   ]
 }

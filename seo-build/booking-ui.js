@@ -2,10 +2,10 @@ const { VILLAS, wa, optimizedImage } = require('./data');
 const FEATURED_IDS = ['nile-view-luxury-2', 'nile-view-2'];
 
 function searchBar() {
-  return `<aside class="booking-dock" aria-label="Apartment availability"><details open id="bookingPanel"><summary>Check apartment availability <span aria-hidden="true">⌄</span></summary><form id="availabilityForm" class="booking-form">
+  return `<aside class="booking-dock" aria-label="Apartment availability"><form id="availabilityForm" class="booking-form">
 <div><label for="checkin">Check in</label><input type="date" id="checkin" required></div><div><label for="checkout">Check out</label><input type="date" id="checkout" required></div>
-<button type="submit" id="searchBtn">Search availability</button><button type="button" id="clearDates">Clear</button>
-<p id="searchFeedback" role="status" aria-live="polite"></p></form></details></aside>`;
+<button type="submit" id="searchBtn">Search availability</button>
+<p id="searchFeedback" role="status" aria-live="polite"></p></form></aside>`;
 }
 
 function searchResults() {

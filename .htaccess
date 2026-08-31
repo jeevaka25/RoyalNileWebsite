@@ -6,6 +6,59 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.egyptvillastours\.com$ [NC]
 RewriteRule ^ https://egyptvillastours.com%{REQUEST_URI} [R=301,L,NE]
 
+# BEGIN GENERATED TOUR ROUTES
+# Keep old links and campaign query strings; do not remove these redirects.
+RewriteRule ^(luxor-solar-eclipse-2027-package|2027-luxor-solar-eclipse-package|luxor-eclipse-package|solar-eclipse-luxor-2027)(?:\.html)?/?$ /tours/luxor-solar-eclipse-2027-package [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/luxor-solar-eclipse-2027-package(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/luxor-solar-eclipse-2027-package(?:/|\.html/?)$ /tours/luxor-solar-eclipse-2027-package [R=301,L]
+RewriteRule ^tours/luxor-solar-eclipse-2027-package$ tours/luxor-solar-eclipse-2027-package.html [L]
+
+RewriteRule ^(hot-air-balloon-luxor|hot-air-balloon-ride|hot-air-balloon-tour|balloon-tour|balloon-ride|balloon)(?:\.html)?/?$ /tours/hot-air-balloon-luxor [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/hot-air-balloon-luxor(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/hot-air-balloon-luxor(?:/|\.html/?)$ /tours/hot-air-balloon-luxor [R=301,L]
+RewriteRule ^tours/hot-air-balloon-luxor$ tours/hot-air-balloon-luxor.html [L]
+
+RewriteRule ^(valley-of-the-kings-tour|west-bank-tour|luxor-west-bank-tour|west-bank)(?:\.html)?/?$ /tours/valley-of-the-kings-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/valley-of-the-kings-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/valley-of-the-kings-tour(?:/|\.html/?)$ /tours/valley-of-the-kings-tour [R=301,L]
+RewriteRule ^tours/valley-of-the-kings-tour$ tours/valley-of-the-kings-tour.html [L]
+
+RewriteRule ^(karnak-luxor-temple-tour|east-bank-tour|luxor-east-bank-tour|east-bank)(?:\.html)?/?$ /tours/karnak-luxor-temple-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/karnak-luxor-temple-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/karnak-luxor-temple-tour(?:/|\.html/?)$ /tours/karnak-luxor-temple-tour [R=301,L]
+RewriteRule ^tours/karnak-luxor-temple-tour$ tours/karnak-luxor-temple-tour.html [L]
+
+RewriteRule ^(luxor-desert-safari|desert-quad-safari|quad-bike-safari|desert)(?:\.html)?/?$ /tours/luxor-desert-safari [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/luxor-desert-safari(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/luxor-desert-safari(?:/|\.html/?)$ /tours/luxor-desert-safari [R=301,L]
+RewriteRule ^tours/luxor-desert-safari$ tours/luxor-desert-safari.html [L]
+
+RewriteRule ^(abu-simbel-tour|abu-simbel-expedition|aswan-abusimbel-tour|abu-simbel)(?:\.html)?/?$ /tours/abu-simbel-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/abu-simbel-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/abu-simbel-tour(?:/|\.html/?)$ /tours/abu-simbel-tour [R=301,L]
+RewriteRule ^tours/abu-simbel-tour$ tours/abu-simbel-tour.html [L]
+
+RewriteRule ^(aswan-philae-temple-tour|aswan-tour|aswan-philae-temple|aswan-and-philae-temple|aswan)(?:\.html)?/?$ /tours/aswan-philae-temple-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/aswan-philae-temple-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/aswan-philae-temple-tour(?:/|\.html/?)$ /tours/aswan-philae-temple-tour [R=301,L]
+RewriteRule ^tours/aswan-philae-temple-tour$ tours/aswan-philae-temple-tour.html [L]
+
+RewriteRule ^(sunset-nile-boat-cruise|nile-boat-cruise|nile-sunset-cruise|nile-cruise)(?:\.html)?/?$ /tours/sunset-nile-boat-cruise [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/sunset-nile-boat-cruise(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/sunset-nile-boat-cruise(?:/|\.html/?)$ /tours/sunset-nile-boat-cruise [R=301,L]
+RewriteRule ^tours/sunset-nile-boat-cruise$ tours/sunset-nile-boat-cruise.html [L]
+
+RewriteRule ^(hurghada-snorkelling-adventure|hurghada-snorkeling-adventure|red-sea-snorkelling|red-sea-snorkeling|red-sea)(?:\.html)?/?$ /tours/hurghada-snorkelling-adventure [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/hurghada-snorkelling-adventure(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/hurghada-snorkelling-adventure(?:/|\.html/?)$ /tours/hurghada-snorkelling-adventure [R=301,L]
+RewriteRule ^tours/hurghada-snorkelling-adventure$ tours/hurghada-snorkelling-adventure.html [L]
+
+RewriteRule ^(abydos-dendera-tour|abydos-and-dendera-tour|abydos-dendera)(?:\.html)?/?$ /tours/abydos-dendera-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/abydos-dendera-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/abydos-dendera-tour(?:/|\.html/?)$ /tours/abydos-dendera-tour [R=301,L]
+RewriteRule ^tours/abydos-dendera-tour$ tours/abydos-dendera-tour.html [L]
+# END GENERATED TOUR ROUTES
+
 # Public collection URLs use directory indexes and one trailing-slash canonical.
 RewriteRule ^(villas|tours)$ /$1/ [R=301,L]
 RewriteRule ^tour/?$ /tours/ [R=301,L]
@@ -14,7 +67,6 @@ RewriteRule ^(villas|tours)/index\.html$ /$1/ [R=301,L]
 
 # Permanent redirects for legacy URLs reported in Search Console.
 # Keep these ahead of the internal clean-URL rewrites below.
-RewriteRule ^balloon-ride/?$ /hot-air-balloon-luxor [R=301,L]
 RewriteRule ^nile-view-apartment/?$ /villas/royal-home-nile-view [R=301,L]
 RewriteRule ^pool-view-apartment/?$ /villas/royal-home-pool-view [R=301,L]
 RewriteRule ^royal-home-villa/?$ /villas/royal-home-nile-view [R=301,L]
@@ -22,22 +74,10 @@ RewriteRule ^royal-nile-nile-view-apartment-1/?$ /villas/nile-view-1 [R=301,L]
 RewriteRule ^(royal-nile-villas|contact-us-2)/?$ / [R=301,L]
 RewriteRule ^(the-4-most-incredible-least-known-monuments-egypt|top-10-things-to-do-in-egypt-2025)/?$ /egypt-travel-guide/ [R=301,L]
 
-# Luxor total solar eclipse 2027 accommodation package
-RewriteRule ^(luxor-solar-eclipse-2027-package|2027-luxor-solar-eclipse-package|luxor-eclipse-package|solar-eclipse-luxor-2027)/?$ luxor-solar-eclipse-2027-package.html [L]
-
 # Hostinger/PHP equivalent of the Vercel availability function.
 RewriteRule ^api/availability/?$ api/availability-hostinger.php [L,QSA]
 
-# Tour aliases.
-RewriteRule ^(hot-air-balloon-luxor|hot-air-balloon-ride|hot-air-balloon-tour|balloon-tour|balloon-ride|balloon)/?$ hot-air-balloon-luxor.html [L]
-RewriteRule ^(valley-of-the-kings-tour|west-bank-tour|luxor-west-bank-tour|west-bank)/?$ valley-of-the-kings-tour.html [L]
-RewriteRule ^(karnak-luxor-temple-tour|east-bank-tour|luxor-east-bank-tour|east-bank)/?$ karnak-luxor-temple-tour.html [L]
-RewriteRule ^(luxor-desert-safari|desert-quad-safari|quad-bike-safari|desert)/?$ luxor-desert-safari.html [L]
-RewriteRule ^(abu-simbel-tour|abu-simbel-expedition|aswan-abusimbel-tour|abu-simbel)/?$ abu-simbel-tour.html [L]
-RewriteRule ^(aswan-philae-temple-tour|aswan-tour|aswan-philae-temple|aswan-and-philae-temple|aswan)/?$ aswan-philae-temple-tour.html [L]
-RewriteRule ^(sunset-nile-boat-cruise|nile-boat-cruise|nile-sunset-cruise|nile-cruise)/?$ sunset-nile-boat-cruise.html [L]
-RewriteRule ^(hurghada-snorkelling-adventure|hurghada-snorkeling-adventure|red-sea-snorkelling|red-sea-snorkeling|red-sea)/?$ hurghada-snorkelling-adventure.html [L]
-RewriteRule ^(abydos-dendera-tour|abydos-and-dendera-tour|abydos-dendera)/?$ abydos-dendera-tour.html [L]
+# Legacy tours without a dedicated offering keep their existing homepage fallback.
 RewriteRule ^(pyramids-sphinx-tour|wonders-of-cairo-tour)/?$ index.html [L]
 
 # Clean villa URLs.

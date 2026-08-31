@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5050;
 
 const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
 const rewrites = (vercel.rewrites || []).reduce((m, r) => { m[r.source.replace(/\/$/, '') || '/'] = r.destination; return m; }, {});
+const redirects = new Map((vercel.redirects || []).filter(r => !r.has && !r.source.includes(':')).map(r => [r.source,r]));
 
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
@@ -43,6 +44,12 @@ const server = http.createServer((req, res) => {
   }
 
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
+  const redirect = redirects.get(urlPath);
+  if (redirect) {
+    const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+    res.writeHead(redirect.permanent ? 308 : 307,{'Location':redirect.destination+query});
+    return res.end();
+  }
   const noSlash = urlPath.replace(/\/$/, '') || '/';
 
   // 1) explicit rewrite match

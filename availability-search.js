@@ -30,7 +30,6 @@ window.RoyalAvailability = (() => {
       if (co.value && co.value < co.min) co.value='';
     }
     ci.addEventListener('change',datesChanged); co.addEventListener('change',datesChanged);
-    document.getElementById('clearDates').addEventListener('click',clear);
     document.getElementById('resetAvailability').addEventListener('click',clear);
     form.addEventListener('submit',async event => {
       event.preventDefault();

@@ -48,7 +48,8 @@ function siteAsset(src) {
 const TOURS = [
   {
     id: 'eclipse-2027',
-    primarySlug: 'luxor-solar-eclipse-2027-package',
+    legacySlug: 'luxor-solar-eclipse-2027-package',
+    primarySlug: 'tours/luxor-solar-eclipse-2027-package',
     aliases: ['2027-luxor-solar-eclipse-package', 'luxor-eclipse-package', 'solar-eclipse-luxor-2027'],
     h1: 'Luxor Solar Eclipse 2027 Accommodation Package',
     title: 'Luxor Solar Eclipse 2027 Package | Royal Nile Villas Stay',
@@ -88,7 +89,8 @@ const TOURS = [
   },
   {
     id: 'balloon',
-    primarySlug: 'hot-air-balloon-luxor',
+    legacySlug: 'hot-air-balloon-luxor',
+    primarySlug: 'tours/hot-air-balloon-luxor',
     aliases: ['hot-air-balloon-ride', 'hot-air-balloon-tour', 'balloon-tour', 'balloon-ride', 'balloon'],
     h1: 'Hot Air Balloon Ride Over Luxor at Sunrise',
     title: 'Hot Air Balloon Ride Over Luxor at Sunrise | Valley of the Kings',
@@ -115,7 +117,8 @@ const TOURS = [
   },
   {
     id: 'west-bank',
-    primarySlug: 'valley-of-the-kings-tour',
+    legacySlug: 'valley-of-the-kings-tour',
+    primarySlug: 'tours/valley-of-the-kings-tour',
     aliases: ['west-bank-tour', 'luxor-west-bank-tour', 'west-bank'],
     h1: 'Valley of the Kings & Luxor West Bank Tour',
     title: 'Valley of the Kings Tour, Luxor | Private West Bank Day Tour',
@@ -141,7 +144,8 @@ const TOURS = [
   },
   {
     id: 'east-bank',
-    primarySlug: 'karnak-luxor-temple-tour',
+    legacySlug: 'karnak-luxor-temple-tour',
+    primarySlug: 'tours/karnak-luxor-temple-tour',
     aliases: ['east-bank-tour', 'luxor-east-bank-tour', 'east-bank'],
     h1: 'Karnak & Luxor Temple Tour (East Bank)',
     title: 'Karnak & Luxor Temple Tour | Private Luxor East Bank Day Tour',
@@ -167,7 +171,8 @@ const TOURS = [
   },
   {
     id: 'desert',
-    primarySlug: 'luxor-desert-safari',
+    legacySlug: 'luxor-desert-safari',
+    primarySlug: 'tours/luxor-desert-safari',
     aliases: ['desert-quad-safari', 'quad-bike-safari', 'desert'],
     h1: 'Luxor Desert Quad Bike Safari',
     title: 'Luxor Desert Quad Bike Safari | Sunset Ride & Bedouin Tea',
@@ -193,7 +198,8 @@ const TOURS = [
   },
   {
     id: 'abu-simbel',
-    primarySlug: 'abu-simbel-tour',
+    legacySlug: 'abu-simbel-tour',
+    primarySlug: 'tours/abu-simbel-tour',
     aliases: ['abu-simbel-expedition', 'aswan-abusimbel-tour', 'abu-simbel'],
     h1: 'Abu Simbel Tour from Luxor',
     title: 'Abu Simbel Tour from Luxor | Private Day Trip to Ramesses II',
@@ -220,7 +226,8 @@ const TOURS = [
   },
   {
     id: 'aswan',
-    primarySlug: 'aswan-philae-temple-tour',
+    legacySlug: 'aswan-philae-temple-tour',
+    primarySlug: 'tours/aswan-philae-temple-tour',
     aliases: ['aswan-tour', 'aswan-philae-temple', 'aswan-and-philae-temple', 'aswan'],
     h1: 'Aswan & Philae Temple Tour from Luxor',
     title: 'Aswan & Philae Temple Tour from Luxor | Private Day Trip',
@@ -247,7 +254,8 @@ const TOURS = [
   },
   {
     id: 'nile-boat-cruise',
-    primarySlug: 'sunset-nile-boat-cruise',
+    legacySlug: 'sunset-nile-boat-cruise',
+    primarySlug: 'tours/sunset-nile-boat-cruise',
     aliases: ['nile-boat-cruise', 'nile-sunset-cruise', 'nile-cruise'],
     h1: 'Sunset Nile Boat Cruise in Luxor',
     title: 'Sunset Nile Boat Cruise, Luxor | Dinner on the Nile',
@@ -273,7 +281,8 @@ const TOURS = [
   },
   {
     id: 'red-sea',
-    primarySlug: 'hurghada-snorkelling-adventure',
+    legacySlug: 'hurghada-snorkelling-adventure',
+    primarySlug: 'tours/hurghada-snorkelling-adventure',
     aliases: ['hurghada-snorkeling-adventure', 'red-sea-snorkelling', 'red-sea-snorkeling', 'red-sea'],
     h1: 'Hurghada Red Sea Snorkelling Trip from Luxor',
     title: 'Hurghada Snorkelling Day Trip from Luxor | Red Sea Adventure',
@@ -299,7 +308,8 @@ const TOURS = [
   },
   {
     id: 'abydos-dendera',
-    primarySlug: 'abydos-dendera-tour',
+    legacySlug: 'abydos-dendera-tour',
+    primarySlug: 'tours/abydos-dendera-tour',
     aliases: ['abydos-and-dendera-tour', 'abydos-dendera'],
     h1: 'Abydos & Dendera Temples Tour from Luxor',
     title: 'Abydos & Dendera Temples Tour from Luxor | Private Day Trip',

@@ -31,7 +31,7 @@ const response=values=>({ok:true,json:async()=>({results:inventory.map((v,i)=>({
   });
   await mixed.submit();assert.equal(requests,0,'Missing dates must not make a request');
   mixed.dates();await mixed.submit();assert.equal(mixed.rendered().length,3);assert.match(mixed.get('bookingResultsMessage').textContent,/2 could not be verified/);
-  mixed.get('clearDates').handlers.click();assert.equal(mixed.get('bookingResults').hidden,true);assert.equal(mixed.get('checkin').value,'');assert.equal(mixed.resets(),1);
+  mixed.get('resetAvailability').handlers.click();assert.equal(mixed.get('bookingResults').hidden,true);assert.equal(mixed.get('checkin').value,'');assert.equal(mixed.resets(),1);
   mixed.dates();mixed.get('checkin').value='2000-01-01';await mixed.submit();assert.equal(requests,1,'Past dates must not request availability');
   mixed.dates();mixed.get('checkout').value='2099-12-09';await mixed.submit();assert.equal(requests,1,'Reversed dates must not request availability');
   mixed.dates();mixed.get('checkin').value='2099-12-15';mixed.get('checkin').handlers.change();assert.equal(mixed.get('checkout').value,'');assert.equal(mixed.get('checkout').min,'2099-12-16');
@@ -45,7 +45,7 @@ const response=values=>({ok:true,json:async()=>({results:inventory.map((v,i)=>({
   const missing=harness(async()=>({ok:true,json:async()=>({})}));missing.dates();await missing.submit();assert.equal(missing.rendered().length,0);assert.match(missing.get('bookingResultsMessage').textContent,/8 could not be verified/);
   let resolve;
   const racing=harness(()=>new Promise(done=>{resolve=done;}));racing.dates();const pending=racing.submit();assert.equal(racing.get('searchBtn').disabled,true);
-  racing.get('clearDates').handlers.click();resolve(response([true]));await pending;assert.equal(racing.rendered(),null,'A response after reset must not repaint the page');assert.equal(racing.get('bookingResults').hidden,true);
+  racing.get('resetAvailability').handlers.click();resolve(response([true]));await pending;assert.equal(racing.rendered(),null,'A response after reset must not repaint the page');assert.equal(racing.get('bookingResults').hidden,true);
   let finishOld;
   const changed=harness(()=>new Promise(done=>{finishOld=done;}));changed.dates();const old=changed.submit();changed.get('checkin').value='2099-12-11';changed.get('checkin').handlers.change();finishOld(response([true]));await old;assert.equal(changed.rendered(),null,'A response for old dates must be ignored');
   // Existing public calendar inventory was relocated, not modified or duplicated.
