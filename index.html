@@ -379,8 +379,11 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where are Royal Nile Villas located?","acceptedAnswer":{"@type":"Answer","text":"In Al Aqaletah on Luxor's tranquil West Bank — about 15 minutes from the Valley of the Kings, about 15 minutes from the hot air balloon launch site, and 5 minutes from the West Bank ferry, with a free shuttle to the ferry."}},{"@type":"Question","name":"Do guests have access to a swimming pool?","acceptedAnswer":{"@type":"Answer","text":"Yes. Guests enjoy a 14-metre swimming pool set in a 30-metre garden, with several apartments offering direct pool access or panoramic pool and Nile views."}},{"@type":"Question","name":"Do you offer airport pickup and tours?","acceptedAnswer":{"@type":"Answer","text":"Yes. We arrange airport pickup and drop-off, a free shuttle to the West Bank ferry, and a full range of private tours including the Valley of the Kings, hot air balloon rides, Abu Simbel, Aswan and more."}},{"@type":"Question","name":"How do I book a villa?","acceptedAnswer":{"@type":"Answer","text":"Message us directly on WhatsApp for the best direct rates and availability, or book instantly through our Airbnb and Booking.com listings."}}]}
 </script>
+<link rel="stylesheet" href="/booking-ui.css">
+<script src="/villa-data.js"></script>
+<script src="/availability-search.js"></script>
 </head>
-<body>
+<body class="has-availability-search">
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -426,14 +429,10 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   <div class="scroll-indicator"><span>Discover</span><div class="line"></div></div>
 </section>
 
-<!-- SEARCH -->
-<div class="search-wrapper" id="search">
-  <div class="search-bar">
-    <div class="search-field"><label>Check In</label><input type="text" id="checkin" placeholder="Select date" readonly></div>
-    <div class="search-field"><label>Check Out</label><input type="text" id="checkout" placeholder="Select date" readonly></div>
-    <button class="search-submit" id="searchBtn" onclick="checkAvailability()">Search Availability</button>
-  </div>
-</div>
+<!-- BOOKING DOCK START --><aside class="booking-dock" aria-label="Apartment availability"><details open id="bookingPanel"><summary>Check apartment availability <span aria-hidden="true">⌄</span></summary><form id="availabilityForm" class="booking-form">
+<div><label for="checkin">Check in</label><input type="date" id="checkin" required></div><div><label for="checkout">Check out</label><input type="date" id="checkout" required></div>
+<button type="submit" id="searchBtn">Search availability</button><button type="button" id="clearDates">Clear</button>
+<p id="searchFeedback" role="status" aria-live="polite"></p></form></details></aside><!-- BOOKING DOCK END -->
 
 <!-- AMENITIES -->
 <section class="amenities-section fade-up" aria-label="Villa amenities and services">
@@ -458,6 +457,8 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
   </div>
 </section>
 
+<!-- FEATURED STAYS START --><section class="featured-stays" id="featured-properties" aria-labelledby="featured-heading"><div class="featured-heading"><div><p class="featured-kicker">Featured Properties</p><h2 id="featured-heading">Two special stays.<br><em>A little more to look forward to.</em></h2></div><p>Find your favourite corner of Luxor. Book either of these apartments directly with us and enjoy <strong>10% off your stay.</strong></p></div><div class="featured-grid"><article class="featured-card"><a class="featured-photo" href="/villas/nile-view-luxury-2" aria-label="Explore Luxury Nile View 2"><img src="/optimized-assets/villa-assets/imagen-enhanced/nile-view-luxury-2/05-garden-palm-nile-view.webp" alt="Palm garden and Nile outlook at Luxury Nile View 2" width="800" height="560" loading="lazy"><span>10% off · Book direct</span></a><div class="featured-content"><p class="featured-kicker">Private terrace · Second floor</p><h3><a href="/villas/nile-view-luxury-2">Luxury Nile View 2</a></h3><p>Two queen bedrooms, a private terrace and a Nile-side outlook. Settle in above the pool and garden.</p><p class="featured-specs">2 bedrooms <span>·</span> Up to 4 guests <span>·</span> Shared pool</p><a class="featured-direct" href="https://wa.me/201204421652?text=Hi!%20I'd%20like%20to%20book%20Luxury%20Nile%20View%202%20directly%20with%20the%2010%25%20featured-property%20discount.%20Please%20check%20my%20dates%20and%20send%20a%20quote." target="_blank" rel="noopener">WhatsApp us · Save 10% <span aria-hidden="true">↗</span></a><div class="featured-platforms"><a href="https://www.airbnb.co.uk/rooms/959415706303071560" target="_blank" rel="noopener">Book on Airbnb ↗</a><a href="https://www.booking.com/Pulse-ILh8Q3" target="_blank" rel="noopener">Booking.com ↗</a></div><a class="featured-explore" href="/villas/nile-view-luxury-2">Explore apartment →</a></div></article><article class="featured-card"><a class="featured-photo" href="/villas/nile-view-2" aria-label="Explore Nile View Apartment 2"><img src="/optimized-assets/villa-assets/generated-nile-view-interiors/09-living-open-plan-flow.webp" alt="Open-plan living room at Nile View Apartment 2" width="800" height="560" loading="lazy"><span>10% off · Book direct</span></a><div class="featured-content"><p class="featured-kicker">Poolside living · Ground floor</p><h3><a href="/villas/nile-view-2">Nile View Apartment 2</a></h3><p>A relaxed ground-floor home with a queen-and-twin layout and direct access to the shared pool.</p><p class="featured-specs">2 bedrooms <span>·</span> Up to 4 guests <span>·</span> Shared pool</p><a class="featured-direct" href="https://wa.me/201204421652?text=Hi!%20I'd%20like%20to%20book%20Nile%20View%20Apartment%202%20directly%20with%20the%2010%25%20featured-property%20discount.%20Please%20check%20my%20dates%20and%20send%20a%20quote." target="_blank" rel="noopener">WhatsApp us · Save 10% <span aria-hidden="true">↗</span></a><div class="featured-platforms"><a href="https://www.airbnb.co.uk/rooms/952260705771172731" target="_blank" rel="noopener">Book on Airbnb ↗</a><a href="https://www.booking.com/Pulse-vTu0Xy" target="_blank" rel="noopener">Booking.com ↗</a></div><a class="featured-explore" href="/villas/nile-view-2">Explore apartment →</a></div></article></div><p class="featured-terms">The 10% offer is for direct bookings of these two featured apartments. Message us with your dates for availability and your discounted quote.</p></section><!-- FEATURED STAYS END -->
+
 <!-- LOADING -->
 <div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div><p class="loading-text">Checking availability...</p></div>
 
@@ -471,8 +472,8 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
 
 <!-- VILLAS -->
 <section class="section" id="villas">
-  <div class="section-header fade-up"><p class="section-eyebrow">Our Collection</p><h2 class="section-title">Luxury Nile Villas</h2><p class="section-subtitle">Eight exceptional properties on Luxor's peaceful West Bank. From poolside ground-floor apartments to panoramic sky penthouses.</p></div>
-  <div class="results-header" id="resultsHeader"><p class="results-count" id="resultsCount"></p><button class="results-reset" onclick="resetSearch()">Show All Villas</button></div>
+  <div class="section-header fade-up"><p class="section-eyebrow">Our Collection</p><h2 class="section-title">Luxury Nile Villas</h2><p class="section-subtitle">More places to feel at home on Luxor's peaceful West Bank. Explore the rest of our collection below, or search dates across all eight apartments.</p></div>
+  <div class="booking-results" id="bookingResults" hidden><p id="bookingResultsMessage" role="status" aria-live="polite"></p><a href="https://wa.me/201204421652?text=Hi!%20I'd%20like%20help%20checking%20apartment%20availability%20for%20my%20dates." target="_blank" rel="noopener">WhatsApp us</a><button id="resetAvailability" type="button">Show all apartments</button></div>
   <div class="villa-grid" id="villaGrid"></div>
   <div style="text-align:center"><a class="guide-preview-link" href="/villas/">View all accommodation →</a></div>
   <nav class="collection-links" aria-label="Browse all villa apartments">
@@ -595,81 +596,6 @@ a:hover > .credentials-image { transform:translateY(-3px); box-shadow:var(--shad
 // ============================================
 // VILLA DATA
 // ============================================
-const VILLAS = [
-  { id:'royal-home-nile-view', roomId:'33825380', name:'Royal Home Luxor — Nile View', shortName:'Nile View Apartment', location:'West Bank, Luxor', guests:4, bedrooms:2, beds:2, bathrooms:1, rating:4.91, reviews:404, floor:'Top Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
-    features:['Private Balcony','Shared Pool','Rose Garden','Rooftop Restaurant','15min Walk to Ferry','Self Check-in','Extra Spacious'],
-    description:'Top-floor apartment with a private entrance and balcony overlooking the pool, green countryside, and the River Nile. Part of the enchanting Royal Home Villa — just 15 minutes\' walk from the West Bank ferry and waterfront restaurants.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/33825380',
-    bookingUrl:'https://www.booking.com/Pulse-CZL3W5',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/33825380.ics?t=db0bb0f1a2094605a74753169c7fa8f2',
-    propertyGroup:'Royal Home Luxor',
-    photos:['0f9027b3-d864-4162-bb6f-f91b7eb4d1c0.jpg','ff9890f6-2cdd-4e6c-87ff-65744e1c4013.jpg','ba12b524-21f2-4141-8d52-59d1af265544.jpg','cb69e200-f98f-4bbc-84dd-ec6bae1cabea.jpg','84789dfc-80bd-4cb8-bdff-e5b1ce72e905.jpg','4e8e41ed-363c-4adb-a962-a160829fef32.jpg','515f7b54-25d7-4cb2-9d4d-1b375994f538.jpg'],
-  },
-  { id:'royal-home-pool-view', roomId:'33760041', name:'Royal Home Luxor — Pool View', shortName:'Pool View Apartment', location:'West Bank, Luxor', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.94, reviews:464, floor:'Ground Floor', viewType:'Pool, Valley & Garden', bedsConfig:'1 Queen + 2 Singles',
-    features:['Direct Pool Access','Private Entrance','Rose Garden & Hammock','Rooftop Nile Sunsets','Daily Housekeeping','Self Check-in'],
-    description:'Ground-floor apartment with private entrance and direct pool access. Lounge in the rose garden hammock after a day exploring ancient temples. Rooftop terrace for unforgettable Nile sunsets.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/33760041',
-    bookingUrl:'https://www.booking.com/Pulse-DGM5QI',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/33760041.ics?t=a316c37daf0e4aa8a042707ea26b00e3',
-    propertyGroup:'Royal Home Luxor',
-    photos:['c5034f08-97d7-42c5-a094-0532921122f7.jpg','5997fc1e-9626-4490-981f-79febbeda217.jpg','68d3db49-c20a-4615-9b29-0670831cf291.jpg','42e61710-4b43-4992-9dee-c37258deb8fd.jpg','5ad8f753-2746-4dce-bfdc-2677f9b6abed.jpg','d3470d76-85f4-4ec0-a176-a437bcd3c649.jpg','30afc5b2-704e-416c-bd4c-9d50a6082eff.jpg'],
-  },
-  { id:'sky-penthouse-1', roomId:'1505758884972582166', name:'Royal Nile Villa — Sky Penthouse 1', shortName:'Sky Penthouse 1', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.92, reviews:36, floor:'Top Floor Penthouse', viewType:'Panoramic Nile, Desert', bedsConfig:'1 Queen + 2 Singles',
-    features:['Panoramic 360° Views','Private Terrace','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle','TV & Workspace'],
-    description:'Top-floor penthouse with breathtaking panoramic views of the Nile, desert mountains, pool, and lush gardens. The ultimate Luxor vantage point — watch the sunrise paint the river gold from your private terrace.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/1505758884972582166',
-    bookingUrl:'https://www.booking.com/Pulse-a5GOdn',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/1505758884972582166.ics?t=ac9593ce802647a6b9b8b5cd3e0ca623',
-    propertyGroup:'Royal Nile Villa',
-    photos:['hosting/Hosting-1505758884972582166/original/095deb02-b573-486e-beb8-26caf938e11d.jpeg','hosting/Hosting-1505758884972582166/original/d29d1f46-3c76-44f0-ac38-3e978b316b9e.jpeg','hosting/Hosting-1505758884972582166/original/18e00ed1-db90-4789-9bb7-14d1c0075afe.jpeg','hosting/Hosting-1505758884972582166/original/d43daf90-8086-4446-ad1d-b0ccfa920961.jpeg','hosting/Hosting-1505758884972582166/original/8e34daa2-9050-4522-875a-57f31e38d8b0.jpeg','hosting/Hosting-1505758884972582166/original/3d52a54d-b40b-4dc1-87bd-10bb234d4de8.jpeg'],
-  },
-  { id:'sky-penthouse-2', roomId:'1505764523387331978', name:'Royal Nile Villa — Sky Penthouse 2', shortName:'Sky Penthouse 2', location:'Luxor, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.92, reviews:48, floor:'Top Floor Penthouse', viewType:'Panoramic Nile, Desert & Mountains', bedsConfig:'1 Queen + 2 Singles',
-    features:['Guest Favourite','Panoramic 360° Views','Private Terrace','14m Swimming Pool','On-site Restaurant','TV & Workspace'],
-    description:'Guest-favourite penthouse with the same stunning panoramic views. Dedicated workspace makes it ideal for digital nomads seeking inspiration from the timeless Nile landscape.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/1505764523387331978',
-    bookingUrl:'https://www.booking.com/Pulse-XuOc35',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/1505764523387331978.ics?t=258f71adbd25442f89dfd2db702d355e',
-    propertyGroup:'Royal Nile Villa',
-    photos:['hosting/Hosting-1505764523387331978/original/9bee0310-0105-47fd-9944-bcf41f34f121.jpeg','hosting/Hosting-1505758884972582166/original/095deb02-b573-486e-beb8-26caf938e11d.jpeg','hosting/Hosting-1505758884972582166/original/18e00ed1-db90-4789-9bb7-14d1c0075afe.jpeg','hosting/Hosting-1505758884972582166/original/e5af2d6c-305a-496c-91e2-471d5ca8707d.jpeg','hosting/Hosting-1505758884972582166/original/8e34daa2-9050-4522-875a-57f31e38d8b0.jpeg','hosting/Hosting-1505758884972582166/original/d43daf90-8086-4446-ad1d-b0ccfa920961.jpeg'],
-  },
-  { id:'nile-view-luxury-1', roomId:'959398645193866526', name:'Royal Nile Villa — Luxury Nile View 1', shortName:'Luxury Nile View 1', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:2, rating:4.97, reviews:153, floor:'2nd Floor', viewType:'Nile, Garden & Mountain', bedsConfig:'2 Queen Beds',
-    features:['Highest Rated ★ 4.97','2 Bathrooms','2 Queen Beds','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
-    description:'Our highest-rated property. Two queen bedrooms with two bathrooms — perfect for couples traveling together, or families wanting extra space and privacy. Stunning Nile, garden, and mountain views from the 2nd floor.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/959398645193866526',
-    bookingUrl:'https://www.booking.com/Pulse-Cq1VIp',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/959398645193866526.ics?t=88e80f2db092405ebaf3ef172b771d0f',
-    propertyGroup:'Royal Nile Villa',
-    photos:['hosting/Hosting-959398645193866526/original/f62cc0ab-cc13-4ca7-8ceb-eca9f272e412.jpeg','hosting/Hosting-959398645193866526/original/539d62ac-4ab6-4b71-8bc5-74ca198d8740.jpeg','hosting/Hosting-959398645193866526/original/8b0ae1c4-18a2-40cf-aed3-0e7aab16368e.jpeg','miso/Hosting-959398645193866526/original/49544fa0-6a75-4c1b-9e98-c5158e81fa8f.jpeg','miso/Hosting-959398645193866526/original/0a9fb635-f402-4e04-9efc-86a463f83582.jpeg','miso/Hosting-959398645193866526/original/bdd4482d-9bb5-4d41-baae-5c2691a5b5ae.jpeg'],
-  },
-  { id:'nile-view-1', roomId:'950750256318960064', name:'Royal Nile Villa — Nile View Apartment 1', shortName:'Nile View 1', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.90, reviews:58, floor:'Ground Floor', viewType:'Nile, Garden & Mountain', bedsConfig:'1 Queen + 2 Singles',
-    features:['Direct Pool Access','Ground Floor','Garden & Mountain Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
-    description:'Ground-floor apartment with direct pool access and beautiful garden and mountain views. Ideal for families wanting easy outdoor access — step right from your door to the 14-meter pool.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/950750256318960064',
-    bookingUrl:'https://www.booking.com/Pulse-eWXYX5',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/950750256318960064.ics?t=29cb67176e6e44738bc2d997d9878ef0',
-    propertyGroup:'Royal Nile Villa',
-    photos:['hosting/Hosting-950750256318960064/original/fe75eeaf-6e1b-429c-9de7-23e454495951.jpeg','hosting/Hosting-950750256318960064/original/94b97dbf-9999-470c-bac9-1eaa624c31a9.jpeg','miso/Hosting-950750256318960064/original/dc7b07ce-e5da-42e9-92a0-f3074c60f6f2.jpeg','miso/Hosting-950750256318960064/original/76a27f45-d604-40ac-917e-e2f4d447ebfc.jpeg','miso/Hosting-950750256318960064/original/640d02bc-1e0a-4fbf-b7e6-0225b84cfd88.jpeg','miso/Hosting-950750256318960064/original/8086ee0b-d445-4294-86a1-7ce53ed8cfd0.jpeg'],
-  },
-  { id:'nile-view-luxury-2', roomId:'959415706303071560', name:'Royal Nile Villas — Luxury Nile View 2', shortName:'Luxury Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:1, rating:4.94, reviews:124, floor:'2nd Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
-    features:['Guest Favourite','Private Terrace','Incredible Nile Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
-    description:'Second-floor apartment with a private terrace and incredible Nile River, pool, and garden views. A guest favourite with 124 reviews — known for spectacular sunset views from the terrace.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/959415706303071560',
-    bookingUrl:'https://www.booking.com/Pulse-ILh8Q3',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/959415706303071560.ics?t=67b6e918b5b34b68b33dae58b13b27cd',
-    propertyGroup:'Royal Nile Villa',
-    photos:['hosting/Hosting-959415706303071560/original/f0b244de-b444-4bc9-9cf7-afad74eb4793.jpeg','hosting/Hosting-959415706303071560/original/177f5134-8f3c-4f08-a0f1-a58c748e71ba.jpeg','miso/Hosting-959415706303071560/original/2a759cb1-e923-406b-8aa6-97abe1551267.jpeg'],
-  },
-  { id:'nile-view-2', roomId:'952260705771172731', name:'Royal Nile Villas — Nile View Apartment 2', shortName:'Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:3, bathrooms:1, rating:4.91, reviews:58, floor:'Ground Floor', viewType:'Nile & Desert View', bedsConfig:'1 Queen + 2 Singles',
-    features:['Direct Pool Access','Ground Floor','Desert & Nile Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
-    description:'Ground-floor apartment with direct pool access and sweeping desert and Nile views. Same great layout as Nile View 1, with a different, dramatic desert vista from your windows.',
-    airbnbUrl:'https://www.airbnb.co.uk/rooms/952260705771172731',
-    bookingUrl:'https://www.booking.com/Pulse-vTu0Xy',
-    icalUrl:'https://www.airbnb.co.uk/calendar/ical/952260705771172731.ics?t=674a6b647e5a4a2288cd2b25225ea3ed',
-    propertyGroup:'Royal Nile Villa',
-    photos:['hosting/Hosting-952260705771172731/original/4a7fc130-6e87-4f39-aaf5-300afb527106.jpeg','hosting/Hosting-952260705771172731/original/9d752eda-265e-4419-9be8-3bdb66d7d426.jpeg','miso/Hosting-952260705771172731/original/7c36b2a2-3ab3-407d-9714-2883f58998bc.jpeg','miso/Hosting-952260705771172731/original/9b0f63f0-2ac6-414e-a007-2685d923d358.jpeg','miso/Hosting-952260705771172731/original/ae6d8147-4b4f-4aa3-942a-e8aebdaf6001.jpeg','miso/Hosting-952260705771172731/original/edecbe4e-df9e-4803-a92e-a8e0abebd5a6.jpeg','miso/Hosting-952260705771172731/original/da9e5d9b-2fc1-4967-9c94-e9bc8490d7fb.jpeg'],
-  },
-];
-
 // Give every apartment a fair chance to lead the homepage on each new page view.
 const VILLA_DISPLAY_ORDER = (()=>{
   const shuffled=VILLAS.slice();
@@ -1119,7 +1045,6 @@ Object.keys(prefetchedICalData).forEach(roomId => {
   const v = VILLAS.find(v => v.roomId === roomId);
   if (v) fallbackICalCache[v.icalUrl] = new Set(prefetchedICalData[roomId].booked);
 });
-const AVAILABILITY_API_TIMEOUT_MS = 9000;
 
 function formatDate(d) { return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function getDateRange(start, end) { const dates=[]; const d=new Date(start); while(d<end) { dates.push(formatDate(new Date(d))); d.setDate(d.getDate()+1); } return dates; }
@@ -1150,63 +1075,14 @@ async function fetchICal(url, options = {}) {
 }
 
 async function fetchAvailabilityStatuses(checkinValue, checkoutValue, villaIds) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), AVAILABILITY_API_TIMEOUT_MS);
-  const selectedVillas = villaIds ? VILLA_DISPLAY_ORDER.filter(villa => villaIds.includes(villa.id)) : VILLA_DISPLAY_ORDER;
-  try {
-    const response = await fetch('/api/availability', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: controller.signal,
-      body: JSON.stringify({
-        checkin: checkinValue,
-        checkout: checkoutValue,
-        calendars: selectedVillas.map(villa => ({ id: villa.id, roomId: villa.roomId, icalUrl: villa.icalUrl }))
-      })
-    });
-    if (!response.ok) throw new Error('Availability check failed');
-    const payload = await response.json();
-    const statusById = new Map((payload.results || []).map(result => [result.id, result]));
-    return selectedVillas.map(villa => ({
-      ...villa,
-      available: statusById.has(villa.id) ? statusById.get(villa.id).available : null,
-      availabilitySource: statusById.get(villa.id)?.source || 'unverified'
-    }));
-  } finally {
-    clearTimeout(timer);
-  }
+  const selected = villaIds ? VILLA_DISPLAY_ORDER.filter(v => villaIds.includes(v.id)) : VILLA_DISPLAY_ORDER;
+  return RoyalAvailability.fetchStatuses(checkinValue, checkoutValue, selected);
 }
 
-async function checkAvailability() {
-  const ci=document.getElementById('checkin').value, co=document.getElementById('checkout').value;
-  if(!ci||!co) { alert('Please select check-in and check-out dates.'); return; }
-  const checkin=new Date(ci+'T00:00:00'), checkout=new Date(co+'T00:00:00');
-  if(checkout<=checkin) { alert('Check-out must be after check-in.'); return; }
-  document.getElementById('loadingOverlay').classList.add('active');
-  document.getElementById('searchBtn').disabled=true;
-  try {
-    const statuses=await fetchAvailabilityStatuses(ci, co);
-    const available=statuses.filter(v=>v.available===true);
-    renderVillas(available, ci, co);
-    document.getElementById('resultsHeader').classList.add('visible');
-    const unverifiedCount=statuses.filter(v=>v.available===null).length;
-    document.getElementById('resultsCount').innerHTML=`<strong>${available.length}</strong> of ${VILLAS.length} apartments verified available for your dates${unverifiedCount?` · ${unverifiedCount} could not be verified live`:''}`;
-    document.getElementById('villas').scrollIntoView({behavior:'smooth'});
-  } catch(e) {
-    renderVillas([]);
-    document.getElementById('resultsHeader').classList.add('visible');
-    document.getElementById('resultsCount').innerHTML='Live availability could not be checked. Please try again in a moment or message us directly.';
-    document.getElementById('villas').scrollIntoView({behavior:'smooth'});
-  } finally {
-    document.getElementById('loadingOverlay').classList.remove('active');
-    document.getElementById('searchBtn').disabled=false;
-  }
-}
-
-function resetSearch() {
-  document.getElementById('resultsHeader').classList.remove('visible');
-  document.getElementById('checkin').value=''; document.getElementById('checkout').value='';
-  renderVillas(VILLA_DISPLAY_ORDER.map(v=>({...v,available:null})));
+const FEATURED_VILLA_IDS = new Set(['nile-view-luxury-2', 'nile-view-2']);
+function renderDefaultVillas() {
+  document.getElementById('featured-properties').hidden = false;
+  renderVillas(VILLA_DISPLAY_ORDER.filter(v => !FEATURED_VILLA_IDS.has(v.id)).map(v => ({...v,available:null})));
 }
 
 // ============================================
@@ -1226,9 +1102,10 @@ function renderVillas(villaStatuses, ci, co) {
         <p class="villa-location">📍 ${villa.location} · ${villa.viewType}</p>
         <div class="villa-features"><span class="villa-feature">🛏 ${villa.bedrooms} BR</span><span class="villa-feature">🛌 ${villa.beds} Beds</span><span class="villa-feature">🚿 ${villa.bathrooms} BA</span><span class="villa-feature">${villa.bedsConfig}</span></div>
         <div class="villa-footer" style="position:relative;z-index:2;">
-          <a href="${villa.airbnbUrl}" target="_blank" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">Airbnb</a>
-          <a href="${villa.bookingUrl}" target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Booking.com</a>
+          <a href="${villa.airbnbUrl}" target="_blank" rel="noopener" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">Airbnb</a>
+          <a href="${villa.bookingUrl}" target="_blank" rel="noopener" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Booking.com</a>
         </div>
+        ${FEATURED_VILLA_IDS.has(villa.id)?`<a class="featured-direct featured-search-offer" href="https://wa.me/201204421652?text=${encodeURIComponent(`Hi! I'd like to book ${villa.name} directly with the 10% featured-property discount${ci&&co?` for ${ci} to ${co}`:''}. Please send a quote.`)}" target="_blank" rel="noopener">WhatsApp us · Save 10% ↗</a>`:''}
       </div>
     </div>`;
   }).join('');
@@ -1467,12 +1344,16 @@ function renderTours() {
 // INIT
 // ============================================
 document.addEventListener('DOMContentLoaded',()=>{
-  renderVillas(VILLA_DISPLAY_ORDER.map(v=>({...v,available:null})));
+  renderDefaultVillas();
+  RoyalAvailability.mount({inventory:VILLA_DISPLAY_ORDER, resultsId:'villas',
+    render(available, ci, co) {
+      document.getElementById('featured-properties').hidden=true;
+      renderVillas(available, ci, co);
+    },
+    reset:renderDefaultVillas
+  });
   renderTours();
 
-  const fpCfg={dateFormat:'Y-m-d',minDate:'today',disableMobile:true,static:true};
-  const ciPicker=flatpickr('#checkin',{...fpCfg,onChange:function(sd){if(sd.length){coPicker.set('minDate',sd[0].fp_incr(1));if(coPicker.selectedDates[0]<=sd[0]) coPicker.clear();}}});
-  const coPicker=flatpickr('#checkout',fpCfg);
 
   window.addEventListener('scroll',()=>{ document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80); });
   document.getElementById('navToggle').addEventListener('click',event=>{

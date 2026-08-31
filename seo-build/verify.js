@@ -37,7 +37,20 @@ for (const [kind, expected] of [['villas', VILLAS.length], ['tours', TOURS.lengt
   for (const item of page.mainEntity.itemListElement) assert.ok(markup.includes(`href="${new URL(item.url).pathname}"`));
   assert.equal((markup.match(/class="inventory-card"/g) || []).length, kind === 'villas' ? 8 : 9);
 }
-assert.ok(read('villas/index.html').includes('not exclusive use of an entire villa'));
+assert.ok(read('villas/index.html').includes('For entire villa bookings,'));
+assert.equal((read('villas/index.html').match(/Book on Airbnb/g) || []).length, 8);
+for (const file of ['index.html', 'villas/index.html']) {
+  assert.ok(read(file).includes('id="availabilityForm"'));
+  assert.ok(read(file).includes('src="/villa-data.js"'));
+  assert.ok(read(file).includes('src="/availability-search.js"'));
+}
+for (const kind of ['villas','tours']) {
+  assert.ok(read(`${kind}/index.html`).includes('https://www.airbnb.co.uk/users/show/252258998'));
+  assert.ok(read(`${kind}/index.html`).includes('1,900+'));
+}
+assert.ok(home.indexOf('Included Comforts') < home.indexOf('id="featured-properties"'));
+assert.ok(home.indexOf('id="featured-properties"') < home.indexOf('Our Collection'));
+assert.equal((home.match(/class="featured-card"/g) || []).length,2);
 assert.ok(read('tours/index.html').includes('Shared flight'));
 assert.ok(read('tours/index.html').includes('25% non-refundable'));
 assert.equal([...read('sitemap.xml').matchAll(/<loc>/g)].length, files.length);

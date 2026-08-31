@@ -398,6 +398,7 @@ TOURS.forEach((t) => {
 VILLAS.forEach((v) => { rw.push({ source: `/villas/${v.id}`, destination: `/villas/${v.id}.html` }); rw.push({ source: `/villas/${v.id}/`, destination: `/villas/${v.id}.html` }); });
 write('seo-build/_rewrites.generated.json', JSON.stringify(rw, null, 2));
 
+require('./booking-ui').updateHome();
 console.log('Generated ' + written.length + ' files:');
 written.forEach((w) => console.log('  ' + w));
 console.log('\nSitemap URLs: ' + urls.length);
