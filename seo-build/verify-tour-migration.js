@@ -3,6 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
 const {TOURS}=require('./data');
+const {ARTICLES}=require('./travel-guide-data');
 const {legacyMap}=require('./tour-routing');
 const root=path.join(__dirname,'..');
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
@@ -16,7 +17,7 @@ for(const [old,destination] of legacyMap) for(const suffix of ['', '/', '.html',
   assert.equal(apacheRedirects.find(r=>r.pattern.test((old+suffix).slice(1)))?.target,destination);
 }
 const pages=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
-assert.equal(pages.length,34);
+assert.equal(pages.length,23+ARTICLES.length);
 for(const tour of TOURS) {
   assert.ok(pages.includes('/'+tour.primarySlug));assert.ok(!pages.includes('/'+tour.legacySlug));
   assert.ok(!fs.existsSync(path.join(root,tour.legacySlug+'.html')),'Old duplicate file remains');
