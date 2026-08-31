@@ -25,9 +25,21 @@ function send(res, code, body, type) {
 }
 
 const server = http.createServer((req, res) => {
-  // stub the availability serverless function so the homepage button degrades gracefully
+  // Local-only deterministic fixtures; never used by the production API.
   if (req.url.startsWith('/api/availability')) {
-    return send(res, 200, JSON.stringify({ results: [] }), 'application/json');
+    let body='';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const request=JSON.parse(body);
+        const scenario=process.env.PREVIEW_AVAILABILITY_SCENARIO || 'unknown';
+        if (scenario === 'error') return send(res,503,'Fixture failure');
+        const values=scenario === 'mixed' ? [true,false,null] : scenario === 'booked' ? [false] : scenario === 'available' ? [true] : [null];
+        const results=request.calendars.map((v,i) => ({id:v.id,available:values[i % values.length],source:'local-preview-fixture'}));
+        setTimeout(() => send(res,200,JSON.stringify({results}),'application/json'),Number(process.env.PREVIEW_AVAILABILITY_DELAY_MS || 0));
+      } catch { send(res,400,'Invalid preview request'); }
+    });
+    return;
   }
 
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
