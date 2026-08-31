@@ -1,6 +1,5 @@
 {
   "cleanUrls": false,
-  "trailingSlash": false,
   "headers": [
     {
       "source": "/optimized-assets/(.*)",
@@ -14,6 +13,12 @@
   ],
   "redirects": [
     { "source": "/:path*", "has": [{ "type": "host", "value": "www.egyptvillastours.com" }], "destination": "https://egyptvillastours.com/:path*", "permanent": true },
+    { "source": "/villas", "destination": "/villas/", "permanent": true },
+    { "source": "/tours", "destination": "/tours/", "permanent": true },
+    { "source": "/tour", "destination": "/tours/", "permanent": true },
+    { "source": "/tour/", "destination": "/tours/", "permanent": true },
+    { "source": "/villas/index.html", "destination": "/villas/", "permanent": true },
+    { "source": "/tours/index.html", "destination": "/tours/", "permanent": true },
     { "source": "/balloon-ride", "destination": "/hot-air-balloon-luxor", "permanent": true },
     { "source": "/balloon-ride/", "destination": "/hot-air-balloon-luxor", "permanent": true },
     { "source": "/nile-view-apartment", "destination": "/villas/royal-home-nile-view", "permanent": true },
@@ -34,6 +39,8 @@
     { "source": "/top-10-things-to-do-in-egypt-2025/", "destination": "/egypt-travel-guide/", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/villas/", "destination": "/villas/index.html" },
+    { "source": "/tours/", "destination": "/tours/index.html" },
     {
       "source": "/hot-air-balloon-luxor",
       "destination": "/hot-air-balloon-luxor.html"

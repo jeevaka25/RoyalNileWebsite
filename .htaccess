@@ -6,6 +6,12 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.egyptvillastours\.com$ [NC]
 RewriteRule ^ https://egyptvillastours.com%{REQUEST_URI} [R=301,L,NE]
 
+# Public collection URLs use directory indexes and one trailing-slash canonical.
+RewriteRule ^(villas|tours)$ /$1/ [R=301,L]
+RewriteRule ^tour/?$ /tours/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(villas|tours)/index\.html[?\s] [NC]
+RewriteRule ^(villas|tours)/index\.html$ /$1/ [R=301,L]
+
 # Permanent redirects for legacy URLs reported in Search Console.
 # Keep these ahead of the internal clean-URL rewrites below.
 RewriteRule ^balloon-ride/?$ /hot-air-balloon-luxor [R=301,L]
