@@ -41,7 +41,7 @@ const CSS = `
 
 const nav = (current = 'guide') => `<nav class="nav"><div class="nav-inner">
   <a class="logo" href="/">Royal Nile <span>Villas</span></a>
-  <div class="nav-links"><a href="/#villas">Villas</a><a href="/#tours">Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/"${current === 'guide' ? ' aria-current="page"' : ''}>Egypt Travel Guide</a><a class="book" href="${WHATSAPP}" target="_blank" rel="noopener">Book Now</a></div>
+  <div class="nav-links"><a href="/villas/">Villas</a><a href="/tours/">Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/"${current === 'guide' ? ' aria-current="page"' : ''}>Egypt Travel Guide</a><a class="book" href="${WHATSAPP}" target="_blank" rel="noopener">Book Now</a></div>
 </div></nav>`;
 
 const footer = `<footer class="footer"><div class="footer-inner"><div>Royal Nile Villas · Premium West Bank apartments, local transfers and private tours.</div><div><a href="/">Villas & Tours</a> · <a href="/egypt-travel-guide/">Egypt Travel Guide</a> · <a href="https://share.google/P6PPmkbxRYg6QhLie" target="_blank" rel="noopener">Royal Nile Villas on Google</a> · <a href="https://share.google/xxd26OMK5AOtsgYik" target="_blank" rel="noopener">Royal Home Villa on Google</a></div></div></footer>`;
@@ -87,7 +87,7 @@ const buildArticle = (article) => {
   }).join('');
   const cluster = GUIDE_CLUSTERS.find((slugs) => slugs.includes(article.slug)) || [];
   const contextual = cluster.filter((slug) => slug !== article.slug).map((slug) => ARTICLES.find((item) => item.slug === slug)).filter(Boolean).map((item) => ({ url: `/egypt-travel-guide/${item.slug}/`, label: item.title }));
-  const links = [...(article.relatedLinks || []), ...contextual, { url: '/#villas', label: 'Compare all eight Luxor apartments' }, { url: '/#tours', label: 'Add private tours to your stay' }];
+  const links = [...(article.relatedLinks || []), ...contextual, { url: '/villas/', label: 'Compare all eight Luxor apartments' }, { url: '/tours/', label: 'Add tours and experiences to your stay' }];
   const uniqueLinks = links.filter((link, index) => links.findIndex((item) => item.url === link.url) === index);
   const relatedLinks = uniqueLinks.length ? `<section class="sources"><h2>Plan the rest of your Luxor trip</h2><ul>${uniqueLinks.map((link) => `<li><a href="${esc(link.url)}">${esc(link.label)}</a></li>`).join('')}</ul></section>` : '';
   const sources = article.sources?.length ? `<section class="sources"><h2>Sources and further reading</h2><ul>${article.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}</a></li>`).join('')}</ul></section>` : '';

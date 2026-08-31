@@ -1,5 +1,21 @@
 [
   {
+    "source": "/villas",
+    "destination": "/villas/index.html"
+  },
+  {
+    "source": "/villas/",
+    "destination": "/villas/index.html"
+  },
+  {
+    "source": "/tours",
+    "destination": "/tours/index.html"
+  },
+  {
+    "source": "/tours/",
+    "destination": "/tours/index.html"
+  },
+  {
     "source": "/luxor-solar-eclipse-2027-package",
     "destination": "/luxor-solar-eclipse-2027-package.html"
   },

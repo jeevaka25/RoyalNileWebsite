@@ -9,7 +9,7 @@ const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const home = read('index.html').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
 for (const villa of VILLAS) assert.ok(home.includes(`href="/villas/${villa.id}"`), 'Unlinked villa: ' + villa.id);
 for (const tour of TOURS) assert.ok(home.includes(`href="/${tour.primarySlug}"`), 'Unlinked tour: ' + tour.id);
-const files = ['index.html', 'restaurant.html', ...TOURS.map((tour) => tour.primarySlug + '.html'), ...VILLAS.map((villa) => 'villas/' + villa.id + '.html'), 'egypt-travel-guide/index.html', ...ARTICLES.map((article) => 'egypt-travel-guide/' + article.slug + '/index.html')];
+const files = ['index.html', 'restaurant.html', 'villas/index.html', 'tours/index.html', ...TOURS.map((tour) => tour.primarySlug + '.html'), ...VILLAS.map((villa) => 'villas/' + villa.id + '.html'), 'egypt-travel-guide/index.html', ...ARTICLES.map((article) => 'egypt-travel-guide/' + article.slug + '/index.html')];
 const walk = (value) => {
   if (!value || typeof value !== 'object') return;
   if (value['@type'] === 'TouristTrip') assert.ok(!value.additionalProperty);
@@ -20,6 +20,27 @@ for (const file of files) {
   assert.ok(html.includes('src="/analytics-events.js"'), 'Tracking missing: ' + file);
   for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) walk(JSON.parse(match[1]));
 }
+// Category pages must remain crawlable without JavaScript and link every offering.
+for (const [kind, expected] of [['villas', VILLAS.length], ['tours', TOURS.length]]) {
+  const html = read(`${kind}/index.html`);
+  const canonical = `https://egyptvillastours.com/${kind}/`;
+  assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`));
+  assert.ok(read('sitemap.xml').includes(`<loc>${canonical}</loc>`));
+  assert.ok(home.includes(`href="/${kind}/"`));
+  assert.equal((html.match(/<h1\b/g) || []).length, 1);
+  assert.ok(!html.includes('noindex'));
+  const schema = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map(m => JSON.parse(m[1]));
+  const page = schema.find(item => item['@type'] === 'CollectionPage');
+  assert.equal(page.mainEntity.numberOfItems, expected);
+  assert.equal(page.mainEntity.itemListElement.length, expected);
+  const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+  for (const item of page.mainEntity.itemListElement) assert.ok(markup.includes(`href="${new URL(item.url).pathname}"`));
+  assert.equal((markup.match(/class="inventory-card"/g) || []).length, kind === 'villas' ? 8 : 9);
+}
+assert.ok(read('villas/index.html').includes('not exclusive use of an entire villa'));
+assert.ok(read('tours/index.html').includes('Shared flight'));
+assert.ok(read('tours/index.html').includes('25% non-refundable'));
+assert.equal([...read('sitemap.xml').matchAll(/<loc>/g)].length, files.length);
 const listeners = {}, events = [];
 vm.runInNewContext(read('analytics-events.js'), {
   URL, location: { href: 'https://egyptvillastours.com/test?private=hidden', pathname: '/test' },

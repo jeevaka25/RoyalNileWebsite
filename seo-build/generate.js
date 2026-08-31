@@ -6,6 +6,7 @@ const path = require('path');
 const { SITE, TOURS, VILLAS, wa, optimizedImage, siteAsset } = require('./data.js');
 
 const { HOST_TRUST, VILLA_SEO } = require('./seo-content.js');
+const { collectionPage } = require('./collections.js');
 const ROOT = path.join(__dirname, '..');
 const ORIGIN = SITE.origin;
 
@@ -107,7 +108,7 @@ h2{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin:1.8re
 @media(max-width:820px){body{padding-bottom:4.5rem;}.hero{margin-bottom:.9rem;}.layout{grid-template-columns:1fr;}.card{position:static;}.desktop-booking-card{display:none;}.mobile-top-actions{display:grid;gap:.7rem;margin:0 0 1.5rem;}.mobile-top-actions.apartment-actions{grid-template-columns:1fr 1fr;}.mobile-top-actions .btn{margin:0;padding:.86rem .55rem;font-size:.69rem;}.mobile-top-actions.apartment-actions .btn{font-size:.64rem;letter-spacing:1.1px;}.mobile-booking-card{display:block;}.mobile-whatsapp-fab{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:calc(1rem + env(safe-area-inset-bottom));z-index:900;display:flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.24);transition:transform .2s,box-shadow .2s;}.mobile-whatsapp-fab:hover{color:#fff;text-decoration:none;transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.28);}.mobile-whatsapp-fab:focus-visible{outline:3px solid #fff;outline-offset:3px;}.mobile-whatsapp-fab svg{width:25px;height:25px;fill:currentColor;}.nav-links{display:none;}.footer-inner{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr);}}
 `;
 
-function head({ title, desc, canonical, ogImage, jsonld, ogType = 'website' }) {
+function head({ title, desc, canonical, ogImage, jsonld, ogType = 'website', stylesheet, bodyClass = '' }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,14 +151,15 @@ gtag('js',new Date());gtag('config','${SITE.ga}');
 ${FONTS}
 ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n')}
 <style>${BASE_CSS}</style>
+${stylesheet ? `<link rel="stylesheet" href="${stylesheet}">` : ''}
 </head>
-<body>`;
+<body${bodyClass ? ` class="${bodyClass}"` : ''}>`;
 }
 
-function nav() {
+function nav(current) {
   return `<nav class="nav"><div class="nav-inner">
 <a href="/" class="nav-logo">Royal Nile <span>Villas</span></a>
-<div class="nav-links"><a href="/#villas">Villas</a><a href="/#tours">Tours</a><a href="/restaurant.html">Restaurant</a><a href="/#location">Location</a><a href="${wa("Hi! I'd like to know more about Royal Nile Villas.")}" class="nav-cta" target="_blank" rel="noopener">Book Now</a></div>
+<div class="nav-links"><a href="/villas/"${current === 'villas' ? ' aria-current="page"' : ''}>Villas</a><a href="/tours/"${current === 'tours' ? ' aria-current="page"' : ''}>Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/">Travel Guide</a><a href="/#location">Location</a><a href="${wa("Hi! I'd like to know more about Royal Nile Villas.")}" class="nav-cta" target="_blank" rel="noopener">Book Now</a></div>
 </div></nav>`;
 }
 
@@ -166,8 +168,8 @@ function footer() {
   const villaLinks = VILLAS.slice(0, 6).map((v) => `<li><a href="/villas/${v.id}">${esc(v.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</a></li>`).join('');
   return `<footer class="footer"><div class="footer-inner">
 <div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with 7+ years and ${HOST_TRUST.reviews} Airbnb reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
-<div><h5>Tours</h5><ul>${tourLinks}</ul></div>
-<div><h5>Villas</h5><ul>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
+<div><h5>Tours</h5><ul><li><a href="/tours/">Explore all tours & experiences</a></li>${tourLinks}</ul></div>
+<div><h5>Villas</h5><ul><li><a href="/villas/">Compare all apartments</a></li>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
 </div><div class="footer-bottom">&copy; ${new Date().getFullYear()} Royal Nile Villas — West Bank, Luxor, Egypt. All rights reserved.</div></footer>
 <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer">
 <button class="lightbox-close" id="lbClose" aria-label="Close">&#10005;</button>
@@ -284,14 +286,14 @@ function tourPage(t) {
   const bookingCard = `<div class="card"><h3>${esc(t.h1)}</h3><p class="rating">★ Hosted by a Luxor Superhost · ${HOST_TRUST.reviews} Airbnb reviews · ${HOST_TRUST.rating} ★ rating</p>
 <p style="font-size:.9rem;color:var(--text-secondary)">${esc(t.duration)} · ${esc(t.priceNote || 'private pickup from your villa or hotel')}.</p>
 <a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}" ${inquiryAttrs}>Inquire on WhatsApp</a>
-<a class="btn btn-outline" href="/#villas">Stay at our Nile-view villas</a></div>`;
+<a class="btn btn-outline" href="/villas/">Stay at our Nile-view villas</a></div>`;
 
   const tourLd = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.metaDesc, url: canonical, image: abs(poster), touristType: 'Sightseeing', provider: providerLd(), itinerary: { '@type': 'ItemList', itemListElement: t.highlights.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) } };
-  const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Tours', url: ORIGIN + '/#tours' }, { name: t.h1, url: canonical }]);
+  const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Tours', url: ORIGIN + '/tours/' }, { name: t.h1, url: canonical }]);
 
   return head({ title: t.title, desc: t.metaDesc, canonical, ogImage: cover, jsonld: [tourLd, faqLd(t.faqs), crumbs], ogType: 'website' })
     + nav()
-    + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/#tours">Tours</a> › ${esc(t.h1)}</div>
+    + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/tours/">Tours</a> › ${esc(t.h1)}</div>
 <section class="hero" style="background-image:url('${poster}')">
 ${heroVideo}
 <div class="hero-inner"><p class="eyebrow">Luxor Tours & Experiences</p><h1>${esc(t.h1)}</h1>
@@ -332,7 +334,7 @@ function villaPage(v) {
   const productLd = { '@context': 'https://schema.org', '@type': 'Product', name: v.name, description: v.description, image: abs(poster), brand: { '@type': 'Brand', name: SITE.brand }, url: canonical, aggregateRating: { '@type': 'AggregateRating', ratingValue: String(v.rating), reviewCount: v.reviews, bestRating: '5' } };
   const businessProfile = v.id.startsWith('royal-home-') ? SITE.royalHomeGoogleBusinessProfile : SITE.googleBusinessProfile;
   const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, sameAs: [businessProfile, v.airbnbUrl, v.bookingUrl], numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
-  const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Villas', url: ORIGIN + '/#villas' }, { name: v.name, url: canonical }]);
+  const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Villas', url: ORIGIN + '/villas/' }, { name: v.name, url: canonical }]);
   const faqs = [
     ['How far is the villa from the Valley of the Kings?', 'The villa is on Luxor’s West Bank in Al Aqaletah — about 15 minutes from the Valley of the Kings, about 15 minutes from the balloon launch site and 5 minutes from the West Bank ferry, with a free shuttle to the ferry.'],
     ['Is airport pickup available?', 'Yes. Airport pickup and drop-off can be arranged, along with private tours and a free shuttle to the West Bank ferry.'],
@@ -341,7 +343,7 @@ function villaPage(v) {
 
   return head({ title, desc, canonical, ogImage: cover, jsonld: [productLd, lodgingLd, faqLd(faqs), crumbs], ogType: 'website' })
     + nav()
-    + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/#villas">Villas</a> › ${esc(v.name)}</div>
+    + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/villas/">Villas</a> › ${esc(v.name)}</div>
 <section class="hero" style="background-image:url('${poster}')"><div class="hero-inner"><p class="eyebrow">Luxor West Bank · ${esc(v.viewType)}</p><h1>${esc(v.name)}</h1>
 <div class="meta-row"><span class="pill">★ ${v.rating} · ${v.reviews} reviews</span><span class="pill">🛏 ${v.bedrooms} bedrooms</span><span class="pill">🚿 ${v.bathrooms} bath</span><span class="pill">👥 up to ${v.guests} guests</span></div></div></section>
 <div class="mobile-top-actions apartment-actions">
@@ -369,11 +371,14 @@ function write(rel, content) { const fp = path.join(ROOT, rel); fs.mkdirSync(pat
 
 TOURS.forEach((t) => write(`${t.primarySlug}.html`, tourPage(t)));
 VILLAS.forEach((v) => write(`villas/${v.id}.html`, villaPage(v)));
+['villas', 'tours'].forEach((kind) => write(`${kind}/index.html`, collectionPage(kind, { head, nav, footer })));
 
 // ---------------- SITEMAP ----------------
 const today = new Date().toISOString().slice(0, 10);
 const urls = [
   { loc: ORIGIN + '/', pri: '1.0', freq: 'weekly' },
+  { loc: ORIGIN + '/villas/', pri: '0.9', freq: 'weekly' },
+  { loc: ORIGIN + '/tours/', pri: '0.9', freq: 'weekly' },
   { loc: ORIGIN + '/restaurant.html', pri: '0.8', freq: 'monthly' },
   ...TOURS.map((t) => ({ loc: `${ORIGIN}/${t.primarySlug}`, pri: '0.9', freq: 'monthly' })),
   ...VILLAS.map((v) => ({ loc: `${ORIGIN}/villas/${v.id}`, pri: '0.9', freq: 'weekly' })),
@@ -385,6 +390,7 @@ write('sitemap.xml', sitemap);
 
 // ---------------- VERCEL REWRITES BLOCK (for reference / paste) ----------------
 const rw = [];
+['villas', 'tours'].forEach((kind) => { rw.push({ source: `/${kind}`, destination: `/${kind}/index.html` }); rw.push({ source: `/${kind}/`, destination: `/${kind}/index.html` }); });
 TOURS.forEach((t) => {
   const dest = `/${t.primarySlug}.html`;
   [t.primarySlug, ...t.aliases].forEach((s) => { rw.push({ source: `/${s}`, destination: dest }); rw.push({ source: `/${s}/`, destination: dest }); });
