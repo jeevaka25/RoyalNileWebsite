@@ -213,7 +213,7 @@ const ARTICLES = [
     ],
     relatedLinks: [
       { label: 'Compare where to stay in Luxor for the 2027 eclipse', url: '/egypt-travel-guide/where-to-stay-luxor-solar-eclipse-2027/' },
-      { label: 'View the Royal Nile Villas eclipse accommodation package', url: '/luxor-solar-eclipse-2027-package' },
+      { label: 'View the Royal Nile Villas eclipse accommodation package', url: '/tours/luxor-solar-eclipse-2027-package' },
       { label: 'Plan a flexible five-day Luxor eclipse itinerary', url: '/egypt-travel-guide/luxor-eclipse-2027-tour-itinerary/' },
     ],
     ctaTitle: 'Join the Royal Nile Villas Eclipse 2027 priority list',

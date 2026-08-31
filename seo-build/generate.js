@@ -393,12 +393,13 @@ const rw = [];
 ['villas', 'tours'].forEach((kind) => { rw.push({ source: `/${kind}`, destination: `/${kind}/index.html` }); rw.push({ source: `/${kind}/`, destination: `/${kind}/index.html` }); });
 TOURS.forEach((t) => {
   const dest = `/${t.primarySlug}.html`;
-  [t.primarySlug, ...t.aliases].forEach((s) => { rw.push({ source: `/${s}`, destination: dest }); rw.push({ source: `/${s}/`, destination: dest }); });
+  rw.push({ source: `/${t.primarySlug}`, destination: dest });
 });
 VILLAS.forEach((v) => { rw.push({ source: `/villas/${v.id}`, destination: `/villas/${v.id}.html` }); rw.push({ source: `/villas/${v.id}/`, destination: `/villas/${v.id}.html` }); });
 write('seo-build/_rewrites.generated.json', JSON.stringify(rw, null, 2));
 
 require('./booking-ui').updateHome();
+require('./tour-routing').updateRouting();
 console.log('Generated ' + written.length + ' files:');
 written.forEach((w) => console.log('  ' + w));
 console.log('\nSitemap URLs: ' + urls.length);

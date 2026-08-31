@@ -56,6 +56,10 @@ const head = ({ title, description, canonical, image, type = 'article', schema }
 <script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${SITE.ga}');</script>
 <script defer src="/analytics-events.js"></script>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','${SITE.metaPixel}');fbq('track','PageView');
+</script>
 <style>${CSS}</style><script type="application/ld+json">${JSON.stringify(schema)}</script></head>`;
 
 const articleCard = (article, index) => `<a class="card${index === 0 ? ' featured' : ''}" href="${article.href}"><img src="${article.image}" alt="" loading="${index < 3 ? 'eager' : 'lazy'}"><div class="card-content"><span class="kicker">${esc(article.readTime)}</span><h2>${esc(article.title)}</h2><p>${esc(article.dek)}</p><span class="read">Read article →</span></div></a>`;
