@@ -8,7 +8,7 @@ const ARTICLES = [
     description: 'Where to stay near the Luxor hot air balloon launch on the West Bank, with practical advice on pre-dawn pickup, launch-field transfers and weather delays.',
     dek: 'A West Bank base can turn Luxor’s earliest start into a short local transfer—without changing the need for a confirmed operator pickup and weather clearance.',
     image: '/optimized-assets/travel-guide/luxor-hot-air-balloon-west-bank-sunrise.webp',
-    imageCaption: 'Editorial visualisation of sunrise balloons above Luxor’s West Bank fields and Theban cliffs.',
+    imageCaption: '',
     readTime: '9 min read',
     datePublished: '2026-08-28',
     dateModified: '2026-08-28',
@@ -25,7 +25,7 @@ const ARTICLES = [
       { heading: 'Royal Nile Villas as your balloon base', body: 'Royal Nile Villas offers individually bookable two-bedroom apartments and penthouses in Al Aqaletah, around 15 minutes by vehicle from the usual West Bank balloon launch area under normal local conditions. Guests also have air conditioning, a 14-metre shared pool, a garden and an on-site Nile-view rooftop restaurant—useful after the early start. We can coordinate a shared sunrise balloon ride with pickup and return, subject to operator availability, weather and aviation approval. Send your dates and party size so we can confirm the appropriate apartment and the current balloon arrangements.' },
     ],
     inlineImages: [
-      { afterSection: 4, src: '/optimized-assets/travel-guide/luxor-hot-air-balloon-launch-preflight.webp', alt: 'Hot air balloons being prepared at a Luxor West Bank launch field before sunrise', caption: 'Editorial visualisation of a supervised pre-flight briefing and balloon preparation on Luxor’s West Bank.' },
+      { afterSection: 4, src: '/optimized-assets/travel-guide/luxor-hot-air-balloon-launch-preflight.webp', alt: 'Hot air balloons being prepared at a Luxor West Bank launch field before sunrise', caption: '' },
     ],
     tips: ['Stay on the West Bank to reduce pre-dawn transfer complexity.', 'Use the pickup arranged by the balloon operator.', 'Book for your first available Luxor morning.', 'Confirm the actual operator, insurance and cancellation terms.', 'Keep the morning after landing flexible.', 'Expect weather and aviation clearance to control the final plan.'],
     sources: [
@@ -44,7 +44,7 @@ const ARTICLES = [
     description: 'Combine the Grand Egyptian Museum with a relaxed Luxor villa stay in a practical 10–12 day itinerary, with private tours, Nile views and time to unwind.',
     dek: 'Give the Grand Egyptian Museum the time it deserves, then slow the pace with a private Luxor villa, carefully planned temple days and room to enjoy the Nile.',
     image: '/optimized-assets/travel-guide/grand-egyptian-museum-luxor-itinerary-2026-27.webp',
-    imageCaption: 'Editorial visualisation of the two-stage journey from the Grand Egyptian Museum at Giza to a private Nile-view stay in Luxor.',
+    imageCaption: '',
     readTime: '10 min read',
     datePublished: '2026-08-26',
     dateModified: '2026-08-26',
