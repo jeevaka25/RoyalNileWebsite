@@ -9,14 +9,14 @@
   document.addEventListener('click', function (event) {
     var anchor = event.target.closest ? event.target.closest('a[href]') : null;
     if (!anchor) return;
-    var host;
-    try { host = new URL(anchor.href, location.href).hostname; } catch (_) { return; }
+    var host, target;
+    try { target = new URL(anchor.href, location.href); host = target.hostname; } catch (_) { return; }
     if (anchor.hasAttribute('data-tour-inquiry')) {
       track('enquiry_start', host);
     } else if (host === 'wa.me' || host === 'api.whatsapp.com') {
       track('whatsapp_click', host);
     } else if (/(^|\.)airbnb\.[a-z.]+$/.test(host)) {
-      track('airbnb_click', host);
+      track(target.pathname.includes('/users/') ? 'airbnb_profile_click' : 'airbnb_click', host);
     } else if (host === 'booking.com' || host.endsWith('.booking.com')) {
       track('booking_click', host);
     }

@@ -15,7 +15,7 @@ function verifyButtons(html,pathname) {
     const href=match[2].replaceAll('&amp;','&');
     const host=new URL(href,SITE.origin).hostname;
     const inquiry=match[1].includes('data-tour-inquiry');
-    const expected=inquiry?'enquiry_start':host==='wa.me'||host==='api.whatsapp.com'?'whatsapp_click':/(^|\.)airbnb\.[a-z.]+$/.test(host)?'airbnb_click':host==='booking.com'||host.endsWith('.booking.com')?'booking_click':null;
+    const expected=inquiry?'enquiry_start':host==='wa.me'||host==='api.whatsapp.com'?'whatsapp_click':/(^|\.)airbnb\.[a-z.]+$/.test(host)?(new URL(href,SITE.origin).pathname.includes('/users/')?'airbnb_profile_click':'airbnb_click'):host==='booking.com'||host.endsWith('.booking.com')?'booking_click':null;
     const before=pixel.length;
     listeners.click({target:{closest:()=>({href,hasAttribute:name=>name==='data-tour-inquiry'&&inquiry})}});
     assert.equal(pixel.length,before+(expected?1:0));
@@ -26,7 +26,7 @@ function verifyButtons(html,pathname) {
 }
 for(const pathname of paths) {
   const html=read(pathname==='/'?'index.html':pathname.slice(1)+(pathname.endsWith('/')?'index.html':pathname.endsWith('.html')?'':'.html'));
-  assert.equal((html.match(/src="\/analytics-events\.js"/g)||[]).length,1,pathname);
+  assert.equal((html.match(/src="\/analytics-events\.js\?v=20260909"/g)||[]).length,1,pathname);
   assert.equal((html.match(new RegExp("fbq\\('init','"+SITE.metaPixel+"'\\)",'g'))||[]).length,1,'Pixel must initialize exactly once: '+pathname);
   assert.ok(html.includes("fbq('track','PageView')"),pathname);
   verifyButtons(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,''),pathname);
