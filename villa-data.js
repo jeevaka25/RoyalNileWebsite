@@ -56,7 +56,7 @@ const VILLAS = [
   },
   { id:'nile-view-luxury-2', roomId:'959415706303071560', name:'Royal Nile Villas — Luxury Nile View 2', shortName:'Luxury Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:1, rating:4.92, reviews:126, floor:'2nd Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
     features:['Guest Favourite','Private Terrace','Incredible Nile Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
-    description:'Second-floor apartment with a private terrace and incredible Nile River, pool, and garden views. A guest favourite with 124 reviews — known for spectacular sunset views from the terrace.',
+    description:'Second-floor apartment with a private terrace and incredible Nile River, pool, and garden views. A guest favourite with 126 reviews — known for spectacular sunset views from the terrace.',
     airbnbUrl:'https://www.airbnb.co.uk/rooms/959415706303071560',
     bookingUrl:'https://www.booking.com/Pulse-ILh8Q3',
     icalUrl:'https://www.airbnb.co.uk/calendar/ical/959415706303071560.ics?t=67b6e918b5b34b68b33dae58b13b27cd',

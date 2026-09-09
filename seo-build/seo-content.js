@@ -1,5 +1,6 @@
 // Owner-approved host-wide credentials. Individual listing ratings remain separate.
-const HOST_TRUST = { rating: '4.91', reviews: '1,900+', superhostYears: '7+' };
+const snapshot = require('../trust-data.json');
+const HOST_TRUST = { rating: snapshot.rating.toFixed(2), reviews: snapshot.reviews.toLocaleString('en-GB'), superhostYears: String(snapshot.yearsHosting), checkedAt: snapshot.checkedAt };
 
 const VILLA_SEO = {
   'royal-home-nile-view': ['Royal Home Nile View, Luxor', 'Two-bedroom top-floor Royal Home apartment in Luxor, with a private entrance, balcony and Nile, pool and countryside views. Ask about dates and transfers.'],

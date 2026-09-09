@@ -331,7 +331,6 @@ function villaPage(v) {
 <a class="btn btn-luxury btn-airbnb" target="_blank" rel="noopener" href="${v.airbnbUrl}">Reserve on Airbnb</a>
 <a class="btn btn-luxury btn-booking" target="_blank" rel="noopener" href="${v.bookingUrl}">Reserve on Booking.com</a></div>`;
 
-  const productLd = { '@context': 'https://schema.org', '@type': 'Product', name: v.name, description: v.description, image: abs(poster), brand: { '@type': 'Brand', name: SITE.brand }, url: canonical, aggregateRating: { '@type': 'AggregateRating', ratingValue: String(v.rating), reviewCount: v.reviews, bestRating: '5' } };
   const businessProfile = v.id.startsWith('royal-home-') ? SITE.royalHomeGoogleBusinessProfile : SITE.googleBusinessProfile;
   const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, sameAs: [businessProfile, v.airbnbUrl, v.bookingUrl], numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Villas', url: ORIGIN + '/villas/' }, { name: v.name, url: canonical }]);
@@ -341,7 +340,7 @@ function villaPage(v) {
     ['How do I book?', 'Message us directly on WhatsApp for the best direct rates and availability, or book instantly via our Airbnb and Booking.com listings.'],
   ];
 
-  return head({ title, desc, canonical, ogImage: cover, jsonld: [productLd, lodgingLd, faqLd(faqs), crumbs], ogType: 'website' })
+  return head({ title, desc, canonical, ogImage: cover, jsonld: [lodgingLd, crumbs], ogType: 'website' })
     + nav()
     + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/villas/">Villas</a> › ${esc(v.name)}</div>
 <section class="hero" style="background-image:url('${poster}')"><div class="hero-inner"><p class="eyebrow">Luxor West Bank · ${esc(v.viewType)}</p><h1>${esc(v.name)}</h1>
