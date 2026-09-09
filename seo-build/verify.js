@@ -17,7 +17,7 @@ const walk = (value) => {
 };
 for (const file of files) {
   const html = read(file);
-  assert.ok(html.includes('src="/analytics-events.js"'), 'Tracking missing: ' + file);
+  assert.ok(html.includes('src="/analytics-events.js?v=20260909"'), 'Tracking missing: ' + file);
   for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) walk(JSON.parse(match[1]));
 }
 // Category pages must remain crawlable without JavaScript and link every offering.
@@ -68,6 +68,8 @@ listeners['royal-inquiry-outbound']();
 assert.equal(events[1][1], 'whatsapp_click');
 click('https://www.airbnb.com/rooms/123?private=hidden', false);
 assert.equal(events[2][1], 'airbnb_click');
+click('https://www.airbnb.co.uk/users/show/252258998', false);
+assert.equal(events[3][1], 'airbnb_profile_click');
 assert.ok(!JSON.stringify(events).includes('PRIVATE_MESSAGE'));
 assert.ok(!JSON.stringify(events).includes('private='));
 console.log(`Verified ${files.length} pages, all villa/tour homepage links, supported trip markup and privacy-safe enquiry events.`);
