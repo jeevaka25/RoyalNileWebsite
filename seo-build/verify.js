@@ -24,12 +24,13 @@ for (const file of files) {
 for (const [kind, expected] of [['villas', VILLAS.length], ['tours', TOURS.length]]) {
   const html = read(`${kind}/index.html`);
   const canonical = `https://egyptvillastours.com/${kind}/`;
-  assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`));
+  const canonicalTag=html.match(/<link\b[^>]*rel="canonical"[^>]*>/)?.[0];
+  assert.ok(canonicalTag?.includes(`href="${canonical}"`));
   assert.ok(read('sitemap.xml').includes(`<loc>${canonical}</loc>`));
   assert.ok(home.includes(`href="/${kind}/"`));
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.ok(!html.includes('noindex'));
-  const schema = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map(m => JSON.parse(m[1]));
+  const schema = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].flatMap(m => JSON.parse(m[1]));
   const page = schema.find(item => item['@type'] === 'CollectionPage');
   assert.equal(page.mainEntity.numberOfItems, expected);
   assert.equal(page.mainEntity.itemListElement.length, expected);
@@ -46,7 +47,7 @@ for (const file of ['index.html', 'villas/index.html']) {
 }
 for (const kind of ['villas','tours']) {
   assert.ok(read(`${kind}/index.html`).includes('https://www.airbnb.co.uk/users/show/252258998'));
-  assert.ok(read(`${kind}/index.html`).includes('1,900+'));
+  assert.ok(read(`${kind}/index.html`).includes('1,934'));
 }
 assert.ok(home.indexOf('Included Comforts') < home.indexOf('id="featured-properties"'));
 assert.ok(home.indexOf('id="featured-properties"') < home.indexOf('Our Collection'));

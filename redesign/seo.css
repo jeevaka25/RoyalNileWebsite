@@ -1,0 +1,8 @@
+/* SEO content follows the existing luxury design. */
+.seo-details{margin:2rem 0;padding:1.5rem 0;border-top:1px solid var(--border,#d5cdbf)}
+.seo-details h2,.seo-details h3{margin:0 0 1rem}.seo-details p{margin:0 0 1rem;max-width:72ch}
+.seo-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}.seo-facts div{border-bottom:1px solid var(--border,#d5cdbf);padding:.6rem 0}.seo-facts dt{font-size:.7rem;text-transform:uppercase;letter-spacing:1px}.seo-facts dd{margin:.4rem 0}
+.seo-related{display:flex;gap:.7rem 1.5rem;flex-wrap:wrap;margin:1.2rem 0}.seo-related a{color:inherit;text-decoration:underline;text-underline-offset:4px}
+.seo-comparison{overflow-x:auto;margin:1.5rem 0;max-width:100%}.seo-comparison table{width:100%;border-collapse:collapse;font-size:.9rem}.seo-comparison caption{text-align:left;margin-bottom:1rem;font-weight:600}.seo-comparison th,.seo-comparison td{text-align:left;vertical-align:top;padding:.9rem;border-bottom:1px solid var(--border,#d5cdbf)}
+.seo-date{font-size:.76rem;opacity:.8}.seo-brand{font-size:.85rem;line-height:1.7;margin:1rem 0}.seo-summary{padding:1.5rem;background:var(--bg-warm,#eee9df);border-left:2px solid #a38e65;margin:1.5rem 0}
+@media(max-width:600px){.seo-facts{grid-template-columns:1fr}.seo-comparison th,.seo-comparison td{padding:.6rem;min-width:6rem}.seo-details{padding-top:1rem}}

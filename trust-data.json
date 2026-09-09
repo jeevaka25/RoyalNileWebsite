@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-09-03",
+  "profileUrl": "https://www.airbnb.co.uk/users/show/252258998",
+  "hostName": "Abdol",
+  "rating": 4.91,
+  "reviews": 1934,
+  "yearsHosting": 7,
+  "listings": {
+    "royal-home-nile-view": {
+      "rating": 4.91,
+      "reviews": 414,
+      "url": "https://www.airbnb.co.uk/rooms/33825380"
+    },
+    "royal-home-pool-view": {
+      "rating": 4.94,
+      "reviews": 477,
+      "url": "https://www.airbnb.co.uk/rooms/33760041"
+    },
+    "sky-penthouse-1": {
+      "rating": 4.92,
+      "reviews": 39,
+      "url": "https://www.airbnb.co.uk/rooms/1505758884972582166"
+    },
+    "sky-penthouse-2": {
+      "rating": 4.93,
+      "reviews": 59,
+      "url": "https://www.airbnb.co.uk/rooms/1505764523387331978"
+    },
+    "nile-view-luxury-1": {
+      "rating": 4.97,
+      "reviews": 163,
+      "url": "https://www.airbnb.co.uk/rooms/959398645193866526"
+    },
+    "nile-view-1": {
+      "rating": 4.9,
+      "reviews": 58,
+      "url": "https://www.airbnb.co.uk/rooms/950750256318960064"
+    },
+    "nile-view-luxury-2": {
+      "rating": 4.92,
+      "reviews": 126,
+      "url": "https://www.airbnb.co.uk/rooms/959415706303071560"
+    },
+    "nile-view-2": {
+      "rating": 4.92,
+      "reviews": 60,
+      "url": "https://www.airbnb.co.uk/rooms/952260705771172731"
+    }
+  }
+}

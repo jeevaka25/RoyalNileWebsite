@@ -1,3 +1,4 @@
+const HOST_SNAPSHOT = require('../trust-data.json');
 // ============================================================
 // SEO landing-page data (single source of truth)
 // Generated pages are built by generate.js from this file.
@@ -15,8 +16,8 @@ const SITE = {
   addressLocality: 'Al Aqaletah, West Bank',
   addressRegion: 'Luxor',
   addressCountry: 'EG',
-  // Weighted aggregate across the 8 listings below (sum reviews = 1345).
-  aggregate: { ratingValue: '4.93', reviewCount: 1345 },
+  // Host-wide evidence only; never emit as a property or Product aggregate.
+  hostSnapshot: HOST_SNAPSHOT,
   ga: 'G-12JHJ887DG',
   metaPixel: '665393768919342',
   ogImage: '/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp',
@@ -390,5 +391,7 @@ const VILLAS = [
     cover:'villa-assets/generated-nile-view-interiors/09-living-open-plan-flow.png',
     photos:['villa-assets/generated-nile-view-interiors/09-living-open-plan-flow.png','villa-assets/generated-nile-view-interiors/01-kitchen-wide.png','villa-assets/generated-nile-view-interiors/05-double-bedroom-desk.png','villa-assets/generated-nile-view-interiors/04-twin-bedroom-front.png','villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.png','villa-assets/generated-royal-nile-exteriors/05-terrace-nile-view-sunset.png'] },
 ];
+
+VILLAS.forEach(villa => { const snapshot = HOST_SNAPSHOT.listings[villa.id]; if (snapshot) { villa.rating = snapshot.rating; villa.reviews = snapshot.reviews; } });
 
 module.exports = { SITE, TOURS, VILLAS, wa, optimizedImage, siteAsset };
