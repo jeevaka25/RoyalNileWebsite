@@ -41,7 +41,7 @@ const CSS = `
 
 const nav = (current = 'guide') => `<nav class="nav"><div class="nav-inner">
   <a class="logo" href="/">Royal Nile <span>Villas</span></a>
-  <div class="nav-links"><a href="/villas/">Villas</a><a href="/tours/">Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/"${current === 'guide' ? ' aria-current="page"' : ''}>Egypt Travel Guide</a><a href="/meet-your-hosts/">Meet your hosts</a><a class="book" href="${WHATSAPP}" target="_blank" rel="noopener">Book Now</a></div>
+  <div class="nav-links"><a href="/villas/">Villas</a><a href="/tours/">Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/"${current === 'guide' ? ' aria-current="page"' : ''}>Egypt Travel Guide</a><a href="/meet-your-hosts/">Meet your hosts</a></div>
 </div></nav>`;
 
 const footer = `<footer class="footer"><div class="footer-inner"><div>Royal Nile Villas · Premium West Bank apartments, local transfers and private tours.</div><div><a href="/">Villas & Tours</a> · <a href="/egypt-travel-guide/">Egypt Travel Guide</a> · <a href="https://share.google/P6PPmkbxRYg6QhLie" target="_blank" rel="noopener">Royal Nile Villas on Google</a> · <a href="https://share.google/xxd26OMK5AOtsgYik" target="_blank" rel="noopener">Royal Home Villa on Google</a></div></div></footer>`;
