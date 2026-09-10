@@ -159,7 +159,7 @@ ${stylesheet ? `<link rel="stylesheet" href="${stylesheet}">` : ''}
 function nav(current) {
   return `<nav class="nav"><div class="nav-inner">
 <a href="/" class="nav-logo">Royal Nile <span>Villas</span></a>
-<div class="nav-links"><a href="/villas/"${current === 'villas' ? ' aria-current="page"' : ''}>Villas</a><a href="/tours/"${current === 'tours' ? ' aria-current="page"' : ''}>Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/">Travel Guide</a><a href="/meet-your-hosts/">Meet your hosts</a><a href="/#location">Location</a><a href="${wa("Hi! I'd like to know more about Royal Nile Villas.")}" class="nav-cta" target="_blank" rel="noopener">Book Now</a></div>
+<div class="nav-links"><a href="/villas/"${current === 'villas' ? ' aria-current="page"' : ''}>Villas</a><a href="/tours/"${current === 'tours' ? ' aria-current="page"' : ''}>Tours</a><a href="/restaurant.html">Restaurant</a><a href="/egypt-travel-guide/">Travel Guide</a><a href="/meet-your-hosts/">Meet your hosts</a><a href="/#location">Location</a></div>
 </div></nav>`;
 }
 
