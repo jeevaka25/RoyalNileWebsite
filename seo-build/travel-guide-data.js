@@ -275,4 +275,6 @@ const ARTICLES = [
   },
 ];
 
+Object.assign(ARTICLES.find(a => a.slug === 'where-to-stay-luxor-west-bank'), require('./authority-stay-update.json'));
+ARTICLES.unshift(require('./authority-tour-guide.json'));
 module.exports = { ARTICLES };
