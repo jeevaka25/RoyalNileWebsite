@@ -121,7 +121,7 @@ fbq('init','${SITE.metaPixel}');fbq('track','PageView');
 </script>
 <noscript><img alt="" aria-hidden="true" height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${SITE.metaPixel}&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
-<script defer src="/analytics-events.js"></script>
+<script defer src="/analytics-events.js?v=20260923-lead"></script>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga}"></script>
 <script>
