@@ -4,7 +4,18 @@
   function track(eventName, destinationHost) {
     var details = { destination_host: destinationHost, page_path: location.pathname };
     if (typeof gtag === 'function') gtag('event', eventName, details);
-    if (typeof fbq === 'function') fbq('trackCustom', eventName, details);
+    if (typeof fbq === 'function') {
+      fbq('trackCustom', eventName, details);
+      // Keep the standard event used by our Meta lead campaigns alongside
+      // channel-specific reporting. Opening a form or host profile is not a lead.
+      if (eventName === 'whatsapp_click' || eventName === 'airbnb_click' || eventName === 'booking_click') {
+        fbq('track', 'Lead', {
+          content_category: eventName.replace('_click', ''),
+          destination_host: destinationHost,
+          page_path: location.pathname
+        });
+      }
+    }
   }
   document.addEventListener('click', function (event) {
     var anchor = event.target.closest ? event.target.closest('a[href]') : null;

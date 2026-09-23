@@ -18,15 +18,22 @@ function verifyButtons(html,pathname) {
     const expected=inquiry?'enquiry_start':host==='wa.me'||host==='api.whatsapp.com'?'whatsapp_click':/(^|\.)airbnb\.[a-z.]+$/.test(host)?(new URL(href,SITE.origin).pathname.includes('/users/')?'airbnb_profile_click':'airbnb_click'):host==='booking.com'||host.endsWith('.booking.com')?'booking_click':null;
     const before=pixel.length;
     listeners.click({target:{closest:()=>({href,hasAttribute:name=>name==='data-tour-inquiry'&&inquiry})}});
-    assert.equal(pixel.length,before+(expected?1:0));
-    if(expected){assert.equal(pixel.at(-1)[0],'trackCustom');assert.equal(pixel.at(-1)[1],expected);assert.equal(ga.at(-1)[1],expected);assert.equal(pixel.at(-1)[2].page_path,pathname);assert.equal(pixel.at(-1)[2].destination_host,host);assert.deepEqual(Object.keys(pixel.at(-1)[2]).sort(),['destination_host','page_path']);count++;}
+    const isLead=['whatsapp_click','airbnb_click','booking_click'].includes(expected);
+    assert.equal(pixel.length,before+(expected?1:0)+(isLead?1:0));
+    if(expected){assert.equal(pixel[before][0],'trackCustom');assert.equal(pixel[before][1],expected);assert.equal(ga.at(-1)[1],expected);assert.equal(pixel[before][2].page_path,pathname);assert.equal(pixel[before][2].destination_host,host);assert.deepEqual(Object.keys(pixel[before][2]).sort(),['destination_host','page_path']);count++;}
+    if(isLead){const lead=pixel[before+1];assert.equal(lead[0],'track');assert.equal(lead[1],'Lead');assert.equal(lead[2].content_category,expected.replace('_click',''));assert.deepEqual(Object.keys(lead[2]).sort(),['content_category','destination_host','page_path']);}
   }
-  listeners['royal-inquiry-outbound']();assert.equal(pixel.at(-1)[1],'whatsapp_click');
+  const beforeHandoff=pixel.length;
+  listeners['royal-inquiry-outbound']();
+  assert.equal(pixel.length,beforeHandoff+2);
+  assert.equal(pixel[beforeHandoff][1],'whatsapp_click');
+  assert.equal(pixel[beforeHandoff+1][0],'track');
+  assert.equal(pixel[beforeHandoff+1][1],'Lead');
   assert.ok(!JSON.stringify(pixel).includes('private=hidden'));
 }
 for(const pathname of paths) {
   const html=read(pathname==='/'?'index.html':pathname.slice(1)+(pathname.endsWith('/')?'index.html':pathname.endsWith('.html')?'':'.html'));
-  assert.equal((html.match(/src="\/analytics-events\.js\?v=20260909"/g)||[]).length,1,pathname);
+  assert.equal((html.match(/src="\/analytics-events\.js\?v=20260923-lead"/g)||[]).length,1,pathname);
   assert.equal((html.match(new RegExp("fbq\\('init','"+SITE.metaPixel+"'\\)",'g'))||[]).length,1,'Pixel must initialize exactly once: '+pathname);
   assert.ok(html.includes("fbq('track','PageView')"),pathname);
   verifyButtons(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,''),pathname);
@@ -37,4 +44,4 @@ const ctx={document:{getElementById:()=>grid},vPhoto:()=>'/test.webp',requestAni
 vm.runInNewContext(read('villa-data.js')+"\nconst FEATURED_VILLA_IDS=new Set(['nile-view-luxury-2','nile-view-2']);\n"+home.slice(home.indexOf('function renderVillas('),home.indexOf('// ============================================\n// VILLA MODAL'))+"\nrenderVillas(VILLAS.map(v=>({...v,available:true})),'2026-12-10','2026-12-14');",ctx);
 verifyButtons(grid.innerHTML,'/');
 assert.ok(home.includes("document.dispatchEvent(new Event('royal-inquiry-outbound'));"));
-console.log(`Pixel checks passed: ${paths.length} pages initialize pixel ${SITE.metaPixel} once; ${count} static/dynamic booking links invoke the correct custom event, including nested targets and enquiry handoffs. No message/date/form data is sent in event parameters. This tests site-side dispatch, not Meta dashboard receipt.`);
+console.log(`Pixel checks passed: ${paths.length} pages initialize pixel ${SITE.metaPixel} once; ${count} static/dynamic booking links invoke the correct custom event and exactly one standard Lead for outbound booking/WhatsApp actions, including nested targets and enquiry handoffs. No message/date/form data is sent in event parameters. This tests site-side dispatch, not Meta dashboard receipt.`);
