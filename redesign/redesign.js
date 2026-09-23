@@ -19,7 +19,7 @@ function shuffleChildren(container,selector){
 }
 function keepHomeApartmentsRandom(){
  const grid=document.querySelector('.ev-home #villaGrid');if(!grid)return;
- const randomize=()=>{watch.disconnect();shuffleChildren(grid,'.villa-card');watch.observe(grid,{childList:true})};
+ const randomize=()=>{watch.disconnect();shuffleChildren(grid,'.collection-card');watch.observe(grid,{childList:true})};
  const watch=new MutationObserver(()=>requestAnimationFrame(randomize));watch.observe(grid,{childList:true});
  if(grid.children.length)randomize();else document.addEventListener('DOMContentLoaded',randomize,{once:true});
 }
