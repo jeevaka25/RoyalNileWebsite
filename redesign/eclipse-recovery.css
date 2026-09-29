@@ -9,7 +9,8 @@
 .ev-hero .ev-deferred-video.is-playing{opacity:1}
 .eclipse-guides{background:#e8e7dd}
 .eclipse-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
-.eclipse-guide-card{border-top:1px solid #9ba997;padding:24px 0 0;display:flex;flex-direction:column;align-items:flex-start}
+.eclipse-guide-card{padding:0;display:flex;flex-direction:column;align-items:flex-start}
+.eclipse-guide-image{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;margin:0 0 24px;background:#203c36}
 .eclipse-guide-number{font-size:12px;color:#52674f;margin-bottom:22px;font-variant-numeric:tabular-nums}
 .eclipse-guide-card h3{font-size:clamp(25px,2.7vw,37px);line-height:1.15;margin:0 0 16px}
 .eclipse-guide-card h3 a{color:#203c36;text-decoration:none}
@@ -25,6 +26,6 @@
  .ev-home .ev-hero .ev-deferred-video{display:none}
  .ev-hero .ev-trust,.ev-hero h1{animation:none!important}
  .eclipse-guide-grid{grid-template-columns:1fr;gap:28px}
- .eclipse-guide-card{padding-top:20px}.eclipse-guide-number{margin-bottom:12px}
+ .eclipse-guide-card{padding-top:0}.eclipse-guide-number{margin-bottom:12px}
  .eclipse-guides .section-header{margin-bottom:28px!important}
 }
