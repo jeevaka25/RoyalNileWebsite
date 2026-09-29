@@ -1,6 +1,7 @@
 const HAWARA_ARTICLE = require('./hawara-article.json');
 
 const ARTICLES = [
+  require('./balloon-restart-article.json'),
   HAWARA_ARTICLE,
   {
     slug: 'where-to-stay-near-luxor-hot-air-balloon-launch-west-bank',
