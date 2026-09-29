@@ -1,0 +1,30 @@
+/* Eclipse discovery and first-screen performance, September 2026. */
+.ev-home .ev-hero,.ev-eclipse-package .ev-hero{background-image:none!important}
+.ev-home .ev-hero{min-height:max(660px,100svh)!important;padding-bottom:85px!important}
+.ev-home .ev-hero .hero-actions{display:flex!important;max-width:none;margin-top:22px!important}
+.ev-home .ev-hero .ev-eclipse-primary{display:inline-flex;align-items:center;justify-content:center;gap:18px;min-height:54px;padding:18px 26px!important;font-size:12px!important;letter-spacing:1.2px!important;background:#f5f1e4!important;color:#173d34!important;border-color:#f5f1e4!important;text-decoration:none}
+.ev-home .ev-hero .ev-eclipse-primary:hover{background:#e7d9ab!important;border-color:#e7d9ab!important}
+.ev-home .ev-hero h1,.ev-eclipse-package .ev-hero h1{animation:none!important}
+.ev-hero .ev-deferred-video{opacity:0;transition:opacity .4s ease}
+.ev-hero .ev-deferred-video.is-playing{opacity:1}
+.eclipse-guides{background:#e8e7dd}
+.eclipse-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.eclipse-guide-card{border-top:1px solid #9ba997;padding:24px 0 0;display:flex;flex-direction:column;align-items:flex-start}
+.eclipse-guide-number{font-size:12px;color:#52674f;margin-bottom:22px;font-variant-numeric:tabular-nums}
+.eclipse-guide-card h3{font-size:clamp(25px,2.7vw,37px);line-height:1.15;margin:0 0 16px}
+.eclipse-guide-card h3 a{color:#203c36;text-decoration:none}
+.eclipse-guide-card p:not(.eclipse-guide-number){font-size:14px;color:#4f625b;margin-bottom:18px}
+.eclipse-guide-link,.eclipse-guide-package{display:inline-flex;align-items:center;gap:12px;min-height:48px;color:#173d34;text-decoration:underline;text-underline-offset:5px;font-size:13px}
+.eclipse-guide-link{margin-top:auto}.eclipse-guide-package{margin-top:30px}
+@media(max-width:700px){
+ .ev-home .ev-hero{min-height:max(640px,100svh)!important;padding:215px var(--gutter) 65px!important}
+ .ev-home .ev-hero h1{font-size:clamp(44px,10.8vw,65px)!important}
+ .ev-home .ev-hero .hero-subtitle{font-size:14px!important;margin:20px 0!important}
+ .ev-home .ev-hero .hero-actions{display:flex!important;width:100%;margin:0!important}
+ .ev-home .ev-hero .ev-eclipse-primary{width:100%;min-height:56px;padding:18px 12px!important;font-size:11px!important;letter-spacing:1px!important}
+ .ev-home .ev-hero .ev-deferred-video{display:none}
+ .ev-hero .ev-trust,.ev-hero h1{animation:none!important}
+ .eclipse-guide-grid{grid-template-columns:1fr;gap:28px}
+ .eclipse-guide-card{padding-top:20px}.eclipse-guide-number{margin-bottom:12px}
+ .eclipse-guides .section-header{margin-bottom:28px!important}
+}

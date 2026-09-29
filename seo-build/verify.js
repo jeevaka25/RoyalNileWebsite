@@ -9,7 +9,7 @@ const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const home = read('index.html').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
 for (const villa of VILLAS) assert.ok(home.includes(`href="/villas/${villa.id}"`), 'Unlinked villa: ' + villa.id);
 for (const tour of TOURS) assert.ok(home.includes(`href="/${tour.primarySlug}"`), 'Unlinked tour: ' + tour.id);
-const files = ['index.html', 'restaurant.html', 'villas/index.html', 'tours/index.html', ...TOURS.map((tour) => tour.primarySlug + '.html'), ...VILLAS.map((villa) => 'villas/' + villa.id + '.html'), 'egypt-travel-guide/index.html', ...ARTICLES.map((article) => 'egypt-travel-guide/' + article.slug + '/index.html')];
+const files = ['index.html', 'restaurant.html', 'meet-your-hosts/index.html', 'villas/index.html', 'tours/index.html', ...TOURS.map((tour) => tour.primarySlug + '.html'), ...VILLAS.map((villa) => 'villas/' + villa.id + '.html'), 'egypt-travel-guide/index.html', ...ARTICLES.map((article) => 'egypt-travel-guide/' + article.slug + '/index.html')];
 const walk = (value) => {
   if (!value || typeof value !== 'object') return;
   if (value['@type'] === 'TouristTrip') assert.ok(!value.additionalProperty);
