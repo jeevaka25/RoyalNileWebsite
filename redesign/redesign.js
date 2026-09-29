@@ -1,6 +1,7 @@
 (()=>{
 'use strict';
-window.ScrollCraft?.mount(document.querySelector('main')||document.body);
+const compact=matchMedia('(max-width: 700px)'),lightweight=compact.matches||navigator.connection?.saveData;
+if(!lightweight)window.ScrollCraft?.mount(document.querySelector('main')||document.body);
 const reduce=matchMedia('(prefers-reduced-motion: reduce)'),fine=matchMedia('(hover:hover) and (pointer:fine)');
 const nav=document.querySelector('.nav'),menu=nav?.querySelector('.ev-menu-toggle'),links=nav?.querySelector('.nav-links');
 function toggleMenu(open){nav?.classList.toggle('menu-open',open);menu?.setAttribute('aria-expanded',String(open));if(links)links.inert=!open;}
@@ -9,7 +10,7 @@ links?.addEventListener('click',e=>{if(e.target.closest('a'))toggleMenu(false)})
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav?.classList.contains('menu-open')){toggleMenu(false);menu.focus()}if(e.key==='Tab'&&nav?.classList.contains('menu-open')){const focus=[menu,...links.querySelectorAll('a,button')];if(e.shiftKey&&document.activeElement===focus[0]){e.preventDefault();focus.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===focus.at(-1)){e.preventDefault();focus[0].focus()}}});
 // The final verified number is the semantic value; only its visual text ticks.
 const counts=[...document.querySelectorAll('[data-ev-count]')];
-function count(el){const target=+el.dataset.evCount,places=el.dataset.evCount.includes('.')?2:0;const format=x=>x.toLocaleString('en-GB',{minimumFractionDigits:places,maximumFractionDigits:places});if(reduce.matches){el.textContent=format(target);return}const start=performance.now();function frame(now){const p=Math.min(1,(now-start)/1600),n=target*(1-(1-p)**3);el.textContent=format(places?n:Math.round(n));if(p<1)requestAnimationFrame(frame)}requestAnimationFrame(frame)}
+function count(el){const target=+el.dataset.evCount,places=el.dataset.evCount.includes('.')?2:0;const format=x=>x.toLocaleString('en-GB',{minimumFractionDigits:places,maximumFractionDigits:places});if(reduce.matches||lightweight){el.textContent=format(target);return}const start=performance.now();function frame(now){const p=Math.min(1,(now-start)/1600),n=target*(1-(1-p)**3);el.textContent=format(places?n:Math.round(n));if(p<1)requestAnimationFrame(frame)}requestAnimationFrame(frame)}
 counts.forEach(count);
 function shuffleChildren(container,selector){
  const cards=[...container.querySelectorAll(`:scope > ${selector}`)];if(cards.length<2)return;
@@ -26,11 +27,24 @@ function keepHomeApartmentsRandom(){
 for(const grid of document.querySelectorAll('.ev-collection .inventory-grid'))shuffleChildren(grid,'.inventory-card');
 keepHomeApartmentsRandom();
 const videos=[...document.querySelectorAll('.ev-hero video')];
-for(const video of videos){let visible=true;const sync=()=>{if(reduce.matches||!visible||document.hidden)video.pause();else video.play().catch(()=>{})};new IntersectionObserver(es=>{visible=es[0].isIntersecting;sync()}).observe(video);document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync()}
+for(const video of videos){
+ let visible=true,ready=!video.classList.contains('ev-deferred-video');
+ const sync=()=>{if(!ready||reduce.matches||!visible||document.hidden||(video.classList.contains('ev-deferred-video')&&compact.matches))video.pause();else video.play().catch(()=>{})};
+ if(!ready){
+  video.addEventListener('playing',()=>video.classList.add('is-playing'));
+  const load=()=>{if(ready||compact.matches||reduce.matches||navigator.connection?.saveData)return;for(const source of video.querySelectorAll('source[data-src]'))source.src=source.dataset.src;ready=true;video.load();sync()};
+  // The decorative desktop film starts after critical content; mobile keeps the still.
+  const schedule=()=>{if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:4000});else setTimeout(load,1500)};
+  if(document.readyState==='complete')schedule();else window.addEventListener('load',schedule,{once:true});
+  compact.addEventListener('change',()=>{load();sync()});reduce.addEventListener('change',load);
+ }
+ new IntersectionObserver(es=>{visible=es[0].isIntersecting;sync()}).observe(video);
+ document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
+}
 const heroChoice=document.querySelector('[data-reserve]');
 if(heroChoice&&typeof VILLAS!=='undefined'){const pool=VILLAS.filter(v=>['nile-view-luxury-1','nile-view-luxury-2','nile-view-1','nile-view-2'].includes(v.id));const random=new Uint32Array(1);crypto.getRandomValues(random);const villa=pool[random[0]%pool.length];document.querySelector('[data-reserve="airbnb"]').href=villa.airbnbUrl;document.querySelector('[data-reserve="booking"]').href=villa.bookingUrl;document.querySelectorAll('[data-reserve]').forEach(a=>a.setAttribute('aria-label',a.textContent+' · '+villa.shortName))}
 let lenis;
-if(window.Lenis&&!reduce.matches){lenis=new Lenis({autoRaf:true,lerp:.11,smoothWheel:true,syncTouch:false,anchors:{offset:-110},prevent:node=>!!node.closest('.modal-overlay,.lightbox,.nav-links,.ev-review-track,input,textarea,select')});reduce.addEventListener('change',()=>{if(reduce.matches){lenis.destroy();lenis=null}})}
+if(window.Lenis&&!reduce.matches&&!lightweight){lenis=new Lenis({autoRaf:true,lerp:.11,smoothWheel:true,syncTouch:false,anchors:{offset:-110},prevent:node=>!!node.closest('.modal-overlay,.lightbox,.nav-links,.ev-review-track,input,textarea,select')});reduce.addEventListener('change',()=>{if(reduce.matches){lenis.destroy();lenis=null}})}
 for(const heading of document.querySelectorAll('main h2,main h3'))if(!heading.closest('.ev-hero'))heading.classList.add('ev-illuminate');
 const revealTargets=[...document.querySelectorAll('main .section-header,main .featured-heading,main .amenity-item,main .featured-card,main .villa-card,main .tour-card,main .inventory-card,main .advice-card,main .ev-detail-intro>* ,main .ev-faqs>* ,main .related-card,main .cards .card,main .article-section,main .menu-category,main .location-content>*')];
 for(const [i,el] of revealTargets.entries()){el.classList.add('ev-scroll-reveal');el.style.setProperty('--reveal-delay',`${Math.min(i%4,3)*55}ms`)}
@@ -40,7 +54,7 @@ const horizontalStories=[];
 const illuminate=[...document.querySelectorAll('.ev-illuminate')],hero=document.querySelector('.ev-hero'),photoCards=[...document.querySelectorAll('.ev-photo-card')];let scheduled=false;
 function paint(){scheduled=false;nav?.classList.toggle('is-scrolled',scrollY>60);
 for(const h of illuminate){const r=h.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight*.91-r.top)/(innerHeight*.55)));h.style.setProperty('--lit',(reduce.matches?100:p*100)+'%')}
-if(hero&&!reduce.matches){const r=hero.getBoundingClientRect();if(r.bottom>0){hero.style.setProperty('--media-y',Math.min(100,-r.top*.14)+'px');hero.style.setProperty('--floor-y',Math.max(-28,r.top*.035)+'px')}}
+if(hero&&!reduce.matches&&!lightweight){const r=hero.getBoundingClientRect();if(r.bottom>0){hero.style.setProperty('--media-y',Math.min(100,-r.top*.14)+'px');hero.style.setProperty('--floor-y',Math.max(-28,r.top*.035)+'px')}}
 for(const story of horizontalStories){if(reduce.matches||!story.section.classList.contains('ev-horizontal-ready'))continue;const r=story.section.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/story.distance));const target=p*story.max;if(Math.abs(story.track.scrollLeft-target)>1)story.track.scrollLeft=target}
 for(let i=0;i<photoCards.length;i++){const card=photoCards[i],next=photoCards[i+1],r=card.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)continue;const overlap=next?Math.max(0,Math.min(1,(innerHeight*.78-next.getBoundingClientRect().top)/(innerHeight*.65))):0;card.querySelector('.ev-photo-inner').style.setProperty('--stack-scale',reduce.matches?1:1-overlap*.045)}
 }
@@ -50,7 +64,7 @@ for(const button of document.querySelectorAll('.ev-enlarge'))button.addEventList
 // The original image viewers, enquiry forms, menu filters and availability logic are retained.
 // A glass review ring: scroll, swipe and keyboard all share the same position.
 const reviewSection=document.querySelector('#guest-reviews');
-if(reviewSection&&!reduce.matches){
+if(reviewSection&&!reduce.matches&&!lightweight){
  const cards=[...reviewSection.querySelectorAll('.ev-review-card')],track=reviewSection.querySelector('.ev-review-track');
  const stage=document.createElement('div');stage.className='ev-ring-stage';while(reviewSection.firstChild)stage.append(reviewSection.firstChild);reviewSection.append(stage);reviewSection.classList.add('ev-ring-section');
  const scene=document.createElement('div');scene.className='ev-ring-scene';track.before(scene);scene.append(track);track.classList.add('ev-ring');
@@ -67,11 +81,11 @@ if(reviewSection&&!reduce.matches){
 // Preserve inline emphasis and links while revealing words in sequence.
 const flowObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){e.target.classList.add('ev-flowed');flowObserver.unobserve(e.target)}},{threshold:.1,rootMargin:'0px 0px -4% 0px'});
 function prepareText(root=document){
- if(reduce.matches)return;
+ if(reduce.matches||lightweight)return;
  const selector='main h1,main h2,main .section-subtitle,main .lede,main .article-section>p,.amenities-section,.villa-card,.tour-card,.inventory-card';
  const roots=[...(root.matches?.(selector)?[root]:[]),...root.querySelectorAll(selector)];
  for(const el of roots){
-  if(el.closest('#guest-reviews,.ev-flow-word,.ev-word-flow'))continue;
+  if(el.closest('.ev-hero,#guest-reviews,.ev-flow-word,.ev-word-flow'))continue;
   const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];
   while(walker.nextNode()){const n=walker.currentNode;if(n.textContent.trim()&&!n.parentElement.closest('.ev-word-flow,.ev-flow-word,script,style,button,.emoji,[aria-hidden="true"]'))nodes.push(n)}
   for(const node of nodes){
@@ -89,7 +103,7 @@ for(const grid of document.querySelectorAll('#villaGrid,#toursGrid,.inventory-gr
 const glass=document.createElement('div');glass.className='ev-glass-ground';glass.setAttribute('aria-hidden','true');document.body.prepend(glass);
 let px=0,py=0,gx=0,gy=0,glassFrame=0;
 function glassPaint(){gx+=(px-gx)*.14;gy+=(py-gy)*.14;glass.style.setProperty('--glass-x',gx+'px');glass.style.setProperty('--glass-y',gy+'px');glass.style.setProperty('--glass-light-x',(50+gx*.65)+'%');glass.style.setProperty('--glass-light-y',(45+gy*.75)+'%');if(Math.abs(px-gx)+Math.abs(py-gy)>.15)glassFrame=requestAnimationFrame(glassPaint);else glassFrame=0}
-if(!reduce.matches){addEventListener('pointermove',e=>{if(!fine.matches)return;px=(e.clientX/innerWidth-.5)*72;py=(e.clientY/innerHeight-.5)*48;if(!glassFrame)glassFrame=requestAnimationFrame(glassPaint)},{passive:true});addEventListener('scroll',()=>{glass.style.setProperty('--glass-scroll',`${-(scrollY%4000)*.018}px`)},{passive:true})}
+if(!reduce.matches&&!lightweight){addEventListener('pointermove',e=>{if(!fine.matches)return;px=(e.clientX/innerWidth-.5)*72;py=(e.clientY/innerHeight-.5)*48;if(!glassFrame)glassFrame=requestAnimationFrame(glassPaint)},{passive:true});addEventListener('scroll',()=>{glass.style.setProperty('--glass-scroll',`${-(scrollY%4000)*.018}px`)},{passive:true})}
 
 document.documentElement.classList.add('ev-ready');
 })();
