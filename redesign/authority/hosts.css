@@ -49,3 +49,6 @@
 }
 
 .ev-hosts .hosts-content h2 .ev-flow-word{opacity:1!important;transform:none!important}
+
+.hosts-founder-portrait{width:min(100%,380px);justify-self:center}
+.hosts-founder-portrait img{height:auto;aspect-ratio:1;object-fit:contain}
