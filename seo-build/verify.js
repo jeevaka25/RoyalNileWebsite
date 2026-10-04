@@ -17,7 +17,7 @@ const walk = (value) => {
 };
 for (const file of files) {
   const html = read(file);
-  assert.ok(html.includes('src="/analytics-events.js?v=20260923-lead"'), 'Tracking missing: ' + file);
+  assert.ok(html.includes('src="/analytics-events.js?v=20261004-context"'), 'Tracking missing: ' + file);
   for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) walk(JSON.parse(match[1]));
 }
 // Category pages must remain crawlable without JavaScript and link every offering.
