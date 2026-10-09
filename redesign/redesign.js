@@ -28,15 +28,22 @@ for(const grid of document.querySelectorAll('.ev-collection .inventory-grid'))sh
 keepHomeApartmentsRandom();
 const videos=[...document.querySelectorAll('.ev-hero video')];
 for(const video of videos){
- let visible=true,ready=!video.classList.contains('ev-deferred-video');
- const sync=()=>{if(!ready||reduce.matches||!visible||document.hidden||(video.classList.contains('ev-deferred-video')&&compact.matches))video.pause();else video.play().catch(()=>{})};
+ let visible=true,ready=!video.classList.contains('ev-deferred-video'),userPaused=false,failed=false;
+ const control=video.parentElement.querySelector('[data-hero-video-toggle]');
+ const label=playing=>{if(control){control.hidden=reduce.matches||failed;control.textContent=playing?'Pause video':'Play video';control.setAttribute('aria-label',playing?'Pause introduction video':'Play introduction video')}};
+ // Explicit properties also cover mobile browsers that ignore the muted attribute alone.
+ video.muted=true;video.defaultMuted=true;video.playsInline=true;
+ const sync=()=>{if(!ready||failed||userPaused||reduce.matches||!visible||document.hidden)video.pause();else video.play().catch(()=>label(false))};
+ video.addEventListener('playing',()=>{video.classList.add('is-playing');label(true)});
+ video.addEventListener('pause',()=>label(false));
+ video.addEventListener('error',()=>{failed=true;video.classList.remove('is-playing');if(control)control.hidden=true});
+ control?.addEventListener('click',()=>{userPaused=!video.paused;sync()});
  if(!ready){
-  video.addEventListener('playing',()=>video.classList.add('is-playing'));
-  const load=()=>{if(ready||compact.matches||reduce.matches||navigator.connection?.saveData)return;for(const source of video.querySelectorAll('source[data-src]'))source.src=source.dataset.src;ready=true;video.load();sync()};
-  // The decorative desktop film starts after critical content; mobile keeps the still.
-  const schedule=()=>{if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:4000});else setTimeout(load,1500)};
-  if(document.readyState==='complete')schedule();else window.addEventListener('load',schedule,{once:true});
-  compact.addEventListener('change',()=>{load();sync()});reduce.addEventListener('change',load);
+  const load=()=>{if(ready||reduce.matches||navigator.connection?.saveData)return;for(const source of video.querySelectorAll('source[data-src]'))source.src=source.dataset.src;ready=true;video.load();sync()};
+  // Paint the lightweight fallback first, then start on mobile and desktop alike.
+  const schedule=()=>{if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:1500});else setTimeout(load,250)};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
+  reduce.addEventListener('change',load);
  }
  new IntersectionObserver(es=>{visible=es[0].isIntersecting;sync()}).observe(video);
  document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
