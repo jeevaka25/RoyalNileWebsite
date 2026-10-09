@@ -28,16 +28,12 @@ for(const grid of document.querySelectorAll('.ev-collection .inventory-grid'))sh
 keepHomeApartmentsRandom();
 const videos=[...document.querySelectorAll('.ev-hero video')];
 for(const video of videos){
- let visible=true,ready=!video.classList.contains('ev-deferred-video'),userPaused=false,failed=false;
- const control=video.parentElement.querySelector('[data-hero-video-toggle]');
- const label=playing=>{if(control){control.hidden=reduce.matches||failed;control.textContent=playing?'Pause video':'Play video';control.setAttribute('aria-label',playing?'Pause introduction video':'Play introduction video')}};
+ let visible=true,ready=!video.classList.contains('ev-deferred-video'),failed=false;
  // Explicit properties also cover mobile browsers that ignore the muted attribute alone.
  video.muted=true;video.defaultMuted=true;video.playsInline=true;
- const sync=()=>{if(!ready||failed||userPaused||reduce.matches||!visible||document.hidden)video.pause();else video.play().catch(()=>label(false))};
- video.addEventListener('playing',()=>{video.classList.add('is-playing');label(true)});
- video.addEventListener('pause',()=>label(false));
- video.addEventListener('error',()=>{failed=true;video.classList.remove('is-playing');if(control)control.hidden=true});
- control?.addEventListener('click',()=>{userPaused=!video.paused;sync()});
+ const sync=()=>{if(!ready||failed||reduce.matches||!visible||document.hidden)video.pause();else video.play().catch(()=>{})};
+ video.addEventListener('playing',()=>video.classList.add('is-playing'));
+ video.addEventListener('error',()=>{failed=true;video.classList.remove('is-playing')});
  if(!ready){
   const load=()=>{if(ready||reduce.matches||navigator.connection?.saveData)return;for(const source of video.querySelectorAll('source[data-src]'))source.src=source.dataset.src;ready=true;video.load();sync()};
   // Paint the lightweight fallback first, then start on mobile and desktop alike.
@@ -48,8 +44,25 @@ for(const video of videos){
  new IntersectionObserver(es=>{visible=es[0].isIntersecting;sync()}).observe(video);
  document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
 }
-const heroChoice=document.querySelector('[data-reserve]');
-if(heroChoice&&typeof VILLAS!=='undefined'){const pool=VILLAS.filter(v=>['nile-view-luxury-1','nile-view-luxury-2','nile-view-1','nile-view-2'].includes(v.id));const random=new Uint32Array(1);crypto.getRandomValues(random);const villa=pool[random[0]%pool.length];document.querySelector('[data-reserve="airbnb"]').href=villa.airbnbUrl;document.querySelector('[data-reserve="booking"]').href=villa.bookingUrl;document.querySelectorAll('[data-reserve]').forEach(a=>a.setAttribute('aria-label',a.textContent+' · '+villa.shortName))}
+// Each platform advances independently only after a real link activation.
+const heroReservationIds=['nile-view-1','nile-view-2','nile-view-luxury-1','nile-view-luxury-2'];
+if(typeof VILLAS!=='undefined'){
+ const pool=heroReservationIds.map(id=>VILLAS.find(v=>v.id===id));
+ if(pool.every(Boolean))for(const link of document.querySelectorAll('[data-reserve]')){
+  const platform=link.dataset.reserve,field={airbnb:'airbnbUrl',booking:'bookingUrl'}[platform];
+  if(!field)continue;
+  const key='royal-nile.hero-reservation.'+platform+'.v1';let index=0;
+  try{const saved=Number(localStorage.getItem(key));if(Number.isInteger(saved)&&saved>=0)index=saved%pool.length}catch{}
+  const render=()=>{const villa=pool[index];link.href=villa[field];link.dataset.villaId=villa.id;link.setAttribute('aria-label',link.textContent.trim()+' · '+villa.shortName)};
+  const advance=event=>{
+   if(event.defaultPrevented||(event.type==='auxclick'&&event.button!==1))return;
+   index=(index+1)%pool.length;try{localStorage.setItem(key,String(index))}catch{}
+   // Keep this click's href intact for browser navigation and the existing Lead handler.
+   setTimeout(render,0);
+  };
+  render();link.addEventListener('click',advance);link.addEventListener('auxclick',advance);
+ }
+}
 let lenis;
 if(window.Lenis&&!reduce.matches&&!lightweight){lenis=new Lenis({autoRaf:true,lerp:.11,smoothWheel:true,syncTouch:false,anchors:{offset:-110},prevent:node=>!!node.closest('.modal-overlay,.lightbox,.nav-links,.ev-review-track,input,textarea,select')});reduce.addEventListener('change',()=>{if(reduce.matches){lenis.destroy();lenis=null}})}
 for(const heading of document.querySelectorAll('main h2,main h3'))if(!heading.closest('.ev-hero'))heading.classList.add('ev-illuminate');
