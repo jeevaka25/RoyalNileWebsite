@@ -8,6 +8,16 @@ RewriteRule ^ https://egyptvillastours.com%{REQUEST_URI} [R=301,L,NE]
 
 # BEGIN GENERATED TOUR ROUTES
 # Keep old links and campaign query strings; do not remove these redirects.
+RewriteRule ^(pyramids-sphinx-tour)(?:\.html)?/?$ /tours/cairo-pyramids-sphinx-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/cairo-pyramids-sphinx-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/cairo-pyramids-sphinx-tour(?:/|\.html/?)$ /tours/cairo-pyramids-sphinx-tour [R=301,L]
+RewriteRule ^tours/cairo-pyramids-sphinx-tour$ tours/cairo-pyramids-sphinx-tour.html [L]
+
+RewriteRule ^(grand-egyptian-museum-tour)(?:\.html)?/?$ /tours/grand-egyptian-museum-tour [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tours/grand-egyptian-museum-tour(?:/|\.html/?)[?\s] [NC]
+RewriteRule ^tours/grand-egyptian-museum-tour(?:/|\.html/?)$ /tours/grand-egyptian-museum-tour [R=301,L]
+RewriteRule ^tours/grand-egyptian-museum-tour$ tours/grand-egyptian-museum-tour.html [L]
+
 RewriteRule ^(luxor-solar-eclipse-2027-package|2027-luxor-solar-eclipse-package|luxor-eclipse-package|solar-eclipse-luxor-2027)(?:\.html)?/?$ /tours/luxor-solar-eclipse-2027-package [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+tours/luxor-solar-eclipse-2027-package(?:/|\.html/?)[?\s] [NC]
 RewriteRule ^tours/luxor-solar-eclipse-2027-package(?:/|\.html/?)$ /tours/luxor-solar-eclipse-2027-package [R=301,L]

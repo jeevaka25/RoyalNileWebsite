@@ -134,6 +134,46 @@
       "permanent": true
     },
     {
+      "source": "/pyramids-sphinx-tour",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/pyramids-sphinx-tour/",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/pyramids-sphinx-tour.html",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/pyramids-sphinx-tour.html/",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/grand-egyptian-museum-tour",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
+      "source": "/grand-egyptian-museum-tour/",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
+      "source": "/grand-egyptian-museum-tour.html",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
+      "source": "/grand-egyptian-museum-tour.html/",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
       "source": "/luxor-solar-eclipse-2027-package",
       "destination": "/tours/luxor-solar-eclipse-2027-package",
       "permanent": true
@@ -994,6 +1034,36 @@
       "permanent": true
     },
     {
+      "source": "/tours/cairo-pyramids-sphinx-tour/",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/cairo-pyramids-sphinx-tour.html",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/cairo-pyramids-sphinx-tour.html/",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/grand-egyptian-museum-tour/",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/grand-egyptian-museum-tour.html",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
+      "source": "/tours/grand-egyptian-museum-tour.html/",
+      "destination": "/tours/grand-egyptian-museum-tour",
+      "permanent": true
+    },
+    {
       "source": "/tours/luxor-solar-eclipse-2027-package/",
       "destination": "/tours/luxor-solar-eclipse-2027-package",
       "permanent": true
@@ -1218,20 +1288,20 @@
       "destination": "/villas/nile-view-2.html"
     },
     {
-      "source": "/pyramids-sphinx-tour",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/pyramids-sphinx-tour/",
-      "destination": "/index.html"
-    },
-    {
       "source": "/wonders-of-cairo-tour",
       "destination": "/index.html"
     },
     {
       "source": "/wonders-of-cairo-tour/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/tours/cairo-pyramids-sphinx-tour",
+      "destination": "/tours/cairo-pyramids-sphinx-tour.html"
+    },
+    {
+      "source": "/tours/grand-egyptian-museum-tour",
+      "destination": "/tours/grand-egyptian-museum-tour.html"
     },
     {
       "source": "/tours/luxor-solar-eclipse-2027-package",
