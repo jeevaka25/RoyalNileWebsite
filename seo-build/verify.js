@@ -47,7 +47,7 @@ for (const file of ['index.html', 'villas/index.html']) {
 }
 for (const kind of ['villas','tours']) {
   assert.ok(read(`${kind}/index.html`).includes('https://www.airbnb.co.uk/users/show/252258998'));
-  assert.ok(read(`${kind}/index.html`).includes('1,934'));
+  assert.ok(read(`${kind}/index.html`).includes(require('../trust-data.json').reviews.toLocaleString('en-GB')));
 }
 assert.ok(home.indexOf('Included Comforts') < home.indexOf('id="featured-properties"'));
 assert.ok(home.indexOf('id="featured-properties"') < home.indexOf('Our Collection'));

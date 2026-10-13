@@ -60,7 +60,7 @@ for p in [p for p in ROOT.rglob('*.html') if 'redesign/redesign.css' in p.read_t
  # A single maintained snapshot; host ratings never become per-property ratings.
  for el in s.select('[data-ev-count]'):
   old=el['data-ev-count']; value=trust['rating'] if '.' in old else trust['yearsHosting'] if int(old)<20 else trust['reviews'];el['data-ev-count']=str(value);el.string=f'{value:,}'
- for el in s.select('.ev-trust'):el['aria-label']="Abdol's Airbnb hosting credentials, checked 3 September 2026"
+ for el in s.select('.ev-trust'):el['aria-label']=f"Abdol's Airbnb hosting credentials, checked {trust['checkedAt']}"
  schemas=[]
  for el in s.select('script[type="application/ld+json"]'):
   value=json.loads(el.string or el.text);schemas.extend(value if isinstance(value,list) else [value]);el.decompose()
