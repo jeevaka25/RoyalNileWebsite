@@ -70,15 +70,24 @@ const TOURS = [
   ],
   "coverImage": "tour-assets/cairo/04-great-sphinx-giza.webp",
   "photos": [
-    "tour-assets/cairo/04-great-sphinx-giza.webp"
+    "tour-assets/cairo/01-private-arrival-giza.webp",
+    "tour-assets/cairo/02-giza-panorama-viewpoint.webp",
+    "tour-assets/cairo/03-great-pyramid-stonework.webp",
+    "tour-assets/cairo/04-great-sphinx-giza.webp",
+    "tour-assets/cairo/05-valley-temple-approach.webp",
+    "tour-assets/cairo/06-giza-golden-hour-return.webp"
   ],
   "photoAlts": [
-    "Illustration of travellers and a guide beside the Great Sphinx and a pyramid at Giza"
+    "Guests arriving with their guide at the Giza Pyramids",
+    "A guide and couple taking in the Giza panorama",
+    "A guide explaining the Great Pyramid’s stonework",
+    "The Great Sphinx with a pyramid behind it",
+    "Guests exploring the Valley Temple area with their guide",
+    "Guests returning to their vehicle in the golden light at Giza"
   ],
   "ticketsExtra": true,
-  "ticketNote": "Entrance tickets are extra. Entry inside a pyramid is optional, subject to availability and a separate ticket. Confirm the final itinerary and ticket costs with your quotation.",
+  "ticketNote": "Entrance tickets are extra. Optional pyramid interior entry requires a separate ticket.",
   "priceNote": "Price confirmed on WhatsApp; allow additional transfer time",
-  "galleryNote": "Illustrative tour imagery reused from Egyptian Tours.",
   "faqs": [
     [
       "Where does this tour start?",
@@ -92,6 +101,14 @@ const TOURS = [
       "Are entrance tickets included?",
       "Entrance tickets are extra. Going inside a pyramid requires an additional ticket and is subject to availability. Your quotation will confirm the arrangements."
     ]
+  ],
+  "photoCaptions": [
+    "Your first glimpse of Giza",
+    "The great panorama",
+    "Stories written in stone",
+    "Face to face with the Sphinx",
+    "Through the Valley Temple",
+    "A golden finish"
   ]
 },
 {
@@ -115,17 +132,24 @@ const TOURS = [
     "Time for questions and a relaxed pace",
     "Plan your museum visit alongside your Giza Pyramids tour"
   ],
-  "coverImage": "tour-assets/cairo/01-grand-egyptian-museum-morning.webp",
+  "coverImage": "tour-assets/cairo/02-gem-grand-hall.webp",
   "photos": [
-    "tour-assets/cairo/01-grand-egyptian-museum-morning.webp"
+    "tour-assets/cairo/01-gem-exterior.jpg",
+    "tour-assets/cairo/02-gem-grand-hall.webp",
+    "tour-assets/cairo/03-gem-grand-staircase.webp",
+    "tour-assets/cairo/04-gem-ancient-craftsmanship.webp",
+    "tour-assets/cairo/05-gem-royal-sculpture.webp"
   ],
   "photoAlts": [
-    "Illustrative Egyptian museum scene with ancient statues, visitors and a guide"
+    "Grand Egyptian Museum exterior in warm evening light",
+    "Ramesses II in the Grand Egyptian Museum’s soaring Grand Hall",
+    "Royal statues and visitors on the Grand Staircase",
+    "A guide and guests discovering ancient Egyptian jewellery and objects",
+    "Detail of an ancient Egyptian royal sculpture"
   ],
   "ticketsExtra": false,
-  "ticketNote": "Your quotation will confirm museum tickets, the meeting point and any requested transfers. The three-hour duration covers the guided museum visit; travel time is additional. Gallery access depends on your ticket and the museum’s arrangements.",
+  "ticketNote": "Three hours inside the museum, plus travel time. Message us for tickets, your meeting point and optional hotel transfers.",
   "priceNote": "Tickets and any transfers confirmed with your quotation",
-  "galleryNote": "Illustrative museum scene reused from Egyptian Tours; it does not depict the exact GEM gallery layout.",
   "faqs": [
     [
       "How long is the GEM tour?",
@@ -139,6 +163,13 @@ const TOURS = [
       "Does this tour include the Pyramids?",
       "This is a standalone three-hour museum tour. The Cairo Pyramids & Sphinx Tour is a separate experience; ask us about combining the two."
     ]
+  ],
+  "photoCaptions": [
+    "An extraordinary arrival",
+    "Stand beneath Ramesses II",
+    "Ascend through ancient history",
+    "Discover the details",
+    "Meet the faces of ancient Egypt"
   ]
 },
   {
@@ -168,18 +199,17 @@ const TOURS = [
     photos: ['tour-assets/eclipse-2027/01-royal-nile-terrace-totality.webp','tour-assets/eclipse-2027/02-nile-boat-totality.webp','tour-assets/eclipse-2027/03-luxor-temple-totality.webp','tour-assets/eclipse-2027/04-karnak-totality.webp','tour-assets/eclipse-2027/05-hatshepsut-totality.webp'],
     photoAlts: ['Total solar eclipse above the panoramic Royal Nile Villas terrace','Artist’s visualisation of the 2027 eclipse viewed from a Nile boat in Luxor','Artist’s visualisation of totality above Luxor Temple','Artist’s visualisation of the eclipse framed by Karnak Temple columns','Artist’s visualisation of totality above Hatshepsut Temple'],
     ticketsExtra: false,
-    galleryNote: 'Eclipse scenes are artist’s visualisations. Temple and boat images do not imply confirmed eclipse-day access; the current written viewing arrangements will be provided with your quotation.',
+
     priceNote: 'Price confirmed upon WhatsApp inquiry',
     depositNote: 'A non-refundable 25% deposit is required to hold the booking.',
     faqs: [
       ['When is the Luxor total solar eclipse?', 'The total solar eclipse is on Monday, 2 August 2027. Current calculations place maximum eclipse in Luxor at about 13:05 local time, with approximately 6 minutes 22 seconds of totality depending on the exact coordinates.'],
       ['What is included in the Royal Nile Villas eclipse package?', 'The package includes a minimum four-night accommodation booking, three meals per day, bottled water, soft drinks, and private pickup and drop-off at Luxor Airport.'],
-      ['Can we view the eclipse from Royal Nile Villas?', 'Royal Nile Villas offers completely unobstructed panoramic views across the Nile and open sky. Your written quotation will confirm the current property viewing arrangements, guest capacity and any operational details.'],
+      ['Can we view the eclipse from Royal Nile Villas?', 'Royal Nile Villas offers completely unobstructed panoramic views across the Nile and open sky. '],
       ['Are Luxor tours included in the package price?', 'No. Tours are optional extras and can be organised around your stay. Ask for the West Bank Wonders tour, East Bank Magical Temple Tour, a sunset Nile boat ride with dinner, or a sunrise hot air balloon flight.'],
       ['Which optional experiences are private?', 'The West Bank tour, East Bank tour and sunset Nile boat ride with dinner are private to your booking group. The sunrise hot air balloon flight is shared with other passengers.'],
-      ['How much does the 2027 eclipse package cost?', 'Pricing depends on dates, party size, apartment choice and requested extras. Contact us on WhatsApp for availability and a confirmed price. A non-refundable 25% deposit is required to hold the booking; your written quotation will state the remaining balance schedule and cancellation terms.'],
-      ['What deposit is required to hold an eclipse booking?', 'A non-refundable 25% deposit is required to hold the Royal Nile Villas eclipse booking. Availability is not secured until the deposit has been received and the booking is confirmed in writing. Your quotation will state the remaining balance schedule and cancellation terms.'],
-      ['Do the temple images mean eclipse-day temple access is included?', 'No. The gallery contains artist’s visualisations of the eclipse around Luxor. Temple access on eclipse day is not included or guaranteed unless it is explicitly confirmed in writing.'],
+      ['How much does the 2027 eclipse package cost?', 'Pricing depends on dates, party size, apartment choice and requested extras. Contact us on WhatsApp for availability and a confirmed price. A non-refundable 25% deposit is required to hold the booking; we’ll confirm payment dates when you book.'],
+      ['What deposit is required to hold an eclipse booking?', 'A non-refundable 25% deposit is required to hold the Royal Nile Villas eclipse booking. Availability is not secured until the deposit has been received and the booking is confirmed in writing. We’ll confirm payment dates when you book.'],
     ],
   },
   {
@@ -233,7 +263,7 @@ const TOURS = [
     ticketsExtra: true,
     faqs: [
       ['How long is the Valley of the Kings tour?', 'The tour runs around 3 hours, plus transfer time from your accommodation. It can be extended or combined with the East Bank temples or a balloon ride on request.'],
-      ['Are entrance tickets included?', 'Entrance tickets are extra and must be paid by tourist credit card at each site’s ticket office, as required by local law. Your guide will help you choose which tombs to enter.'],
+      ['Are entrance tickets included?', 'Entrance tickets are extra. Your guide will help you choose which tombs to visit.'],
       ['Is a guide included?', 'Yes — a private, licensed Egyptologist guide accompanies you throughout, along with private air-conditioned transfers and hotel pickup and drop-off.'],
     ],
   },
