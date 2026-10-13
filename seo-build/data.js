@@ -47,6 +47,100 @@ function siteAsset(src) {
 // TOURS — primarySlug is the canonical URL; aliases 301-consolidate to it.
 // ============================================================
 const TOURS = [
+{
+  "id": "cairo-pyramids",
+  "legacySlug": "pyramids-sphinx-tour",
+  "primarySlug": "tours/cairo-pyramids-sphinx-tour",
+  "aliases": [],
+  "h1": "Cairo Pyramids & Sphinx Tour",
+  "title": "Cairo Pyramids & Sphinx Tour | Royal Nile Villas",
+  "metaDesc": "Stand before the Pyramids of Giza and the Great Sphinx on a private guided tour with Cairo or Giza hotel pickup. Plan your visit on WhatsApp.",
+  "duration": "Approx. 3 hours",
+  "locationLabel": "Cairo & Giza",
+  "location": "Giza, Egypt",
+  "pickupLabel": "Cairo / Giza hotel pickup",
+  "eyebrow": "Cairo Tours & Experiences",
+  "overview": "Stand beneath the Great Pyramid, meet the gaze of the Sphinx and watch the desert open around monuments that have fascinated travellers for centuries. Your private Egyptologist guide brings their stories to life, with time for the Giza panorama and photographs at your own pace. Private air-conditioned transfers from your Cairo or Giza hotel keep the journey simple.",
+  "highlights": [
+    "The Pyramids of Giza and the Great Sphinx",
+    "Panoramic views across the Giza Plateau",
+    "Private Egyptologist guide",
+    "Private air-conditioned vehicle with driver",
+    "Pickup and drop-off at your Cairo or Giza hotel"
+  ],
+  "coverImage": "tour-assets/cairo/04-great-sphinx-giza.webp",
+  "photos": [
+    "tour-assets/cairo/04-great-sphinx-giza.webp"
+  ],
+  "photoAlts": [
+    "Illustration of travellers and a guide beside the Great Sphinx and a pyramid at Giza"
+  ],
+  "ticketsExtra": true,
+  "ticketNote": "Entrance tickets are extra. Entry inside a pyramid is optional, subject to availability and a separate ticket. Confirm the final itinerary and ticket costs with your quotation.",
+  "priceNote": "Price confirmed on WhatsApp; allow additional transfer time",
+  "galleryNote": "Illustrative tour imagery reused from Egyptian Tours.",
+  "faqs": [
+    [
+      "Where does this tour start?",
+      "This is a Cairo and Giza tour, with pickup from your hotel in either city. It is not a day trip departing Luxor."
+    ],
+    [
+      "How long is the tour?",
+      "Allow approximately three hours at Giza, plus hotel transfer time. Share your hotel and preferred date so we can confirm the schedule."
+    ],
+    [
+      "Are entrance tickets included?",
+      "Entrance tickets are extra. Going inside a pyramid requires an additional ticket and is subject to availability. Your quotation will confirm the arrangements."
+    ]
+  ]
+},
+{
+  "id": "grand-egyptian-museum",
+  "legacySlug": "grand-egyptian-museum-tour",
+  "primarySlug": "tours/grand-egyptian-museum-tour",
+  "aliases": [],
+  "h1": "Grand Egyptian Museum — 3 Hour Guided Tour",
+  "title": "Grand Egyptian Museum: 3 Hour Guided Tour | Royal Nile Villas",
+  "metaDesc": "Discover ancient Egypt at the Grand Egyptian Museum in Giza on a three-hour guided tour. Explore the stories behind the treasures and enquire on WhatsApp.",
+  "duration": "3 hour guided tour",
+  "locationLabel": "Cairo & Giza",
+  "location": "Giza, Egypt",
+  "pickupLabel": "Meeting point confirmed on booking",
+  "eyebrow": "Cairo Tours & Experiences",
+  "overview": "Step into the world of pharaohs, extraordinary craftsmanship and lives lived thousands of years ago. Over three hours at the Grand Egyptian Museum, your guide connects the objects with the people and stories behind them, turning a remarkable collection into a journey through ancient Egypt. There is time to pause, ask questions and follow your curiosity.",
+  "highlights": [
+    "Three hours of guided discovery at the Grand Egyptian Museum",
+    "Stories behind ancient Egyptian artefacts and royal monuments",
+    "A focused route through museum highlights",
+    "Time for questions and a relaxed pace",
+    "Plan your museum visit alongside your Giza Pyramids tour"
+  ],
+  "coverImage": "tour-assets/cairo/01-grand-egyptian-museum-morning.webp",
+  "photos": [
+    "tour-assets/cairo/01-grand-egyptian-museum-morning.webp"
+  ],
+  "photoAlts": [
+    "Illustrative Egyptian museum scene with ancient statues, visitors and a guide"
+  ],
+  "ticketsExtra": false,
+  "ticketNote": "Your quotation will confirm museum tickets, the meeting point and any requested transfers. The three-hour duration covers the guided museum visit; travel time is additional. Gallery access depends on your ticket and the museum’s arrangements.",
+  "priceNote": "Tickets and any transfers confirmed with your quotation",
+  "galleryNote": "Illustrative museum scene reused from Egyptian Tours; it does not depict the exact GEM gallery layout.",
+  "faqs": [
+    [
+      "How long is the GEM tour?",
+      "The guided visit lasts three hours inside the Grand Egyptian Museum. Allow additional time for travel and entry formalities."
+    ],
+    [
+      "Are tickets and hotel transfers included?",
+      "Contact us on WhatsApp for a quotation confirming museum tickets, your meeting point and any transfers you would like to arrange."
+    ],
+    [
+      "Does this tour include the Pyramids?",
+      "This is a standalone three-hour museum tour. The Cairo Pyramids & Sphinx Tour is a separate experience; ask us about combining the two."
+    ]
+  ]
+},
   {
     id: 'eclipse-2027',
     legacySlug: 'luxor-solar-eclipse-2027-package',

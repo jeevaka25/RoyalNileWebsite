@@ -277,7 +277,7 @@ function tourPage(t) {
   const poster = img(cover);
   const galleryImgs = t.photos.slice(0, 6).map((p, i) => `<img src="${img(p)}" alt="${esc(t.photoAlts?.[i] || `${t.h1} — ${t.highlights[i] || 'Luxor tour photo ' + (i + 1)}`)}" loading="lazy">`).join('');
   const related = TOURS.filter((x) => x.id !== t.id).slice(0, 4).map((x) => `<a class="related-card" href="/${x.primarySlug}"><img src="${img(x.coverImage || x.photos[0])}" alt="${esc(x.h1)}" loading="lazy"><span>${esc(x.h1.replace(/ from Luxor| at Sunrise| \(East Bank\)/,''))}</span></a>`).join('');
-  const ticketNote = t.ticketsExtra ? `<div class="note">Entrance tickets are extra and must be purchased by tourist credit card at each site's ticket office, as required by local law.</div>` : '';
+  const ticketNote = t.ticketNote ? `<div class="note">${esc(t.ticketNote)}</div>` : t.ticketsExtra ? `<div class="note">Entrance tickets are extra and must be purchased by tourist credit card at each site's ticket office, as required by local law.</div>` : '';
   const galleryNote = t.galleryNote ? `<div class="note">${esc(t.galleryNote)}</div>` : '';
   const depositNote = t.depositNote ? `<div class="note">${esc(t.depositNote)}</div>` : '';
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
@@ -296,8 +296,8 @@ function tourPage(t) {
     + `<div class="wrap"><div class="crumbs"><a href="/">Home</a> › <a href="/tours/">Tours</a> › ${esc(t.h1)}</div>
 <section class="hero" style="background-image:url('${poster}')">
 ${heroVideo}
-<div class="hero-inner"><p class="eyebrow">Luxor Tours & Experiences</p><h1>${esc(t.h1)}</h1>
-<div class="meta-row"><span class="pill">⏱ ${esc(t.duration)}</span><span class="pill">🚐 Hotel pickup</span><span class="pill">📍 Luxor, Egypt</span></div></div>
+<div class="hero-inner"><p class="eyebrow">${esc(t.eyebrow || "Luxor Tours & Experiences")}</p><h1>${esc(t.h1)}</h1>
+<div class="meta-row"><span class="pill">⏱ ${esc(t.duration)}</span><span class="pill">🚐 ${esc(t.pickupLabel || "Hotel pickup")}</span><span class="pill">📍 ${esc(t.location || "Luxor, Egypt")}</span></div></div>
 </section>
 <div class="mobile-top-actions"><a class="btn btn-luxury btn-whatsapp" target="_blank" rel="noopener" href="${inquiryUrl}" ${inquiryAttrs}>Inquire on WhatsApp</a></div>
 <div class="layout"><div>
