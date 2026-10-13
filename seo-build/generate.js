@@ -167,7 +167,7 @@ function footer() {
   const tourLinks = TOURS.map((t) => `<li><a href="/${t.primarySlug}">${esc(t.h1.replace(/ from Luxor| at Sunrise| \(East Bank\)/,''))}</a></li>`).join('');
   const villaLinks = VILLAS.slice(0, 6).map((v) => `<li><a href="/villas/${v.id}">${esc(v.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</a></li>`).join('');
   return `<footer class="footer"><div class="footer-inner">
-<div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with 7+ years and ${HOST_TRUST.reviews} Airbnb reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
+<div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with ${HOST_TRUST.superhostYears} years and ${HOST_TRUST.reviews} Airbnb reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
 <div><h5>Tours</h5><ul><li><a href="/tours/">Explore all tours & experiences</a></li>${tourLinks}</ul></div>
 <div><h5>Villas</h5><ul><li><a href="/villas/">Compare all apartments</a></li>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
 </div><div class="footer-bottom">&copy; ${new Date().getFullYear()} Royal Nile Villas — West Bank, Luxor, Egypt. All rights reserved.</div></footer>
