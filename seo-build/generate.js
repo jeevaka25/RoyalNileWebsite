@@ -277,7 +277,7 @@ function tourPage(t) {
   const poster = img(cover);
   const galleryImgs = t.photos.slice(0, 6).map((p, i) => `<img src="${img(p)}" alt="${esc(t.photoAlts?.[i] || `${t.h1} — ${t.highlights[i] || 'Luxor tour photo ' + (i + 1)}`)}" loading="lazy">`).join('');
   const related = TOURS.filter((x) => x.id !== t.id).slice(0, 4).map((x) => `<a class="related-card" href="/${x.primarySlug}"><img src="${img(x.coverImage || x.photos[0])}" alt="${esc(x.h1)}" loading="lazy"><span>${esc(x.h1.replace(/ from Luxor| at Sunrise| \(East Bank\)/,''))}</span></a>`).join('');
-  const ticketNote = t.ticketNote ? `<div class="note">${esc(t.ticketNote)}</div>` : t.ticketsExtra ? `<div class="note">Entrance tickets are extra and must be purchased by tourist credit card at each site's ticket office, as required by local law.</div>` : '';
+  const ticketNote = t.ticketNote ? `<div class="note">${esc(t.ticketNote)}</div>` : t.ticketsExtra ? `<div class="note">Entrance tickets are extra.</div>` : '';
   const galleryNote = t.galleryNote ? `<div class="note">${esc(t.galleryNote)}</div>` : '';
   const depositNote = t.depositNote ? `<div class="note">${esc(t.depositNote)}</div>` : '';
   const heroVideo = t.heroVideo ? `<video autoplay muted loop playsinline preload="none" poster="${poster}"><source src="${siteAsset(t.heroVideo)}" type="video/mp4"></video>` : '';
