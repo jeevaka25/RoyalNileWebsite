@@ -52,7 +52,7 @@ for (const kind of ['villas','tours']) {
 assert.ok(home.indexOf('Included Comforts') < home.indexOf('id="featured-properties"'));
 assert.ok(home.indexOf('id="featured-properties"') < home.indexOf('Our Collection'));
 assert.equal((home.match(/class="featured-card"/g) || []).length,2);
-assert.ok(read('tours/index.html').includes('Shared flight'));
+assert.ok(read('tours/index.html').includes('A shared flight above Luxor')); // Keep the useful tour description; the redundant inclusions row was removed.
 assert.ok(read('tours/index.html').includes('25% non-refundable'));
 assert.equal([...read('sitemap.xml').matchAll(/<loc>/g)].length, files.length);
 const listeners = {}, events = [];

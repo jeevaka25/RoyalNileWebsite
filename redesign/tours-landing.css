@@ -1,0 +1,4 @@
+/* Tours collection only: retain the poster until the existing video controller starts playback. */
+.ev-tours .ev-hero>video{opacity:0;transition:opacity .45s ease}
+.ev-tours .ev-hero>video.is-playing{opacity:1}
+@media(min-width:701px){.ev-tours .ev-hero .ev-trust-link{display:none}}
