@@ -1,4 +1,5 @@
 const HOST_SNAPSHOT = require('../trust-data.json');
+const VILLA_GALLERIES = require('./villa-galleries.json');
 // ============================================================
 // SEO landing-page data (single source of truth)
 // Generated pages are built by generate.js from this file.
@@ -517,5 +518,7 @@ const VILLAS = [
 ];
 
 VILLAS.forEach(villa => { const snapshot = HOST_SNAPSHOT.listings[villa.id]; if (snapshot) { villa.rating = snapshot.rating; villa.reviews = snapshot.reviews; } });
+
+VILLAS.forEach(villa => { const gallery = VILLA_GALLERIES[villa.id]; if (gallery) { villa.photos = gallery.map(photo => photo.src); villa.galleryPhotos = villa.photos; villa.photoAlts = gallery.map(photo => photo.caption); } });
 
 module.exports = { SITE, TOURS, VILLAS, wa, optimizedImage, siteAsset };
