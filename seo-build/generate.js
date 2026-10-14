@@ -320,7 +320,7 @@ function villaPage(v) {
   const canonical = `${ORIGIN}/villas/${v.id}`;
   const cover = v.cover || v.photos[0];
   const poster = img(cover);
-  const galleryImgs = v.photos.slice(0, 6).map((p, i) => `<img src="${img(p)}" alt="${esc(v.name)} — interior/exterior photo ${i + 1}" loading="lazy">`).join('');
+  const galleryImgs = (v.galleryPhotos || v.photos.slice(0, 6)).map((p, i) => `<img src="${img(p)}" alt="${esc(v.photoAlts?.[i] || `${v.name} — interior/exterior photo ${i + 1}`)}" loading="lazy">`).join('');
   const related = VILLAS.filter((x) => x.id !== v.id).map((x) => `<a class="related-card" href="/villas/${x.id}"><img src="${img(x.cover || x.photos[0])}" alt="${esc(x.name)}" loading="lazy"><span>${esc(x.name.replace('Royal Nile Villa — ','').replace('Royal Nile Villas — ','').replace('Royal Home Luxor — ',''))}</span></a>`).join('');
   const title = `${VILLA_SEO[v.id][0]} | Royal Nile Villas`;
   const desc = VILLA_SEO[v.id][1];

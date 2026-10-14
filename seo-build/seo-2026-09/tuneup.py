@@ -7,6 +7,7 @@ from html import escape as E
 import json,re,hashlib,subprocess
 ROOT=Path(__file__).resolve().parents[2]
 trust=json.loads((ROOT/'trust-data.json').read_text())
+gallery_overrides=json.loads((ROOT/'seo-build/villa-galleries.json').read_text())
 inv=json.loads((Path(__file__).parent/'inventory.json').read_text())
 for v in inv:v.pop('icalUrl',None)
 (Path(__file__).parent/'inventory.json').write_text(json.dumps(inv,indent=2)+'\n')
@@ -77,15 +78,17 @@ for p in [p for p in ROOT.rglob('*.html') if 'redesign/redesign.css' in p.read_t
    cover=photos[slug][0]
    hero=s.select_one('.ev-hero');hero['style']=f"background-image:url('{cover}')";hero.select_one('.ev-hero-image')['src']=cover
    for m in s.select('meta[property="og:image"],meta[name="twitter:image"]'):m['content']='https://egyptvillastours.com'+cover
-   gallery=s.select_one('.ev-gallery');gallery.clear()
-   for n,(i,caption) in enumerate(originals[slug],1):
+   gallery=s.select_one('.ev-gallery')
+   if slug not in gallery_overrides:gallery.clear()
+   for n,(i,caption) in enumerate([] if slug in gallery_overrides else originals[slug],1):
     imgpath=f'/optimized-assets/villa-originals/{slug}/{i:02}.webp'
     add(gallery,f'<figure class="ev-photo-card" style="--stack-i:{n}"><div class="ev-photo-inner"><img src="{imgpath}" width="1440" height="1080" alt="{E(caption)}" aria-label="Enlarge {E(caption)}" role="button" tabindex="0" loading="lazy" decoding="async"><figcaption class="ev-photo-caption"><span>{E(caption)}</span></figcaption></div></figure>')
   for sch in schemas:
    if sch.get('@type')=='Accommodation':
     sch['@id']=canon+'#apartment';sch['floorLevel']=v['floor'];sch['numberOfBedrooms']=v['bedrooms'];sch['numberOfBathroomsTotal']=v['bathrooms'];sch['occupancy']={'@type':'QuantitativeValue','maxValue':v['guests']};sch['sameAs']=[v['airbnbUrl'],v['bookingUrl']];sch['containedInPlace']={'@type':'LodgingBusiness','@id':'https://egyptvillastours.com/#royal-home' if slug.startswith('royal-home') else 'https://egyptvillastours.com/#royal-nile','name':v['propertyGroup'],'url':'https://egyptvillastours.com/villas/'}
     sch['amenityFeature']=[{'@type':'LocationFeatureSpecification','name':f,'value':True} for f in v['features'] if not re.search('Rated|Favourite',f)]
-    if slug in photos:sch['image']=['https://egyptvillastours.com'+x for x in photos[slug]]
+    if slug in gallery_overrides:sch['image']=['https://egyptvillastours.com'+x['src'] for x in gallery_overrides[slug]]
+    elif slug in photos:sch['image']=['https://egyptvillastours.com'+x for x in photos[slug]]
  if rel=='villas/index.html':
   meta(s,'Luxor West Bank Apartments With Pool | Royal Nile Villas','Compare eight Luxor West Bank apartments with shared pools, Nile views and two bedrooms. Choose your floor and beds, check dates and plan your stay.')
   section=s.select_one('.choice-section');add(section,'<section class="seo-details" data-seo-added><h2>Find the layout that fits your stay</h2>'+comparison()+'<p>All four sleep up to four guests and use the shared pool at Royal Nile Villas. Tell us if stairs, bathroom count or separate beds are important before you reserve.</p></section>')
