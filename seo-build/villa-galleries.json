@@ -134,5 +134,165 @@
       "width": 810,
       "height": 1440
     }
+  ],
+  "nile-view-luxury-1": [
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/01-balcony-nile-pool.webp",
+      "caption": "Balcony overlooking the pool and Nile",
+      "width": 1440,
+      "height": 663
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/02-living-kitchen.webp",
+      "caption": "Open-plan living room and kitchen",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/03-living-room.webp",
+      "caption": "Living room opening onto the balcony",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/04-dining-area.webp",
+      "caption": "Dining area beside the living room",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/05-canopy-bedroom.webp",
+      "caption": "Queen bedroom with a canopy bed",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/06-canopy-bedroom-front.webp",
+      "caption": "Canopy bed with crisp white linens",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/07-canopy-bedroom-portrait.webp",
+      "caption": "Canopy bed and soft ceiling lighting",
+      "width": 810,
+      "height": 1440
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/08-queen-bedroom-wide.webp",
+      "caption": "Queen bedroom and wardrobe",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/09-queen-bedroom-dressing-table.webp",
+      "caption": "Queen bedroom with dressing table",
+      "width": 810,
+      "height": 1440
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/10-pool-garden-nile.webp",
+      "caption": "Shared pool and garden overlooking the Nile",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/11-nile-terrace-view.webp",
+      "caption": "Nile view across the garden terrace",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/12-pool-courtyard.webp",
+      "caption": "Shared pool and courtyard from the balcony",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/13-bathroom.webp",
+      "caption": "Bathroom with bathtub and shower",
+      "width": 810,
+      "height": 1440
+    }
+  ],
+  "nile-view-luxury-2": [
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/01-balcony-nile-pool.webp",
+      "caption": "Balcony overlooking the pool and Nile",
+      "width": 1440,
+      "height": 663
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/02-living-kitchen.webp",
+      "caption": "Open-plan living room and kitchen",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/03-living-room.webp",
+      "caption": "Living room opening onto the balcony",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/04-dining-area.webp",
+      "caption": "Dining area beside the living room",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/05-canopy-bedroom.webp",
+      "caption": "Queen bedroom with a canopy bed",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/06-canopy-bedroom-front.webp",
+      "caption": "Canopy bed with crisp white linens",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/07-canopy-bedroom-portrait.webp",
+      "caption": "Canopy bed and soft ceiling lighting",
+      "width": 810,
+      "height": 1440
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/08-queen-bedroom-wide.webp",
+      "caption": "Queen bedroom and wardrobe",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/09-queen-bedroom-dressing-table.webp",
+      "caption": "Queen bedroom with dressing table",
+      "width": 810,
+      "height": 1440
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/10-pool-garden-nile.webp",
+      "caption": "Shared pool and garden overlooking the Nile",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/11-nile-terrace-view.webp",
+      "caption": "Nile view across the garden terrace",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/12-pool-courtyard.webp",
+      "caption": "Shared pool and courtyard from the balcony",
+      "width": 1440,
+      "height": 810
+    },
+    {
+      "src": "/optimized-assets/villa-assets/luxury-nile-view-refresh-20261015/13-bathroom.webp",
+      "caption": "Bathroom with bathtub and shower",
+      "width": 810,
+      "height": 1440
+    }
   ]
 }
