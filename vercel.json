@@ -105,22 +105,22 @@
     },
     {
       "source": "/royal-nile-pool-view-apartment-1",
-      "destination": "/villas/",
+      "destination": "/villas/nile-view-1",
       "permanent": true
     },
     {
       "source": "/royal-nile-pool-view-apartment-1/",
-      "destination": "/villas/",
+      "destination": "/villas/nile-view-1",
       "permanent": true
     },
     {
       "source": "/royal-nile-pool-view-apartment-2",
-      "destination": "/villas/",
+      "destination": "/villas/nile-view-2",
       "permanent": true
     },
     {
       "source": "/royal-nile-pool-view-apartment-2/",
-      "destination": "/villas/",
+      "destination": "/villas/nile-view-2",
       "permanent": true
     },
     {
