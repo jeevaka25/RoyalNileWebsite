@@ -36,7 +36,7 @@ for (const [kind, expected] of [['villas', VILLAS.length], ['tours', TOURS.lengt
   assert.equal(page.mainEntity.itemListElement.length, expected);
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
   for (const item of page.mainEntity.itemListElement) assert.ok(markup.includes(`href="${new URL(item.url).pathname}"`));
-  assert.equal((markup.match(/class="inventory-card"/g) || []).length, kind === 'villas' ? 8 : 9);
+  assert.equal((markup.match(/class="inventory-card"/g) || []).length, kind === 'villas' ? 8 : TOURS.length - 1); // every tour except the eclipse accommodation package
 }
 assert.ok(read('villas/index.html').includes('For entire villa bookings,'));
 assert.equal((read('villas/index.html').match(/Book on Airbnb/g) || []).length, 8);

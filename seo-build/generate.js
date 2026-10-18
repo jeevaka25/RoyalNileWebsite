@@ -169,7 +169,7 @@ function footer() {
   return `<footer class="footer"><div class="footer-inner">
 <div><h4>Royal Nile <span>Villas</span></h4><p>Premium Nile-view apartments, penthouses and curated tours on Luxor's West Bank. Superhost with ${HOST_TRUST.superhostYears} years and ${HOST_TRUST.reviews} Airbnb reviews.</p><p><a href="${SITE.googleBusinessProfile}" target="_blank" rel="noopener">Royal Nile Villas on Google</a><br><a href="${SITE.royalHomeGoogleBusinessProfile}" target="_blank" rel="noopener">Royal Home Villa on Google</a></p></div>
 <div><h5>Tours</h5><ul><li><a href="/tours/">Explore all tours & experiences</a></li>${tourLinks}</ul></div>
-<div><h5>Villas</h5><ul><li><a href="/villas/">Compare all apartments</a></li>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
+<div><h5>Villas</h5><ul><li><a href="/villas/">Compare all Luxor villas</a></li>${villaLinks}<li><a href="/restaurant.html">Rooftop Restaurant</a></li></ul></div>
 </div><div class="footer-bottom">&copy; ${new Date().getFullYear()} Royal Nile Villas — West Bank, Luxor, Egypt. All rights reserved.</div></footer>
 <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer">
 <button class="lightbox-close" id="lbClose" aria-label="Close">&#10005;</button>

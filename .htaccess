@@ -81,14 +81,22 @@ RewriteRule ^nile-view-apartment/?$ /villas/royal-home-nile-view [R=301,L]
 RewriteRule ^pool-view-apartment/?$ /villas/royal-home-pool-view [R=301,L]
 RewriteRule ^royal-home-villa/?$ /villas/royal-home-nile-view [R=301,L]
 RewriteRule ^royal-nile-nile-view-apartment-1/?$ /villas/nile-view-1 [R=301,L]
+RewriteRule ^royal-nile-nile-view-apartment-2/?$ /villas/nile-view-2 [R=301,L]
+RewriteRule ^royal-nile-pool-view-apartment-[12]/?$ /villas/ [R=301,L]
 RewriteRule ^(royal-nile-villas|contact-us-2)/?$ / [R=301,L]
 RewriteRule ^(the-4-most-incredible-least-known-monuments-egypt|top-10-things-to-do-in-egypt-2025)/?$ /egypt-travel-guide/ [R=301,L]
+# Old blog posts with a close current equivalent (October 2026 audit). Others stay 404.
+RewriteRule ^wonders-of-cairo-tour/?$ /tours/cairo-pyramids-sphinx-tour [R=301,L]
+RewriteRule ^5-tips-for-trip-to-pyramids/?$ /tours/cairo-pyramids-sphinx-tour [R=301,L]
+RewriteRule ^5-day-cairo-itinerary/?$ /egypt-travel-guide/grand-egyptian-museum-luxor-itinerary-2026-27/ [R=301,L]
+RewriteRule ^5-reasons-you-love-desert-safari-luxor/?$ /tours/luxor-desert-safari [R=301,L]
+RewriteRule ^5-reasons-you-love-hot-air-balloon-ride/?$ /tours/hot-air-balloon-luxor [R=301,L]
+RewriteRule ^ultimate-5-day-aswan-itinerary/?$ /tours/aswan-philae-temple-tour [R=301,L]
+RewriteRule ^5-important-tips-for-booking-tours-egypt/?$ /egypt-travel-guide/private-luxor-tour-planning-guide/ [R=301,L]
 
 # Hostinger/PHP equivalent of the Vercel availability function.
 RewriteRule ^api/availability/?$ api/availability-hostinger.php [L,QSA]
 
-# Legacy tours without a dedicated offering keep their existing homepage fallback.
-RewriteRule ^(pyramids-sphinx-tour|wonders-of-cairo-tour)/?$ index.html [L]
 
 # Clean villa URLs.
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
@@ -103,8 +111,14 @@ RewriteRule ^ - [L]
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
+  # Images, fonts and video: 30 days (replaced photos ship under new file names).
   <FilesMatch "\.(webp|avif|jpg|jpeg|png|gif|svg|ico|mp4|webm|woff2?)$">
-    Header set Cache-Control "public, max-age=86400, stale-while-revalidate=604800"
+    Header set Cache-Control "public, max-age=2592000, stale-while-revalidate=604800"
+  </FilesMatch>
+  # Stylesheets and scripts: 7 days. Most are referenced with ?v= strings; bump the
+  # version (or rename) when changing an unversioned file such as scrollcraft.js.
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
   </FilesMatch>
 </IfModule>
 

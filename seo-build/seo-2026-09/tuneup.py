@@ -1,4 +1,6 @@
 """Apply the approved SEO improvements to the published static redesign.
+October 2026: key values mirrored from seo-build/seo-2026-10/apply.py. Re-running this whole
+script re-serialises every page and reverts later dated copy; prefer targeted scripts.
 Idempotent. Requires beautifulsoup4; never invoke the legacy visual generator.
 """
 from pathlib import Path
@@ -51,13 +53,17 @@ css='''/* SEO content follows the existing luxury design. */
 .seo-related{display:flex;gap:.7rem 1.5rem;flex-wrap:wrap;margin:1.2rem 0}.seo-related a{color:inherit;text-decoration:underline;text-underline-offset:4px}
 .seo-comparison{overflow-x:auto;margin:1.5rem 0;max-width:100%}.seo-comparison table{width:100%;border-collapse:collapse;font-size:.9rem}.seo-comparison caption{text-align:left;margin-bottom:1rem;font-weight:600}.seo-comparison th,.seo-comparison td{text-align:left;vertical-align:top;padding:.9rem;border-bottom:1px solid var(--border,#d5cdbf)}
 .seo-date{font-size:.76rem;opacity:.8}.seo-brand{font-size:.85rem;line-height:1.7;margin:1rem 0}.seo-summary{padding:1.5rem;background:var(--bg-warm,#eee9df);border-left:2px solid #a38e65;margin:1.5rem 0}
+.ev-tour-depth h3{font-size:20px;margin:28px 0 10px}.ev-tour-depth p{max-width:72ch}
+.ev-steps{list-style:none;counter-reset:step;display:grid;gap:10px;margin:14px 0 6px;padding:0}
+.ev-steps li{counter-increment:step;position:relative;padding:0 0 10px 2.2rem;border-bottom:1px solid var(--border,#d5cdbf);font-size:14px}
+.ev-steps li::before{content:counter(step);position:absolute;left:0;top:0;font-family:var(--font-display);color:#a38e65;font-size:1.1rem}
 @media(max-width:600px){.seo-facts{grid-template-columns:1fr}.seo-comparison th,.seo-comparison td{padding:.6rem;min-width:6rem}.seo-details{padding-top:1rem}}
 '''
 (ROOT/'redesign/seo.css').write_text(css)
 for p in [p for p in ROOT.rglob('*.html') if 'redesign/redesign.css' in p.read_text()]:
  before=p.read_text();s=frag(before);rel=str(p.relative_to(ROOT));canon=s.select_one('link[rel="canonical"]')['href']
  for x in s.select('[data-seo-added]'):x.decompose()
- if not s.select_one('link[href="/redesign/seo.css?v=1"]'):add(s.head,'<link rel="stylesheet" href="/redesign/seo.css?v=1">')
+ if not s.select_one('link[href="/redesign/seo.css?v=2"]'):add(s.head,'<link rel="stylesheet" href="/redesign/seo.css?v=2">')
  # A single maintained snapshot; host ratings never become per-property ratings.
  for el in s.select('[data-ev-count]'):
   old=el['data-ev-count']; value=trust['rating'] if '.' in old else trust['yearsHosting'] if int(old)<20 else trust['reviews'];el['data-ev-count']=str(value);el.string=f'{value:,}'
@@ -90,7 +96,7 @@ for p in [p for p in ROOT.rglob('*.html') if 'redesign/redesign.css' in p.read_t
     if slug in gallery_overrides:sch['image']=['https://egyptvillastours.com'+x['src'] for x in gallery_overrides[slug]]
     elif slug in photos:sch['image']=['https://egyptvillastours.com'+x for x in photos[slug]]
  if rel=='villas/index.html':
-  meta(s,'Luxor West Bank Apartments With Pool | Royal Nile Villas','Compare eight Luxor West Bank apartments with shared pools, Nile views and two bedrooms. Choose your floor and beds, check dates and plan your stay.')
+  meta(s,'Luxor Villas & Nile-View Apartments | Royal Nile Villas','Compare eight Luxor villas and Nile-view apartments on the West Bank, with shared pools and two bedrooms. Choose your floor and beds, then check dates.')
   section=s.select_one('.choice-section');add(section,'<section class="seo-details" data-seo-added><h2>Find the layout that fits your stay</h2>'+comparison()+'<p>All four sleep up to four guests and use the shared pool at Royal Nile Villas. Tell us if stairs, bathroom count or separate beds are important before you reserve.</p></section>')
   for slug in originals:
    for img in s.select(f'#{slug} img'):img['src']=photos[slug][0]
@@ -100,17 +106,17 @@ for p in [p for p in ROOT.rglob('*.html') if 'redesign/redesign.css' in p.read_t
    add(body,'<section class="article-section seo-details" data-seo-added><h2>Choose a Royal Nile apartment for your plans</h2><p>For separate beds and easy pool access, compare '+link('nile-view-1')+' and '+link('nile-view-2')+'. If you prefer two queen bedrooms on an upper floor, compare '+link('nile-view-luxury-1')+' (two bathrooms) with '+link('nile-view-luxury-2')+' (private terrace). These are individual apartments with a shared pool; check your exact dates and requirements before booking.</p></section>')
   if body and slug in ['luxor-total-solar-eclipse-2027','where-to-stay-luxor-solar-eclipse-2027','luxor-eclipse-2027-tour-itinerary']:
    links=[('luxor-total-solar-eclipse-2027','Eclipse date, local times and duration'),('where-to-stay-luxor-solar-eclipse-2027','Choose your eclipse accommodation'),('luxor-eclipse-2027-tour-itinerary','Arrange your days around the eclipse')]
-   html='<nav class="seo-related" aria-label="Eclipse planning" data-seo-added>'+''.join(f'<a href="/egypt-travel-guide/{i}/">{l}</a>' for i,l in links if i!=slug)+'<a href="/tours/luxor-solar-eclipse-2027-package">Four-night eclipse stay: inclusions and booking</a></nav>'
+   html='<nav class="seo-related" aria-label="Eclipse planning" data-seo-added>'+''.join(f'<a href="/egypt-travel-guide/{i}/">{l}</a>' for i,l in links if i!=slug)+'<a href="/tours/luxor-solar-eclipse-2027-package">Luxor eclipse 2027 accommodation package</a></nav>'
    body.insert(0,frag(html))
-   titles={'luxor-total-solar-eclipse-2027':'Luxor Eclipse 2027: Local Times & Duration | Royal Nile','where-to-stay-luxor-solar-eclipse-2027':'Where to Stay in Luxor for Eclipse 2027 | Royal Nile','luxor-eclipse-2027-tour-itinerary':'Luxor Eclipse 2027: Five-Day Itinerary | Royal Nile'}
+   titles={'luxor-total-solar-eclipse-2027':'Luxor Eclipse 2027: Times & Where to Watch | Royal Nile','where-to-stay-luxor-solar-eclipse-2027':'Luxor Eclipse 2027 Hotels & Where to Stay | Royal Nile','luxor-eclipse-2027-tour-itinerary':'Luxor Eclipse 2027: Five-Day Itinerary | Royal Nile'}
    meta(s,titles[slug])
    if slug=='luxor-total-solar-eclipse-2027':
-    desc='Luxor’s eclipse is on 2 August 2027, with maximum near 13:05 local time and about 6m 22s of totality. Check timings and plan your Nile-side stay.';meta(s,description=desc)
+    desc='Totality in Luxor on 2 August 2027 peaks near 13:05 and lasts about 6m 22s. Local times, viewing spots, heat planning and where to stay.';meta(s,description=desc)
     body.insert(0,frag('<section class="seo-summary" data-seo-added><h2>What time is the 2027 eclipse in Luxor?</h2><p>On <strong>Monday 2 August 2027</strong>, maximum eclipse in Luxor is expected at about <strong>13:05 local time (EEST)</strong>. The partial phase runs approximately 11:40–14:26; totality lasts about <strong>6 minutes 22 seconds</strong>. Exact contact times depend on your viewing coordinates.</p><p><a href="https://www.timeanddate.com/eclipse/in/egypt/luxor?iso=20270802" target="_blank" rel="noopener">Check the current Luxor calculations</a> · Checked 9 September 2026.</p><p>Planning a stay? <a href="/tours/luxor-solar-eclipse-2027-package">See our four-night accommodation package, transfers and booking terms.</a></p></section>'))
  if rel=='index.html':
   # Distinguish the operating brand from its two lodging properties.
   schemas=[x for x in schemas if x.get('@type')!='LodgingBusiness' and x.get('@id')!='https://egyptvillastours.com/#organization']
-  schemas.extend([{'@context':'https://schema.org','@type':'Organization','@id':'https://egyptvillastours.com/#organization','name':'Royal Nile Villas','url':'https://egyptvillastours.com/','telephone':'+201204421652','email':'royalhomeluxor@gmail.com','subOrganization':{'@type':'TravelAgency','name':'Egyptian Tours by Royal Nile Villas','url':'https://www.egyptian.tours/'}},{'@context':'https://schema.org','@type':'LodgingBusiness','@id':'https://egyptvillastours.com/#royal-nile','name':'Royal Nile Villas','url':'https://egyptvillastours.com/villas/','sameAs':['https://share.google/P6PPmkbxRYg6QhLie'],'address':{'@type':'PostalAddress','addressLocality':'Al Aqaletah, Luxor West Bank','addressCountry':'EG'}},{'@context':'https://schema.org','@type':'LodgingBusiness','@id':'https://egyptvillastours.com/#royal-home','name':'Royal Home Luxor','url':'https://egyptvillastours.com/villas/royal-home-nile-view','sameAs':['https://share.google/xxd26OMK5AOtsgYik'],'address':{'@type':'PostalAddress','addressLocality':'Luxor West Bank','addressCountry':'EG'}}])
+  schemas.extend([{'@context':'https://schema.org','@type':'Organization','@id':'https://egyptvillastours.com/#organization','name':'Royal Nile Villas','url':'https://egyptvillastours.com/','telephone':'+201204421652','email':'royalhomeluxor@gmail.com','subOrganization':{'@type':'TravelAgency','name':'Egyptian Tours by Royal Nile Villas','url':'https://www.egyptian.tours/','telephone':'+201204421652','address':{'@type':'PostalAddress','addressLocality':'Al Aqaletah, Luxor West Bank','addressRegion':'Luxor','addressCountry':'EG'}}},{'@context':'https://schema.org','@type':'LodgingBusiness','@id':'https://egyptvillastours.com/#royal-nile','name':'Royal Nile Villas','url':'https://egyptvillastours.com/villas/','sameAs':['https://share.google/P6PPmkbxRYg6QhLie'],'address':{'@type':'PostalAddress','streetAddress':'Jorf Albairat','addressLocality':'Al Aqaletah, Luxor West Bank','addressRegion':'Luxor','postalCode':'1345110','addressCountry':'EG'},'image':'https://egyptvillastours.com/optimized-assets/performance/royal-nile-hero-fallback-20261009.jpg','telephone':'+201204421652','geo':{'@type':'GeoCoordinates','latitude':25.691162,'longitude':32.623042}},{'@context':'https://schema.org','@type':'LodgingBusiness','@id':'https://egyptvillastours.com/#royal-home','name':'Royal Home Luxor','url':'https://egyptvillastours.com/villas/royal-home-nile-view','sameAs':['https://share.google/xxd26OMK5AOtsgYik'],'address':{'@type':'PostalAddress','addressLocality':'Luxor West Bank','addressCountry':'EG'}}])
   tours=s.select_one('#tours .section-header') or s.select_one('#tours');add(tours,'<p class="seo-brand" data-seo-added>Your apartment is your Luxor base. For a wider private itinerary, our sister site <a href="https://www.egyptian.tours/">Egyptian Tours</a> brings together locally arranged journeys in Luxor, Cairo and Upper Egypt.</p>')
  # Proper physical dimensions for local images prevent layout shifts.
  from PIL import Image

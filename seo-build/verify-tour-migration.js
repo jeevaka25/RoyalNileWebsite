@@ -17,13 +17,14 @@ for(const [old,destination] of legacyMap) for(const suffix of ['', '/', '.html',
   assert.equal(apacheRedirects.find(r=>r.pattern.test((old+suffix).slice(1)))?.target,destination);
 }
 const pages=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
-assert.equal(pages.length,23+ARTICLES.length);
+// 4 core pages + meet-your-hosts + guide index + every tour, apartment and article.
+assert.equal(pages.length,6+TOURS.length+8+ARTICLES.length);
 for(const tour of TOURS) {
   assert.ok(pages.includes('/'+tour.primarySlug));assert.ok(!pages.includes('/'+tour.legacySlug));
   assert.ok(!fs.existsSync(path.join(root,tour.legacySlug+'.html')),'Old duplicate file remains');
   const html=read(tour.primarySlug+'.html');
-  assert.ok(html.includes(`rel="canonical" href="https://egyptvillastours.com/${tour.primarySlug}"`));
-  assert.ok(html.includes(`property="og:url" content="https://egyptvillastours.com/${tour.primarySlug}"`));
+  assert.ok((html.match(/<link\b[^>]*rel="canonical"[^>]*>/)||[''])[0].includes(`href="https://egyptvillastours.com/${tour.primarySlug}"`)); // attribute order varies after tuneup.py
+  assert.ok((html.match(/<meta\b[^>]*property="og:url"[^>]*>/)||[''])[0].includes(`content="https://egyptvillastours.com/${tour.primarySlug}"`));
   assert.ok(config.rewrites.some(r=>r.source==='/'+tour.primarySlug&&r.destination==='/'+tour.primarySlug+'.html'));
 }
 for(const pathname of pages) {
@@ -41,7 +42,7 @@ vm.runInNewContext(snippet+'\nrenderTours();',{TOURS,document:{getElementById:()
 for(const t of TOURS)assert.ok(grid.innerHTML.includes(`href="/${t.primarySlug}"`));
 for(const file of ['index.html','villas/index.html']) {
   const html=read(file);assert.ok(!html.includes('id="clearDates"'));assert.ok(!html.includes('id="bookingPanel"'));
-  const heroEnd=file==='index.html'?html.indexOf('<!-- BOOKING DOCK START -->'):html.indexOf('</header>');
+  const heroEnd=file==='index.html'?html.indexOf('</section>',html.indexOf('class="hero')):html.indexOf('</header>'); // the old BOOKING DOCK comment no longer marks the hero
   assert.ok(html.indexOf('class="booking-dock"')>=heroEnd,'Search should follow hero');
 }
 console.log(`Tour migration passed: ${TOURS.length} canonical pages, ${legacyMap.size*4} legacy variants, matching server configs, metadata, sitemap and internal links.`);
