@@ -91,7 +91,7 @@ const buildArticle = (article) => {
   }).join('');
   const cluster = GUIDE_CLUSTERS.find((slugs) => slugs.includes(article.slug)) || [];
   const contextual = cluster.filter((slug) => slug !== article.slug).map((slug) => ARTICLES.find((item) => item.slug === slug)).filter(Boolean).map((item) => ({ url: `/egypt-travel-guide/${item.slug}/`, label: item.title }));
-  const links = [...(article.relatedLinks || []), ...contextual, { url: '/villas/', label: 'Compare all eight Luxor apartments' }, { url: '/tours/', label: 'Add tours and experiences to your stay' }];
+  const links = [...(article.relatedLinks || []), ...contextual, { url: '/villas/', label: 'Compare all eight Luxor villas' }, { url: '/tours/', label: 'Add tours and experiences to your stay' }];
   const uniqueLinks = links.filter((link, index) => links.findIndex((item) => item.url === link.url) === index);
   const relatedLinks = uniqueLinks.length ? `<section class="sources"><h2>Plan the rest of your Luxor trip</h2><ul>${uniqueLinks.map((link) => `<li><a href="${esc(link.url)}">${esc(link.label)}</a></li>`).join('')}</ul></section>` : '';
   const sources = article.sources?.length ? `<section class="sources"><h2>Sources and further reading</h2><ul>${article.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}</a></li>`).join('')}</ul></section>` : '';

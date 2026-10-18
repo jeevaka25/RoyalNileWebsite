@@ -1,0 +1,48 @@
+{
+  "titles": {
+    "index.html": {"title": "Royal Nile Villas | Luxury Nile-View Villas in Luxor, Egypt"},
+    "villas/index.html": {
+      "title": "Luxor Villas & Nile-View Apartments | Royal Nile Villas",
+      "description": "Compare eight Luxor villas and Nile-view apartments on the West Bank, with shared pools and two bedrooms. Choose your floor and beds, then check dates."
+    },
+    "egypt-travel-guide/luxor-total-solar-eclipse-2027/index.html": {
+      "title": "Luxor Eclipse 2027: Times & Where to Watch | Royal Nile",
+      "description": "Totality in Luxor on 2 August 2027 peaks near 13:05 and lasts about 6m 22s. Local times, viewing spots, heat planning and where to stay."
+    },
+    "egypt-travel-guide/where-to-stay-luxor-solar-eclipse-2027/index.html": {
+      "title": "Luxor Eclipse 2027 Hotels & Where to Stay | Royal Nile"
+    }
+  },
+  "villas_h1": "Luxor villas<br/>&amp; Nile-view <em>apartments.</em>",
+  "package_anchor": "Luxor eclipse 2027 accommodation package",
+  "eclipse_guides": [
+    ["luxor-total-solar-eclipse-2027", "Luxor eclipse 2027: local times and where to watch"],
+    ["where-to-stay-luxor-solar-eclipse-2027", "Luxor eclipse 2027 hotels and where to stay"],
+    ["luxor-eclipse-2027-tour-itinerary", "A five-day Luxor eclipse itinerary"]
+  ],
+  "hero_alts": {
+    "/optimized-assets/performance/royal-nile-hero-fallback-20261009.jpg": "Royal Nile Villas pool, garden and apartments with the Nile and Luxor beyond",
+    "/optimized-assets/travel-guide/grand-egyptian-museum-luxor-itinerary-2026-27.webp": "Illustration pairing the Grand Egyptian Museum and Giza Pyramids with a Nile terrace in Luxor",
+    "/optimized-assets/travel-guide/hawara-pyramid-royal-nile-1600.webp": "The Hawara pyramid at the edge of the Faiyum",
+    "/optimized-assets/villa-assets/generated-royal-nile-exteriors/06-wide-pool-garden-nile-view-day.webp": "Pool and garden with Nile views on Luxor's West Bank",
+    "/optimized-assets/travel-guide/luxor-eclipse-villa-2027.webp": "Illustration of a total solar eclipse above a Nile-side villa pool in Luxor",
+    "/optimized-assets/travel-guide/luxor-hot-air-balloon-west-bank-sunrise.webp": "Hot air balloons over Luxor's West Bank at sunrise",
+    "/optimized-assets/villa-assets/imagen-enhanced/nile-view-luxury-1/07-living-room-sofa.webp": "Living room in Luxury Nile View 1",
+    "/optimized-assets/villa-assets/imagen-enhanced/royal-home-pool-view/04-kitchen.webp": "Fitted kitchen in Royal Home Pool View",
+    "/optimized-assets/villa-assets/imagen-enhanced/sky-penthouse-1/03-living-dining.webp": "Living and dining space in Sky Penthouse 1",
+    "/optimized-assets/villa-assets/imagen-enhanced/royal-home-pool-view/02-overhead-pool.webp": "Royal Home pool seen from above",
+    "/optimized-assets/villa-assets/imagen-enhanced/nile-view-luxury-1/05-garden-palm-nile-view.webp": "Garden palms and Nile view from Luxury Nile View 1"
+  },
+  "gallery": {
+    "abu-simbel-tour": [["Early-morning departure", "Early-morning departure from Luxor for Abu Simbel"], ["Arrive at Abu Simbel", "Arriving at the Abu Simbel temples on Lake Nasser"], ["Temple of Ramesses II", "The four seated colossi of Ramesses II at the Great Temple"], ["Inside the sanctuary", "Carved halls inside the Great Temple of Abu Simbel"], ["Temple of Nefertari", "The Temple of Nefertari and Hathor at Abu Simbel"], ["Lake Nasser views", "Lake Nasser beside the Abu Simbel temples"]],
+    "abydos-dendera-tour": [["Private drive north", "Private air-conditioned van on the road north from Luxor"], ["Arrival at Abydos", "Arriving at the Temple of Seti I in Abydos"], ["Temple of Seti I", "Carved reliefs in the Temple of Seti I at Abydos"], ["Dendera Temple of Hathor", "The Hathor Temple at Dendera"], ["The Dendera zodiac ceiling", "Painted astronomical ceiling at Dendera"], ["A sacred temple journey", "Travellers and a guide among carved temple columns at sunset"]],
+    "aswan-philae-temple-tour": [["Private drive to Aswan", "Private van on the road from Luxor to Aswan"], ["Boat to Philae", "Motorboat crossing to Philae island"], ["Temple of Isis", "The Temple of Isis on Philae island"], ["Aswan High Dam", "View from the Aswan High Dam"], ["Nubian lunch", "Nubian lunch on the Aswan day trip"], ["Return to Luxor", "Evening return to Luxor after the Aswan tour"]],
+    "hot-air-balloon-luxor": [["Begin before sunrise", "Balloons preparing for take-off before sunrise on Luxor's West Bank"], ["Lift into a golden sky", "Hot air balloons rising into the golden sky over Luxor"], ["Ancient Luxor from above", "West Bank temples and fields seen from a balloon basket"], ["Moments you never forget", "Guests in the balloon basket above Luxor at sunrise"], ["Float over living history", "Balloons drifting over the Theban hills and villages"], ["Reserve your sunrise ride", "Sunrise balloon flight over Luxor"]],
+    "hurghada-snorkelling-adventure": [["Private drive to Hurghada", "Private van on the desert road from Luxor to Hurghada"], ["Board the Red Sea boat", "Boarding the snorkelling boat in Hurghada"], ["Coral reef snorkelling", "Snorkelling over a Red Sea coral reef"], ["Tropical fish below", "Tropical fish on a Red Sea reef"], ["Lunch on deck", "Lunch on deck during the Red Sea boat trip"], ["Turquoise water finale", "Turquoise Red Sea water off Hurghada"]],
+    "karnak-luxor-temple-tour": [["Arrive at Karnak", "Arriving at Karnak Temple in Luxor"], ["Forest of 134 columns", "The 134 columns of Karnak's Great Hypostyle Hall"], ["Obelisks of Karnak", "Obelisks at Karnak Temple"], ["Walk the Avenue of Sphinxes", "The Avenue of Sphinxes in Luxor"], ["Luxor Temple at golden hour", "Luxor Temple in golden evening light"], ["Private comfort throughout", "Private air-conditioned transfer between Karnak and Luxor Temple"]],
+    "luxor-desert-safari": [["Arrive in the desert", "Quad bikes ready in the desert near Luxor"], ["Safety briefing", "Safety briefing before the Luxor quad bike safari"], ["Ride the golden trails", "Quad bikes on golden desert trails near Luxor"], ["Desert viewpoint", "Desert viewpoint on the Luxor quad bike safari"], ["Bedouin tea stop", "Tea stop in a Bedouin village"], ["Sunset ride home", "Quad bike ride back at sunset"]],
+    "sunset-nile-boat-cruise": [["Private pickup", "Private pickup for the sunset Nile cruise in Luxor"], ["Board the Nile boat", "Boarding the boat on the Nile in Luxor"], ["Sail into sunset", "Nile boat sailing into the sunset in Luxor"], ["Dinner on the Nile", "Egyptian dinner served on board the Nile boat"], ["Tea and a Nile breeze", "Tea on deck during the Luxor sunset cruise"], ["Golden-hour return", "Returning along the Nile at golden hour"]],
+    "valley-of-the-kings-tour": [["Begin at the Colossi", "The Colossi of Memnon on Luxor's West Bank"], ["Enter the Valley of the Kings", "Entrance to the Valley of the Kings"], ["Tombs alive with colour", "Painted tomb walls in the Valley of the Kings"], ["Temple of a queen", "Hatshepsut's temple at Deir el-Bahari"], ["Crafted by hand", "Alabaster craftsmanship on Luxor's West Bank"], ["A day among pharaohs", "A private day among the monuments of Luxor's West Bank"]],
+    "luxor-solar-eclipse-2027-package": [["Royal Nile terrace at totality"], ["Nile boat at totality"], ["Luxor Temple at totality"], ["Karnak at totality"], ["Hatshepsut Temple at totality"]]
+  }
+}

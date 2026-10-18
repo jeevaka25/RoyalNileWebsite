@@ -94,6 +94,106 @@
       "permanent": true
     },
     {
+      "source": "/royal-nile-nile-view-apartment-2",
+      "destination": "/villas/nile-view-2",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-nile-view-apartment-2/",
+      "destination": "/villas/nile-view-2",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-pool-view-apartment-1",
+      "destination": "/villas/nile-view-1",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-pool-view-apartment-1/",
+      "destination": "/villas/nile-view-1",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-pool-view-apartment-2",
+      "destination": "/villas/nile-view-2",
+      "permanent": true
+    },
+    {
+      "source": "/royal-nile-pool-view-apartment-2/",
+      "destination": "/villas/nile-view-2",
+      "permanent": true
+    },
+    {
+      "source": "/wonders-of-cairo-tour",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/wonders-of-cairo-tour/",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/5-tips-for-trip-to-pyramids",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/5-tips-for-trip-to-pyramids/",
+      "destination": "/tours/cairo-pyramids-sphinx-tour",
+      "permanent": true
+    },
+    {
+      "source": "/5-day-cairo-itinerary",
+      "destination": "/egypt-travel-guide/grand-egyptian-museum-luxor-itinerary-2026-27/",
+      "permanent": true
+    },
+    {
+      "source": "/5-day-cairo-itinerary/",
+      "destination": "/egypt-travel-guide/grand-egyptian-museum-luxor-itinerary-2026-27/",
+      "permanent": true
+    },
+    {
+      "source": "/5-reasons-you-love-desert-safari-luxor",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/5-reasons-you-love-desert-safari-luxor/",
+      "destination": "/tours/luxor-desert-safari",
+      "permanent": true
+    },
+    {
+      "source": "/5-reasons-you-love-hot-air-balloon-ride",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/5-reasons-you-love-hot-air-balloon-ride/",
+      "destination": "/tours/hot-air-balloon-luxor",
+      "permanent": true
+    },
+    {
+      "source": "/ultimate-5-day-aswan-itinerary",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/ultimate-5-day-aswan-itinerary/",
+      "destination": "/tours/aswan-philae-temple-tour",
+      "permanent": true
+    },
+    {
+      "source": "/5-important-tips-for-booking-tours-egypt",
+      "destination": "/egypt-travel-guide/private-luxor-tour-planning-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/5-important-tips-for-booking-tours-egypt/",
+      "destination": "/egypt-travel-guide/private-luxor-tour-planning-guide/",
+      "permanent": true
+    },
+    {
       "source": "/royal-nile-villas",
       "destination": "/",
       "permanent": true
@@ -1286,14 +1386,6 @@
     {
       "source": "/villas/nile-view-2/",
       "destination": "/villas/nile-view-2.html"
-    },
-    {
-      "source": "/wonders-of-cairo-tour",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/wonders-of-cairo-tour/",
-      "destination": "/index.html"
     },
     {
       "source": "/tours/cairo-pyramids-sphinx-tour",
