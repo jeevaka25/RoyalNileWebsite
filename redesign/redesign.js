@@ -45,7 +45,7 @@ for(const video of videos){
  document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
 }
 // Each platform advances independently only after a real link activation.
-const heroReservationIds=['nile-view-1','nile-view-2','nile-view-luxury-1','nile-view-luxury-2'];
+const heroReservationIds=['sky-penthouse-1','sky-penthouse-2'];
 if(typeof VILLAS!=='undefined'){
  const pool=heroReservationIds.map(id=>VILLAS.find(v=>v.id===id));
  if(pool.every(Boolean))for(const link of document.querySelectorAll('[data-reserve]')){
