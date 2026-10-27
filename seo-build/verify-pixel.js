@@ -41,7 +41,7 @@ for(const pathname of paths) {
 // Check the actual dynamically rendered homepage/search-result buttons too.
 const home=read('index.html'),grid={innerHTML:''};
 const ctx={document:{getElementById:()=>grid},vPhoto:()=>'/test.webp',requestAnimationFrame:()=>{},Set,encodeURIComponent};
-vm.runInNewContext(read('villa-data.js')+"\nconst FEATURED_VILLA_IDS=new Set(['sky-penthouse-1','sky-penthouse-2']);\n"+home.slice(home.indexOf('function renderVillas('),home.indexOf('// ============================================\n// VILLA MODAL'))+"\nrenderVillas(VILLAS.map(v=>({...v,available:true})),'2026-12-10','2026-12-14');",ctx);
+vm.runInNewContext(read('villa-data.js')+"\nconst FEATURED_VILLA_IDS=new Set(['sky-penthouse-1','nile-view-luxury-1']);\n"+home.slice(home.indexOf('function renderVillas('),home.indexOf('// ============================================\n// VILLA MODAL'))+"\nrenderVillas(VILLAS.map(v=>({...v,available:true})),'2026-12-10','2026-12-14');",ctx);
 verifyButtons(grid.innerHTML,'/');
 assert.ok(home.includes("document.dispatchEvent(new CustomEvent('royal-inquiry-outbound', {detail: {tourName: form.dataset.tourName}}));"));
 console.log(`Pixel checks passed: ${paths.length} pages initialize pixel ${SITE.metaPixel} once; ${count} static/dynamic booking links invoke the correct custom event and exactly one standard Lead for outbound booking/WhatsApp actions, including nested targets and enquiry handoffs. No message/date/form data is sent in event parameters. This tests site-side dispatch, not Meta dashboard receipt.`);
