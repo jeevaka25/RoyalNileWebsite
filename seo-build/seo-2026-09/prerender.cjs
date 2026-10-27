@@ -8,7 +8,7 @@ const slice=(start,end)=>html.slice(html.indexOf(start),html.indexOf(end,html.in
 const code=fs.readFileSync(path.join(root,'villa-data.js'),'utf8')+'\n'+
  slice('const SITE_VILLA_PHOTOS =','// ============================================\n// TOUR DATA')+'\n'+
  slice('const TOURS = [','function tourIdFromPath')+'\n'+
- "const FEATURED_VILLA_IDS=new Set(['sky-penthouse-1','sky-penthouse-2']);\n"+
+ "const FEATURED_VILLA_IDS=new Set(['sky-penthouse-1','nile-view-luxury-1']);\n"+
  slice('function renderVillas(','// ============================================\n// VILLA MODAL')+'\n'+
  slice('const TOUR_PAGE=','// ============================================\n// INIT')+'\n'+
  'renderVillas(VILLAS.filter(v=>!FEATURED_VILLA_IDS.has(v.id)).map(v=>({...v,available:null})));renderTours();';
