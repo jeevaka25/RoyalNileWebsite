@@ -335,7 +335,7 @@ function villaPage(v) {
   const lodgingLd = { '@context': 'https://schema.org', '@type': 'Accommodation', name: v.name, description: v.description, url: canonical, sameAs: [businessProfile, v.airbnbUrl, v.bookingUrl], numberOfBedrooms: v.bedrooms, numberOfBathroomsTotal: v.bathrooms, occupancy: { '@type': 'QuantitativeValue', maxValue: v.guests }, amenityFeature: v.features.map((f) => ({ '@type': 'LocationFeatureSpecification', name: f })), address: { '@type': 'PostalAddress', addressLocality: SITE.addressLocality, addressRegion: SITE.addressRegion, addressCountry: SITE.addressCountry }, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng } };
   const crumbs = breadcrumbLd([{ name: 'Home', url: ORIGIN + '/' }, { name: 'Villas', url: ORIGIN + '/villas/' }, { name: v.name, url: canonical }]);
   const faqs = [
-    ['How far is the villa from the Valley of the Kings?', 'The villa is on Luxor’s West Bank in Al Aqaletah — about 15 minutes from the Valley of the Kings, about 15 minutes from the balloon launch site and 5 minutes from the West Bank ferry, with a free shuttle to the ferry.'],
+    ['How far is the villa from the Valley of the Kings?', 'The villa is on Luxor’s West Bank in Al Aqaletah — about 15 minutes from the Valley of the Kings, about 15 minutes from the balloon launch site and 15 minutes from the West Bank ferry by our free shuttle.'],
     ['Is airport pickup available?', 'Yes. Airport pickup and drop-off can be arranged, along with private tours and a free shuttle to the West Bank ferry.'],
     ['How do I book?', 'Message us directly on WhatsApp for the best direct rates and availability, or book instantly via our Airbnb and Booking.com listings.'],
   ];
@@ -352,7 +352,7 @@ function villaPage(v) {
 <div class="layout"><div>
 <p class="lede">${esc(v.description)}</p>
 <h2>What this villa offers</h2><ul class="checklist">${v.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
-<div class="note">Located in Al Aqaletah on Luxor’s tranquil West Bank — 15 min to the Valley of the Kings, about 15 min to the balloon launch, 5 min to the ferry. Free shuttle to the West Bank ferry, on-site 14-metre pool and Nile-view rooftop restaurant.</div>
+<div class="note">Located in Al Aqaletah on Luxor’s tranquil West Bank — 15 min to the Valley of the Kings, about 15 min to the balloon launch, 15 min to the ferry by free shuttle. On-site 14-metre pool and Nile-view rooftop restaurant.</div>
 <div class="mobile-booking-card">${bookingCard}</div>
 <h2>Photo gallery</h2><div class="gallery">${galleryImgs}</div>
 <h2>Frequently asked questions</h2>${faqs.map(([q, a]) => `<div class="faq"><h3>${esc(q)}</h3><p>${esc(a)}</p></div>`).join('')}
