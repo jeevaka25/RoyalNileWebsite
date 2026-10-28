@@ -23,7 +23,7 @@ short=lambda v:v['name'].replace('Royal Nile Villas — ','').replace('Royal Nil
 compare=['nile-view-luxury-1','nile-view-luxury-2','nile-view-1','nile-view-2']
 notes={
 'nile-view-luxury-1':'Two queen bedrooms and two bathrooms suit two couples who would like a bathroom each. The second-floor position gives Nile, garden and mountain views.',
-'nile-view-luxury-2':'Two queen bedrooms and a private terrace make this a place to settle above the shared pool. Compare it with Luxury Nile View 1 if bathroom count is important to your group.',
+'nile-view-luxury-2':'Two queen bedrooms, two bathrooms and a private terrace make this a place to settle above the shared pool. It has the same layout as Luxury Nile View 1.',
 'nile-view-1':'Choose the queen-and-twin bed layout when children or friends need separate beds. Ground-floor living and direct access to the shared pool make time outdoors easy.',
 'nile-view-2':'A queen bedroom and a twin bedroom offer a flexible layout for a family or friends. Compare the Nile and desert outlook with the garden and mountain outlook of Nile View 1.',
 'royal-home-nile-view':'A private entrance and balcony give this top-floor apartment its own rhythm. Royal Home is a separate property from Royal Nile Villas; confirm your arrival address with the host.',
