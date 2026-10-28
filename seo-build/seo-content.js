@@ -8,7 +8,7 @@ const VILLA_SEO = {
   'sky-penthouse-1': ['Sky Penthouse 1, Luxor', 'Stay above Luxor’s West Bank in a two-bedroom penthouse with a private terrace and panoramic Nile and desert views. Enquire about availability and transfers.'],
   'sky-penthouse-2': ['Sky Penthouse 2, Luxor', 'Two-bedroom Luxor penthouse with panoramic Nile and mountain views and a dedicated workspace. Plan a relaxed West Bank stay with private tours.'],
   'nile-view-luxury-1': ['Luxury Nile View 1, Luxor', 'Two queen bedrooms and two bathrooms in a second-floor Luxor apartment with Nile, garden and mountain views. A practical base for couples or families.'],
-  'nile-view-luxury-2': ['Luxury Nile View 2, Luxor', 'Second-floor, two-bedroom Luxor apartment with a private terrace and Nile, pool and garden views. Check dates for a West Bank stay and private tours.'],
+  'nile-view-luxury-2': ['Luxury Nile View 2, Luxor', 'Second-floor, two-bedroom, two-bathroom Luxor apartment with a private terrace and Nile, pool and garden views. Check dates for a West Bank stay and private tours.'],
   'nile-view-1': ['Nile View Apartment 1, Luxor', 'Two-bedroom ground-floor Luxor apartment with direct pool access and garden and mountain views. Plan a family stay with locally arranged transfers and tours.'],
   'nile-view-2': ['Nile View Apartment 2, Luxor', 'Two-bedroom ground-floor Luxor apartment with direct pool access and Nile and desert views. Enquire about your West Bank stay, airport transfers and tours.'],
 };

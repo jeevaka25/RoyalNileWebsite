@@ -54,7 +54,7 @@ const VILLAS = [
     propertyGroup:'Royal Nile Villa',
     photos:['hosting/Hosting-950750256318960064/original/fe75eeaf-6e1b-429c-9de7-23e454495951.jpeg','hosting/Hosting-950750256318960064/original/94b97dbf-9999-470c-bac9-1eaa624c31a9.jpeg','miso/Hosting-950750256318960064/original/dc7b07ce-e5da-42e9-92a0-f3074c60f6f2.jpeg','miso/Hosting-950750256318960064/original/76a27f45-d604-40ac-917e-e2f4d447ebfc.jpeg','miso/Hosting-950750256318960064/original/640d02bc-1e0a-4fbf-b7e6-0225b84cfd88.jpeg','miso/Hosting-950750256318960064/original/8086ee0b-d445-4294-86a1-7ce53ed8cfd0.jpeg'],
   },
-  { id:'nile-view-luxury-2', roomId:'959415706303071560', name:'Royal Nile Villas — Luxury Nile View 2', shortName:'Luxury Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:1, rating:4.92, reviews:126, floor:'2nd Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
+  { id:'nile-view-luxury-2', roomId:'959415706303071560', name:'Royal Nile Villas — Luxury Nile View 2', shortName:'Luxury Nile View 2', location:'Al Aqaletah, West Bank', guests:4, bedrooms:2, beds:2, bathrooms:2, rating:4.92, reviews:126, floor:'2nd Floor', viewType:'Nile, Pool & Garden', bedsConfig:'2 Queen Beds',
     features:['Guest Favourite','Private Terrace','Incredible Nile Views','14m Swimming Pool','On-site Restaurant','Free Ferry Shuttle'],
     description:'Second-floor apartment with a private terrace and incredible Nile River, pool, and garden views. A guest favourite with 126 reviews — known for spectacular sunset views from the terrace.',
     airbnbUrl:'https://www.airbnb.co.uk/rooms/959415706303071560',

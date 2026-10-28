@@ -59,7 +59,7 @@ function villaCollection() {
 ${searchResults()}<div class="inventory-grid">${VILLA_ORDER.map((id, index) => villaCard(VILLAS.find(v => v.id === id), index)).join('')}</div></section>
 <section class="collection-section choice-section" aria-labelledby="choose-heading"><p class="collection-kicker">Make yourself at home</p><h2 id="choose-heading">A few details make all the difference.</h2><div class="advice-grid">
 <article><span>01</span><h3>Choose your floor</h3><p>Ground-floor apartments offer direct pool access. The penthouses offer private terraces and panoramic views. If stairs or step-free access matter, confirm the exact route with us before booking.</p></article>
-<article><span>02</span><h3>Choose your layout</h3><p>Travelling with friends? Luxury Nile View 1 has two queen bedrooms and two bathrooms. For a queen-and-twin setup, compare the penthouses, Nile View apartments or Royal Home Pool View.</p></article>
+<article><span>02</span><h3>Choose your layout</h3><p>Travelling with friends? Luxury Nile View 1 and 2 each have two queen bedrooms and two bathrooms. For a queen-and-twin setup, compare the penthouses, Nile View apartments or Royal Home Pool View.</p></article>
 <article><span>03</span><h3>Build the rest of your stay</h3><p>Pair your apartment with <a href="/tours/">Luxor tours and day trips</a>, arrange airport transfers, and leave time for a meal at our <a href="/restaurant.html">Nile-view restaurant</a>.</p></article></div>
 <div class="reading-links"><a href="/egypt-travel-guide/luxor-apartment-vs-hotel/">Apartment or hotel in Luxor? ↗</a><a href="/egypt-travel-guide/where-to-stay-luxor-with-family/">Planning a family stay ↗</a></div></section>`;
 }
