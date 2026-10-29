@@ -1,8 +1,8 @@
 const { VILLAS, wa, optimizedImage } = require('./data');
-const FEATURED_IDS = ['sky-penthouse-1', 'nile-view-luxury-1'];
+const FEATURED_IDS = ['nile-view-luxury-1', 'nile-view-1'];
 const FEATURED_COPY = {
-  'sky-penthouse-1': { name: 'Sky Penthouse 1', alt: 'Nile, palms and pool from the Sky Penthouse 1 terrace', kicker: 'Top-floor penthouse · Panoramic views', text: 'Wake above the Nile. Panoramic river and desert views from a private terrace, high over the pool and garden.' },
   'nile-view-luxury-1': { name: 'Luxury Nile View 1', cover: 'villa-assets/imagen-enhanced/nile-view-luxury-1/03-balcony-nile-pool.png', alt: 'Balcony looking over the pool and palms to the Nile at Luxury Nile View 1', kicker: 'Highest rated · Two bathrooms', text: 'Our highest-rated apartment. Two queen bedrooms, two bathrooms and a balcony looking over the pool to the Nile.' },
+  'nile-view-1': { name: 'Nile View 1', cover: 'optimized-assets/villa-originals/nile-view-1/02.webp', alt: 'Hot-air balloons over the garden and pool at Nile View 1', kicker: 'Ground floor · Direct pool access', text: 'Step straight out to the shared pool. A ground-floor home with a queen-and-twin layout and garden and mountain views.' },
 };
 function versionBookingAssets(html) {
   const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');

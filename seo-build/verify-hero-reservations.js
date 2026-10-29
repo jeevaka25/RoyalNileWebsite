@@ -4,7 +4,7 @@ const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const source=read('redesign/redesign.js');
 const rotation=source.slice(source.indexOf('const heroReservationIds='),source.indexOf('let lenis;'));
 const inventory={};vm.runInNewContext(read('villa-data.js')+';this.villas=VILLAS;',inventory);
-const order=['sky-penthouse-1','sky-penthouse-2','nile-view-luxury-1','nile-view-2'];
+const order=['nile-view-luxury-1','nile-view-1'];
 function harness(store=new Map(),blocked=false){
  const pending=[];
  const links=['airbnb','booking'].map(platform=>({dataset:{reserve:platform},textContent:'Reserve on '+platform,handlers:{},setAttribute(k,v){this[k]=v},addEventListener(k,v){this.handlers[k]=v}}));
@@ -40,4 +40,4 @@ const html=read('index.html');
 assert.equal((html.match(/data-reserve=/g)||[]).length,2);
 assert.ok(!html.includes('data-hero-video-toggle'));
 assert.ok(html.includes('class="ev-eclipse-link"'));
-console.log('Hero reservation checks passed: both platforms cycle through only Sky Penthouse 1, Sky Penthouse 2, Luxury Nile View 1 and Nile View 2, independently; navigation keeps the clicked href; reload persistence, blocked storage, cancelled clicks and middle clicks behave correctly.');
+console.log('Hero reservation checks passed: both platforms cycle through only Luxury Nile View 1 and Nile View 1, independently; navigation keeps the clicked href; reload persistence, blocked storage, cancelled clicks and middle clicks behave correctly.');
