@@ -30,3 +30,17 @@ later dated copy, so prefer targeted scripts like this one.
 
 Checks updated for known stale expectations: tour collection card count, sitemap page count, canonical
 and og:url attribute order, and the old booking-dock comment marker.
+
+## 31 October 2026 fixes (`apply_oct31.py`)
+
+Run `python3 seo-build/seo-2026-10/apply_oct31.py`, then `node seo-build/seo-2026-09/prerender.cjs`, then the script once more
+(the second run only refreshes sitemap dates). It:
+- points the restaurant's Email Us at royalhomeluxor@gmail.com (info@egyptvillastours.com has no working mailbox) and its
+  footer Airbnb Profile at the host profile (it linked an unrelated guest's profile);
+- retitles the restaurant "Royal Skylounge | Nile-View Rooftop Restaurant, Luxor";
+- updates Jeevaka's LinkedIn to linkedin.com/in/egypt-villas-tours;
+- adds `logo` (optimized-assets/brand/royal-nile-villas-logo-512.png, drawn from favicon.svg) and `sameAs` (Google Maps
+  listing, Airbnb host profile, LinkedIn) to the homepage Organization markup, mirrored in tuneup.py;
+- builds homepage apartment links as `${'/villas/'+villa.id}` so Google stops reading `/villas/${villa.id}` as a URL;
+- gives the hero photo on every tour and apartment page alt text from its heading;
+- sets each sitemap lastmod to the date its page file last changed.
