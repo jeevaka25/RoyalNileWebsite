@@ -1,6 +1,7 @@
 const HAWARA_ARTICLE = require('./hawara-article.json');
 
 const ARTICLES = [
+  require('./ramses-ii-article.json'),
   require('./balloon-restart-article.json'),
   HAWARA_ARTICLE,
   {
