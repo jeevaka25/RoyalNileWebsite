@@ -1,8 +1,8 @@
 # French pages (November 2026)
 
 French versions of the homepage, the apartments and tours collection pages, the eight apartment
-pages and every tour page, for the France Meta campaign. The restaurant, travel guide and Meet your
-hosts stay in English.
+pages, every tour page and the restaurant page, for the France Meta campaign. The travel guide and
+Meet your hosts stay in English.
 
 | French page | Built from |
 | --- | --- |
@@ -11,6 +11,7 @@ hosts stay in English.
 | `/fr/villas/<apartment>` | `villas/<apartment>.html` |
 | `/fr/tours/` | `tours/index.html` |
 | `/fr/tours/<tour>` | `tours/<tour>.html` |
+| `/fr/restaurant.html` | `restaurant.html` |
 
 ## How it works
 
@@ -19,16 +20,16 @@ September redesign and must not be used). `build-fr.js` reads each English page 
 French twin, changing only the words, links and page language. Design, photos, scripts and
 tracking are therefore identical by construction.
 
-- **Wording:** `catalog.js` (homepage and apartments) and `catalog-tours.js` (tours) hold every
-  English wording beside its French wording.
+- **Wording:** `catalog.js` (homepage and apartments), `catalog-tours.js` (tours) and
+  `catalog-restaurant.js` (restaurant) hold every English wording beside its French wording.
 - **Facts:** numbers (ratings, review counts, beds, bathrooms, guests, minutes, years) are read
   from the English page on every build, so a fact update is one edit to the English page plus a
   rebuild. A French wording without `{0}`-style placeholders is only reused while the English
   numbers are unchanged.
 - **Reworded English:** the build stops and lists any English wording that has no French yet.
-- **Links:** links to translated pages go to their `/fr/` versions; everything else (restaurant,
-  travel guide, Meet your hosts) goes to the English pages. Guide and restaurant
-  links in running text say "(en anglais)". An `EN` link in the menu opens the English version.
+- **Links:** links to translated pages go to their `/fr/` versions; the travel guide and Meet your
+  hosts go to the English pages. Travel guide links
+  in running text say "(en anglais)". An `EN` link in the menu opens the English version.
 - **WhatsApp:** every WhatsApp button opens with a French message. Booking.com and Airbnb links are
   unchanged. Meta Pixel `Lead` events fire exactly as on the English site (same
   `analytics-events.js`).

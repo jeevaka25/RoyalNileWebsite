@@ -280,7 +280,7 @@ const PAIRS = [
   ['Pair your apartment with', 'Associez votre appartement à'],
   ['Luxor tours and day trips', 'nos excursions à Louxor'],
   [', arrange airport transfers, and leave time for a meal at our', ', organisez vos transferts aéroport et gardez du temps pour un repas à notre'],
-  ['Nile-view restaurant', `restaurant avec vue sur le Nil ${EN}`],
+  ['Nile-view restaurant', 'restaurant avec vue sur le Nil'],
   ['Apartment or hotel in Luxor? ↗', `Appartement ou hôtel à Louxor ? ${EN} ↗`],
   ['Planning a family stay ↗', `Préparer un séjour en famille ${EN} ↗`],
   ['Find the layout that fits your stay', 'Trouvez l’agencement adapté à votre séjour'],
@@ -386,7 +386,7 @@ const PAIRS = [
   ["Perfectly positioned on Luxor's tranquil West Bank — minutes from the Valley of the Kings and a short ferry ride to the city.", 'Idéalement situés sur la paisible rive ouest de Louxor, à quelques minutes de la Vallée des Rois et à une courte traversée en bac du centre-ville.'],
   ['The Heart of Ancient Thebes', 'Au cœur de l’antique Thèbes'],
   ["All our properties are located in Al Aqaletah, surrounded by sugar cane fields with stunning Nile and mountain views. Free shuttle service to the West Bank ferry station. Don't miss our", 'Toutes nos résidences se trouvent à Al Aqaletah, au milieu des champs de canne à sucre, avec une vue superbe sur le Nil et les montagnes. Navette gratuite jusqu’à l’embarcadère du bac de la rive ouest. Ne manquez pas notre'],
-  ['rooftop restaurant', `restaurant sur le toit ${EN}`],
+  ['rooftop restaurant', 'restaurant sur le toit'],
   ['— the best Nile view in Luxor.', ': la plus belle vue sur le Nil de Louxor.'],
   ['15 min to Valley of the Kings', 'À {0} min de la Vallée des Rois'],
   ['About 15 min to balloon launch', 'À environ {0} min du décollage des montgolfières'],
@@ -439,7 +439,7 @@ const PAIRS = [
 ];
 
 const TEXT = {};
-for (const [en, fr] of [...PAIRS, ...require('./catalog-tours')]) {
+for (const [en, fr] of [...PAIRS, ...require('./catalog-tours'), ...require('./catalog-restaurant')]) {
   if (Object.prototype.hasOwnProperty.call(TEXT, en)) throw new Error('Duplicate catalog entry: ' + en);
   TEXT[en] = fr;
 }
@@ -506,6 +506,7 @@ const WHATSAPP = [
   [/^Hi! I'd like to ask about (.+)\.$/, (m, t) => `Bonjour ! J’aimerais des informations sur l’excursion « ${t(m[1])} ».`],
   [/^Hi! I'm interested in (.+)\. Date: \[enter date\]\. People: \[enter number\]\.( I understand a non-refundable (\d+)% deposit is required\.)?$/, (m, t) => `Bonjour ! L’excursion « ${t(m[1])} » m’intéresse. Date : [indiquez la date]. Nombre de personnes : [indiquez le nombre].${m[2] ? ` Je comprends qu’un acompte non remboursable de ${m[3]} % est demandé.` : ''}`],
   [/^Hi! I'd like help planning Luxor tours and accommodation for my trip\.$/, () => 'Bonjour ! Pouvez-vous m’aider à organiser mes excursions et mon hébergement à Louxor ?'],
+  [/^Hi! I'd like to make a reservation at the Royal Skylounge Restaurant\.$/, () => 'Bonjour ! Je souhaite réserver une table au Royal Skylounge Restaurant.'],
   [/^Hello, please confirm availability and a written quote for the (\d+) eclipse stay\.$/, (m) => `Bonjour, pouvez-vous me confirmer les disponibilités et m’envoyer un devis écrit pour le séjour éclipse ${m[1]} ?`],
 ];
 

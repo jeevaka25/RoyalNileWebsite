@@ -1606,6 +1606,14 @@
     {
       "source": "/fr/tours/valley-of-the-kings-tour/",
       "destination": "/fr/tours/valley-of-the-kings-tour.html"
+    },
+    {
+      "source": "/fr/restaurant.html",
+      "destination": "/fr/restaurant.html"
+    },
+    {
+      "source": "/fr/restaurant.html/",
+      "destination": "/fr/restaurant.html"
     }
   ]
 }

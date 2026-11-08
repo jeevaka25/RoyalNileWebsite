@@ -28,6 +28,7 @@ const PAGES = [
   { en: 'index.html', fr: 'fr/index.html', enPath: '/', frPath: '/fr/' },
   ...section('villas'),
   ...section('tours'),
+  { en: 'restaurant.html', fr: 'fr/restaurant.html', enPath: '/restaurant.html', frPath: '/fr/restaurant.html' },
 ];
 const TRANSLATED = new Map(PAGES.map((p) => [p.enPath, p.frPath]));
 
