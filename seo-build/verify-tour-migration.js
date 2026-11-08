@@ -17,8 +17,9 @@ for(const [old,destination] of legacyMap) for(const suffix of ['', '/', '.html',
   assert.equal(apacheRedirects.find(r=>r.pattern.test((old+suffix).slice(1)))?.target,destination);
 }
 const pages=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
-// 4 core pages + meet-your-hosts + guide index + every tour, apartment and article.
-assert.equal(pages.length,6+TOURS.length+8+ARTICLES.length);
+// 4 core pages + meet-your-hosts + guide index + every tour, apartment and article,
+// plus the French homepage, French /villas/ and the 8 French apartment pages.
+assert.equal(pages.length,6+TOURS.length+8+ARTICLES.length+require('./fr/build-fr').PAGES.length);
 for(const tour of TOURS) {
   assert.ok(pages.includes('/'+tour.primarySlug));assert.ok(!pages.includes('/'+tour.legacySlug));
   assert.ok(!fs.existsSync(path.join(root,tour.legacySlug+'.html')),'Old duplicate file remains');

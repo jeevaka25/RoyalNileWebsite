@@ -1434,6 +1434,78 @@
     {
       "source": "/tours/abydos-dendera-tour",
       "destination": "/tours/abydos-dendera-tour.html"
+    },
+    {
+      "source": "/fr/",
+      "destination": "/fr/index.html"
+    },
+    {
+      "source": "/fr/villas/",
+      "destination": "/fr/villas/index.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-1",
+      "destination": "/fr/villas/nile-view-1.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-1/",
+      "destination": "/fr/villas/nile-view-1.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-2",
+      "destination": "/fr/villas/nile-view-2.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-2/",
+      "destination": "/fr/villas/nile-view-2.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-luxury-1",
+      "destination": "/fr/villas/nile-view-luxury-1.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-luxury-1/",
+      "destination": "/fr/villas/nile-view-luxury-1.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-luxury-2",
+      "destination": "/fr/villas/nile-view-luxury-2.html"
+    },
+    {
+      "source": "/fr/villas/nile-view-luxury-2/",
+      "destination": "/fr/villas/nile-view-luxury-2.html"
+    },
+    {
+      "source": "/fr/villas/royal-home-nile-view",
+      "destination": "/fr/villas/royal-home-nile-view.html"
+    },
+    {
+      "source": "/fr/villas/royal-home-nile-view/",
+      "destination": "/fr/villas/royal-home-nile-view.html"
+    },
+    {
+      "source": "/fr/villas/royal-home-pool-view",
+      "destination": "/fr/villas/royal-home-pool-view.html"
+    },
+    {
+      "source": "/fr/villas/royal-home-pool-view/",
+      "destination": "/fr/villas/royal-home-pool-view.html"
+    },
+    {
+      "source": "/fr/villas/sky-penthouse-1",
+      "destination": "/fr/villas/sky-penthouse-1.html"
+    },
+    {
+      "source": "/fr/villas/sky-penthouse-1/",
+      "destination": "/fr/villas/sky-penthouse-1.html"
+    },
+    {
+      "source": "/fr/villas/sky-penthouse-2",
+      "destination": "/fr/villas/sky-penthouse-2.html"
+    },
+    {
+      "source": "/fr/villas/sky-penthouse-2/",
+      "destination": "/fr/villas/sky-penthouse-2.html"
     }
   ]
 }

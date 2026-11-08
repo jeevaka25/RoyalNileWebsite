@@ -1,5 +1,15 @@
 /* Shared homepage/listing search. Only an explicit live true is available. */
 window.RoyalAvailability = (() => {
+  // Interface text follows the page language (<html lang="fr"> on /fr/ pages); English is the default.
+  const lang = (typeof document !== 'undefined' && document.documentElement && document.documentElement.lang || 'en').slice(0,2);
+  const isoToFr = value => value.split('-').reverse().join('/');
+  const TEXT = {
+    en: { search:'Search availability', checking:'Checking…', invalid:'Choose a check-in date today or later and a check-out after check-in.', failed:'Live availability could not be checked. Please try again or WhatsApp us to confirm your dates.',
+      result:(n,total,ci,co,unknown,none) => `${n} of ${total} apartments verified available · ${ci} to ${co}.${unknown ? ` ${unknown} could not be verified; ask us to check these directly.` : ''}${none ? ' Try different dates or WhatsApp us for help.' : ' Calendar availability is not a reservation; confirm when booking.'}` },
+    fr: { search:'Voir les disponibilités', checking:'Vérification…', invalid:'Choisissez une date d’arrivée à partir d’aujourd’hui et une date de départ postérieure.', failed:'Impossible de vérifier les disponibilités en direct. Réessayez ou écrivez-nous sur WhatsApp pour confirmer vos dates.',
+      result:(n,total,ci,co,unknown,none) => `${n} appartement${n>1?'s':''} sur ${total} disponible${n>1?'s':''} (vérifié) · du ${isoToFr(ci)} au ${isoToFr(co)}.${unknown ? ` ${unknown} n’${unknown>1?'ont':'a'} pas pu être vérifié${unknown>1?'s':''} ; demandez-nous de les vérifier directement.` : ''}${none ? ' Essayez d’autres dates ou écrivez-nous sur WhatsApp.' : ' Une date libre au calendrier n’est pas une réservation ; confirmez-la en réservant.'}` },
+  };
+  const T = TEXT[lang] || TEXT.en;
   const dateString = date => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
   const tomorrow = value => { const date = new Date(`${value}T12:00:00`); date.setDate(date.getDate()+1); return dateString(date); };
   async function fetchStatuses(checkin, checkout, inventory) {
@@ -22,7 +32,7 @@ window.RoyalAvailability = (() => {
     const results = document.getElementById('bookingResults'), message = document.getElementById('bookingResultsMessage');
     let revision = 0;
     ci.min = dateString(new Date()); co.min = tomorrow(ci.min);
-    function cancel() { revision++; button.disabled=false; button.textContent='Search availability'; form.removeAttribute('aria-busy'); }
+    function cancel() { revision++; button.disabled=false; button.textContent=T.search; form.removeAttribute('aria-busy'); }
     function clear() { cancel(); form.reset(); co.min=tomorrow(ci.min); feedback.textContent=''; results.hidden=true; reset(); }
     function datesChanged() {
       cancel(); results.hidden=true; feedback.textContent=''; reset();
@@ -34,23 +44,23 @@ window.RoyalAvailability = (() => {
     form.addEventListener('submit',async event => {
       event.preventDefault();
       if (!ci.value || !co.value || ci.value < dateString(new Date()) || co.value <= ci.value || !form.reportValidity()) {
-        feedback.textContent='Choose a check-in date today or later and a check-out after check-in.'; return;
+        feedback.textContent=T.invalid; return;
       }
       const request = ++revision, checkin=ci.value, checkout=co.value;
-      button.disabled=true; button.textContent='Checking…'; feedback.textContent=''; form.setAttribute('aria-busy','true');
+      button.disabled=true; button.textContent=T.checking; feedback.textContent=''; form.setAttribute('aria-busy','true');
       results.hidden=true;
       try {
         const statuses = await fetchStatuses(checkin,checkout,inventory);
         if (request !== revision) return;
         const available = statuses.filter(v => v.available === true), unknown = statuses.filter(v => v.available === null).length;
         render(available,checkin,checkout);
-        message.textContent=`${available.length} of ${inventory.length} apartments verified available · ${checkin} to ${checkout}.${unknown ? ` ${unknown} could not be verified; ask us to check these directly.` : ''}${!available.length ? ' Try different dates or WhatsApp us for help.' : ' Calendar availability is not a reservation; confirm when booking.'}`;
+        message.textContent=T.result(available.length,inventory.length,checkin,checkout,unknown,!available.length);
       } catch {
         if (request !== revision) return;
-        render([]); message.textContent='Live availability could not be checked. Please try again or WhatsApp us to confirm your dates.';
+        render([]); message.textContent=T.failed;
       } finally {
         if (request === revision) {
-          button.disabled=false; button.textContent='Search availability'; form.removeAttribute('aria-busy'); results.hidden=false;
+          button.disabled=false; button.textContent=T.search; form.removeAttribute('aria-busy'); results.hidden=false;
           document.getElementById(resultsId).scrollIntoView({behavior:'smooth',block:'start'});
         }
       }
