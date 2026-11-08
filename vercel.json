@@ -1506,6 +1506,114 @@
     {
       "source": "/fr/villas/sky-penthouse-2/",
       "destination": "/fr/villas/sky-penthouse-2.html"
+    },
+    {
+      "source": "/fr/tours/",
+      "destination": "/fr/tours/index.html"
+    },
+    {
+      "source": "/fr/tours/abu-simbel-tour",
+      "destination": "/fr/tours/abu-simbel-tour.html"
+    },
+    {
+      "source": "/fr/tours/abu-simbel-tour/",
+      "destination": "/fr/tours/abu-simbel-tour.html"
+    },
+    {
+      "source": "/fr/tours/abydos-dendera-tour",
+      "destination": "/fr/tours/abydos-dendera-tour.html"
+    },
+    {
+      "source": "/fr/tours/abydos-dendera-tour/",
+      "destination": "/fr/tours/abydos-dendera-tour.html"
+    },
+    {
+      "source": "/fr/tours/aswan-philae-temple-tour",
+      "destination": "/fr/tours/aswan-philae-temple-tour.html"
+    },
+    {
+      "source": "/fr/tours/aswan-philae-temple-tour/",
+      "destination": "/fr/tours/aswan-philae-temple-tour.html"
+    },
+    {
+      "source": "/fr/tours/cairo-pyramids-sphinx-tour",
+      "destination": "/fr/tours/cairo-pyramids-sphinx-tour.html"
+    },
+    {
+      "source": "/fr/tours/cairo-pyramids-sphinx-tour/",
+      "destination": "/fr/tours/cairo-pyramids-sphinx-tour.html"
+    },
+    {
+      "source": "/fr/tours/grand-egyptian-museum-tour",
+      "destination": "/fr/tours/grand-egyptian-museum-tour.html"
+    },
+    {
+      "source": "/fr/tours/grand-egyptian-museum-tour/",
+      "destination": "/fr/tours/grand-egyptian-museum-tour.html"
+    },
+    {
+      "source": "/fr/tours/hot-air-balloon-luxor",
+      "destination": "/fr/tours/hot-air-balloon-luxor.html"
+    },
+    {
+      "source": "/fr/tours/hot-air-balloon-luxor/",
+      "destination": "/fr/tours/hot-air-balloon-luxor.html"
+    },
+    {
+      "source": "/fr/tours/hurghada-snorkelling-adventure",
+      "destination": "/fr/tours/hurghada-snorkelling-adventure.html"
+    },
+    {
+      "source": "/fr/tours/hurghada-snorkelling-adventure/",
+      "destination": "/fr/tours/hurghada-snorkelling-adventure.html"
+    },
+    {
+      "source": "/fr/tours/karnak-luxor-temple-tour",
+      "destination": "/fr/tours/karnak-luxor-temple-tour.html"
+    },
+    {
+      "source": "/fr/tours/karnak-luxor-temple-tour/",
+      "destination": "/fr/tours/karnak-luxor-temple-tour.html"
+    },
+    {
+      "source": "/fr/tours/luxor-desert-safari",
+      "destination": "/fr/tours/luxor-desert-safari.html"
+    },
+    {
+      "source": "/fr/tours/luxor-desert-safari/",
+      "destination": "/fr/tours/luxor-desert-safari.html"
+    },
+    {
+      "source": "/fr/tours/luxor-solar-eclipse-2027-package",
+      "destination": "/fr/tours/luxor-solar-eclipse-2027-package.html"
+    },
+    {
+      "source": "/fr/tours/luxor-solar-eclipse-2027-package/",
+      "destination": "/fr/tours/luxor-solar-eclipse-2027-package.html"
+    },
+    {
+      "source": "/fr/tours/sunset-nile-boat-cruise",
+      "destination": "/fr/tours/sunset-nile-boat-cruise.html"
+    },
+    {
+      "source": "/fr/tours/sunset-nile-boat-cruise/",
+      "destination": "/fr/tours/sunset-nile-boat-cruise.html"
+    },
+    {
+      "source": "/fr/tours/valley-of-the-kings-tour",
+      "destination": "/fr/tours/valley-of-the-kings-tour.html"
+    },
+    {
+      "source": "/fr/tours/valley-of-the-kings-tour/",
+      "destination": "/fr/tours/valley-of-the-kings-tour.html"
+    },
+    {
+      "source": "/fr/restaurant.html",
+      "destination": "/fr/restaurant.html"
+    },
+    {
+      "source": "/fr/restaurant.html/",
+      "destination": "/fr/restaurant.html"
     }
   ]
 }
