@@ -19,11 +19,15 @@ const ORIGIN = 'https://egyptvillastours.com';
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
 // ---------- the translated pages ----------
-const VILLA_IDS = fs.readdirSync(path.join(ROOT, 'villas')).filter((f) => f.endsWith('.html') && f !== 'index.html').map((f) => f.replace(/\.html$/, '')).sort();
+const idsIn = (dir) => fs.readdirSync(path.join(ROOT, dir)).filter((f) => f.endsWith('.html') && f !== 'index.html').map((f) => f.replace(/\.html$/, '')).sort();
+const section = (dir) => [
+  { en: `${dir}/index.html`, fr: `fr/${dir}/index.html`, enPath: `/${dir}/`, frPath: `/fr/${dir}/` },
+  ...idsIn(dir).map((id) => ({ en: `${dir}/${id}.html`, fr: `fr/${dir}/${id}.html`, enPath: `/${dir}/${id}`, frPath: `/fr/${dir}/${id}` })),
+];
 const PAGES = [
   { en: 'index.html', fr: 'fr/index.html', enPath: '/', frPath: '/fr/' },
-  { en: 'villas/index.html', fr: 'fr/villas/index.html', enPath: '/villas/', frPath: '/fr/villas/' },
-  ...VILLA_IDS.map((id) => ({ en: `villas/${id}.html`, fr: `fr/villas/${id}.html`, enPath: `/villas/${id}`, frPath: `/fr/villas/${id}` })),
+  ...section('villas'),
+  ...section('tours'),
 ];
 const TRANSLATED = new Map(PAGES.map((p) => [p.enPath, p.frPath]));
 
@@ -169,6 +173,12 @@ function buildPage(page) {
     }
     html = html.slice(0, start) + code + html.slice(end);
   }
+  for (const rule of catalog.PAGE_PATCHES.filter((r) => r.pages.test(page.en))) {
+    for (const [from, to] of rule.patches) {
+      if (!html.includes(from)) throw new Error(`${page.en}: text not found, update catalog.PAGE_PATCHES:\n${from.slice(0, 160)}`);
+      html = html.split(from).join(to);
+    }
+  }
   const tokens = tokenize(stripHreflang(html));
   walk(tokens, (t, stack, i) => {
     const inside = (sel) => stack.some((s) => (sel.startsWith('.') ? s.cls.split(/\s+/).includes(sel.slice(1)) : s.name === sel));
@@ -186,7 +196,7 @@ function buildPage(page) {
     if (t.type !== 'open') return;
     let tag = t.raw;
     if (t.name === 'html') tag = setAttr(tag, 'lang', 'fr');
-    for (const a of ['alt', 'aria-label', 'title', 'placeholder']) {
+    for (const a of ['alt', 'aria-label', 'title', 'placeholder', 'data-tour-name']) {
       const v = getAttr(tag, a);
       if (v && !(a === 'title' && t.name === 'link')) { const fr = tr(decode(v), where + ' @' + a); if (fr !== null) tag = setAttr(tag, a, encodeAttr(fr)); }
     }

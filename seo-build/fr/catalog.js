@@ -412,7 +412,7 @@ const PAIRS = [
   ['© 2026 Royal Nile Villas. All rights reserved.', '© {0} Royal Nile Villas. Tous droits réservés.'],
   ['Luxor, Egypt — West Bank', 'Louxor, Égypte — rive ouest'],
   ['All website content, branding, text, photography, and design are the property of Royal Nile Villas unless otherwise credited. Unauthorized reproduction, copying, or commercial use is prohibited.', 'Sauf mention contraire, l’ensemble des contenus de ce site (marque, textes, photographies et design) est la propriété de Royal Nile Villas. Toute reproduction, copie ou utilisation commerciale non autorisée est interdite.'],
-  // Tour cards (names and summaries; the tour pages themselves are English)
+  // Tour cards on the homepage (names and summaries)
   ['Luxor Solar Eclipse 2027 Package', 'Formule Éclipse solaire {0} à Louxor'],
   ['A minimum four-night Royal Nile Villas stay for the 2 August 2027 total solar eclipse, with panoramic Nile and sky views, full board and private airport transfers.', 'Un séjour d’au moins quatre nuits chez Royal Nile Villas pour l’éclipse totale de Soleil du {0} août {1}, avec vue panoramique sur le Nil et le ciel, pension complète et transferts privés depuis l’aéroport.'],
   ['Hot Air Balloon Sunrise', 'Montgolfière au lever du soleil'],
@@ -439,7 +439,7 @@ const PAIRS = [
 ];
 
 const TEXT = {};
-for (const [en, fr] of PAIRS) {
+for (const [en, fr] of [...PAIRS, ...require('./catalog-tours')]) {
   if (Object.prototype.hasOwnProperty.call(TEXT, en)) throw new Error('Duplicate catalog entry: ' + en);
   TEXT[en] = fr;
 }
@@ -476,6 +476,7 @@ const RULES = [
   [/^› (.+)$/, (m, t) => `› ${t(m[1])}`],
   [/^(.+), Luxor \| Royal Nile Villas$/, (m, t) => `${t(m[1])}, Louxor | Royal Nile Villas`],
   [/^(.+), Luxor West Bank$/, (m, t) => `${t(m[1])}, rive ouest de Louxor`],
+  [/^WhatsApp Inquiry about (.+) on WhatsApp$/, (m, t) => `Nous écrire sur WhatsApp au sujet de ${t(m[1])}`],
   [/^Explore (.+)$/, (m, t) => `Découvrir ${t(m[1])}`],
   [/^Five-star review from (.+)$/, (m) => `Avis cinq étoiles ${vowel(m[1]) ? 'd’' : 'de '}${m[1]}`],
   [/^★ ([\d.]+) · ([\d,]+) Airbnb reviews(?: · (.+))?$/, (m, t, f) => `★ ${f(m[1])} · ${f(m[2])} avis Airbnb${m[3] ? ' · ' + t(m[3]) : ''}`],
@@ -501,6 +502,11 @@ const WHATSAPP = [
   [/^Hi! I'd like to arrange an entire villa booking\. Please help design our stay\.$/, () => 'Bonjour ! Je souhaite réserver une villa entière. Pouvez-vous nous aider à organiser notre séjour ?'],
   [/^Hi! I'd like help choosing a Luxor apartment and planning my stay\.$/, () => 'Bonjour ! Pouvez-vous m’aider à choisir un appartement à Louxor et à organiser mon séjour ?'],
   [/^Hi! I'm interested in booking the (.+)\. Is it available\?$/, (m) => `Bonjour ! Je souhaite réserver l’appartement ${m[1]}. Est-il disponible ?`],
+  // Tour pages and /tours/
+  [/^Hi! I'd like to ask about (.+)\.$/, (m, t) => `Bonjour ! J’aimerais des informations sur l’excursion « ${t(m[1])} ».`],
+  [/^Hi! I'm interested in (.+)\. Date: \[enter date\]\. People: \[enter number\]\.( I understand a non-refundable (\d+)% deposit is required\.)?$/, (m, t) => `Bonjour ! L’excursion « ${t(m[1])} » m’intéresse. Date : [indiquez la date]. Nombre de personnes : [indiquez le nombre].${m[2] ? ` Je comprends qu’un acompte non remboursable de ${m[3]} % est demandé.` : ''}`],
+  [/^Hi! I'd like help planning Luxor tours and accommodation for my trip\.$/, () => 'Bonjour ! Pouvez-vous m’aider à organiser mes excursions et mon hébergement à Louxor ?'],
+  [/^Hello, please confirm availability and a written quote for the (\d+) eclipse stay\.$/, (m) => `Bonjour, pouvez-vous me confirmer les disponibilités et m’envoyer un devis écrit pour le séjour éclipse ${m[1]} ?`],
 ];
 
 // ---------- homepage card renderer (runs in the browser when cards are shuffled or searched) ----------
@@ -538,6 +544,15 @@ const SCRIPT_DICTIONARY = {
   },
 };
 
+// Script text replaced on whole pages (the tour enquiry form builds its WhatsApp message in the browser).
+const PAGE_PATCHES = [
+  { pages: /^tours\/(?!index)/, patches: [
+    ['var message="Hi! I\'m interested in "+name+". Date: "+dateInput.value+". People: "+peopleInput.value+".";',
+     `var message="Bonjour${NNB}! L’excursion «${NB}"+name+"${NB}» m’intéresse. Date${NB}: "+dateInput.value.split('-').reverse().join('/')+". Nombre de personnes${NB}: "+peopleInput.value+".";`],
+    ["message+=' I understand a non-refundable 25% deposit is required.';", `message+=' Je comprends qu’un acompte non remboursable de 25${NB}% est demandé.';`],
+  ] },
+];
+
 const LINK_OVERRIDES = {};
 
-module.exports = { TEXT, CONTEXT, KEEP, KEEP_CONTEXT, RULES, WHATSAPP, WHATSAPP_DEFAULT, SCRIPT_PATCHES, SCRIPT_DICTIONARY, LINK_OVERRIDES };
+module.exports = { TEXT, CONTEXT, KEEP, KEEP_CONTEXT, RULES, WHATSAPP, WHATSAPP_DEFAULT, SCRIPT_PATCHES, SCRIPT_DICTIONARY, PAGE_PATCHES, LINK_OVERRIDES };
