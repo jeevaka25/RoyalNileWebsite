@@ -18,6 +18,8 @@ node seo-build/verify.js
 node seo-build/verify-booking.js
 node seo-build/verify-tour-migration.js
 node seo-build/verify-pixel.js
+node seo-build/fr/build-fr.js   # French pages, after any change to the homepage or apartment pages
+node seo-build/verify-fr.js
 ```
 
 Local browser preview (synthetic availability only):

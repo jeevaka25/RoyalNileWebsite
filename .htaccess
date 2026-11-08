@@ -70,10 +70,10 @@ RewriteRule ^tours/abydos-dendera-tour$ tours/abydos-dendera-tour.html [L]
 # END GENERATED TOUR ROUTES
 
 # Public collection URLs use directory indexes and one trailing-slash canonical.
-RewriteRule ^(villas|tours)$ /$1/ [R=301,L]
+RewriteRule ^(villas|tours|fr|fr/villas)$ /$1/ [R=301,L]
 RewriteRule ^tour/?$ /tours/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+(villas|tours)/index\.html[?\s] [NC]
-RewriteRule ^(villas|tours)/index\.html$ /$1/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(villas|tours|fr|fr/villas)/index\.html[?\s] [NC]
+RewriteRule ^(villas|tours|fr|fr/villas)/index\.html$ /$1/ [R=301,L]
 
 # Permanent redirects for legacy URLs reported in Search Console.
 # Keep these ahead of the internal clean-URL rewrites below.
@@ -99,9 +99,9 @@ RewriteRule ^5-important-tips-for-booking-tours-egypt/?$ /egypt-travel-guide/pri
 RewriteRule ^api/availability/?$ api/availability-hostinger.php [L,QSA]
 
 
-# Clean villa URLs.
+# Clean villa URLs, English and French (/fr/villas/<apartment>).
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-RewriteRule ^(villas/[^/.]+)/?$ $1.html [L]
+RewriteRule ^((?:fr/)?villas/[^/.]+)/?$ $1.html [L]
 
 # Serve real files and directories without rewriting.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
