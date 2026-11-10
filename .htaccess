@@ -118,6 +118,23 @@ RewriteRule ^ - [L]
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
+  # Transport security: no downgrade after the first visit. Both hostnames are
+  # HTTPS-only (www 301s to apex), so includeSubDomains is safe here.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Framing: nobody may frame the booking buttons. Enforced, the rest of the
+  # policy below is report-only until it has been reviewed in a browser console.
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Content-Security-Policy "frame-ancestors 'self'"
+
+  # payment=() deliberately omitted so Apple Pay / Google Pay can be added later.
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # Report-only first: violations show in the console, nothing breaks.
+  # Move to Content-Security-Policy once the console is clean, and drop
+  # 'unsafe-inline' from script-src only after the inline handlers are gone.
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.allorigins.win https://www.google-analytics.com https://region1.google-analytics.com https://connect.facebook.net; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://www.facebook.com; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me"
+
   # Images, fonts and video: 30 days (replaced photos ship under new file names).
   <FilesMatch "\.(webp|avif|jpg|jpeg|png|gif|svg|ico|mp4|webm|woff2?)$">
     Header set Cache-Control "public, max-age=2592000, stale-while-revalidate=604800"
