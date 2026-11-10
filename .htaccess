@@ -127,7 +127,8 @@ RewriteRule ^ - [L]
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Content-Security-Policy "frame-ancestors 'self'"
 
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  # payment=() deliberately omitted so Apple Pay / Google Pay can be added later.
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 
   # Report-only first: violations show in the console, nothing breaks.
   # Move to Content-Security-Policy once the console is clean, and drop
