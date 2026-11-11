@@ -38,6 +38,20 @@
     window['ga-disable-G-12JHJ887DG'] = true;
     window['ga-disable-G-RWPKYR0C8J'] = true;
     if (typeof window.fbq === 'function') { try { window.fbq('consent', 'revoke'); } catch (e) {} }
+    clearMeasurementCookies();
+  }
+
+  // A rejection stops future hits; expire what the tags already set so the browser does not keep carrying it.
+  function clearMeasurementCookies() {
+    var host = location.hostname.replace(/^www\./, '');
+    var domains = ['', '; domain=.' + host, '; domain=' + host];
+    document.cookie.split(';').forEach(function (pair) {
+      var name = pair.split('=')[0].trim();
+      if (!/^(_ga|_gid|_fbp|_fbc)/.test(name)) return;
+      domains.forEach(function (d) {
+        document.cookie = name + '=; path=/' + d + '; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
+      });
+    });
   }
 
   function close(el) {
