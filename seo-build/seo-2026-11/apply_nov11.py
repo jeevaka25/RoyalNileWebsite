@@ -103,6 +103,9 @@ def ld_edit(text):
         for it in items:
             if it.get('@type') != 'LodgingBusiness': continue
             it['checkinTime'] = '13:00'; it['checkoutTime'] = '11:00'
+            if it.get('@id') == 'https://egyptvillastours.com/#royal-home':
+                # Google Maps pin "Royal Home Villa" supplied by Jay, 11 Nov 2026
+                it['geo'] = {'@type': 'GeoCoordinates', 'latitude': 25.6986166, 'longitude': 32.6298814}
             if it.get('@id') == 'https://egyptvillastours.com/#royal-nile':
                 it['amenityFeature'] = [{'@type': 'LocationFeatureSpecification', 'name': n, 'value': True} for n in
                     ['Free WiFi', 'Private kitchen', 'Swimming pool', 'Garden', 'Air conditioning', 'Free daily housekeeping',
