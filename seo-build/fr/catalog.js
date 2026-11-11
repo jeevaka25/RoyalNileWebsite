@@ -18,6 +18,8 @@ const vm = require('node:vm');
 const EN = '(en anglais)';
 
 const PAIRS = [
+  ['Privacy Policy', 'Politique de confidentialité'],
+  ['Cookie settings', 'Paramètres des cookies'],
   // ---------------- Shared: menu, hero trust panel, buttons, footer ----------------
   ['Skip to content', 'Aller au contenu'],
   ['Main navigation', 'Navigation principale'],
@@ -38,7 +40,7 @@ const PAIRS = [
   ['Reserve on Booking.com', 'Réserver sur Booking.com'],
   ['Book on Airbnb', 'Réserver sur Airbnb'],
   ['Book on Airbnb ↗', 'Réserver sur Airbnb ↗'],
-  ["Abdol's Airbnb hosting credentials, checked 28 October 2026", 'Les références d’hôte Airbnb d’Abdol, vérifiées le {0} octobre {1}'],
+  ["Abdol's Airbnb hosting credentials, checked 11 November 2026", 'Les références d’hôte Airbnb d’Abdol, vérifiées le {0} novembre {1}'],
   ['4.92 out of 5', '{0} sur 5'],
   ['2,006 reviews', '{0} avis'],
   ['8 years hosting', '{0} ans comme hôte'],
@@ -554,6 +556,7 @@ const PAGE_PATCHES = [
   ] },
 ];
 
-const LINK_OVERRIDES = {};
+// The French privacy page is hand-written (not built from privacy/), so map its links here.
+const LINK_OVERRIDES = { '/privacy/': '/fr/privacy/', '/privacy/#cookies': '/fr/privacy/#cookies' };
 
 module.exports = { TEXT, CONTEXT, KEEP, KEEP_CONTEXT, RULES, WHATSAPP, WHATSAPP_DEFAULT, SCRIPT_PATCHES, SCRIPT_DICTIONARY, PAGE_PATCHES, LINK_OVERRIDES };
