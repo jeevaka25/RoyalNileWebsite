@@ -252,7 +252,9 @@ function updateSitemap(changed) {
   let xml = fs.readFileSync(file, 'utf8');
   const today = new Date().toISOString().slice(0, 10);
   const old = new Map([...xml.matchAll(/  <url><loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>[\s\S]*?<\/url>\n/g)].map((m) => [m[1], m[2]]));
-  xml = xml.replace(/  <url><loc>https:\/\/egyptvillastours\.com\/fr\/[^<]*<\/loc>[\s\S]*?<\/url>\n/g, '');
+  // Only replace the pages this build writes; hand-written French pages (e.g. /fr/privacy/) keep their entries.
+  const built = new Set(PAGES.map((p) => ORIGIN + p.frPath));
+  xml = xml.replace(/  <url><loc>(https:\/\/egyptvillastours\.com\/fr\/[^<]*)<\/loc>[\s\S]*?<\/url>\n/g, (m, loc) => (built.has(loc) ? '' : m));
   const entries = PAGES.map((p) => {
     const loc = ORIGIN + p.frPath;
     const lastmod = changed.has(p.fr) || !old.has(loc) ? today : old.get(loc);
