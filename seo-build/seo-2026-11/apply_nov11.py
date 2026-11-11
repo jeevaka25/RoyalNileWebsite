@@ -7,7 +7,7 @@ Run from the repository root:
 
 Owner-confirmed facts used here (Jay, 11 Nov 2026): shuttle to the West Bank ferry runs 8am-10pm
 daily including weekends; airport pickup USD 20 total, one way; check-in 1pm, check-out 11am;
-local place name spelled "Jorf El Bairat".
+local place name spelled "Jorf El Bairat"; all eight apartments have private kitchens.
 """
 import json, pathlib, re, sys
 
@@ -40,6 +40,10 @@ swap('<meta content="Luxury Nile-view stays on Luxor\'s West Bank, including a d
 # 2. Local spelling in the location paragraph
 swap('All our properties are located in Al Aqaletah, surrounded by sugar cane fields',
      'All our properties are located in Al Aqaletah (Jorf El Bairat), surrounded by sugar cane fields')
+
+# 2b. Self-catering (owner confirmed 11 Nov 2026: all eight apartments have private kitchens)
+swap('<p class="amenities-copy">Relaxed resort-style comforts, practical guest services, and thoughtful details across our Royal Nile Villas apartments.</p>',
+     '<p class="amenities-copy">Self-catering apartments, each with a private kitchen, and a rooftop restaurant on site when you would rather not cook.</p>')
 
 # 3. Card alt text describing each card picture (falls back to the name)
 VILLA_ALTS = {
@@ -101,7 +105,7 @@ def ld_edit(text):
             it['checkinTime'] = '13:00'; it['checkoutTime'] = '11:00'
             if it.get('@id') == 'https://egyptvillastours.com/#royal-nile':
                 it['amenityFeature'] = [{'@type': 'LocationFeatureSpecification', 'name': n, 'value': True} for n in
-                    ['Free WiFi', 'Swimming pool', 'Garden', 'Air conditioning', 'Free daily housekeeping',
+                    ['Free WiFi', 'Private kitchen', 'Swimming pool', 'Garden', 'Air conditioning', 'Free daily housekeeping',
                      'Nile-view rooftop restaurant', 'Free shuttle to the West Bank ferry', 'Airport transfer', 'Free parking']]
         return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
     return re.sub(r'<script type="application/ld\+json">(\[[^<]*?LodgingBusiness[^<]*?)</script>', fix, text, count=1)

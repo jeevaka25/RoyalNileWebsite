@@ -19,6 +19,7 @@ const EN = '(en anglais)';
 
 const PAIRS = [
   // 11 Nov 2026 homepage SEO update
+  ['Self-catering apartments, each with a private kitchen, and a rooftop restaurant on site when you would rather not cook.', 'Des appartements indépendants, chacun avec sa cuisine privée, et un restaurant sur le toit quand vous n’avez pas envie de cuisiner.'],
   ['Luxor Nile-View Apartments & Penthouses | Royal Nile Villas', 'Appartements et penthouses vue Nil à Louxor | Royal Nile Villas'],
   ["Nile-view apartments and penthouses on Luxor's West Bank, 15 minutes from the Valley of the Kings. Airbnb Superhost. Now booking for the 2027 eclipse.", 'Appartements et penthouses avec vue sur le Nil, sur la rive ouest de Louxor, à {0} minutes de la Vallée des Rois. Superhost Airbnb. Réservations ouvertes pour l’éclipse de {1}.'],
   ['Pool in front of the white two-storey building with arched terraces at Royal Home Luxor', 'Piscine devant le bâtiment blanc de deux étages aux terrasses en arcades, Royal Home Luxor'],
@@ -341,7 +342,6 @@ const PAIRS = [
   ['Villa amenities and services', 'Équipements et services des villas'],
   ['Included Comforts', 'Le confort inclus'],
   ['Everything you need for an easy Luxor stay', 'Tout pour un séjour serein à Louxor'],
-  ['Relaxed resort-style comforts, practical guest services, and thoughtful details across our Royal Nile Villas apartments.', 'Le confort décontracté d’un resort, des services pratiques et des attentions soignées dans tous les appartements Royal Nile Villas.'],
   ['Free WiFi', 'Wi-Fi gratuit'],
   ['14 meter lap pool', 'Piscine de nage de {0} mètres'],
   ['30 meter green garden', 'Jardin verdoyant de {0} mètres'],
