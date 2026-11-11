@@ -48,3 +48,33 @@ curl -sSI https://egyptvillastours.com/ | grep -iE "strict-transport|x-frame|con
   `frame-ancestors 'self' https://partner.example` if needed.
 - Report-only CSP still permits inline script execution, so it is *not* XSS protection yet.
   Move the header name to `Content-Security-Policy` once the console stays clean for a week.
+
+---
+
+# Privacy policy page — 2026-11-10
+
+Added `privacy/index.html` (served at `/privacy/`) and its French counterpart `fr/privacy/index.html`
+(`/fr/privacy/`), footer links on all 66 pages in the right language, hreflang pairs both ways, and two
+`sitemap.xml` entries. Legal position on Article 27 recorded in the engagement notes (`art27-assessment.md`).
+
+## Rollback
+
+```bash
+git revert <merge-commit-sha>          # removes the page, the 65 footer links and the sitemap entry
+```
+
+Single-file rollback: delete `privacy/index.html` and the ` · <a href="/privacy/">…</a>` fragment
+from the footer line of each page. The page is self-contained — it shares the site's CSS and nav
+but nothing else links to it, so removing it cannot break another page.
+
+## Before publishing — not yet done
+
+1. `privacy@egyptvillastours.com` must forward to a monitored inbox.
+2. Confirm the retention periods in section 4 match real practice.
+3. French page shipped at `/fr/privacy/`; all 25 French footers relinked to it. Keep the two translations in
+   step — an edit to one language must be mirrored or the pair diverges.
+4. **Section 7 states the gated model.** Today the banner is not built and both tags still fire on load; the fallback
+   sentence was removed at the owner's request, so nothing in the policy now hedges. Build the banner and the section
+   becomes true; until then an operator reading devtools sees `_ga` without consent.
+5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
+   that reverse it.
