@@ -18,6 +18,38 @@ const vm = require('node:vm');
 const EN = '(en anglais)';
 
 const PAIRS = [
+  // 11 Nov 2026 homepage SEO update
+  ['Self-catering apartments, each with a private kitchen, and a rooftop restaurant on site when you would rather not cook.', 'Des appartements indépendants, chacun avec sa cuisine privée, et un restaurant sur le toit quand vous n’avez pas envie de cuisiner.'],
+  ['Luxor Nile-View Apartments & Penthouses | Royal Nile Villas', 'Appartements et penthouses vue Nil à Louxor | Royal Nile Villas'],
+  ["Nile-view apartments and penthouses on Luxor's West Bank, 15 minutes from the Valley of the Kings. Airbnb Superhost. Now booking for the 2027 eclipse.", 'Appartements et penthouses avec vue sur le Nil, sur la rive ouest de Louxor, à {0} minutes de la Vallée des Rois. Superhost Airbnb. Réservations ouvertes pour l’éclipse de {1}.'],
+  ['Pool in front of the white two-storey building with arched terraces at Royal Home Luxor', 'Piscine devant le bâtiment blanc de deux étages aux terrasses en arcades, Royal Home Luxor'],
+  ['Pool beside the arched ground-floor terraces at Royal Home Luxor — Pool View', 'Piscine au pied des terrasses en arcades du rez-de-chaussée, Royal Home Luxor — Pool View'],
+  ['Nile, felucca sails and the Luxor skyline seen over the garden and pool from Sky Penthouse 1', 'Le Nil, des voiles de felouques et Louxor vus par-dessus le jardin et la piscine depuis le Sky Penthouse 1'],
+  ['Living room and kitchen opening onto a terrace with a Nile view in Sky Penthouse 2', 'Séjour et cuisine ouverts sur une terrasse avec vue sur le Nil, Sky Penthouse 2'],
+  ['Pool and lawn below the three-storey Royal Nile Villas building', 'Piscine et pelouse au pied du bâtiment de trois étages de Royal Nile Villas'],
+  ["Date palm in the garden with the Nile and Luxor's East Bank behind", 'Palmier dattier dans le jardin, avec le Nil et la rive est de Louxor en arrière-plan'],
+  ['Covered balcony looking over the pool, palms and fields to the Nile at Luxury Nile View 1', 'Balcon couvert donnant sur la piscine, les palmiers et les champs jusqu’au Nil, Luxury Nile View 1'],
+  ['Pool, sun loungers and garden path at dusk with the lights of Luxor across the Nile', 'Piscine, transats et allée du jardin au crépuscule, avec les lumières de Louxor de l’autre côté du Nil'],
+  ['Artist’s impression of the total eclipse over the Nile from the Royal Nile Villas terrace', 'Vue d’artiste de l’éclipse totale au-dessus du Nil depuis la terrasse de Royal Nile Villas'],
+  ['Hot-air balloon passengers watching sunrise over Luxor’s West Bank', 'Passagers d’une montgolfière regardant le lever du soleil sur la rive ouest de Louxor'],
+  ['The Colossi of Memnon below the Theban hills on Luxor’s West Bank', 'Les colosses de Memnon au pied des collines thébaines, sur la rive ouest de Louxor'],
+  ['Carved columns and an obelisk in golden morning light on Luxor’s East Bank', 'Colonnes sculptées et obélisque dans la lumière dorée du matin, sur la rive est de Louxor'],
+  ['Quad bikes on a desert track below the Theban cliffs', 'Quads sur une piste du désert au pied des falaises thébaines'],
+  ['The seated colossi of Ramesses II at the Great Temple of Abu Simbel', 'Les colosses assis de Ramsès II au grand temple d’Abou Simbel'],
+  ['Pylon and colonnade of the Temple of Isis at Philae, near Aswan', 'Pylône et colonnade du temple d’Isis à Philae, près d’Assouan'],
+  ['Felucca on the Nile at sunset with palms and temple columns on the shore', 'Felouque sur le Nil au coucher du soleil, avec des palmiers et des colonnes de temple sur la rive'],
+  ['Two snorkellers over a coral reef with tropical fish in the Red Sea', 'Deux nageurs avec masque et tuba au-dessus d’un récif corallien et de poissons tropicaux en mer Rouge'],
+  ['Hathor-headed columns on the façade of Dendera Temple', 'Colonnes hathoriques sur la façade du temple de Dendérah'],
+  ['The Great Sphinx with a pyramid behind it at Giza', 'Le grand Sphinx devant une pyramide à Gizeh'],
+  ['Colossal statue of Ramesses II in the Grand Egyptian Museum’s Grand Hall', 'Statue colossale de Ramsès II dans le grand hall du Grand Musée égyptien'],
+  ['Is the pool shared?', 'La piscine est-elle partagée ?'],
+  ['Yes. Guests share the pool and the Nile-side garden; each apartment is your own private space.', 'Oui. La piscine et le jardin au bord du Nil sont partagés entre les voyageurs ; chaque appartement reste un espace privé.'],
+  ['When does the free ferry shuttle run?', 'À quelle heure circule la navette gratuite vers le bac ?'],
+  ['Every day from 8am to 10pm, weekends included. The ride to the West Bank ferry takes about 15 minutes.', 'Tous les jours de 8 h à 22 h, week-end compris. Le trajet jusqu’au bac de la rive ouest dure environ 15 minutes.'],
+  ['Can you arrange an airport pickup?', 'Pouvez-vous organiser un transfert depuis l’aéroport ?'],
+  ['Yes. A private transfer from Luxor Airport costs USD 20 in total, one way, and takes about 20 minutes.', 'Oui. Le transfert privé depuis l’aéroport de Louxor coûte 20 USD au total, en aller simple, et dure environ 20 minutes.'],
+  ['What are the check-in and check-out times?', 'À quelle heure sont l’arrivée et le départ ?'],
+  ['Check-in is from 1pm and check-out is by 11am.', 'Arrivée à partir de 13 h, départ avant 11 h.'],
   ['Privacy Policy', 'Politique de confidentialité'],
   ['Cookie settings', 'Paramètres des cookies'],
   // ---------------- Shared: menu, hero trust panel, buttons, footer ----------------
@@ -300,11 +332,8 @@ const PAIRS = [
   ['Compare eight Nile-view apartments and penthouses in Luxor. Explore bedrooms, pool access, terraces and layouts, then check dates with Royal Nile Villas.', 'Comparez huit appartements et penthouses avec vue sur le Nil à Louxor : chambres, accès à la piscine, terrasses et agencements, puis vérifiez vos dates avec Royal Nile Villas.'],
 
   // ---------------- Homepage (reviewed copy, 8 Nov 2026) ----------------
-  ['Royal Nile Villas | Luxury Nile-View Villas in Luxor, Egypt', 'Royal Nile Villas | Villas de luxe avec vue sur le Nil à Louxor, Égypte'],
-  ["Luxury Nile-view apartments and penthouses on Luxor's West Bank, now offering a dedicated accommodation package for the 2 August 2027 total solar eclipse.", 'Appartements et penthouses de luxe avec vue sur le Nil, sur la rive ouest de Louxor. Nous proposons désormais une formule d’hébergement dédiée à l’éclipse totale de Soleil du {0} août {1}.'],
   ['Royal Nile Villas — Luxury Nile-View Villas & Tours in Luxor, Egypt', 'Royal Nile Villas — Villas de luxe avec vue sur le Nil et excursions à Louxor, Égypte'],
   ['Royal Nile Villas — Luxury Villas & Tours in Luxor, Egypt', 'Royal Nile Villas — Villas de luxe et excursions à Louxor, Égypte'],
-  ["Luxury Nile-view stays on Luxor's West Bank, including a dedicated accommodation package for the 2 August 2027 total solar eclipse.", 'Séjours de luxe avec vue sur le Nil, sur la rive ouest de Louxor, dont une formule d’hébergement dédiée à l’éclipse totale de Soleil du {0} août {1}.'],
   ['Royal Nile Villas pool, garden and apartments with the Nile and Luxor beyond', 'La piscine, le jardin et les appartements de Royal Nile Villas, avec le Nil et Louxor en arrière-plan'],
   ['Luxury Nile-View Villas in', 'Villas de luxe avec vue sur le Nil à'],
   ['15 mins to Luxor Hot Air Balloon, Valley of Kings — packages for solar eclipse 2027 available.', 'À {0} min des montgolfières de Louxor et de la Vallée des Rois — formules disponibles pour l’éclipse solaire de {1}.'],
@@ -313,7 +342,6 @@ const PAIRS = [
   ['Villa amenities and services', 'Équipements et services des villas'],
   ['Included Comforts', 'Le confort inclus'],
   ['Everything you need for an easy Luxor stay', 'Tout pour un séjour serein à Louxor'],
-  ['Relaxed resort-style comforts, practical guest services, and thoughtful details across our Royal Nile Villas apartments.', 'Le confort décontracté d’un resort, des services pratiques et des attentions soignées dans tous les appartements Royal Nile Villas.'],
   ['Free WiFi', 'Wi-Fi gratuit'],
   ['14 meter lap pool', 'Piscine de nage de {0} mètres'],
   ['30 meter green garden', 'Jardin verdoyant de {0} mètres'],
@@ -387,7 +415,7 @@ const PAIRS = [
   ['Where to Find Us', 'Où nous trouver'],
   ["Perfectly positioned on Luxor's tranquil West Bank — minutes from the Valley of the Kings and a short ferry ride to the city.", 'Idéalement situés sur la paisible rive ouest de Louxor, à quelques minutes de la Vallée des Rois et à une courte traversée en bac du centre-ville.'],
   ['The Heart of Ancient Thebes', 'Au cœur de l’antique Thèbes'],
-  ["All our properties are located in Al Aqaletah, surrounded by sugar cane fields with stunning Nile and mountain views. Free shuttle service to the West Bank ferry station. Don't miss our", 'Toutes nos résidences se trouvent à Al Aqaletah, au milieu des champs de canne à sucre, avec une vue superbe sur le Nil et les montagnes. Navette gratuite jusqu’à l’embarcadère du bac de la rive ouest. Ne manquez pas notre'],
+  ["All our properties are located in Al Aqaletah (Jorf El Bairat), surrounded by sugar cane fields with stunning Nile and mountain views. Free shuttle service to the West Bank ferry station. Don't miss our", 'Toutes nos résidences se trouvent à Al Aqaletah (Jorf El Bairat), au milieu des champs de canne à sucre, avec une vue superbe sur le Nil et les montagnes. Navette gratuite jusqu’à l’embarcadère du bac de la rive ouest. Ne manquez pas notre'],
   ['rooftop restaurant', 'restaurant sur le toit'],
   ['— the best Nile view in Luxor.', ': la plus belle vue sur le Nil de Louxor.'],
   ['15 min to Valley of the Kings', 'À {0} min de la Vallée des Rois'],
@@ -518,6 +546,7 @@ const SCRIPT_PATCHES = {
   'index.html': [
     ["const st=villa.available===true?'Available':villa.available===false?'Booked':'';", "const st=villa.available===true?'Disponible':villa.available===false?'Réservé':'';"],
     ['aria-label="Explore ${villa.name}"', 'aria-label="Découvrir ${villa.name}"'],
+    ['alt="${VILLA_CARD_ALTS[villa.id]||villa.name}"', 'alt="${frT(VILLA_CARD_ALTS[villa.id]||villa.name)}"'],
     ['<span>10% off · Book direct</span></a>', `<span>−10${NB}% · Réservation directe</span></a>`],
     ['<p class="featured-kicker">${villa.floor} · ${villa.viewType}</p>', '<p class="featured-kicker">${frT(villa.floor)} · ${frT(villa.viewType)}</p>'],
     ['<p>${villa.location}. ${villa.bedsConfig}.<br>★ ${villa.rating} · ${villa.reviews} Airbnb reviews</p>', '<p>${frT(villa.location)}. ${frT(villa.bedsConfig)}.<br>★ ${frNum(villa.rating)} · ${villa.reviews} avis Airbnb</p>'],
@@ -526,7 +555,7 @@ const SCRIPT_PATCHES = {
     ['WhatsApp us · Save 10% <span aria-hidden="true">↗</span>', `WhatsApp · −10${NB}% <span aria-hidden="true">↗</span>`],
     ['rel="noopener">Book on Airbnb ↗</a>', 'rel="noopener">Réserver sur Airbnb ↗</a>'],
     ['<a class="featured-explore" href="${\'/villas/\'+villa.id}">Explore apartment →</a>', '<a class="featured-explore" href="${\'/villas/\'+villa.id}">Voir l’appartement →</a>'],
-    ['aria-label="Explore ${t.name}"><img src="${CLEAN_TOUR_COVERS[t.id]||optimizedImage(t.coverImage||t.photos[0])}" alt="${t.name}"', 'aria-label="Découvrir ${frT(t.name)}"><img src="${CLEAN_TOUR_COVERS[t.id]||optimizedImage(t.coverImage||t.photos[0])}" alt="${frT(t.name)}"'],
+    ['aria-label="Explore ${t.name}"><img src="${CLEAN_TOUR_COVERS[t.id]||optimizedImage(t.coverImage||t.photos[0])}" alt="${TOUR_CARD_ALTS[t.id]||t.name}"', 'aria-label="Découvrir ${frT(t.name)}"><img src="${CLEAN_TOUR_COVERS[t.id]||optimizedImage(t.coverImage||t.photos[0])}" alt="${frT(TOUR_CARD_ALTS[t.id]||t.name)}"'],
     ["<h3><a href=\"/tours/${TOUR_PAGE[t.id]||''}\">${t.name}</a></h3>\n        <p>${t.desc}</p>", "<h3><a href=\"/tours/${TOUR_PAGE[t.id]||''}\">${frT(t.name)}</a></h3>\n        <p>${frT(t.desc)}</p>"],
     ["Hi! I'd like to enquire about ${t.name}. Please send details and help me check dates.", `Bonjour${NNB}! Je souhaite des informations sur l’excursion «${NB}\${frT(t.name)}${NB}». Pouvez-vous m’envoyer les détails et m’aider à vérifier les dates${NNB}?`],
     ['Enquire on WhatsApp <span aria-hidden="true">↗</span>', 'Nous écrire sur WhatsApp <span aria-hidden="true">↗</span>'],
@@ -543,7 +572,9 @@ const SCRIPT_DICTIONARY = {
     const slice = (start, end) => html.slice(html.indexOf(start), html.indexOf(end, html.indexOf(start)));
     const ctx = { URL, encodeURIComponent };
     vm.runInNewContext(read('villa-data.js') + '\n' + slice('const SITE_VILLA_PHOTOS =', '// ============================================\n// TOUR DATA') + '\n' + slice('const TOURS = [', 'function tourIdFromPath') + '\nthis.V=VILLAS;this.T=TOURS;', ctx);
-    return [...new Set([...ctx.V.flatMap((v) => [v.floor, v.viewType, v.location, v.bedsConfig]), ...ctx.T.flatMap((t) => [t.name, t.desc])])];
+    // Card picture descriptions (alt text), kept as JSON objects in the page script.
+    const alts = ['VILLA_CARD_ALTS', 'TOUR_CARD_ALTS'].flatMap((name) => Object.values(JSON.parse(html.match(new RegExp(`const ${name}=(\\{.*?\\});\\n`))[1])));
+    return [...new Set([...ctx.V.flatMap((v) => [v.floor, v.viewType, v.location, v.bedsConfig]), ...ctx.T.flatMap((t) => [t.name, t.desc]), ...alts])];
   },
 };
 

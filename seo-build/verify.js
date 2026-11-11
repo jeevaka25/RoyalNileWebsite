@@ -54,7 +54,8 @@ assert.ok(home.indexOf('id="featured-properties"') < home.indexOf('Our Collectio
 assert.equal((home.match(/class="featured-card"/g) || []).length,2);
 assert.ok(read('tours/index.html').includes('A shared flight above Luxor')); // Keep the useful tour description; the redundant inclusions row was removed.
 assert.ok(read('tours/index.html').includes('25% non-refundable'));
-assert.equal([...read('sitemap.xml').matchAll(/<loc>/g)].length, files.length);
+// The privacy pages (/privacy/, /fr/privacy/) are listed in the sitemap but checked elsewhere.
+assert.equal([...read('sitemap.xml').matchAll(/<loc>(?![^<]*\/privacy\/)/g)].length, files.length);
 const listeners = {}, events = [];
 vm.runInNewContext(read('analytics-events.js'), {
   URL, location: { href: 'https://egyptvillastours.com/test?private=hidden', pathname: '/test' },
