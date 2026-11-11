@@ -66,7 +66,10 @@ for (const page of PAGES) {
   const leftovers = [...F.text, ...F.attrs].filter((s) => english.has(s) && /[A-Za-z]{3}/.test(s) && !SAME_IN_BOTH.has(s.replace(/^› /, '')));
   assert.deepEqual([...new Set(leftovers)], [], page.fr + ' has untranslated English');
   // 5. Facts: the numbers on the page match the English page.
-  const a = count(numbers([...E.text])), b = count(numbers([...F.text]));
+  // Whole-hour French clock times use the 24-hour clock ("22 h" for "10pm"): compare them as 12-hour
+  // values. Times with minutes ("13 h 05" for "13:05") are left as they are.
+  const clock12 = (s) => s.replace(/\b(1[3-9]|2[0-3])(?=[\s\u00a0\u202f]h\b(?![\s\u00a0\u202f]*\d))/g, (h) => String(h - 12));
+  const a = count(numbers([...E.text])), b = count(numbers([...F.text].map(clock12)));
   for (const n of new Set([...a.keys(), ...b.keys()])) {
     if ((a.get(n) || 0) === (b.get(n) || 0) || ALLOWED_EXTRA_FR[n] || ALLOWED_FLOOR.test(n)) continue;
     assert.fail(`${page.fr}: the number ${n} appears ${a.get(n) || 0}× in English but ${b.get(n) || 0}× in French`);

@@ -16,7 +16,7 @@ for(const [old,destination] of legacyMap) for(const suffix of ['', '/', '.html',
   assert.ok(!redirects.has(destination),'Redirect chain at '+destination);
   assert.equal(apacheRedirects.find(r=>r.pattern.test((old+suffix).slice(1)))?.target,destination);
 }
-const pages=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+const pages=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname).filter(p=>!/\/privacy\/$/.test(p)); // privacy pages are checked elsewhere
 // 4 core pages + meet-your-hosts + guide index + every tour, apartment and article,
 // plus the French homepage, French /villas/ and the 8 French apartment pages.
 assert.equal(pages.length,6+TOURS.length+8+ARTICLES.length+require('./fr/build-fr').PAGES.length);

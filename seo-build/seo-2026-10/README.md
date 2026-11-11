@@ -44,3 +44,13 @@ Run `python3 seo-build/seo-2026-10/apply_oct31.py`, then `node seo-build/seo-202
 - builds homepage apartment links as `${'/villas/'+villa.id}` so Google stops reading `/villas/${villa.id}` as a URL;
 - gives the hero photo on every tour and apartment page alt text from its heading;
 - sets each sitemap lastmod to the date its page file last changed.
+
+## 11 November 2026 homepage tune-up (`../seo-2026-11/apply_nov11.py`)
+
+Run `python3 seo-build/seo-2026-11/apply_nov11.py`, then `node seo-build/seo-2026-09/prerender.cjs`, then
+`node seo-build/fr/build-fr.js`. Title "Luxor Nile-View Apartments & Penthouses | Royal Nile Villas" (also set
+in `content.json` above so `apply.py` keeps it); new meta/og/twitter description; card alt text describing each
+card picture (`VILLA_CARD_ALTS` inside `renderVillas`, `TOUR_CARD_ALTS` before `renderTours`); "Jorf El Bairat"
+in the location paragraph; a four-question FAQ before the location section; `checkinTime`/`checkoutTime`
+on both LodgingBusiness entries and `amenityFeature` on Royal Nile Villas. Owner-confirmed facts are listed
+at the top of the script.
