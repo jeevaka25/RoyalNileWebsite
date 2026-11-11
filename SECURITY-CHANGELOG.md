@@ -73,8 +73,36 @@ but nothing else links to it, so removing it cannot break another page.
 2. Confirm the retention periods in section 4 match real practice.
 3. French page shipped at `/fr/privacy/`; all 25 French footers relinked to it. Keep the two translations in
    step — an edit to one language must be mirrored or the pair diverges.
-4. **Section 7 states the gated model.** Today the banner is not built and both tags still fire on load; the fallback
-   sentence was removed at the owner's request, so nothing in the policy now hedges. Build the banner and the section
-   becomes true; until then an operator reading devtools sees `_ga` without consent.
+4. **Section 7 states the current truth: no banner, tags run on load, a banner is being prepared.** When one lands,
+   rewrite the section to describe what was actually built — a promise is a claim.
 5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
    that reverse it.
+
+---
+
+# Cookie banner — built 2026-11-11, rolled back the same day
+
+There is **no banner** and no consent JS on the site right now. Status quo restored: GA4 and the Meta pixel fire on every
+load, untouched, because the Meta conversion campaigns optimise on the Lead event fired by `analytics-events.js` and the
+owner does not want that signal degraded while the approach is researched.
+
+Superseded commits: `719e682` (banner), `f4f3617` (cache bump), `ae50294` (cookie expiry on refusal). All three reverted in
+one commit; `consent-banner.js` is gone, the `data-consent-open` footer links are gone, and `analytics-preferences.js` is
+back to its staff-test-exclusion form.
+
+## What was learned while it was live (reuse on the next attempt)
+
+- Caching bites: changing `analytics-preferences.js` without bumping its `?v=` meant browsers kept serving the old file and
+  a stored refusal did nothing. Bump the query on any script edit that ships.
+- Disabling a tag does not remove cookies already written; they must be expired explicitly.
+- With the pixel stubbed out, `fbq('track','Lead')` still *fires* but reaches nothing — and the pixel script does not load
+  on refused pages at all. That is the mechanism behind the lead-signal loss.
+- `airbnb_profile_click` does not fire `Lead`; only `airbnb_click` (listing links), `booking_click` and `whatsapp_click` do.
+  Profile links are a decoy when testing.
+- Nothing in `?v=` survives a revert either — the original values come back with it.
+
+## Options considered and not taken yet
+
+B (soft banner) is what was rolled back. C would gate the tags with Consent Mode v2 modelling. D would restore leads
+server-side via Conversions API with `fbclid` + `event_id`, independent of browser consent. D needs dedupe before it ships,
+or the pixel and the server event double-count and the optimiser learns something false.
