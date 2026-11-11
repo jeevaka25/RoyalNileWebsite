@@ -73,37 +73,8 @@ but nothing else links to it, so removing it cannot break another page.
 2. Confirm the retention periods in section 4 match real practice.
 3. French page shipped at `/fr/privacy/`; all 25 French footers relinked to it. Keep the two translations in
    step — an edit to one language must be mirrored or the pair diverges.
-4. **Section 7 states the soft model accurately**: tags switched on at load, banner on first visit, reject stops them from
-   then on, footer link reopens. This is option B from the banner review — chosen so Meta lead counting is untouched.
-   If option D (Consent Mode v2 + server-side Conversions API mirror) is built later, tighten section 7 back to
-   prior-consent wording and gate the tags.
-5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers that reverse it.
-
----
-
-# Cookie banner (option B — soft) — 2026-11-11
-
-`consent-banner.js` on all 67 pages, loaded `defer` from the head. Tags are **not** gated: GA4 and the pixel fire as
-before, so lead counting is unaffected. The banner informs, offers Accept/Reject at equal width, remembers the choice in
-`localStorage` under `consent`, and a **Cookie settings** footer link reopens it. `analytics-preferences.js` reads the
-stored `refused` value *before* GTM runs and disables both GA properties (`ga-disable-*`) and stubs `fbq`, so a rejection
-holds on every later page view without touching the tag markup.
-
-Known trade-off, stated plainly: a rejected visitor still produced one measured page view on the visit where they
-rejected. That is the "soft" part and it is why option C/D exist.
-
-## Rollback
-
-```bash
-git revert <merge-commit-sha>
-```
-
-Or surgically: delete `consent-banner.js`, remove the `<script defer src="/consent-banner.js…">` line and the
-`data-consent-open` link from the footers, and revert the `consent` block in `analytics-preferences.js`. Banner state also
-lives in the visitor's `localStorage` under the key `consent`; bumping the `VERSION` constant re-asks everyone.
-
-## Caveats
-
-- No consent **log** server-side yet — the record is per-browser only. Needed for option C/D, not for B.
-- `localStorage` is cleared by browser data clearing, so that visitor is asked again. Acceptable.
-- The banner is `role="dialog"` but does not trap focus, so it never blocks the page behind it.
+4. **Section 7 states the gated model.** Today the banner is not built and both tags still fire on load; the fallback
+   sentence was removed at the owner's request, so nothing in the policy now hedges. Build the banner and the section
+   becomes true; until then an operator reading devtools sees `_ga` without consent.
+5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
+   that reverse it.
