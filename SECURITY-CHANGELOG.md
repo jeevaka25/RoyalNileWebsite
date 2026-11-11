@@ -106,3 +106,38 @@ back to its staff-test-exclusion form.
 B (soft banner) is what was rolled back. C would gate the tags with Consent Mode v2 modelling. D would restore leads
 server-side via Conversions API with `fbclid` + `event_id`, independent of browser consent. D needs dedupe before it ships,
 or the pixel and the server event double-count and the optimiser learns something false.
+
+---
+
+# Cookie banner restored as COSMETIC ONLY — 2026-11-11
+
+The banner is back, visually identical to the rolled-back one, but it changes **nothing** about tag behaviour: no
+`ga-disable`, no `fbq` stub, no cookie expiry, and `analytics-preferences.js` is untouched. GA4 and the Meta pixel fire on
+load for everyone, accept or reject, so the Lead signal feeding the conversion campaigns is exactly as before.
+
+What it does: shows on first visit, Accept/Reject at equal width, stores the choice in `localStorage` under `consent`
+(same key and values as the gated version, so a later switch inherits choices already made), and a **Cookie settings**
+footer link reopens it. Version string `v=20261111c`.
+
+## The one clause in section 7 that is currently untrue
+
+Section 7 says "rejecting stops them from that point on". With a cosmetic banner it does not — a reject is recorded and
+nothing else. The rest of the section is accurate. Closing that gap is the two-line change described below, and it is the
+natural first step of any future option:
+
+```js
+// analytics-preferences.js, before GTM runs
+var consent = null; try { consent = localStorage.getItem('consent'); } catch (_) {}
+if (consent === 'refused') {
+  window['ga-disable-G-12JHJ887DG'] = true;
+  window['ga-disable-G-RWPKYR0C8J'] = true;
+  window.fbq = function () {};
+}
+```
+
+Then bump `analytics-preferences.js?v=` — forgetting that is what made the last attempt silently fail in production.
+
+## Rollback
+
+`git revert <merge-commit-sha>`, or delete `consent-banner.js` plus the `consent-banner.js` script line and the
+`data-consent-open` footer link. Section 7 would then need the "banner is being prepared" wording again.
