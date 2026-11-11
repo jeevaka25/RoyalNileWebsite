@@ -73,37 +73,36 @@ but nothing else links to it, so removing it cannot break another page.
 2. Confirm the retention periods in section 4 match real practice.
 3. French page shipped at `/fr/privacy/`; all 25 French footers relinked to it. Keep the two translations in
    step — an edit to one language must be mirrored or the pair diverges.
-4. **Section 7 states the soft model accurately**: tags switched on at load, banner on first visit, reject stops them from
-   then on, footer link reopens. This is option B from the banner review — chosen so Meta lead counting is untouched.
-   If option D (Consent Mode v2 + server-side Conversions API mirror) is built later, tighten section 7 back to
-   prior-consent wording and gate the tags.
-5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers that reverse it.
+4. **Section 7 states the current truth: no banner, tags run on load, a banner is being prepared.** When one lands,
+   rewrite the section to describe what was actually built — a promise is a claim.
+5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
+   that reverse it.
 
 ---
 
-# Cookie banner (option B — soft) — 2026-11-11
+# Cookie banner — built 2026-11-11, rolled back the same day
 
-`consent-banner.js` on all 67 pages, loaded `defer` from the head. Tags are **not** gated: GA4 and the pixel fire as
-before, so lead counting is unaffected. The banner informs, offers Accept/Reject at equal width, remembers the choice in
-`localStorage` under `consent`, and a **Cookie settings** footer link reopens it. `analytics-preferences.js` reads the
-stored `refused` value *before* GTM runs and disables both GA properties (`ga-disable-*`) and stubs `fbq`, so a rejection
-holds on every later page view without touching the tag markup.
+There is **no banner** and no consent JS on the site right now. Status quo restored: GA4 and the Meta pixel fire on every
+load, untouched, because the Meta conversion campaigns optimise on the Lead event fired by `analytics-events.js` and the
+owner does not want that signal degraded while the approach is researched.
 
-Known trade-off, stated plainly: a rejected visitor still produced one measured page view on the visit where they
-rejected. That is the "soft" part and it is why option C/D exist.
+Superseded commits: `719e682` (banner), `f4f3617` (cache bump), `ae50294` (cookie expiry on refusal). All three reverted in
+one commit; `consent-banner.js` is gone, the `data-consent-open` footer links are gone, and `analytics-preferences.js` is
+back to its staff-test-exclusion form.
 
-## Rollback
+## What was learned while it was live (reuse on the next attempt)
 
-```bash
-git revert <merge-commit-sha>
-```
+- Caching bites: changing `analytics-preferences.js` without bumping its `?v=` meant browsers kept serving the old file and
+  a stored refusal did nothing. Bump the query on any script edit that ships.
+- Disabling a tag does not remove cookies already written; they must be expired explicitly.
+- With the pixel stubbed out, `fbq('track','Lead')` still *fires* but reaches nothing — and the pixel script does not load
+  on refused pages at all. That is the mechanism behind the lead-signal loss.
+- `airbnb_profile_click` does not fire `Lead`; only `airbnb_click` (listing links), `booking_click` and `whatsapp_click` do.
+  Profile links are a decoy when testing.
+- Nothing in `?v=` survives a revert either — the original values come back with it.
 
-Or surgically: delete `consent-banner.js`, remove the `<script defer src="/consent-banner.js…">` line and the
-`data-consent-open` link from the footers, and revert the `consent` block in `analytics-preferences.js`. Banner state also
-lives in the visitor's `localStorage` under the key `consent`; bumping the `VERSION` constant re-asks everyone.
+## Options considered and not taken yet
 
-## Caveats
-
-- No consent **log** server-side yet — the record is per-browser only. Needed for option C/D, not for B.
-- `localStorage` is cleared by browser data clearing, so that visitor is asked again. Acceptable.
-- The banner is `role="dialog"` but does not trap focus, so it never blocks the page behind it.
+B (soft banner) is what was rolled back. C would gate the tags with Consent Mode v2 modelling. D would restore leads
+server-side via Conversions API with `fbclid` + `event_id`, independent of browser consent. D needs dedupe before it ships,
+or the pixel and the server event double-count and the optimiser learns something false.

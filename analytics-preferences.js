@@ -7,12 +7,8 @@
     if (mode === '0') localStorage.removeItem('analytics_test');
     excluded = localStorage.getItem('analytics_test') === '1';
   } catch (_) { excluded = /[?&]analytics_test=1(?:&|$)/.test(location.search); }
-  var consent = null;
-  try { consent = localStorage.getItem('consent'); } catch (_) {}
-  var refused = consent === 'refused';
-  window.siteConsent = consent;
   window.siteAnalyticsExcluded = excluded;
-  if (!excluded && !refused) return;
+  if (!excluded) return;
   window['ga-disable-G-12JHJ887DG'] = true;
   window['ga-disable-G-RWPKYR0C8J'] = true;
   window.fbq = function () {};
