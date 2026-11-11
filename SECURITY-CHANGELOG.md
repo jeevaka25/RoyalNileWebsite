@@ -48,3 +48,31 @@ curl -sSI https://egyptvillastours.com/ | grep -iE "strict-transport|x-frame|con
   `frame-ancestors 'self' https://partner.example` if needed.
 - Report-only CSP still permits inline script execution, so it is *not* XSS protection yet.
   Move the header name to `Content-Security-Policy` once the console stays clean for a week.
+
+---
+
+# Privacy policy page — 2026-11-10
+
+Added `privacy/index.html` (served at `/privacy/`), a footer link on all 65 pages, and a
+`sitemap.xml` entry. Content drafted from the passive review; legal position on Article 27 is
+recorded in the engagement notes (`art27-assessment.md`).
+
+## Rollback
+
+```bash
+git revert <merge-commit-sha>          # removes the page, the 65 footer links and the sitemap entry
+```
+
+Single-file rollback: delete `privacy/index.html` and the ` · <a href="/privacy/">…</a>` fragment
+from the footer line of each page. The page is self-contained — it shares the site's CSS and nav
+but nothing else links to it, so removing it cannot break another page.
+
+## Before publishing — not yet done
+
+1. `privacy@egyptvillastours.com` must forward to a monitored inbox.
+2. Confirm the retention periods in section 4 match real practice.
+3. French version at `/fr/privacy/` — French footers currently point at the English page.
+4. Re-read section 7 once the cookie banner ships; it currently says the tags run on load and
+   promises consent gating.
+5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
+   that reverse it.
