@@ -8,10 +8,9 @@ function toggleMenu(open){nav?.classList.toggle('menu-open',open);menu?.setAttri
 toggleMenu(false);menu?.addEventListener('click',()=>toggleMenu(!nav.classList.contains('menu-open')));
 links?.addEventListener('click',e=>{if(e.target.closest('a'))toggleMenu(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav?.classList.contains('menu-open')){toggleMenu(false);menu.focus()}if(e.key==='Tab'&&nav?.classList.contains('menu-open')){const focus=[menu,...links.querySelectorAll('a,button')];if(e.shiftKey&&document.activeElement===focus[0]){e.preventDefault();focus.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===focus.at(-1)){e.preventDefault();focus[0].focus()}}});
-// Trust numbers show their final verified value at once: a count-up let screenshots and crawlers
-// catch in-between figures (e.g. 4.81 / 1,959) that looked like conflicting ratings.
+// The final verified number is the semantic value; only its visual text ticks.
 const counts=[...document.querySelectorAll('[data-ev-count]')];
-function count(el){const target=+el.dataset.evCount,places=el.dataset.evCount.includes('.')?2:0;el.textContent=target.toLocaleString(document.documentElement.lang==='fr'?'fr-FR':'en-GB',{minimumFractionDigits:places,maximumFractionDigits:places})}
+function count(el){const target=+el.dataset.evCount,places=el.dataset.evCount.includes('.')?2:0;const format=x=>x.toLocaleString(document.documentElement.lang==='fr'?'fr-FR':'en-GB',{minimumFractionDigits:places,maximumFractionDigits:places});if(reduce.matches||lightweight){el.textContent=format(target);return}const start=performance.now();function frame(now){const p=Math.min(1,(now-start)/1600),n=target*(1-(1-p)**3);el.textContent=format(places?n:Math.round(n));if(p<1)requestAnimationFrame(frame)}requestAnimationFrame(frame)}
 counts.forEach(count);
 function shuffleChildren(container,selector){
  const cards=[...container.querySelectorAll(`:scope > ${selector}`)];if(cards.length<2)return;
