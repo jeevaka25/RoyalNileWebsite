@@ -73,10 +73,8 @@ but nothing else links to it, so removing it cannot break another page.
 2. Confirm the retention periods in section 4 match real practice.
 3. French page shipped at `/fr/privacy/`; all 25 French footers relinked to it. Keep the two translations in
    step — an edit to one language must be mirrored or the pair diverges.
-4. **Section 7 was rewritten into the gated model ("held until you accept") at the owner's instruction. That is
-   now a claim about behaviour the site does not yet have**: the banner is not built, so today the tags still
-   fire on load. The closing fallback sentence ("if the banner has not loaded for any reason, both categories run
-   on page load") keeps the text truthful in the meantime — but build the banner soon, or the policy is ahead of
-   the site.
+4. **Section 7 states the gated model.** Today the banner is not built and both tags still fire on load; the fallback
+   sentence was removed at the owner's request, so nothing in the policy now hedges. Build the banner and the section
+   becomes true; until then an operator reading devtools sees `_ga` without consent.
 5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
    that reverse it.
