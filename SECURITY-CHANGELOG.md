@@ -53,9 +53,9 @@ curl -sSI https://egyptvillastours.com/ | grep -iE "strict-transport|x-frame|con
 
 # Privacy policy page — 2026-11-10
 
-Added `privacy/index.html` (served at `/privacy/`), a footer link on all 65 pages, and a
-`sitemap.xml` entry. Content drafted from the passive review; legal position on Article 27 is
-recorded in the engagement notes (`art27-assessment.md`).
+Added `privacy/index.html` (served at `/privacy/`) and its French counterpart `fr/privacy/index.html`
+(`/fr/privacy/`), footer links on all 66 pages in the right language, hreflang pairs both ways, and two
+`sitemap.xml` entries. Legal position on Article 27 recorded in the engagement notes (`art27-assessment.md`).
 
 ## Rollback
 
@@ -71,8 +71,12 @@ but nothing else links to it, so removing it cannot break another page.
 
 1. `privacy@egyptvillastours.com` must forward to a monitored inbox.
 2. Confirm the retention periods in section 4 match real practice.
-3. French version at `/fr/privacy/` — French footers currently point at the English page.
-4. Re-read section 7 once the cookie banner ships; it currently says the tags run on load and
-   promises consent gating.
+3. French page shipped at `/fr/privacy/`; all 25 French footers relinked to it. Keep the two translations in
+   step — an edit to one language must be mirrored or the pair diverges.
+4. **Section 7 was rewritten into the gated model ("held until you accept") at the owner's instruction. That is
+   now a claim about behaviour the site does not yet have**: the banner is not built, so today the tags still
+   fire on load. The closing fallback sentence ("if the banner has not loaded for any reason, both categories run
+   on page load") keeps the text truthful in the meantime — but build the banner soon, or the policy is ahead of
+   the site.
 5. Article 27: exemption relied on deliberately. See `art27-assessment.md` for the triggers
    that reverse it.
