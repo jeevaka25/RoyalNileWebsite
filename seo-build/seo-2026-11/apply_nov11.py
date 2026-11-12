@@ -25,12 +25,13 @@ def swap(old, new, count=1):
         sys.exit(f'expected {count} x {old[:70]!r}, found {n}')
     s = s.replace(old, new)
 
-TITLE = 'Luxor Nile-View Apartments &amp; Penthouses | Royal Nile Villas'
+TITLE = 'Luxor Nile-View Villas &amp; Apartments | Royal Nile Villas'  # changed 12 Nov 2026 at Jay's request (was Apartments & Penthouses)
 DESC = ("Nile-view apartments and penthouses on Luxor's West Bank, 15 minutes from the Valley of the "
         "Kings. Airbnb Superhost. Now booking for the 2027 eclipse.")
 
 # 1. Title and descriptions
-swap('<title>Royal Nile Villas | Luxury Nile-View Villas in Luxor, Egypt</title>', f'<title>{TITLE}</title>')
+import re as _re
+s = _re.sub(r'<title>[^<]*</title>', f'<title>{TITLE}</title>', s, count=1)
 old_desc = "Luxury Nile-view apartments and penthouses on Luxor's West Bank, now offering a dedicated accommodation package for the 2 August 2027 total solar eclipse."
 swap(f'<meta content="{old_desc}" name="description"/>', f'<meta content="{DESC}" name="description"/>')
 swap(f'<meta content="{old_desc}" property="og:description"/>', f'<meta content="{DESC}" property="og:description"/>')
@@ -125,5 +126,5 @@ else:
 cj = ROOT / 'seo-build/seo-2026-10/content.json'
 c = cj.read_text()
 c2 = c.replace('"index.html": {"title": "Royal Nile Villas | Luxury Nile-View Villas in Luxor, Egypt"}',
-               '"index.html": {"title": "Luxor Nile-View Apartments & Penthouses | Royal Nile Villas"}')
+               '"index.html": {"title": "Luxor Nile-View Villas & Apartments | Royal Nile Villas"}')
 if c2 != c: cj.write_text(c2); print('content.json title updated')
