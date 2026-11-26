@@ -45,13 +45,13 @@ for(const video of videos){
  document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);sync();
 }
 // Each platform advances independently only after a real link activation.
-const heroReservationIds=['nile-view-2','nile-view-luxury-1'];
+const heroReservationIds=['royal-home-nile-view','nile-view-luxury-1','nile-view-luxury-2'];
 if(typeof VILLAS!=='undefined'){
  const pool=heroReservationIds.map(id=>VILLAS.find(v=>v.id===id));
  if(pool.every(Boolean))for(const link of document.querySelectorAll('[data-reserve]')){
   const platform=link.dataset.reserve,field={airbnb:'airbnbUrl',booking:'bookingUrl'}[platform];
   if(!field)continue;
-  const key='royal-nile.hero-reservation.'+platform+'.v1';let index=0;
+  const key='royal-nile.hero-reservation.'+platform+'.v2';let index=0;
   try{const saved=Number(localStorage.getItem(key));if(Number.isInteger(saved)&&saved>=0)index=saved%pool.length}catch{}
   const render=()=>{const villa=pool[index];link.href=villa[field];link.dataset.villaId=villa.id;link.setAttribute('aria-label',link.textContent.trim()+' · '+villa.shortName)};
   const advance=event=>{

@@ -99,7 +99,7 @@ const start = home.indexOf('const FR_TEXT=');
 const code = home.slice(start, home.indexOf('\n', start)) + '\n' + read('villa-data.js') + '\n'
   + home.slice(home.indexOf('const SITE_VILLA_PHOTOS ='), home.indexOf('// ============================================\n// TOUR DATA')) + '\n'
   + home.slice(home.indexOf('const TOURS = ['), home.indexOf('function tourIdFromPath')) + '\n'
-  + "const FEATURED_VILLA_IDS=new Set(['nile-view-2','nile-view-luxury-1']);\n"
+  + "const FEATURED_VILLA_IDS=new Set(['nile-view-2','nile-view-luxury-2']);\n"
   + home.slice(home.indexOf('function renderVillas('), home.indexOf('// ============================================\n// VILLA MODAL')) + '\n'
   + home.slice(home.indexOf('const TOUR_PAGE='), home.indexOf('// ============================================\n// INIT')) + '\n'
   + "renderVillas(VILLAS.map((v,i)=>({...v,available:i%2===0})),'2026-12-10','2026-12-14');renderTours();";

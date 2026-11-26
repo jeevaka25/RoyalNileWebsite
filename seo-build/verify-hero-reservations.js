@@ -4,7 +4,7 @@ const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const source=read('redesign/redesign.js');
 const rotation=source.slice(source.indexOf('const heroReservationIds='),source.indexOf('let lenis;'));
 const inventory={};vm.runInNewContext(read('villa-data.js')+';this.villas=VILLAS;',inventory);
-const order=['nile-view-2','nile-view-luxury-1'];
+const order=['royal-home-nile-view','nile-view-luxury-1','nile-view-luxury-2'];
 function harness(store=new Map(),blocked=false){
  const pending=[];
  const links=['airbnb','booking'].map(platform=>({dataset:{reserve:platform},textContent:'Reserve on '+platform,handlers:{},setAttribute(k,v){this[k]=v},addEventListener(k,v){this.handlers[k]=v}}));
@@ -34,10 +34,10 @@ for(const blocked of [false,true]){
   h.click(link,{type:'auxclick',button:2});assert.equal(link.href,unchanged);
   h.click(link,{type:'auxclick',button:1});assert.notEqual(link.href,unchanged);
  }
- if(!blocked){const restored=harness(h.store);assert.equal(restored.links[0].dataset.villaId,order[1]);assert.equal(restored.links[1].dataset.villaId,order[1]);}
+ if(!blocked){const restored=harness(h.store);const saved=order[9%order.length];assert.equal(restored.links[0].dataset.villaId,saved);assert.equal(restored.links[1].dataset.villaId,saved);}
 }
 const html=read('index.html');
 assert.equal((html.match(/data-reserve=/g)||[]).length,2);
 assert.ok(!html.includes('data-hero-video-toggle'));
 assert.ok(html.includes('class="ev-eclipse-link"'));
-console.log('Hero reservation checks passed: both platforms cycle through only Nile View 2 and Luxury Nile View 1, independently; navigation keeps the clicked href; reload persistence, blocked storage, cancelled clicks and middle clicks behave correctly.');
+console.log('Hero reservation checks passed: both platforms cycle through only Royal Home Nile View, Luxury Nile View 1 and Luxury Nile View 2, independently; navigation keeps the clicked href; reload persistence, blocked storage, cancelled clicks and middle clicks behave correctly.');

@@ -1,7 +1,7 @@
 const { VILLAS, wa, optimizedImage } = require('./data');
-const FEATURED_IDS = ['nile-view-2', 'nile-view-luxury-1'];
+const FEATURED_IDS = ['nile-view-2', 'nile-view-luxury-2'];
 const FEATURED_COPY = {
-  'nile-view-luxury-1': { name: 'Luxury Nile View 1', cover: 'villa-assets/imagen-enhanced/nile-view-luxury-1/03-balcony-nile-pool.png', alt: 'Balcony looking over the pool and palms to the Nile at Luxury Nile View 1', kicker: 'Highest rated · Two bathrooms', text: 'Our highest-rated apartment. Two queen bedrooms, two bathrooms and a balcony looking over the pool to the Nile.' },
+  'nile-view-luxury-2': { name: 'Luxury Nile View 2', cover: 'villa-assets/imagen-enhanced/nile-view-luxury-2/03-balcony-nile-pool.png', alt: 'Balcony looking over the pool and palms to the Nile at Luxury Nile View 2', kicker: 'Private terrace · Two bathrooms', text: 'Two queen bedrooms, two bathrooms and a private second-floor terrace with views over the pool and garden to the Nile. A guest favourite for sunsets.' },
   'nile-view-2': { name: 'Nile View 2', cover: 'optimized-assets/villa-originals/nile-view-2/05.webp', alt: 'Shared pool and Nile-side garden at Royal Nile Villas', kicker: 'Poolside living · Ground floor', text: 'A relaxed ground-floor home with a queen-and-twin layout and direct access to the shared pool.' },
 };
 function versionBookingAssets(html) {
